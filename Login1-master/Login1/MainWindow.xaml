@@ -10,8 +10,7 @@
         
         Title="Login" Height="400" Width="640" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen">
 
-    <Grid>
-        <Rectangle RadiusY="8" RadiusX="8" Fill="White" Margin="1,3,-1,-3"/>
+    <Grid>        <Rectangle RadiusY="8" RadiusX="8" Fill="White" Margin="1,3,-1,-3"/>
         <Rectangle Margin="1,3,0,-3" Visibility="Hidden">
             <Rectangle.Fill>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -22,33 +21,33 @@
         </Rectangle>
 
         <StackPanel Margin="20,13,330,7" Width="290">
-            <Label Content="Login" FontFamily="Segoe UI Black" FontSize="24" Margin="0,10,0,13" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Label Content="Login" FontFamily="QUATTROCENTO SANS" FontSize="24" Margin="0,10,0,13" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <StackPanel Margin="0" Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070"/>
-                <TextBox  Height="37" Text="{Binding Username}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Username" Width="250" Margin="5,0,0,13"/>
+                <TextBox  FontFamily="QUATTROCENTO SANS" Height="37" Text="{Binding Username}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Username" Width="250" Margin="5,0,0,13"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="50">
                 <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070" Width="16"/>
-                <PasswordBox materialDesign:HintAssist.Hint="Password" Width="250" Margin="5,0,0,13" Height="37" />
+                <PasswordBox FontFamily="QUATTROCENTO SANS" materialDesign:HintAssist.Hint="Password" Width="250" Margin="5,0,0,13" Height="37" />
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
-                <Button Content="Log in" FontFamily="Impact" FontSize="18" Background="#FF307CD6" BorderBrush="#FF307CD6" Margin="95,13,95,15" Width="100"/>
+                <Button Content="Log in" FontFamily="QUATTROCENTO SANS" FontSize="18" Background="#FF57B847" BorderBrush="#FF307CD6" Margin="95,13,95,15" Width="100" Foreground="#FFEFFBEB"/>
             </StackPanel>
 
         </StackPanel>
         <StackPanel Margin="330,13,20,7" Width="290">
-            <Label Content="Signup" FontFamily="Segoe UI Black" FontSize="24" Margin="0,10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Label Content="Signup" FontFamily="QUATTROCENTO SANS" FontSize="24" Margin="0,10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <StackPanel Margin="0" Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Foreground="#707070"/>
-                <TextBox  Height="37" Text="{Binding Username}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Username" Width="250" Margin="5,0,0,13"/>
+                <TextBox  FontFamily="QUATTROCENTO SANS" Height="37" Text="{Binding Username}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Username" Width="250" Margin="5,0,0,13"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="50">
                 <materialDesign:PackIcon Kind="Key" VerticalAlignment="Center" Foreground="#707070" Width="16"/>
-                <PasswordBox materialDesign:HintAssist.Hint="Password" Width="250" Margin="5,0,0,13" Height="37"/>
+                <PasswordBox FontFamily="QUATTROCENTO SANS" materialDesign:HintAssist.Hint="Password" Width="250" Margin="5,0,0,13" Height="37"/>
             </StackPanel>
             <StackPanel Margin="0" Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="AccountCircle" VerticalAlignment="Center" Foreground="#707070"/>
-                <TextBox  Height="37" Text="{Binding Your_name}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Your name" Width="250" Margin="5,0,0,13"/>
+                <TextBox FontFamily="QUATTROCENTO SANS" Height="37" Text="{Binding Your_name}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Your name" Width="250" Margin="5,0,0,13"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <materialDesign:PackIcon Kind="AccountMultiple" VerticalAlignment="Center" Foreground="#707070" Width="16"/>
@@ -70,7 +69,7 @@
 
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
-                <Button Content="Sign up" FontFamily="Impact" FontSize="18" Background="#FF307CD6" BorderBrush="#FF307CD6" Margin="95,13,95,15" Width="100"/>
+                <Button Content="Sign up" FontFamily="QUATTROCENTO SANS" FontSize="18" Background="#FF57B847" BorderBrush="#FF307CD6" Margin="95,13,95,15" Width="100" Foreground="#FFEFFBEB"/>
             </StackPanel>
 
         </StackPanel>
