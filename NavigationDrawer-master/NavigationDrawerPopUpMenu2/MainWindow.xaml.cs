@@ -23,6 +23,8 @@ namespace NavigationDrawerPopUpMenu2
         public MainWindow()
         {
             InitializeComponent();
+            Window1 window = new Window1();
+            window.Show();
         }
         
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)

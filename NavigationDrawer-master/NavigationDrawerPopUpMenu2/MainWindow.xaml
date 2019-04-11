@@ -9,16 +9,22 @@
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="70"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="300"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="CloseMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
+        <Style x:Key="BlackAndWhite">
+            <Setter Property="Control.FontFamily" Value="Verdana" />
+            <Setter Property="Control.Background" Value="Black" />
+            <Setter Property="Control.Foreground" Value="White" />
+            <Setter Property="Control.Margin" Value="10" />
+        </Style>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
@@ -29,7 +35,10 @@
         </EventTrigger>
     </Window.Triggers>
     <Grid Background="#FFDEDEDE">
-        <Grid x:Name="GridMain" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="540" Width="1019">
+        <Grid x:Name="GridMain" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="540" Width="830">
+       
+            
+            
             <Grid.RowDefinitions>
                 <RowDefinition Height="103*"/>
                 <RowDefinition Height="32*"/>
@@ -40,21 +49,30 @@
                 <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
             </Grid.Effect>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Abel Dutra" VerticalAlignment="Center" FontSize="16" Foreground="LightGray"/>
-                <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="LightGray">
+                <TextBlock Text="Admin" VerticalAlignment="Center" FontSize="16" Foreground="LightGray"/>
+                <!--<materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="LightGray">
                     <StackPanel Width="150">
-                        <Button Content="Settings"/>
+                     
                         <Button Content="Account"/>
-                        <Button Content="Help"/>
+                        
                         <Separator/>
                         <Button Content="Logout"/>
                     </StackPanel>
-                </materialDesign:PopupBox>
+                </materialDesign:PopupBox>-->
+                
             </StackPanel>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="LightGray">Design com WPF</TextBlock>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="LightGray">Test</TextBlock>
            
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <Grid Height="60" Background="#FF222222" RenderTransformOrigin="0.5,0.5">
+               
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left" Background="#FF222222" Margin="0,0,0,-60">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
+            </Grid.Effect>
+            <StackPanel>
+                <Grid Height="60" Background="#FF222222" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left">
                     <Grid.RenderTransform>
                         <TransformGroup>
                             <ScaleTransform/>
@@ -70,15 +88,46 @@
                         <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
                     </Button>
                 </Grid>
-            </StackPanel>
-        </Grid>
-        <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="#FF222222" Margin="0,60,0,0">
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
-            </Grid.Effect>
-            <StackPanel>
-             
-                <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
+
+                <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="LightGray"
+  MinWidth="220">
+                    <TreeViewItem
+    Header="Основы программирования на C#">
+                        <TreeViewItem
+      Header="Переменные" />
+                        <TreeViewItem
+      Header="Литералы" />
+                        <TreeViewItem
+      Header="Типы данных" />
+                    </TreeViewItem>
+                    <TreeViewItem
+    Header="ООП"
+  >
+                        <TreeViewItem
+      Header="Классы и объекты" />
+                         <TreeViewItem
+      Header="Структуры" />
+                        <TreeViewItem
+      Header="Модификаторы доступа" />
+                    </TreeViewItem>
+                </TreeView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!--<ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
                     <ListViewItem x:Name="ItemHome" Height="60" Foreground="LightGray">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10" Foreground="LightGray"/>
@@ -103,7 +152,7 @@
                             <TextBlock Text="Messages" VerticalAlignment="Center"  Margin="10"/>
                         </StackPanel>
                     </ListViewItem>
-                </ListView>
+                </ListView>-->
             </StackPanel>
         </Grid>
     </Grid>
