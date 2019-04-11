@@ -23,14 +23,9 @@ namespace Login1
         public MainWindow()
         {
             InitializeComponent();
-            Window1 window = new Window1();
-            window.Show();
+       
          
         }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+ 
     }
 }

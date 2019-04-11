@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Login1
+namespace Login1.Sample
 {
     /// <summary>
     /// Логика взаимодействия для Window1.xaml

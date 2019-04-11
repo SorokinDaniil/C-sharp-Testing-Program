@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace NavigationDrawerPopUpMenu2
+namespace TestingProgram
 {
     /// <summary>
     /// Логика взаимодействия для Window1.xaml
@@ -22,6 +22,14 @@ namespace NavigationDrawerPopUpMenu2
         public Window1()
         {
             InitializeComponent();
+
         }
+
+        class Phone
+        {
+            public int Name { get; set; }
+        }
+      
+       
     }
 }

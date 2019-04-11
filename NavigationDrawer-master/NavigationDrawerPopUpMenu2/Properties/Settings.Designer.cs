@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NavigationDrawerPopUpMenu2.Properties
+namespace TestingProgram.Properties
 {
 
 

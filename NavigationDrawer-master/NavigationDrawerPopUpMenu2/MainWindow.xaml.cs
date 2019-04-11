@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace NavigationDrawerPopUpMenu2
+namespace TestingProgram
 {
     /// <summary>
     /// Interação lógica para MainWindow.xam
@@ -22,7 +22,7 @@ namespace NavigationDrawerPopUpMenu2
     {
         public MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
             Window1 window = new Window1();
             window.Show();
         }
