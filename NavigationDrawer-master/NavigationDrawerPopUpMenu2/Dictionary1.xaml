@@ -3,4 +3,37 @@
                     xmlns:local="clr-namespace:TestingProgram">
     <SolidColorBrush x:Key="LightGray" Color="#FFD3D3D3"></SolidColorBrush>
     <SolidColorBrush x:Key="DarkGray" Color="#FF222222"></SolidColorBrush>
+
+
+    <Style x:Key="BaseWindow" TargetType="Window">
+        <Setter Property="Control.Width" Value="800"/>
+        <Setter Property="Control.Height" Value="1080"/>
+        <Setter Property="Background" Value="{StaticResource LightGray}"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        
+    </Style>
+
+    
+    <Style x:Key="BaseTextLightH1">
+        <Setter Property="Control.FontFamily" Value="UATTROCENTO SANS"/>
+        <Setter Property="Control.Foreground" Value="{StaticResource LightGray}"/>
+        <Setter Property="Control.FontSize" Value="24"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
+    </Style>
+    <Style x:Key="BaseTextLightH2" BasedOn="{StaticResource BaseTextLightH1}">
+        <Setter Property="Control.FontSize" Value="20"/>
+    </Style>
+    <Style x:Key="BaseTextLightH3" BasedOn="{StaticResource BaseTextLightH2}">
+        <Setter Property="Control.FontSize" Value="16"/>
+    </Style>
+    <Style x:Key="BaseTextDarkH1" BasedOn="{StaticResource BaseTextLightH1}">
+        <Setter Property="Control.Foreground" Value="{StaticResource DarkGray}"/>
+        <Setter Property="Control.FontWeight" Value="Bold"/>
+    </Style>
+    <Style x:Key="BaseTextDarkH2" BasedOn="{StaticResource BaseTextDarkH1}">
+        <Setter Property="Control.FontSize" Value="20"/>
+    </Style>
+    <Style x:Key="BaseTextDarktH3" BasedOn="{StaticResource BaseTextDarkH1}">
+        <Setter Property="Control.FontSize" Value="16"/>
+    </Style>
 </ResourceDictionary>

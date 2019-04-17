@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Interação lógica para UserControlHome.xam
+    /// Логика взаимодействия для AdminLeftPanel.xaml
     /// </summary>
-    public partial class UserControlHome : UserControl
+    public partial class AdminLeftPanel : UserControl
     {
-        public UserControlHome()
+        public AdminLeftPanel()
         {
             InitializeComponent();
         }

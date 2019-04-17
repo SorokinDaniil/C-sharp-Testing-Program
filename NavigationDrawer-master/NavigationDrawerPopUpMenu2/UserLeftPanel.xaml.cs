@@ -11,22 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для Window1.xaml
+    /// Логика взаимодействия для StudentLeftPanel.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class UserLeftPanel : UserControl
     {
-        public Window1()
+        public UserLeftPanel()
         {
-          InitializeComponent();
-          HeadLabelName.Children.Add(new UserLabelName());
-         LeftPanel.Children.Add(new AdminLeftPanel());
+            InitializeComponent();
         }
     }
 }
-
-

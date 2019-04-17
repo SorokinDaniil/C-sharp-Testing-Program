@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Interação lógica para UserControlCreate.xam
+    /// Логика взаимодействия для StudentControl.xaml
     /// </summary>
-    public partial class UserControlCreate : UserControl
+    public partial class UserLabelName : UserControl
     {
-        public UserControlCreate()
+        public UserLabelName()
         {
             InitializeComponent();
         }

@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="TestingProgram.UserLeftPanel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestingProgram"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d">
+    <Grid>
+        <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH2}"
+  MinWidth="220" BorderBrush="{DynamicResource DarkGray}">
+            <TreeViewItem 
+    Header="Основы программирования на C#">
+                <TreeViewItem
+     >
+                    <TreeViewItem.Header>
+                        <StackPanel
+          Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CloseCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Foreground="Red" />
+
+                            <TextBlock
+            Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+          Переменные
+                            </TextBlock>
+                        </StackPanel>
+                    </TreeViewItem.Header>
+
+                </TreeViewItem>
+                <TreeViewItem
+     >
+                    <TreeViewItem.Header>
+                        <StackPanel
+          Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="CheckCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Foreground="Green" />
+
+                            <TextBlock Text="{Binding Name}"
+            Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                            Тип данных
+                            </TextBlock>
+
+
+                        </StackPanel>
+                    </TreeViewItem.Header>
+
+                </TreeViewItem>
+                <TreeViewItem
+      Header="Присванивание" />
+            </TreeViewItem>
+            <TreeViewItem
+    Header="ООП"
+  >
+                <TreeViewItem
+      Header="Классы и объекты" />
+                <TreeViewItem
+      Header="Структуры" />
+                <TreeViewItem
+      Header="Модификаторы доступа" />
+            </TreeViewItem>
+        </TreeView>
+
+    </Grid>
+
+</UserControl>

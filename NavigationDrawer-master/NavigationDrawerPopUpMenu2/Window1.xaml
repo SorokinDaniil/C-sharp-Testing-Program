@@ -4,157 +4,99 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingProgram"
-     
-        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Testing" Height="800" Width="1080" ResizeMode="NoResize"
-        
+        Title="Testing" Height="600" Width="800" ResizeMode="NoResize"  Background="{StaticResource LightGray}"
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto"
-        Background="{StaticResource LightGray}">
+        TextOptions.TextRenderingMode="Auto">
 
-    <Window.Resources>
-        <Style x:Key="BaseTextLightH1">
-            <Setter Property="Control.FontFamily" Value="UATTROCENTO SANS"/>
-            <Setter Property="Control.Foreground" Value="{StaticResource LightGray}"/>
-            <Setter Property="Control.FontSize" Value="20"/>
-            <Setter Property="Control.FontWeight" Value="Regular"/>
-        </Style>
-        <Style x:Key="BaseTextLightH2" BasedOn="{StaticResource BaseTextLightH1}">
-            <Setter Property="Control.FontSize" Value="16"/>
-        </Style>
-        <Style x:Key="BaseTextDarkH1" BasedOn="{StaticResource BaseTextLightH1}">
-            <Setter Property="Control.Foreground" Value="{StaticResource DarkGray}"/>
-        </Style>
-        <Style x:Key="BaseTextDarkH2" BasedOn="{StaticResource BaseTextDarkH1}">
-            <Setter Property="Control.FontSize" Value="16"/>
-        </Style>
-
-    </Window.Resources>
 
 
 
 
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Background="Gray">
+          
             <materialDesign:DrawerHost.LeftDrawerContent>
-                <DockPanel MinWidth="400" Background="{StaticResource DarkGray}">
+
+<!--#region LEFTPANEL-->
+                <DockPanel MinWidth="300" Background="{StaticResource DarkGray}" >
                     <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                                     DockPanel.Dock="Top"
                                     HorizontalAlignment="Left" Margin="16"
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Foreground="{StaticResource LightGray}" Width="20" Height="20"/>
-                    <!--<ListBox x:Name="DemoItemsListBox" Margin="0 16 0 16" SelectedIndex="0"                         
-                             ItemsSource="{Binding DemoItems}"
-                             >-->
-                    <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH1}"
-  MinWidth="220" BorderBrush="{DynamicResource DarkGray}">
-                        <TreeViewItem 
-    Header="Основы программирования на C#">
-                            <TreeViewItem
-     >
-                                <TreeViewItem.Header>
-                                    <StackPanel
-          Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="CloseCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Foreground="Red" />
 
-                                        <TextBlock
-            Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
-          Переменные
-                                        </TextBlock>
-                                    </StackPanel>
-                                </TreeViewItem.Header>
+                    <Grid x:Name="LeftPanel"/>
+                  
 
-                            </TreeViewItem>
-                            <TreeViewItem
-     >
-                                <TreeViewItem.Header>
-                                    <StackPanel
-          Orientation="Horizontal">
-                                        <materialDesign:PackIcon Kind="CheckCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Foreground="Green" />
-
-                                        <TextBlock Text="{Binding Name}"
-            Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-
-                                    </StackPanel>
-                                </TreeViewItem.Header>
-
-                            </TreeViewItem>
-                            <TreeViewItem
-      Header="Присванивание" />
-                        </TreeViewItem>
-                        <TreeViewItem
-    Header="ООП"
-  >
-                            <TreeViewItem
-      Header="Классы и объекты" />
-                            <TreeViewItem
-      Header="Структуры" />
-                            <TreeViewItem
-      Header="Модификаторы доступа" />
-                        </TreeViewItem>
-                    </TreeView>
-                    <!--<ListBox.ItemTemplate>
-                            <DataTemplate DataType="domain:DemoItem">
-                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>-->
-                    <!--</ListBox>-->
+                    
                 </DockPanel>
+
+<!--#endregion-->
+                
             </materialDesign:DrawerHost.LeftDrawerContent>
+            
             <DockPanel>
+                
                 <materialDesign:ColorZone  Padding="10" materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                           Background="#FF222222" DockPanel.Dock="Top">
-                    <Grid Height="20">
+                                           Background="#FF222222" DockPanel.Dock="Top" Height="40">
+                   
+                    <!--#region HEAD-->
+                    <Grid>
                         <ToggleButton  Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
                                         x:Name="MenuToggleButton" Foreground="{StaticResource LightGray}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="20" Height="20"/>
 
-                        <materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" 
-
- Height="40">
-                            <materialDesign:Flipper.FrontContent>
-                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <TextBlock   Style="{StaticResource BaseTextLightH1}" VerticalAlignment="Center" HorizontalAlignment="Center">Admin</TextBlock>
-
-                                    <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}" Height="20" Width="20" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
-                                        <materialDesign:PackIcon Kind="Edit" Width="Auto" Height="Auto" HorizontalAlignment="Left"/>
-                                    </Button>
-                                </StackPanel>
-                            </materialDesign:Flipper.FrontContent>
-
-                            <materialDesign:Flipper.BackContent>
-
-                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <TextBlock   Style="{StaticResource BaseTextLightH1}" VerticalAlignment="Center" HorizontalAlignment="Center">Admin</TextBlock>
-
-                                    <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}" Height="20" Width="20" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
-                                        <materialDesign:PackIcon Kind="Edit" Width="Auto" Height="Auto" HorizontalAlignment="Left"/>
-                                    </Button>
-                                </StackPanel>
-
-                                <!--<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                    -->
-                                <!--<TextBox   Style="{StaticResource BaseTextLightH1}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBox>-->
-                                <!--
-                                    <TextBox Background="{StaticResource LightGray}" Style="{StaticResource BaseTextLightH1}" Height="20"
-
-  materialDesign:HintAssist.Hint="Comment" >Admin</TextBox>
-                                        <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}" Height="20" Width="20" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
-                                        <materialDesign:PackIcon Kind="Check" Width="20" Height="20" HorizontalAlignment="Left"/>
-                                    </Button>
-                                </StackPanel>-->
-                            </materialDesign:Flipper.BackContent>
-                        </materialDesign:Flipper>
+                        <Grid x:Name="HeadLabelName">
+                        </Grid>
+                   
+                        
                         <Button  Height="20" Width="20" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Right">
                             <materialDesign:PackIcon Kind="ExitToApp" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Button>
 
+                    </Grid>
+                    <!--#endregion-->
+                   
+                </materialDesign:ColorZone>
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Style="{StaticResource BaseTextDarkH1}">Переменная</TextBlock>
+                </Grid>
+            </DockPanel>
+        </materialDesign:DrawerHost>
+    </materialDesign:DialogHost>
+</Window>
 
-                        <!--<materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" 
+
+
+
+
+
+<!--<materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" 
+  >
+                        <materialDesign:Flipper.FrontContent>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <TextBlock   Style="{StaticResource BaseTextDarkH1}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
+
+                                <Button  Height="24" Width="24" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0"  Command="{x:Static materialDesign:Flipper.FlipCommand}">
+                                    <materialDesign:PackIcon Kind="Edit" Width="Auto" Height="Auto" HorizontalAlignment="Left" Foreground="{StaticResource D}"/>
+                                </Button>
+
+
+                    <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar"
+                                            Grid.Row="1" />-->
+
+
+
+
+<!--<materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" 
   >
                             <materialDesign:Flipper.FrontContent>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <TextBlock   Style="{StaticResource BaseTextLightH1}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
+                                    <TextBlock   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
 
                                     <Button  Height="24" Width="24" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
                                         <materialDesign:PackIcon Kind="Edit" Width="Auto" Height="Auto" HorizontalAlignment="Left"/>
@@ -163,7 +105,7 @@
                             </materialDesign:Flipper.FrontContent>
                             <materialDesign:Flipper.BackContent>
                                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <TextBlock   Style="{StaticResource BaseTextLightH1}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
+                                    <TextBlock   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
 
                                     <Button  Height="24" Width="24" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
                                         <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto" HorizontalAlignment="Left"/>
@@ -173,130 +115,33 @@
                         </materialDesign:Flipper>-->
 
 
-
-
-
-
-                    </Grid>
-                </materialDesign:ColorZone>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
+<!--<ListBox x:Name="DemoItemsListBox" Margin="0 16 0 16" SelectedIndex="0"                         
+                             ItemsSource="{Binding DemoItems}"
+                             >-->
 
 
 
 
 
 
-
-
-                    <!--<materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" 
-  >
-                        <materialDesign:Flipper.FrontContent>
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                                <TextBlock   Style="{StaticResource BaseTextDarkH1}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
-
-                                <Button  Height="24" Width="24" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0"  Command="{x:Static materialDesign:Flipper.FlipCommand}">
-                                    <materialDesign:PackIcon Kind="Edit" Width="Auto" Height="Auto" HorizontalAlignment="Left" Foreground="{StaticResource D}"/>
-                                </Button>
-                            </StackPanel>
-                         
-                            
-                            
-                            
-                            
-                            
-                        </materialDesign:Flipper.FrontContent>
-                        <materialDesign:Flipper.BackContent>
-                            <Grid
-      Height="256"
-      Width="200">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition
-          Height="Auto" />
-                                    <RowDefinition
-          Height="*" />
-                                </Grid.RowDefinitions>
-                                <materialDesign:ColorZone
-        Mode="Accent"
-        Padding="6">
-                                    <StackPanel
-          Orientation="Horizontal">
-                                        <Button
-            Style="{StaticResource MaterialDesignToolForegroundButton}"
-            Command="{x:Static materialDesign:Flipper.FlipCommand}"
-            HorizontalAlignment="Left">
-                                            <materialDesign:PackIcon
-              Kind="ArrowLeft"
-              HorizontalAlignment="Right" />
-                                        </Button>
-                                        <TextBlock
-            Margin="8 0 0 0"
-            VerticalAlignment="Center">
-          EDIT USER
-                                        </TextBlock>
-                                    </StackPanel>
-                                </materialDesign:ColorZone>
-                                <Grid
-        Grid.Row="1"
-        Margin="0 6 0 0"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Top"
-        Width="172">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                    </Grid.RowDefinitions>
-                                    <TextBox
-          materialDesign:HintAssist.Hint="First name"
-          materialDesign:HintAssist.IsFloating="True"
-          Margin="0 12 0 0">
-                                        James
-                                    </TextBox>
-                                    <TextBox
-          Grid.Row="1"
-          materialDesign:HintAssist.Hint="Last name"
-          materialDesign:HintAssist.IsFloating="True"
-          Margin="0 12 0 0">
-                                        Willock
-                                    </TextBox>
-                                  
-                                  
-                                </Grid>
-                            </Grid>
-                        </materialDesign:Flipper.BackContent>
-                    </materialDesign:Flipper>-->
+<!--<ListBox.ItemTemplate>
+                            <DataTemplate DataType="domain:DemoItem">
+                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>-->
+<!--</ListBox>-->
 
 
 
+<!--<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    -->
+<!--<TextBox   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBox>-->
+<!--
+                                    <TextBox Background="{StaticResource LightGray}" Style="{StaticResource BaseTextLightH2}" Height="20"
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!--<materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar"
-                                            Grid.Row="1" />-->
-                </Grid>
-            </DockPanel>
-        </materialDesign:DrawerHost>
-    </materialDesign:DialogHost>
-</Window>
+  materialDesign:HintAssist.Hint="Comment" >Admin</TextBox>
+                                        <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}" Height="20" Width="20" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
+                                        <materialDesign:PackIcon Kind="Check" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                    </Button>
+                                </StackPanel>-->
+                    
