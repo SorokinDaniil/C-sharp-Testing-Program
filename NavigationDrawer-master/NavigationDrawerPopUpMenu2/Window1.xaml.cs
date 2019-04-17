@@ -24,7 +24,7 @@ namespace TestingProgram
         {
           InitializeComponent();
           HeadLabelName.Children.Add(new UserLabelName());
-         LeftPanel.Children.Add(new AdminLeftPanel());
+         LeftPanel.Children.Add(new UserLeftPanel());
         }
     }
 }

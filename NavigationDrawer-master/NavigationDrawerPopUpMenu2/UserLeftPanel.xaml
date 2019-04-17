@@ -6,6 +6,9 @@
         xmlns:local="clr-namespace:TestingProgram"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d">
+
+
+
     <Grid>
         <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH2}"
   MinWidth="220" BorderBrush="{DynamicResource DarkGray}">

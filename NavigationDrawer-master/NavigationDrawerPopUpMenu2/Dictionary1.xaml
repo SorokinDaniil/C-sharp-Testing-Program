@@ -17,23 +17,26 @@
     <Style x:Key="BaseTextLightH1">
         <Setter Property="Control.FontFamily" Value="UATTROCENTO SANS"/>
         <Setter Property="Control.Foreground" Value="{StaticResource LightGray}"/>
-        <Setter Property="Control.FontSize" Value="24"/>
-        <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.FontSize" Value="34"/>
+        <Setter Property="Control.FontWeight" Value="Regular"/>
     </Style>
     <Style x:Key="BaseTextLightH2" BasedOn="{StaticResource BaseTextLightH1}">
         <Setter Property="Control.FontSize" Value="20"/>
+        <Setter Property="Control.FontWeight" Value="Regular"/>
     </Style>
     <Style x:Key="BaseTextLightH3" BasedOn="{StaticResource BaseTextLightH2}">
         <Setter Property="Control.FontSize" Value="16"/>
     </Style>
+    
     <Style x:Key="BaseTextDarkH1" BasedOn="{StaticResource BaseTextLightH1}">
         <Setter Property="Control.Foreground" Value="{StaticResource DarkGray}"/>
-        <Setter Property="Control.FontWeight" Value="Bold"/>
+        <Setter Property="Control.FontWeight" Value="Regular"/>
     </Style>
     <Style x:Key="BaseTextDarkH2" BasedOn="{StaticResource BaseTextDarkH1}">
         <Setter Property="Control.FontSize" Value="20"/>
     </Style>
-    <Style x:Key="BaseTextDarktH3" BasedOn="{StaticResource BaseTextDarkH1}">
+    <Style x:Key="BaseTextDarkH3" BasedOn="{StaticResource BaseTextDarkH1}">
         <Setter Property="Control.FontSize" Value="16"/>
+    
     </Style>
 </ResourceDictionary>

@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingProgram"
+        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Testing" Height="600" Width="800" ResizeMode="NoResize"  Background="{StaticResource LightGray}"
+        Title="Testing" Height="600" Width="800" ResizeMode="NoResize"  Background="#FFEEEEEE"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto">
 
@@ -14,7 +15,7 @@
 
 
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
-        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Background="Gray">
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
           
             <materialDesign:DrawerHost.LeftDrawerContent>
 
@@ -38,7 +39,7 @@
             <DockPanel>
                 
                 <materialDesign:ColorZone  Padding="10" materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                           Background="#FF222222" DockPanel.Dock="Top" Height="40">
+                                           Background="{StaticResource DarkGray}" DockPanel.Dock="Top" Height="40">
                    
                     <!--#region HEAD-->
                     <Grid>
@@ -58,13 +59,47 @@
                    
                 </materialDesign:ColorZone>
                 
-                <Grid>
-                    <Grid.RowDefinitions>
+                <!--#region STARTWINDOW-->
+                
+                <!--<StackPanel Margin="20,30">
+                    <TextBlock Style="{StaticResource BaseTextDarkH1}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,30" TextWrapping="Wrap">Переменная</TextBlock>
+                    --><!--<Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Style="{StaticResource BaseTextDarkH1}">Переменная</TextBlock>
-                </Grid>
+                    </Grid.RowDefinitions>-->
+                    <!--<TextBlock Style="{StaticResource BaseTextDarkH1}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10">Переменная</TextBlock>--><!--
+                    <TextBlock Style="{StaticResource BaseTextDarkH3}" TextWrapping="Wrap" Margin="0" Text="Для хранения данных в программе применяются переменные. Переменная представляет именнованную область памяти, в которой хранится значение определенного типа. Переменная имеет тип, имя и значение. Тип определяет, какого рода информацию может хранить переменная. Перед использованием любую переменную надо определить. Синтаксис определения переменной выглядит следующим образом:" Foreground="{StaticResource DarkGray}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ClockOutline" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DarkGray}" />
+                        <TextBlock  Style="{StaticResource BaseTextDarkH3}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >Time:</TextBlock>
+                        <TextBlock  Style="{StaticResource BaseTextDarkH3}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >20:00</TextBlock>
+                    </StackPanel>
+
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DarkGray}" />
+                        <TextBlock  Style="{StaticResource BaseTextDarkH3}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >Question:</TextBlock>
+                        <TextBlock  Style="{StaticResource BaseTextDarkH3}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >10</TextBlock>
+                    </StackPanel>
+                    <Button
+ 
+    Width="100" Background="{StaticResource DarkGray}" Foreground="{StaticResource LightGray}" BorderBrush="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Height="32" 
+   >
+                       START
+                    </Button>
+                </StackPanel>-->
+                
+                <!--#endregion-->
+
+                <avalonEdit:TextEditor
+                    DocumentLine="True"
+                    ShowLineNumbers="True"
+				Name="textEditor"
+				FontFamily="Consolas"
+				FontSize="10pt"
+				SyntaxHighlighting="C#"
+			>Welcome to AvalonEdit!
+                </avalonEdit:TextEditor>
+
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Login1"
         mc:Ignorable="d"
-        xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf"
+        xmlns:wpf="clr-namespace:Login1"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:domain1="clr-namespace:Login1.Domain"
         Title="Login" Height="400" Width="640" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen">
@@ -32,15 +32,8 @@
 
 
 
-                <TextBox x:Name="NameTextBox" TextChanged="NameTextBox_TextChanged"
-                    <TextBox.Text>
-                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <domain1:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
+       
+              
 
                 <!--<PasswordBox
 FontFamily="QUATTROCENTO SANS" materialDesign:HintAssist.Hint="Password"

@@ -9,13 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Login1;
-using Login1.Domain;
 using MaterialDesignDemo;
 using MaterialDesignDemo.Domain;
 using MaterialDesignThemes.Wpf;
-using MaterialDesignThemes.Wpf.Converters;
-using MaterialDesignThemes.Wpf.Transitions;
 using System;
 using System.Diagnostics;
 using System.Windows;

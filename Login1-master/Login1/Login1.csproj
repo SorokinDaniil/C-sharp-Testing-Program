@@ -60,28 +60,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="NewFolder1\AnotherCommandImplementation.cs" />
-    <Compile Include="NewFolder1\DemoItem.cs" />
-    <Compile Include="NewFolder1\DialogsViewModel.cs" />
-    <Compile Include="NewFolder1\DocumentationLink.cs" />
-    <Compile Include="NewFolder1\DocumentationLinks.xaml.cs" />
-    <Compile Include="NewFolder1\DocumentationLinkType.cs" />
-    <Compile Include="NewFolder1\FutureDateValidationRule.cs" />
-    <Compile Include="NewFolder1\IsCheckedValidationRule.cs" />
-    <Compile Include="NewFolder1\ListsAndGridsViewModel.cs" />
-    <Compile Include="NewFolder1\MainWindowViewModel.cs" />
-    <Compile Include="NewFolder1\NotEmptyValidationRule.cs" />
-    <Compile Include="NewFolder1\NotifyPropertyChangedExtension.cs" />
-    <Compile Include="NewFolder1\Sample4Dialog.xaml.cs" />
-    <Compile Include="NewFolder1\SampleDialog.xaml.cs" />
-    <Compile Include="NewFolder1\SampleDialogViewModel.cs" />
-    <Compile Include="NewFolder1\SampleMessageDialog.xaml.cs" />
-    <Compile Include="NewFolder1\SampleProgressDialog.xaml.cs" />
-    <Compile Include="NewFolder1\SelectableViewModel.cs" />
-    <Compile Include="NewFolder1\SimpleDataTemplateSelector.cs" />
-    <Compile Include="NewFolder1\SimpleDateValidationRule.cs" />
-    <Compile Include="NewFolder1\TextFieldsViewModel.cs" />
-    <Compile Include="NewFolder1\TreesViewModel.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -129,9 +107,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Assets\welcome.jpeg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

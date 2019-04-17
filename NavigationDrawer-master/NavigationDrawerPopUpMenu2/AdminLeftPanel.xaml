@@ -9,30 +9,30 @@
       >
     <Grid>
 
-        <ListBox  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH2}" BorderBrush="{DynamicResource DarkGray}"
+        <ItemsControl  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH2}" BorderBrush="{DynamicResource DarkGray}"
             IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
             <StackPanel
           Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="FileDocumentBoxOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" />
+                <materialDesign:PackIcon Kind="FileDocumentBoxOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="6,9,12,9" />
 
                 <TextBlock
-            Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
           Журнал
                 </TextBlock>
             </StackPanel>
             <StackPanel
           Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="SquareEditOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" />
+                <materialDesign:PackIcon Kind="SquareEditOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Margin="6,9,12,9" />
 
                 <TextBlock
-            Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center">
           Редактор
                 </TextBlock>
             </StackPanel>
-         
 
-        </ListBox>
+
+        </ItemsControl>
     </Grid>
-   
-    
+
+
 </UserControl>
