@@ -10,8 +10,8 @@
 
 
     <Grid>
-        <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH2}"
-  MinWidth="220" BorderBrush="{DynamicResource DarkGray}">
+        <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH3}"
+  MinWidth="220" BorderBrush="{x:Null}">
             <TreeViewItem 
     Header="Основы программирования на C#">
                 <TreeViewItem
@@ -19,7 +19,7 @@
                     <TreeViewItem.Header>
                         <StackPanel
           Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="CloseCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Foreground="Red" />
+                            <materialDesign:PackIcon Kind="CloseCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Foreground="Red" />
 
                             <TextBlock
             Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -29,12 +29,12 @@
                     </TreeViewItem.Header>
 
                 </TreeViewItem>
-                <TreeViewItem
+                <TreeViewItem VerticalAlignment="Center"
      >
                     <TreeViewItem.Header>
                         <StackPanel
           Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="CheckCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="24" Height="24" Foreground="Green" />
+                            <materialDesign:PackIcon Kind="CheckCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Foreground="Green" />
 
                             <TextBlock Text="{Binding Name}"
             Margin="8 0 0 0" HorizontalAlignment="Center" VerticalAlignment="Center" >

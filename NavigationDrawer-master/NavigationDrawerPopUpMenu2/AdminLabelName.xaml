@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TestingProgram"
         mc:Ignorable="d"
       >
-    <Grid Height="23" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <TextBlock  Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" HorizontalAlignment="Center">Admin</TextBlock>
     </Grid>
 </UserControl>
