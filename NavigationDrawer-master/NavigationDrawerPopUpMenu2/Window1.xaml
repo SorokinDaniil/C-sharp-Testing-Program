@@ -15,11 +15,11 @@
 
 
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
-        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
-          
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Background="Black">
+
             <materialDesign:DrawerHost.LeftDrawerContent>
 
-<!--#region LEFTPANEL-->
+                <!--#region LEFTPANEL-->
                 <DockPanel MinWidth="300" Background="{StaticResource DarkGray}" >
                     <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                                     DockPanel.Dock="Top"
@@ -27,21 +27,21 @@
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Foreground="{StaticResource LightGray}" Width="25" Height="25"/>
 
                     <Grid x:Name="LeftPanel"/>
-                  
 
-                    
+
+
                 </DockPanel>
 
-<!--#endregion-->
-                
+                <!--#endregion-->
+
             </materialDesign:DrawerHost.LeftDrawerContent>
-            
+
             <DockPanel>
 
                 <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                            DockPanel.Dock="Top"
                                            Background="{StaticResource DarkGray}" Height="60" >
-                   
+
                     <!--#region HEAD-->
                     <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
 
@@ -60,9 +60,9 @@
                         </Grid>
                     </materialDesign:TransitioningContent>
                     <!--#endregion-->
-                   
+
                 </materialDesign:ColorZone>
-                
+
                 <!--#region STARTWINDOW-->
 
                 <!--<materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
@@ -71,7 +71,9 @@
                         <TextBlock Style="{StaticResource BaseTextDarkH1}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,30" TextWrapping="Wrap">Переменная</TextBlock>
 
 
-                        --><!--<TextBlock Style="{StaticResource BaseTextDarkH3}" TextWrapping="Wrap" Margin="0" Text="   Для хранения данных в программе применяются переменные. Переменная представляет именнованную область памяти, в которой хранится значение определенного типа. Переменная имеет тип, имя и значение. Тип определяет, какого рода информацию может хранить переменная. Перед использованием любую переменную надо определить. Синтаксис определения переменной выглядит следующим образом:" Foreground="{StaticResource DarkGray}" HorizontalAlignment="Left" VerticalAlignment="Center" />--><!--
+                        -->
+                <!--<TextBlock Style="{StaticResource BaseTextDarkH3}" TextWrapping="Wrap" Margin="0" Text="   Для хранения данных в программе применяются переменные. Переменная представляет именнованную область памяти, в которой хранится значение определенного типа. Переменная имеет тип, имя и значение. Тип определяет, какого рода информацию может хранить переменная. Перед использованием любую переменную надо определить. Синтаксис определения переменной выглядит следующим образом:" Foreground="{StaticResource DarkGray}" HorizontalAlignment="Left" VerticalAlignment="Center" />-->
+                <!--
                         <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
                             <materialDesign:PackIcon Kind="ClockOutline" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="{StaticResource DarkGray}" />
                             <TextBlock  Style="{StaticResource BaseTextDarkH3}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >Time:</TextBlock>
@@ -105,106 +107,105 @@
                 </materialDesign:TransitioningContent>-->
                 <!--#endregion-->
 
-                <StackPanel>
-                    <TextBlock Style="{StaticResource BaseTextDarkH1}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20">
-                        Выберите группу
-                    </TextBlock>
-                    <materialDesign:DialogHost DialogClosing="Sample1_DialogHost_OnDialogClosing" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <materialDesign:DialogHost.DialogContent>
-                            <StackPanel Margin="16">
-                                <TextBlock>Add a new fruit.</TextBlock>
-                                <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+
+
+                <materialDesign:DialogHost DialogClosing="Sample1_DialogHost_OnDialogClosing"  CloseOnClickAway="True">
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel>
+                            <TextBlock>Input name group</TextBlock>
+                            <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsDefault="True"
                                         Margin="0 8 8 0"
                                         Command="materialDesign:DialogHost.CloseDialogCommand">
-                                       
-                                        ACCEPT
-                                    </Button>
-                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    ACCEPT
+                                </Button>
+                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                         IsCancel="True"
                                         Margin="0 8 8 0"
                                         Command="materialDesign:DialogHost.CloseDialogCommand">
-                                 
-                                        CANCEL
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
-                        </materialDesign:DialogHost.DialogContent>
-                        <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
-                            MinWidth="256" MinHeight="256" ClipToBounds="True">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <ListBox x:Name="FruitListBox">
-                                    <ListBoxItem>Apple</ListBoxItem>
-                                    <ListBoxItem>Banana</ListBoxItem>
-                                    <ListBoxItem>Pear</ListBoxItem>
-                                </ListBox>
-                                <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" Effect="{DynamicResource MaterialDesignShadowDepth5}">
-                                    <TextBlock Margin="16">Fruit Bowl</TextBlock>
-                                </materialDesign:ColorZone>
-                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                    VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-                                    Grid.Row="0" Margin="0 0 28 -20">
-                                    <materialDesign:PackIcon Kind="Plus" Height="22" Width="22"/>
-                                </Button>
-                            </Grid>
-                        </Border>
-                    </materialDesign:DialogHost>
-                </StackPanel>
 
-<!--#region Transitioner-->
+                                    CANCEL
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </materialDesign:DialogHost.DialogContent>
+
+                    <DockPanel LastChildFill="False">
+                        <TextBlock Style="{StaticResource BaseTextDarkH1}" VerticalAlignment="Center" Margin="0,20" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                        Выберите группу
+                        </TextBlock>
+                        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
+
+                            <ListBox x:Name="FruitListBox" Style="{StaticResource BaseTextDarkH3}">
+                                <ListBoxItem>T-691</ListBoxItem>
+                                <ListBoxItem>T-692</ListBoxItem>
+                                <ListBoxItem>T-693</ListBoxItem>
+                            </ListBox>
+                        </Grid>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
+                                    Margin="0,0,28,28" Width="60" Height="60" DockPanel.Dock="Bottom" VerticalAlignment="Center" HorizontalAlignment="Right" >
+                            <materialDesign:PackIcon Kind="Plus" Height="22" Width="22 "/>
+                        </Button>
+                    </DockPanel>
+                </materialDesign:DialogHost>
+
+
+                <!--#region Transitioner-->
                 <!--<materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
                     <materialDesign:Transitioner.InputBindings>
                         <KeyBinding Key="Right" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
                     </materialDesign:Transitioner.InputBindings>
 
-                    --><!-- you can use a slide for each page, let's add a touch of fade for our first page  -->
-                    <!--<materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">--><!--
+                    -->
+                <!-- you can use a slide for each page, let's add a touch of fade for our first page  -->
+                <!--<materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">-->
+                <!--
                         <local:Slide1_Intro Margin="0,0,0,0.4" />
-                    --><!--</materialDesign:TransitionerSlide>-->
+                    -->
+                <!--</materialDesign:TransitionerSlide>-->
 
-                    <!-- but you can use bare xaml too --><!--
+                <!-- but you can use bare xaml too -->
+                <!--
                     <local:Slide2_Intro />
      <local:Slide1_Intro Margin="0,0,0,0.4" />
-                    --><!-- you can control (and create your own) wipes -->
-                    <!--<materialDesign:TransitionerSlide>
+                    -->
+                <!-- you can control (and create your own) wipes -->
+                <!--<materialDesign:TransitionerSlide>
                         <materialDesign:TransitionerSlide.BackwardWipe>
                             <materialDesign:CircleWipe />
                         </materialDesign:TransitionerSlide.BackwardWipe>
                         <materialDesign:TransitionerSlide.ForwardWipe>
                             <materialDesign:SlideWipe Direction="Right" />
                         </materialDesign:TransitionerSlide.ForwardWipe>-->
-                        <!--<local:Slide3_Intro />-->
-                    <!--</materialDesign:TransitionerSlide>-->
+                <!--<local:Slide3_Intro />-->
+                <!--</materialDesign:TransitionerSlide>-->
 
-                    <!-- now we are going to slide this in by combining some extra effects.  the inner content slides in, so we'll set the outer background and clip, to keep things nice -->
-                    <!--<materialDesign:TransitionerSlide Background="{DynamicResource MaterialDesignDarkBackground}"
+                <!-- now we are going to slide this in by combining some extra effects.  the inner content slides in, so we'll set the outer background and clip, to keep things nice -->
+                <!--<materialDesign:TransitionerSlide Background="{DynamicResource MaterialDesignDarkBackground}"
                                               Foreground="{DynamicResource MaterialDesignDarkForeground}"
                                               ClipToBounds="True">
                         <materialDesign:TransitionerSlide.OpeningEffects>
                             <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.8" />
                             <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:0.8" OffsetTime="0:0:0.15" />
                         </materialDesign:TransitionerSlide.OpeningEffects>-->
-                        <!--<local:Slide4_CombineTransitions />-->
-                    <!--</materialDesign:TransitionerSlide>-->
+                <!--<local:Slide4_CombineTransitions />-->
+                <!--</materialDesign:TransitionerSlide>-->
 
-                    <!--<local:Slide5_TransitioningContent />
+                <!--<local:Slide5_TransitioningContent />
 
                     <local:Slide6_Origins />
 
-                    <local:Slide7_MVVM />--><!--
+                    <local:Slide7_MVVM />-->
+                <!--
 
                 </materialDesign:Transitioner>-->
-<!--#endregion--> 
+                <!--#endregion-->
 
 
-<!--#region TextEditor-->
+                <!--#region TextEditor-->
                 <!--<avalonEdit:TextEditor
                     ShowLineNumbers="True"
 				Name="textEditor"
@@ -213,17 +214,17 @@
 				SyntaxHighlighting="C#"
 			>Welcome to AvalonEdit!
                 </avalonEdit:TextEditor>-->
-<!--#endregion-->
-                
+                <!--#endregion-->
+
             </DockPanel>
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
 </Window>
 
-    
-    
-    
-    
+
+
+
+
 
 
 

@@ -19,6 +19,8 @@
         <Setter Property="Control.Foreground" Value="{StaticResource LightGray}"/>
         <Setter Property="Control.FontSize" Value="34"/>
         <Setter Property="Control.FontWeight" Value="Regular"/>
+        <Setter Property="Control.Background" Value="{x:Null}"/>
+        <Setter Property="Control.BorderBrush" Value="{x:Null}"/>
     </Style>
     <Style x:Key="BaseTextLightH2" BasedOn="{StaticResource BaseTextLightH1}">
         <Setter Property="Control.FontSize" Value="22"/>
