@@ -6,16 +6,91 @@
         xmlns:local="clr-namespace:TestingProgram"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Testing" Height="600" Width="1080" ResizeMode="NoResize"  Background="#FFEEEEEE"
+        Title="Testing" Height="600" Width="1080" ResizeMode="CanResize"  Background="#FFFAFAFA"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto">
 
+    
+    <!--<Window.Resources>
+        <ResourceDictionary>
+           
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type Viewbox}">
+                <Setter Property="Width" Value="18" />
+                <Setter Property="Height" Value="18" />
+                <Setter Property="Margin" Value="0 0 8 0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MaterialDesignSlider}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type materialDesign:PackIcon}" BasedOn="{StaticResource {x:Type materialDesign:PackIcon}}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="4 0 4 0" />
+                <Setter Property="Width" Value="40" />
+                <Setter Property="Height" Value="40" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>-->
+
+    <!--<Window.Resources>
+        
+    <ControlTemplate x:Key="ModifiedErrorTemplate">
+            <ControlTemplate.Resources>
+                <DataTemplate DataType="{x:Type ValidationError}">
+                    <TextBlock Foreground="{DynamicResource ValidationErrorBrush}"
+                           MaxWidth="{Binding ElementName=Placeholder, Path=ActualWidth}"
+                           HorizontalAlignment="Left"
+                           Margin="2"
+                           TextWrapping="Wrap"
+                           Text="{Binding ErrorContent}"
+                           UseLayoutRounding="false" />
+                </DataTemplate>
+            </ControlTemplate.Resources>
+        </ControlTemplate>
+   
+        <Style x:Key="ExtendedMaterialDesignComboBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}"
+               TargetType="ComboBox">
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ModifiedErrorTemplate}" />
+        </Style>
+        
+    </Window.Resources>-->
+
+    <!--<Window.Resources>
+        <Style x:Key="ExtendedMaterialDesignComboBox" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                     
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>-->
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
 
 
 
     <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
-        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Background="Black">
+        <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" BottomDrawerBackground="{x:Null}" LeftDrawerBackground="{x:Null}" RightDrawerBackground="{x:Null}" TopDrawerBackground="{x:Null}">
 
             <materialDesign:DrawerHost.LeftDrawerContent>
 
@@ -41,9 +116,11 @@
                 <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                            DockPanel.Dock="Top"
                                            Background="{StaticResource DarkGray}" Height="60" >
-
+                    <Grid>
+                        <TextBlock Style="{StaticResource BaseTextLightH2}" HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
+                    </Grid>
                     <!--#region HEAD-->
-                    <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
+                    <!--<materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
 
                         <Grid x:Name="Head">
                             <ToggleButton  Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
@@ -53,17 +130,17 @@
                             </Grid>
 
 
-                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="True" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
+                            <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
                                 <materialDesign:PackIcon Kind="ExitToApp" Width="25" Height="25"/>
                             </Button>
 
                         </Grid>
-                    </materialDesign:TransitioningContent>
+                    </materialDesign:TransitioningContent>-->
                     <!--#endregion-->
 
                 </materialDesign:ColorZone>
 
-                <!--#region STARTWINDOW-->
+                <!--#region START_WINDOW-->
 
                 <!--<materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
 
@@ -107,12 +184,11 @@
                 </materialDesign:TransitioningContent>-->
                 <!--#endregion-->
 
-
-
-                <materialDesign:DialogHost DialogClosing="Sample1_DialogHost_OnDialogClosing"  CloseOnClickAway="True">
+                <!--#region CHOICE_GROUP-->
+                <!--<materialDesign:DialogHost CloseOnClickAway="True">
                     <materialDesign:DialogHost.DialogContent>
-                        <StackPanel>
-                            <TextBlock>Input name group</TextBlock>
+                        <StackPanel Margin="16">
+                            <TextBlock Style="{StaticResource BaseTextDarkH3}">Input name group</TextBlock>
                             <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -133,26 +209,86 @@
                     </materialDesign:DialogHost.DialogContent>
 
                     <DockPanel LastChildFill="False">
-                        <TextBlock Style="{StaticResource BaseTextDarkH1}" VerticalAlignment="Center" Margin="0,20" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                        
+                        <TextBlock Style="{StaticResource BaseTextDarkH1}" VerticalAlignment="Center" Margin="0,100,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top">
                         Выберите группу
                         </TextBlock>
                         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
 
-                            <ListBox x:Name="FruitListBox" Style="{StaticResource BaseTextDarkH3}">
-                                <ListBoxItem>T-691</ListBoxItem>
-                                <ListBoxItem>T-692</ListBoxItem>
-                                <ListBoxItem>T-693</ListBoxItem>
-                            </ListBox>
+
+
+                            <ComboBox  Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Group"
+  MinWidth="72"
+  VerticalAlignment="Bottom"
+  IsEditable="True"
+  ItemsSource="{Binding LongListToTestComboVirtualization}" Foreground="Black" IsSelected="True" Width="80">
+                                <ComboBox.Text>
+                                    <Binding
+      Path="SelectedTextTwo"
+      Mode="TwoWay"
+      UpdateSourceTrigger="PropertyChanged">
+                                        <Binding.ValidationRules>
+                                            <local:NotEmptyValidationRule
+          ValidatesOnTargetUpdated="False"  />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.Text>
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+
+
+
                         </Grid>
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" 
-                                    Margin="0,0,28,28" Width="60" Height="60" DockPanel.Dock="Bottom" VerticalAlignment="Center" HorizontalAlignment="Right" >
-                            <materialDesign:PackIcon Kind="Plus" Height="22" Width="22 "/>
+                        <Button
+    Style="{StaticResource MaterialDesignFlatButton}"
+   
+    ToolTip="MaterialDesignFlatButton" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
+                            SELECT
                         </Button>
+
+                        <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                            PlacementMode="LeftAndAlignMiddles"
+    UnfurlOrientation="Horizontal"
+                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                 Margin="32" DockPanel.Dock="Right">
+                            <materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:PackIcon
+      Kind="Pencil"
+      Width="22"
+      Height="22" />
+                            </materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PopupBox.ToggleCheckedContent>
+                                <materialDesign:PackIcon
+      Kind="Close"
+      Width="22"
+      Height="22" />
+                            </materialDesign:PopupBox.ToggleCheckedContent>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Button ToolTip="Add" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                                    <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                                </Button>
+                                <Button ToolTip="Edit">
+                                    <materialDesign:PackIcon Kind="Edit" />
+                                </Button>
+                                <Button ToolTip="Delete" >
+                                    <materialDesign:PackIcon Kind="Delete" />
+                                </Button>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
                     </DockPanel>
-                </materialDesign:DialogHost>
+                </materialDesign:DialogHost>-->
+<!--#endregion-->
 
-
+                <Grid>
+                    <TextBlock></TextBlock>
+                </Grid>
+                
                 <!--#region Transitioner-->
                 <!--<materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
                     <materialDesign:Transitioner.InputBindings>
@@ -204,7 +340,6 @@
                 </materialDesign:Transitioner>-->
                 <!--#endregion-->
 
-
                 <!--#region TextEditor-->
                 <!--<avalonEdit:TextEditor
                     ShowLineNumbers="True"
@@ -217,6 +352,7 @@
                 <!--#endregion-->
 
             </DockPanel>
+            
         </materialDesign:DrawerHost>
     </materialDesign:DialogHost>
 </Window>

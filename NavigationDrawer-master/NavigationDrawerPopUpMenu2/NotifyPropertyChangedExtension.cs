@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace MaterialDesignColors.WpfExample.Domain
+namespace TestingProgram
 {
     public static class NotifyPropertyChangedExtension
     {

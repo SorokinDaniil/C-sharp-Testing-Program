@@ -7,32 +7,30 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
       >
-    <Grid>
-
-        <ItemsControl  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH3}" BorderBrush="{DynamicResource DarkGray}"
-            IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-            <StackPanel
-          Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="FileDocumentBoxOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Margin="17.5" />
-
-                <TextBlock
-            Margin="0,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <Grid >
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource Disable}"
+  MinWidth="220" Background="{DynamicResource DarkGray}" BorderBrush="{x:Null}" Foreground="{DynamicResource LightGray}">
+            <ListViewItem Height="60" >
+                <StackPanel  Style="{StaticResource BaseTextLightH3}"
+          Orientation="Horizontal" Background="{x:Null}">
+                    <materialDesign:PackIcon Kind="FileDocumentBoxOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Margin="10" />
+                    <TextBlock
+            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
           Журнал
-                </TextBlock>
-            </StackPanel>
-            <StackPanel
+                    </TextBlock>
+                </StackPanel >
+            </ListViewItem>
+            <ListViewItem Height="60">
+                <StackPanel  Style="{StaticResource BaseTextLightH3}"
           Orientation="Horizontal">
-                <materialDesign:PackIcon Kind="SquareEditOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Margin="17.5" />
+                    <materialDesign:PackIcon Kind="SquareEditOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Margin="10" />
 
-                <TextBlock
-            Margin="0,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock
+            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
           Редактор
-                </TextBlock>
-            </StackPanel>
-
-
-        </ItemsControl>
+                    </TextBlock>
+                </StackPanel>
+            </ListViewItem>
+        </ListView>
     </Grid>
-
-
 </UserControl>

@@ -10,7 +10,7 @@
 
 
     <Grid>
-        <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="{StaticResource DarkGray}" Style="{StaticResource BaseTextLightH3}"
+        <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource BaseTextLightH3}"
   MinWidth="220" BorderBrush="{x:Null}">
             <TreeViewItem 
     Header="Основы программирования на C#">
