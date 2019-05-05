@@ -26,22 +26,16 @@ namespace TestingProgram
         {
           InitializeComponent();
             DataContext = new TextFieldsViewModel();
-            HeadLabelName.Children.Add(new AdminLabelName());
-          LeftPanel.Children.Add(new AdminLeftPanel());
-
+            MAINGRID.Children.Add(new LeftPanel());
+            
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Head.Visibility = Visibility.Hidden;
-            //StartPanel.Visibility = Visibility.Hidden;
-        }
+        //private void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Head.Visibility = Visibility.Hidden;
+        //    //StartPanel.Visibility = Visibility.Hidden;
+        //}
 
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            LeftPanel.Children.Add(new UserLeftPanel());
-        }
     }
 }
 

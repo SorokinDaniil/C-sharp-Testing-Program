@@ -68,6 +68,7 @@ namespace TestingProgram
         private Action<PropertyChangedEventArgs> RaisePropertyChanged()
         {
             return args => PropertyChanged?.Invoke(this, args);
+
         }
     }
 }

@@ -15,14 +15,19 @@ using System.Windows.Shapes;
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для Window2.xaml
+    /// Логика взаимодействия для LeftPanel.xaml
     /// </summary>
-    public partial class Window2 : UserControl
+    public partial class LeftPanel : UserControl
     {
-        public Window2()
+        public LeftPanel()
         {
             InitializeComponent();
-       
+
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            MAIN
         }
     }
 }
