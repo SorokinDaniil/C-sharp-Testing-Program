@@ -10,24 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для LeftPanel.xaml
+    /// Логика взаимодействия для ChoiceGroup.xaml
     /// </summary>
-    public partial class LeftPanel : UserControl
+    public partial class ChoiceGroup : UserControl
     {
-        public LeftPanel()
+        public ChoiceGroup()
         {
             InitializeComponent();
-
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            MAIN
         }
     }
 }

@@ -13,7 +13,7 @@
             <ListViewItem Height="60" >
                 <StackPanel  Style="{StaticResource BaseTextLightH3}"
           Orientation="Horizontal" Background="{x:Null}">
-                    <materialDesign:PackIcon Kind="FileDocumentBoxOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Margin="10" />
+                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="FileDocumentBoxOutline"  Margin="10" />
                     <TextBlock
             Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
           Журнал
@@ -23,8 +23,7 @@
             <ListViewItem Height="60">
                 <StackPanel  Style="{StaticResource BaseTextLightH3}"
           Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="SquareEditOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Width="25" Height="25" Margin="10" />
-
+                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="SquareEditOutline"  Margin="10" />
                     <TextBlock
             Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
           Редактор

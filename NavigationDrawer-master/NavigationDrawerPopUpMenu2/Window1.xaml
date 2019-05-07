@@ -80,13 +80,177 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid x:Name="MAINGRID">
+    <Grid Background="#FFFAFAFA" x:Name="MainGrid">
+        <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}" Background="#FF787878">
+            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" BottomDrawerBackground="{x:Null}" LeftDrawerBackground="{x:Null}" RightDrawerBackground="{x:Null}" TopDrawerBackground="{x:Null}">
+                     
+                    <!--#region LEFTPANEL-->
+                <materialDesign:DrawerHost.LeftDrawerContent>
+
+                    
+                    <DockPanel MinWidth="300" Background="{StaticResource DarkGray}" Width="298" >
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Left" Margin="17.5"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Foreground="{StaticResource LightGray}" Width="25" Height="25"/>
+
+                        <Grid x:Name="Panel"/>
+
+
+
+                    </DockPanel>
+                  
+
+                </materialDesign:DrawerHost.LeftDrawerContent>
+                <!--#endregion-->
+                
+                <DockPanel>
+
+                    <!--#region  HEAD_PANEL-->
+                    <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                           DockPanel.Dock="Top"
+                                           Background="{StaticResource DarkGray}" Height="60" >
+                        <!--<Grid>
+                        <TextBlock Style="{StaticResource BaseTextLightH2}" HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
+                    </Grid>-->
+                       
+                        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
+
+                            <Grid x:Name="Head">
+                                <ToggleButton  Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                        x:Name="MenuToggleButton" Foreground="{StaticResource LightGray}" HorizontalAlignment="Left" Width="30" Height="30" Margin="15,0,0,0"/>
+
+                                <Grid x:Name="HeadLabelName">
+                                </Grid>
+
+                                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="33" Height="33" Margin="0,12,12,12" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="ExitToApp"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Button>
+                                
+                                <!--<Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" Width="40" Height="40" Margin="0,0,17.5,0" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                                    <materialDesign:PackIcon Kind="ExitToApp" Width="30" Height="30"/>
+                                </Button>-->
+
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                      
+
+                    </materialDesign:ColorZone>
+<!--#endregion HEADPANEL-->
+
+                    <Grid x:Name="CenterGrid"/>
+
+
+
+                    <!--#region TESTING_WINDOW-->
+                    <!--<DockPanel Margin="0"  LastChildFill="False">
+                        <TextBox
+    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+    Margin="20"
+    VerticalAlignment="Center"
+    Height="100"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    materialDesign:HintAssist.Hint="This is a text area"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />
+                        --><!--<TextBox TextWrapping="WrapWithOverflow" Style="{StaticResource BaseTextDarkH3}" Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:</TextBox>--><!--
+                        <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="200"
+                    ShowLineNumbers="True"
+				Name="textEditor"
+				FontFamily="Consolas"
+				FontSize="10pt"
+				SyntaxHighlighting="C#"
+                                            HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFAFAFA" DockPanel.Dock="Top"
+			>Welcome to AvalonEdit!
+
+                        </avalonEdit:TextEditor>
+
+                        <StackPanel Style="{StaticResource BaseTextDarkH3}" Margin="0,20,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" >
+                            <CheckBox Margin="20,0,20,6">
+                                <TextBlock TextWrapping="WrapWithOverflow">
+                               public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                                </TextBlock>
+                            </CheckBox>
+                            <CheckBox Margin="20,0,20,6">
+                                internal
+                            </CheckBox>
+                            <CheckBox Margin="20,0,20,6">
+                                private
+                            </CheckBox>
+                            <CheckBox Margin="20,0,20,6">
+                                public
+                            </CheckBox>
+                        </StackPanel>
+
+
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6" Click="Button_Click_2" >NEXT</Button>
+
+                    </DockPanel>-->
+<!--#endregion--> 
+                    
+                    
+                    <!--#region Transitioner-->
+                    <!--<materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
+                    <materialDesign:Transitioner.InputBindings>
+                        <KeyBinding Key="Right" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
+                    </materialDesign:Transitioner.InputBindings>
+
+                    -->
+                    <!-- you can use a slide for each page, let's add a touch of fade for our first page  -->
+                    <!--<materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">-->
+                    <!--
+                        <local:Slide1_Intro Margin="0,0,0,0.4" />
+                    -->
+                    <!--</materialDesign:TransitionerSlide>-->
+
+                    <!-- but you can use bare xaml too -->
+                    <!--
+                    <local:Slide2_Intro />
+     <local:Slide1_Intro Margin="0,0,0,0.4" />
+                    -->
+                    <!-- you can control (and create your own) wipes -->
+                    <!--<materialDesign:TransitionerSlide>
+                        <materialDesign:TransitionerSlide.BackwardWipe>
+                            <materialDesign:CircleWipe />
+                        </materialDesign:TransitionerSlide.BackwardWipe>
+                        <materialDesign:TransitionerSlide.ForwardWipe>
+                            <materialDesign:SlideWipe Direction="Right" />
+                        </materialDesign:TransitionerSlide.ForwardWipe>-->
+                    <!--<local:Slide3_Intro />-->
+                    <!--</materialDesign:TransitionerSlide>-->
+
+                    <!-- now we are going to slide this in by combining some extra effects.  the inner content slides in, so we'll set the outer background and clip, to keep things nice -->
+                    <!--<materialDesign:TransitionerSlide Background="{DynamicResource MaterialDesignDarkBackground}"
+                                              Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                              ClipToBounds="True">
+                        <materialDesign:TransitionerSlide.OpeningEffects>
+                            <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.8" />
+                            <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:0.8" OffsetTime="0:0:0.15" />
+                        </materialDesign:TransitionerSlide.OpeningEffects>-->
+                    <!--<local:Slide4_CombineTransitions />-->
+                    <!--</materialDesign:TransitionerSlide>-->
+
+                    <!--<local:Slide5_TransitioningContent />
+
+                    <local:Slide6_Origins />
+
+                    <local:Slide7_MVVM />-->
+                    <!--
+
+                </materialDesign:Transitioner>-->
+                    <!--#endregion-->
+
+                </DockPanel>
+
+            </materialDesign:DrawerHost>
+        </materialDesign:DialogHost>
+
     </Grid>
 </Window>
 

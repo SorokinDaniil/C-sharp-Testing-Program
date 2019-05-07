@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestingProgram
+namespace TestingProgram.User
 {
     /// <summary>
-    /// Логика взаимодействия для Window2.xaml
+    /// Логика взаимодействия для PreviewTestingWindow.xaml
     /// </summary>
-    public partial class Window2 : UserControl
+    public partial class PreviewTestingWindow : UserControl
     {
-        public Window2()
+        public PreviewTestingWindow()
         {
             InitializeComponent();
-       
         }
     }
 }

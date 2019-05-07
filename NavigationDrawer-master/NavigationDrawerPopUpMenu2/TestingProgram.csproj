@@ -7,7 +7,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{8EC17DF2-B06C-43B3-88B7-838C92B9AB36}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>NavigationDrawerPopUpMenu2</RootNamespace>
+    <RootNamespace>TestingProgram</RootNamespace>
     <AssemblyName>NavigationDrawerPopUpMenu2</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -72,14 +72,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdminLabelName.xaml.cs">
+    <Compile Include="Admin\AdminLabelName.xaml.cs">
       <DependentUpon>AdminLabelName.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminLeftPanel.xaml.cs">
+    <Compile Include="Admin\AdminLeftPanel.xaml.cs">
       <DependentUpon>AdminLeftPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LeftPanel.xaml.cs">
-      <DependentUpon>LeftPanel.xaml</DependentUpon>
+    <Compile Include="Admin\ChoiceGroup.xaml.cs">
+      <DependentUpon>ChoiceGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="NotEmptyValidationRule.cs" />
     <Compile Include="NotifyPropertyChangedExtension.cs" />
@@ -93,31 +93,34 @@
     <Compile Include="Slider\Slide7_MVVM.xaml.cs" />
     <Compile Include="Slider\Slide8_Details.xaml.cs" />
     <Compile Include="TextFieldsViewModel.cs" />
-    <Compile Include="UserLabelName.xaml.cs">
+    <Compile Include="User\PreviewTestingWindow.xaml.cs">
+      <DependentUpon>PreviewTestingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\TestingWindow.xaml.cs">
+      <DependentUpon>TestingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="User\UserLabelName.xaml.cs">
       <DependentUpon>UserLabelName.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserLeftPanel.xaml.cs">
+    <Compile Include="User\UserLeftPanel.xaml.cs">
       <DependentUpon>UserLeftPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
-    </Compile>
-    <Page Include="AdminLabelName.xaml">
+    <Page Include="Admin\AdminLabelName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminLeftPanel.xaml">
+    <Page Include="Admin\AdminLeftPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Admin\ChoiceGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dictionary1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LeftPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,19 +168,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserLabelName.xaml">
+    <Page Include="User\PreviewTestingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserLeftPanel.xaml">
+    <Page Include="User\TestingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\UserLabelName.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="User\UserLeftPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Window2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
