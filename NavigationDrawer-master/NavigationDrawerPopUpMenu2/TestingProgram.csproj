@@ -81,6 +81,12 @@
     <Compile Include="Admin\ChoiceGroup.xaml.cs">
       <DependentUpon>ChoiceGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\AnotherCommandImplementation.cs" />
+    <Compile Include="Dialog\DialogsViewModel.cs" />
+    <Compile Include="Dialog\SampleDialog.xaml.cs">
+      <DependentUpon>SampleDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\SampleDialogViewModel.cs" />
     <Compile Include="NotEmptyValidationRule.cs" />
     <Compile Include="NotifyPropertyChangedExtension.cs" />
     <Compile Include="Slider\Slide1_Intro.xaml.cs" />
@@ -117,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Admin\ChoiceGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\SampleDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingProgram"
         mc:Ignorable="d"
+             
       >
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock  Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" HorizontalAlignment="Center">Admin</TextBlock>
+        <TextBlock  Style="{StaticResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center">Admin</TextBlock>
     </Grid>
 </UserControl>

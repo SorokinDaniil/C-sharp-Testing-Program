@@ -2,22 +2,23 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
                     xmlns:local="clr-namespace:TestingProgram">
-    <SolidColorBrush x:Key="LightGray" Color="#FFD3D3D3"></SolidColorBrush>
-    <SolidColorBrush x:Key="DarkGray" Color="#FF222222"></SolidColorBrush>
+    <!--<SolidColorBrush x:Key="LightGray" Color="#FFD3D3D3"></SolidColorBrush>
+    <SolidColorBrush x:Key="DarkGray" Color="#FF222222"></SolidColorBrush>-->
 
 
-    <Style x:Key="BaseWindow" TargetType="Window">
+    <!--<Style x:Key="BaseWindow" TargetType="Window">
         <Setter Property="Control.Width" Value="800"/>
         <Setter Property="Control.Height" Value="1080"/>
         <Setter Property="Background" Value="{StaticResource LightGray}"/>
         <Setter Property="ResizeMode" Value="NoResize"/>
 
-    </Style>
+    </Style>-->
+    
     <Style x:Key="BaseIcon" TargetType="{x:Type materialDesign:PackIcon}" BasedOn="{StaticResource {x:Type materialDesign:PackIcon}}">
         <Setter Property="Control.VerticalAlignment" Value="Center" />
         <Setter Property="Control.Width" Value="30" />
         <Setter Property="Control.Height" Value="30" />
-        <Setter Property="Control.Foreground" Value="{StaticResource LightGray}"/>
+   
     </Style>
 
     <!--<Style TargetType="{x:Type TextBox}">
@@ -42,14 +43,14 @@
     <Style x:Key="Disable" TargetType="{x:Type ListView}" BasedOn="{StaticResource MaterialDesignListView}">
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{StaticResource DarkGray}"/>
+                <Setter Property="Background" Value="White"/>
             </Trigger>
         </Style.Triggers>
     </Style>
 
 
     
-    <Style x:Key="BaseTextLightH1">
+    <!--<Style x:Key="BaseTextLightH1">
         <Setter Property="Control.FontFamily" Value="Segoe UI"/>
         <Setter Property="Control.Foreground" Value="{StaticResource LightGray}"/>
         <Setter Property="Control.FontSize" Value="34"/>
@@ -75,7 +76,7 @@
     <Style x:Key="BaseTextDarkH3" BasedOn="{StaticResource BaseTextDarkH1}">
         <Setter Property="Control.FontSize" Value="16"/>
     
-    </Style>
+    </Style>-->
 
 
 </ResourceDictionary>

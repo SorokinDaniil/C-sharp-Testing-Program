@@ -26,8 +26,8 @@ namespace TestingProgram
         {
           InitializeComponent();
             DataContext = new TextFieldsViewModel();
-            HeadLabelName.Children.Add(new AdminLabelName());
-            Panel.Children.Add(new AdminLeftPanel());
+            HeadLabelName.Children.Add(new UserLabelName());
+            Panel.Children.Add(new UserLeftPanel());
             CenterGrid.Children.Add(new ChoiceGroup());
         }
 

@@ -6,25 +6,26 @@
          xmlns:local="clr-namespace:TestingProgram"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       >
     <Grid >
-        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Style="{StaticResource Disable}"
-  MinWidth="220" Background="{DynamicResource DarkGray}" BorderBrush="{x:Null}" Foreground="{DynamicResource LightGray}">
+        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+  MinWidth="220" BorderBrush="{x:Null}">
             <ListViewItem Height="60" >
-                <StackPanel  Style="{StaticResource BaseTextLightH3}"
-          Orientation="Horizontal" Background="{x:Null}">
+                <StackPanel 
+          Orientation="Horizontal">
                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="FileDocumentBoxOutline"  Margin="10" />
-                    <TextBlock
+                    <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
             Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
           Журнал
                     </TextBlock>
                 </StackPanel >
             </ListViewItem>
             <ListViewItem Height="60">
-                <StackPanel  Style="{StaticResource BaseTextLightH3}"
+                <StackPanel 
           Orientation="Horizontal">
                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="SquareEditOutline"  Margin="10" />
-                    <TextBlock
+                    <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
             Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
           Редактор
                     </TextBlock>

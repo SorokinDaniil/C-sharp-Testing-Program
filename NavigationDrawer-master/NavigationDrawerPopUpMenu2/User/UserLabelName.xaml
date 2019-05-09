@@ -11,7 +11,7 @@
 
         <materialDesign:Flipper.FrontContent>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <TextBlock   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" HorizontalAlignment="Center">Сорокин Даниил</TextBlock>
+                <TextBlock   Style="{StaticResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center">Сорокин Даниил</TextBlock>
 
                 <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True">
                     <materialDesign:PackIcon Kind="Edit" Width="25" Height="25" HorizontalAlignment="Left"/>
@@ -22,7 +22,7 @@
         <materialDesign:Flipper.BackContent>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <TextBlock   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" HorizontalAlignment="Center">Сорокин Даниил</TextBlock>
+                <TextBlock   Style="{StaticResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center">Сорокин Даниил</TextBlock>
 
                 <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" 
                           >

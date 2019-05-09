@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TestingProgram"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1080" Background="{DynamicResource LightGray}">
+             d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,7 +20,7 @@
         <materialDesign:DialogHost CloseOnClickAway="True">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
-                    <TextBlock Style="{StaticResource BaseTextDarkH3}">Input name group</TextBlock>
+                    <TextBlock>Input name group</TextBlock>
                     <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
@@ -41,53 +41,57 @@
             </materialDesign:DialogHost.DialogContent>
 
             <DockPanel LastChildFill="False">
-
-                <TextBlock Style="{StaticResource BaseTextDarkH1}" VerticalAlignment="Center" Margin="0,100,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top">
+                
+             
+                    <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" VerticalAlignment="Center" Margin="0,200,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top">
                         Выберите группу
-                </TextBlock>
-                <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
+                    </TextBlock>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
 
 
 
-                    <ComboBox  Style="{StaticResource MaterialDesignComboBox}" 
+                        <ComboBox  Style="{StaticResource MaterialDesignComboBox}" 
   materialDesign:HintAssist.Hint="Group"
   MinWidth="72"
   VerticalAlignment="Bottom"
   IsEditable="True"
   ItemsSource="{Binding LongListToTestComboVirtualization}" Foreground="Black" IsSelected="True" Width="80">
-                        <ComboBox.Text>
-                            <Binding
+                            <ComboBox.Text>
+                                <Binding
       Path="SelectedTextTwo"
       Mode="TwoWay"
       UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <local:NotEmptyValidationRule
+                                    <Binding.ValidationRules>
+                                        <local:NotEmptyValidationRule
           ValidatesOnTargetUpdated="False"  />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </ComboBox.Text>
-                        <ComboBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <VirtualizingStackPanel/>
-                            </ItemsPanelTemplate>
-                        </ComboBox.ItemsPanel>
-                    </ComboBox>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.Text>
+                            <ComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel/>
+                                </ItemsPanelTemplate>
+                            </ComboBox.ItemsPanel>
+                        </ComboBox>
 
 
 
-                </Grid>
-                <Button
+                    </Grid>
+                    <Button
     Style="{StaticResource MaterialDesignFlatButton}"
    
-    ToolTip="MaterialDesignFlatButton" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0" Foreground="{DynamicResource DarkGray}">
-                    SELECT
-                </Button>
+   DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
+                        SELECT
+                    </Button>
+
+             
+              
 
                 <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
                                             PlacementMode="LeftAndAlignMiddles"
     UnfurlOrientation="Horizontal"
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                 Margin="32" DockPanel.Dock="Right" Background="{DynamicResource DarkGray}" BorderBrush="{DynamicResource DarkGray}">
+                                 Margin="32" DockPanel.Dock="Right" >
                     <materialDesign:PopupBox.ToggleContent>
                         <materialDesign:PackIcon
       Kind="Pencil"

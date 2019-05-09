@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:TestingProgram"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Testing" Height="800" Width="1080" ResizeMode="CanResize"  Background="#FFFAFAFA"
+        Title="Testing" Height="800" Width="1080" ResizeMode="CanResize" 
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen">
+        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen"
+          Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+          
+        >
 
 
     <!--<Window.Resources>
@@ -85,19 +89,19 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid Background="#FFFAFAFA" x:Name="MainGrid">
-        <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}" Background="#FF787878">
-            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" BottomDrawerBackground="{x:Null}" LeftDrawerBackground="{x:Null}" RightDrawerBackground="{x:Null}" TopDrawerBackground="{x:Null}">
-                     
-                    <!--#region LEFTPANEL-->
+    <Grid x:Name="MainGrid">
+        <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
+            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" >
+
+                <!--#region LEFTPANEL-->
                 <materialDesign:DrawerHost.LeftDrawerContent>
 
-                    
-                    <DockPanel MinWidth="300" Background="{StaticResource DarkGray}" Width="298" >
+
+                    <DockPanel MinWidth="300" Width="300" Background="{DynamicResource PrimaryHueMidBrush}">
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                                     DockPanel.Dock="Top"
                                     HorizontalAlignment="Left" Margin="17.5"
-                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Foreground="{StaticResource LightGray}" Width="25" Height="25"/>
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Width="25" Height="25"/>
 
                         <Grid x:Name="Panel"/>
 
@@ -114,7 +118,7 @@
                     <!--#region  HEAD_PANEL-->
                     <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                            DockPanel.Dock="Top"
-                                           Background="{StaticResource DarkGray}" Height="60" >
+                                          Mode="PrimaryMid" Height="60"  >
                         <!--<Grid>
                         <TextBlock Style="{StaticResource BaseTextLightH2}" HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
                     </Grid>-->
@@ -123,12 +127,12 @@
 
                             <Grid x:Name="Head">
                                 <ToggleButton  Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
-                                        x:Name="MenuToggleButton" Foreground="{StaticResource LightGray}" HorizontalAlignment="Left" Width="30" Height="30" Margin="15,0,0,0"/>
+                                        x:Name="MenuToggleButton" HorizontalAlignment="Left" Width="30" Height="30" Margin="15,0,0,0"/>
 
                                 <Grid x:Name="HeadLabelName">
                                 </Grid>
 
-                                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="33" Height="33" Margin="0,12,12,12" Background="{x:Null}" BorderBrush="{x:Null}">
+                                <Button Command="{Binding RunDialogCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="32" Height="32" Margin="0,13,13,13" Background="{x:Null}" BorderBrush="{x:Null}">
                                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="ExitToApp"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Button>
                                 
@@ -144,7 +148,26 @@
 <!--#endregion HEADPANEL-->
 
                     <Grid x:Name="CenterGrid"/>
+                    <Grid
+  Margin="4" DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                         
+                        </Grid.ColumnDefinitions>
 
+                        <RadioButton 
+    Style="{StaticResource MaterialDesignTabRadioButton}"
+   
+    IsChecked="True"
+    Content="FIRST" />
+                        <RadioButton
+    Style="{StaticResource MaterialDesignTabRadioButton}"
+    
+    IsChecked="False"
+    Content="SECOND" Grid.Column="1" />
+                       
+                    </Grid>
 
 
                     <!--#region TESTING_WINDOW-->
@@ -326,7 +349,7 @@
                                     -->
 <!--<TextBox   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBox>-->
 <!--
-                                    <TextBox Background="{StaticResource LightGray}" Style="{StaticResource BaseTextLightH2}" Height="20"
+                                    <TextBox  Style="{StaticResource BaseTextLightH2}" Height="20"
 
   materialDesign:HintAssist.Hint="Comment" >Admin</TextBox>
                                         <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}" Height="20" Width="20" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">

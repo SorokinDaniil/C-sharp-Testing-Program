@@ -14,7 +14,7 @@
             <!--#region  HEAD_PANEL-->
             <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                            DockPanel.Dock="Top"
-                                           Background="{StaticResource DarkGray}" Height="60" >
+                                        Mode="PrimaryMid" Height="60" >
                 <!--<Grid>
                         <TextBlock Style="{StaticResource BaseTextLightH2}" HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
                     </Grid>-->
@@ -22,12 +22,10 @@
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
 
                     <Grid x:Name="Head">
-                        <ToggleButton  Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
-                                        x:Name="MenuToggleButton" Foreground="{StaticResource LightGray}" HorizontalAlignment="Left" Width="25" Height="25" Margin="17.5,0,0,0"/>
-
+                     
                         <Grid x:Name="HeadLabelName">
                         </Grid>
-
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
 
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
                             <materialDesign:PackIcon Kind="ExitToApp" Width="25" Height="25"/>
@@ -45,7 +43,7 @@
 
 
             <DockPanel Margin="0"  LastChildFill="False">
-                <TextBox
+                <!--<TextBox
     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
     Margin="20"
     VerticalAlignment="Center"
@@ -54,9 +52,9 @@
     TextWrapping="Wrap"
     VerticalScrollBarVisibility="Auto"
     materialDesign:HintAssist.Hint="This is a text area"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />-->
 
-                <TextBox TextWrapping="WrapWithOverflow" Style="{StaticResource BaseTextDarkH3}" Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:</TextBox>
+                <TextBlock TextWrapping="WrapWithOverflow"    Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:</TextBlock>
 
                 <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="200"
                     ShowLineNumbers="True"
@@ -69,20 +67,26 @@
 
                 </avalonEdit:TextEditor>
 
-                <StackPanel Style="{StaticResource BaseTextDarkH3}" Margin="0,20,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" >
+                <StackPanel Margin="0,20,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" >
                     <CheckBox Margin="20,0,20,6">
-                        <TextBlock TextWrapping="WrapWithOverflow">
+                        <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}">
                                public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
                         </TextBlock>
                     </CheckBox>
                     <CheckBox Margin="20,0,20,6">
-                        internal
+                        <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                               public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                        </TextBlock>
                     </CheckBox>
                     <CheckBox Margin="20,0,20,6">
-                        private
+                        <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                               public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                        </TextBlock>
                     </CheckBox>
                     <CheckBox Margin="20,0,20,6">
-                        public
+                        <TextBlock TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}">
+                               public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                        </TextBlock>
                     </CheckBox>
                 </StackPanel>
 
