@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
+using System.Data;
+using System.Data.SqlClient;
 using NUnit.Framework;
 
 namespace TestingProgram
@@ -25,17 +27,21 @@ namespace TestingProgram
         public Window1()
         {
           InitializeComponent();
-            DataContext = new TextFieldsViewModel();
-            HeadLabelName.Children.Add(new UserLabelName());
-            Panel.Children.Add(new UserLeftPanel());
-            CenterGrid.Children.Add(new ChoiceGroup());
+            //DataContext = new TextFieldsViewModel();
+            DataContext = new ListsAndGridsViewModel();
+            HeadLabelName.Children.Add(new AdminLabelName());
+            Panel.Children.Add(new AdminLeftPanel());
+           
+
+        
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             MainGrid.Children.Clear();
-         
         }
+
+      
 
     }
 }

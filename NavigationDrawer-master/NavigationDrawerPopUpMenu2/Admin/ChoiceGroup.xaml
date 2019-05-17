@@ -51,7 +51,7 @@
 
 
                         <ComboBox  Style="{StaticResource MaterialDesignComboBox}" 
-  materialDesign:HintAssist.Hint="Group"
+  materialDesign:HintAssist.Hint="Группа"
   MinWidth="72"
   VerticalAlignment="Bottom"
   IsEditable="True"
@@ -81,7 +81,7 @@
     Style="{StaticResource MaterialDesignFlatButton}"
    
    DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
-                        SELECT
+                        ВЫБРАТЬ
                     </Button>
 
              
@@ -106,13 +106,13 @@
                     </materialDesign:PopupBox.ToggleCheckedContent>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button ToolTip="Add" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                        <Button ToolTip="Добавить" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
                             <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                         </Button>
-                        <Button ToolTip="Edit">
+                        <Button ToolTip="Изменить">
                             <materialDesign:PackIcon Kind="Edit" />
                         </Button>
-                        <Button ToolTip="Delete" >
+                        <Button ToolTip="Удалить">
                             <materialDesign:PackIcon Kind="Delete" />
                         </Button>
                     </StackPanel>

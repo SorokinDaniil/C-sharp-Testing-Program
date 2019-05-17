@@ -6,13 +6,11 @@
         xmlns:local="clr-namespace:TestingProgram"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Testing" Height="800" Width="1080" ResizeMode="CanResize" 
+        Title="Testing" Height="800" Width="1080" ResizeMode="NoResize" 
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen"
           Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-          
-        >
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" WindowStyle="None"         >
 
 
     <!--<Window.Resources>
@@ -84,6 +82,7 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+             
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -97,13 +96,13 @@
                 <materialDesign:DrawerHost.LeftDrawerContent>
 
 
-                    <DockPanel MinWidth="300" Width="300" Background="{DynamicResource PrimaryHueMidBrush}">
+                    <DockPanel MinWidth="300" Width="300" Background="{StaticResource PrimaryHueMidBrush}" >
                         <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                                     DockPanel.Dock="Top"
                                     HorizontalAlignment="Left" Margin="17.5"
-                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Width="25" Height="25"/>
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Width="25" Height="25" Foreground="#DDFFFFFF"/>
 
-                        <Grid x:Name="Panel"/>
+                        <Grid x:Name="Panel" Background="{DynamicResource MaterialDesignPaper}"/>
 
 
 
@@ -147,8 +146,138 @@
                     </materialDesign:ColorZone>
 <!--#endregion HEADPANEL-->
 
-                    <Grid x:Name="CenterGrid"/>
-                    <Grid
+                   
+                        <!--<DockPanel LastChildFill="False">
+
+
+
+
+                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                            PlacementMode="LeftAndAlignMiddles"
+    UnfurlOrientation="Horizontal"
+                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                 Margin="32" DockPanel.Dock="Right" >
+                                <materialDesign:PopupBox.ToggleContent>
+                                    <materialDesign:PackIcon
+      Kind="Pencil"
+      Width="22"
+      Height="22" />
+                                </materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:PopupBox.ToggleCheckedContent>
+                                    <materialDesign:PackIcon
+      Kind="Close"
+      Width="22"
+      Height="22" />
+                                </materialDesign:PopupBox.ToggleCheckedContent>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Button ToolTip="Add" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                                        <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                                    </Button>
+                                    <Button ToolTip="Edit">
+                                        <materialDesign:PackIcon Kind="Edit" />
+                                    </Button>
+                                    <Button ToolTip="Delete" >
+                                        <materialDesign:PackIcon Kind="Delete" />
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </DockPanel>-->
+                      
+                            <!--<DockPanel>
+                                <Button  Style="{StaticResource MaterialDesignFlatButton}" Margin="8" HorizontalAlignment="Left" VerticalAlignment="Center">ADD</Button>
+                                <Button  Style="{StaticResource MaterialDesignFlatButton}" Margin="0,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Center">EDIT</Button>
+                                <ComboBox  Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Group" Margin="8"
+  MinWidth="72"
+  VerticalAlignment="Bottom"
+  IsEditable="True"
+  ItemsSource="{Binding LongListToTestComboVirtualization}" Foreground="Black" IsSelected="True" Width="80">
+                                    <ComboBox.Text>
+                                        <Binding
+      Path="SelectedTextTwo"
+      Mode="TwoWay"
+      UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:NotEmptyValidationRule
+          ValidatesOnTargetUpdated="False"  />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </ComboBox.Text>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
+                                </ComboBox>
+                                <Button  Style="{StaticResource MaterialDesignFlatButton}" Margin="8" HorizontalAlignment="Right" VerticalAlignment="Center">DELETE</Button>
+
+                            </DockPanel>-->
+
+                    <Grid x:Name="CenterGrid" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                       
+                            <DockPanel LastChildFill="False">
+
+                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <TextBlock 
+    Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16" DockPanel.Dock="Top">Основы C#</TextBlock>
+                                <Button Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="Autorenew"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24"/>
+                                </Button>
+                            </StackPanel>
+
+                            <ListView
+  ItemsSource="{Binding Items1}" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,32">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn
+        DisplayMemberBinding="{Binding Code}"
+        Header="Название" />
+                                        <GridViewColumn
+        DisplayMemberBinding="{Binding Name}"
+        Header="Время" />
+                                        <GridViewColumn
+        DisplayMemberBinding="{Binding Description}"
+        Header="Количество вопросов" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                            
+                   
+                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                            PlacementMode="LeftAndAlignMiddles"
+    UnfurlOrientation="Horizontal"
+                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                 Margin="32" DockPanel.Dock="Right" >
+                                <materialDesign:PopupBox.ToggleContent>
+                                    <materialDesign:PackIcon
+      Kind="Pencil"
+      Width="22"
+      Height="22" />
+                                </materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:PopupBox.ToggleCheckedContent>
+                                    <materialDesign:PackIcon
+      Kind="Close"
+      Width="22"
+      Height="22" />
+                                </materialDesign:PopupBox.ToggleCheckedContent>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Button ToolTip="Add" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                                        <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                                    </Button>
+                                    <Button ToolTip="Edit">
+                                        <materialDesign:PackIcon Kind="Edit" />
+                                    </Button>
+                                    <Button ToolTip="Delete" >
+                                        <materialDesign:PackIcon Kind="Delete" />
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </DockPanel>
+                    </Grid>
+                    
+                    <!--<Grid
   Margin="4" DockPanel.Dock="Top" VerticalAlignment="Top">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
@@ -167,7 +296,7 @@
     IsChecked="False"
     Content="SECOND" Grid.Column="1" />
                        
-                    </Grid>
+                    </Grid>-->
 
 
                     <!--#region TESTING_WINDOW-->

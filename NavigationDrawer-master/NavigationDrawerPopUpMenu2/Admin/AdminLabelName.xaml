@@ -8,6 +8,6 @@
              
       >
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock  Style="{StaticResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center">Admin</TextBlock>
+        <TextBlock  Style="{StaticResource MaterialDesignHeadlineTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center">Admin</TextBlock>
     </Grid>
 </UserControl>

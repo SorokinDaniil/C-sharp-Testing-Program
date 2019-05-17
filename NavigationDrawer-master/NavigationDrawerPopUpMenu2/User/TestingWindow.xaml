@@ -25,10 +25,10 @@
                      
                         <Grid x:Name="HeadLabelName">
                         </Grid>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">1/10</TextBlock>
 
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
-                            <materialDesign:PackIcon Kind="ExitToApp" Width="25" Height="25"/>
+                            <materialDesign:PackIcon Kind="Close" Width="25" Height="25"/>
                         </Button>
 
                     </Grid>
@@ -54,9 +54,9 @@
     materialDesign:HintAssist.Hint="This is a text area"
     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />-->
 
-                <TextBlock TextWrapping="WrapWithOverflow"    Style="{StaticResource MaterialDesignSubheadingTextBlock}" Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:</TextBlock>
+                <TextBox TextWrapping="WrapWithOverflow"     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:</TextBox>
 
-                <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="200"
+                <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="200"  
                     ShowLineNumbers="True"
 				Name="textEditor"
 				FontFamily="Consolas"

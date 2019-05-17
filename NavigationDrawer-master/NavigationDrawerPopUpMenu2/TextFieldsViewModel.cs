@@ -2,60 +2,93 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace TestingProgram
 {
     public class TextFieldsViewModel : INotifyPropertyChanged
     {
-        private string _name;
-        private string _name2;
-        private int? _selectedValueOne;
-        private string _selectedTextTwo;
+        private string _loginUsername;
+        private string _loginPassword;
+        private string _signupUsername;
+        private string _signupPassword;
+        private string _signupName;
+   
+
 
         public TextFieldsViewModel()
         {
+            DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
+
+            //for (int i = 0; i < dt_user.Rows.Count; i++)
+            //{ // перебираем данные
+            //    MessageBox.Show(dt_user.Rows[i][0] + "|" + dt_user.Rows[i][1] + dt_user.Rows[i][2]); // выводим данные
+            //}
             LongListToTestComboVirtualization = new List<string>();
-            LongListToTestComboVirtualization.Add("T-691");
-            LongListToTestComboVirtualization.Add("T-692");
-            LongListToTestComboVirtualization.Add("T-693");
+            LongListToTestComboVirtualization.Add(dt_user.Rows[0][0].ToString());
+            LongListToTestComboVirtualization.Add(dt_user.Rows[0][1].ToString());
+            LongListToTestComboVirtualization.Add(dt_user.Rows[0][2].ToString());
             LongListToTestComboVirtualization.Add("T-694");
             //SelectedValueOne = LongListToTestComboVirtualization.Skip(2).First();
-            SelectedTextTwo = null;
+            //SelectedTextTwo = null;
         }
 
-        public string Name
+        public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
         {
-            get { return _name; }
+            DataTable dataTable = new DataTable("dataBase");                // создаём таблицу в приложении
+                                                                            // подключаемся к базе данных
+            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-JKOUM0H;Trusted_Connection=Yes;DataBase=test;");
+            sqlConnection.Open();                                           // открываем базу данных
+            SqlCommand sqlCommand = sqlConnection.CreateCommand();          // создаём команду
+            sqlCommand.CommandText = selectSQL;                             // присваиваем команде текст
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand); // создаём обработчик
+            sqlDataAdapter.Fill(dataTable);                                 // возращаем таблицу с результатом
+            return dataTable;
+        }
+
+        public string LoginUsername
+        {
+            get { return _loginUsername; }
             set
             {
-                this.MutateVerbose(ref _name, value, RaisePropertyChanged());
+                this.MutateVerbose(ref _loginUsername, value, RaisePropertyChanged());
             }
         }
 
-        public string Name2
+        public string LoginPassword
         {
-            get { return _name2; }
+            get { return _loginPassword; }
             set
             {
-                this.MutateVerbose(ref _name2, value, RaisePropertyChanged());
+                this.MutateVerbose(ref _loginPassword, value, RaisePropertyChanged());
             }
         }
 
-        public int? SelectedValueOne
+        public string SignupUsername
         {
-            get { return _selectedValueOne; }
+            get { return _signupUsername; }
             set
             {
-                this.MutateVerbose(ref _selectedValueOne, value, RaisePropertyChanged());
+                this.MutateVerbose(ref _signupUsername, value, RaisePropertyChanged());
             }
-        }        
+        }
 
-        public string SelectedTextTwo
+        public string SignupPassword
         {
-            get { return _selectedTextTwo; }
+            get { return _signupPassword; }
             set
             {
-                this.MutateVerbose(ref _selectedTextTwo, value, RaisePropertyChanged());
+                this.MutateVerbose(ref _signupPassword, value, RaisePropertyChanged());
+            }
+        }
+
+        public string SignupName
+        {
+            get { return _signupName; }
+            set
+            {
+                this.MutateVerbose(ref _signupName, value, RaisePropertyChanged());
             }
         }
 
