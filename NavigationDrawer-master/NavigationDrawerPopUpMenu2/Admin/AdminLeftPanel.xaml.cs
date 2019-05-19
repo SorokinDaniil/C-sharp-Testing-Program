@@ -36,10 +36,9 @@ namespace TestingProgram
                         {
                             (window as Window1).MenuToggleButton.IsChecked = false;
                             (window as Window1).CenterGrid.Children.Clear();
-                            (window as Window1).CenterGrid.Children.Add(new ChoiceGroup());
+                            (window as Window1).CenterGrid.Children.Add(new ChoiceGroup("Group"));
                         }
                     }
-
                     break;
                 case 1:
                     foreach (Window window in Application.Current.Windows)
@@ -48,7 +47,7 @@ namespace TestingProgram
                         {
                             (window as Window1).MenuToggleButton.IsChecked = false;
                             (window as Window1).CenterGrid.Children.Clear();
-                            (window as Window1).CenterGrid.Children.Add(new PreviewTestingWindow());
+                            (window as Window1).CenterGrid.Children.Add(new ChoiceGroup("ChaphterNoEdit"));
                         }
                     }
                     break;

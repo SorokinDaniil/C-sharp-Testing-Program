@@ -46,7 +46,7 @@
           ValidatesOnTargetUpdated="False"  />
                                 <local:TextBoxValidationRule
           ValidatesOnTargetUpdated="False"  />
-                               
+
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

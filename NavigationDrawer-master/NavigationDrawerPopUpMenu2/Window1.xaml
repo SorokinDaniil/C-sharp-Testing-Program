@@ -214,7 +214,7 @@
 
                             </DockPanel>-->
 
-                    <Grid x:Name="CenterGrid"  x:FieldModifier="public" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <Grid x:Name="CenterGrid"  x:FieldModifier="public">
                        
                             <DockPanel LastChildFill="False">
 

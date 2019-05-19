@@ -14,7 +14,8 @@ namespace TestingProgram
         private string _signupUsername;
         private string _signupPassword;
         private string _signupName;
-   
+        private string _group;
+
 
 
         public TextFieldsViewModel()
@@ -28,7 +29,7 @@ namespace TestingProgram
             LongListToTestComboVirtualization = new List<string>();
             LongListToTestComboVirtualization.Add(dt_user.Rows[0][0].ToString());
             LongListToTestComboVirtualization.Add(dt_user.Rows[0][1].ToString());
-            LongListToTestComboVirtualization.Add(dt_user.Rows[0][2].ToString());
+          
             LongListToTestComboVirtualization.Add("T-694");
             //SelectedValueOne = LongListToTestComboVirtualization.Skip(2).First();
             //SelectedTextTwo = null;
@@ -38,7 +39,7 @@ namespace TestingProgram
         {
             DataTable dataTable = new DataTable("dataBase");                // создаём таблицу в приложении
                                                                             // подключаемся к базе данных
-            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-JKOUM0H;Trusted_Connection=Yes;DataBase=test;");
+            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-O6G977H;Trusted_Connection=Yes;DataBase=Test;");
             sqlConnection.Open();                                           // открываем базу данных
             SqlCommand sqlCommand = sqlConnection.CreateCommand();          // создаём команду
             sqlCommand.CommandText = selectSQL;                             // присваиваем команде текст

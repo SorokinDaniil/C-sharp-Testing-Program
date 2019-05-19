@@ -89,14 +89,14 @@
       <DependentUpon>SampleDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\SampleDialogViewModel.cs" />
-    <Compile Include="ListsAndGridsViewModel.cs" />
+    <Compile Include="Grid\ListsAndGridsViewModel.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NotEmptyValidationRule.cs" />
-    <Compile Include="NotifyPropertyChangedExtension.cs" />
-    <Compile Include="NameValidationRule.cs" />
-    <Compile Include="SelectableViewModel.cs" />
+    <Compile Include="Validation\NotEmptyValidationRule.cs" />
+    <Compile Include="Validation\NotifyPropertyChangedExtension.cs" />
+    <Compile Include="Validation\NameValidationRule.cs" />
+    <Compile Include="Grid\SelectableViewModel.cs" />
     <Compile Include="Slider\Slide1_Intro.xaml.cs" />
     <Compile Include="Slider\Slide2_Intro.xaml.cs" />
     <Compile Include="Slider\Slide3_Intro.xaml.cs" />
@@ -106,7 +106,7 @@
     <Compile Include="Slider\Slide7_MasterModel.cs" />
     <Compile Include="Slider\Slide7_MVVM.xaml.cs" />
     <Compile Include="Slider\Slide8_Details.xaml.cs" />
-    <Compile Include="TextFieldsViewModel.cs" />
+    <Compile Include="Validation\TextFieldsViewModel.cs" />
     <Compile Include="User\PreviewTestingWindow.xaml.cs">
       <DependentUpon>PreviewTestingWindow.xaml</DependentUpon>
     </Compile>
@@ -119,7 +119,7 @@
     <Compile Include="User\UserLeftPanel.xaml.cs">
       <DependentUpon>UserLeftPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TextBoxValidationRule.cs" />
+    <Compile Include="Validation\TextBoxValidationRule.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -139,11 +139,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dictionary1.xaml">
+    <Page Include="Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dictionary2.xaml">
+    <Page Include="CustomScrollBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -245,6 +245,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignColors;
+using MaterialDesignThemes;
 
 namespace TestingProgram
 {
@@ -20,10 +22,30 @@ namespace TestingProgram
     /// </summary>
     public partial class ChoiceGroup : UserControl
     {
-        public ChoiceGroup()
+        string ChoiceTextBlock;
+        string ChoiceHint;
+        Visibility ChoicePopupBox;
+
+        public ChoiceGroup(string type)
         {
             InitializeComponent();
-            
+
+            switch (type)
+            {
+                case "Group":
+                  ChoiceTextBlock = "Выберите группу";
+                  ChoiceHint = "Группа";
+                  ChoicePopupBox= Visibility.Visible;break;
+                case "Chaphter":
+                    ChoiceTextBlock = "Выберите раздел";
+                    ChoiceHint = "Раздел";
+                    ChoicePopupBox = Visibility.Visible;break;
+                case "ChaphterNoEdit":
+                    ChoiceTextBlock = "Выберите раздел";
+                    ChoiceHint = "Раздел";
+                    ChoicePopupBox = Visibility.Hidden;break;
+                default: break;
+            }
         }
     }
 }
