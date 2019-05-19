@@ -11,7 +11,7 @@ namespace TestingProgram
     {
         public DialogsViewModel()
         {
-
+           
         }
 
         #region SAMPLE 3

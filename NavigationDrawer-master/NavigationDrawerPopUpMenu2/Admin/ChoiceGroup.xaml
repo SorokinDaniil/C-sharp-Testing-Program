@@ -17,33 +17,8 @@
     </UserControl.Resources>
 
     <Grid>
-        <materialDesign:DialogHost CloseOnClickAway="True">
-            <materialDesign:DialogHost.DialogContent>
-                <StackPanel Margin="16">
-                    <TextBlock>Input name group</TextBlock>
-                    <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                        IsDefault="True"
-                                        Margin="0 8 8 0"
-                                        Command="materialDesign:DialogHost.CloseDialogCommand">
-                            ACCEPT
-                        </Button>
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                        IsCancel="True"
-                                        Margin="0 8 8 0"
-                                        Command="materialDesign:DialogHost.CloseDialogCommand">
-
-                            CANCEL
-                        </Button>
-                    </StackPanel>
-                </StackPanel>
-            </materialDesign:DialogHost.DialogContent>
-
-            <DockPanel LastChildFill="False">
-                
-             
-                    <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" VerticalAlignment="Center" Margin="0,200,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top">
+        <DockPanel LastChildFill="False">
+                <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" VerticalAlignment="Center" Margin="0,200,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top">
                         Выберите группу
                     </TextBlock>
                     <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
@@ -72,12 +47,15 @@
                                     <VirtualizingStackPanel/>
                                 </ItemsPanelTemplate>
                             </ComboBox.ItemsPanel>
+                    <ComboBox.DataContext>
+                        <local:TextFieldsViewModel/>
+                    </ComboBox.DataContext>
                         </ComboBox>
 
 
 
                     </Grid>
-                    <Button
+                <Button 
     Style="{StaticResource MaterialDesignFlatButton}"
    
    DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
@@ -106,7 +84,10 @@
                     </materialDesign:PopupBox.ToggleCheckedContent>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button ToolTip="Добавить" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                    <Button ToolTip="Добавить"  Command="{Binding RunDialogCommand}" >
+                        <Button.DataContext>
+                            <local:DialogsViewModel/>
+                        </Button.DataContext>
                             <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                         </Button>
                         <Button ToolTip="Изменить">
@@ -118,6 +99,6 @@
                     </StackPanel>
                 </materialDesign:PopupBox>
             </DockPanel>
-        </materialDesign:DialogHost>
+      
     </Grid>
 </UserControl>

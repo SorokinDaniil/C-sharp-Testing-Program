@@ -23,6 +23,7 @@ namespace TestingProgram
         {
             InitializeComponent();
             DataContext = new TextFieldsViewModel();
+            
         }
 
     }

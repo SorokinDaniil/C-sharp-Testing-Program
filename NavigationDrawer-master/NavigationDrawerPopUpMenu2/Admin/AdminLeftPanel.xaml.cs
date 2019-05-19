@@ -23,5 +23,43 @@ namespace TestingProgram
         {
             InitializeComponent();
         }
+
+        private void AdminListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = AdminListView.SelectedIndex;
+            switch (index)
+            {
+                case 0:
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window.GetType() == typeof(Window1))
+                        {
+                            (window as Window1).MenuToggleButton.IsChecked = false;
+                            (window as Window1).CenterGrid.Children.Clear();
+                            (window as Window1).CenterGrid.Children.Add(new ChoiceGroup());
+                        }
+                    }
+
+                    break;
+                case 1:
+                    foreach (Window window in Application.Current.Windows)
+                    {
+                        if (window.GetType() == typeof(Window1))
+                        {
+                            (window as Window1).MenuToggleButton.IsChecked = false;
+                            (window as Window1).CenterGrid.Children.Clear();
+                            (window as Window1).CenterGrid.Children.Add(new PreviewTestingWindow());
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+          
+
+        }
+
+       
     }
 }

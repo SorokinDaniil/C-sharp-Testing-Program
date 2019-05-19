@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestingProgram.User
+namespace TestingProgram
 {
     /// <summary>
     /// Логика взаимодействия для PreviewTestingWindow.xaml

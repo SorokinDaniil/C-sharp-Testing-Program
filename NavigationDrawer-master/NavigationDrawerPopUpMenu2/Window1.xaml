@@ -82,7 +82,6 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-             
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -133,6 +132,7 @@
 
                                 <Button Command="{Binding RunDialogCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="32" Height="32" Margin="0,13,13,13" Background="{x:Null}" BorderBrush="{x:Null}">
                                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="ExitToApp"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                
                                 </Button>
                                 
                                 <!--<Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" Width="40" Height="40" Margin="0,0,17.5,0" HorizontalAlignment="Right" VerticalAlignment="Center" >
@@ -214,7 +214,7 @@
 
                             </DockPanel>-->
 
-                    <Grid x:Name="CenterGrid" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <Grid x:Name="CenterGrid"  x:FieldModifier="public" ScrollViewer.VerticalScrollBarVisibility="Auto">
                        
                             <DockPanel LastChildFill="False">
 

@@ -9,8 +9,8 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       >
     <Grid >
-        <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-  MinWidth="220" BorderBrush="{x:Null}">
+        <ListView x:Name="AdminListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+  MinWidth="220" BorderBrush="{x:Null}" SelectionChanged="AdminListView_SelectionChanged">
             <ListViewItem Height="60" >
                 <StackPanel 
           Orientation="Horizontal">

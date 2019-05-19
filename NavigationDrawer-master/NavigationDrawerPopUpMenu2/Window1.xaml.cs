@@ -27,7 +27,7 @@ namespace TestingProgram
         public Window1()
         {
           InitializeComponent();
-            //DataContext = new TextFieldsViewModel();
+         
             DataContext = new ListsAndGridsViewModel();
             HeadLabelName.Children.Add(new AdminLabelName());
             Panel.Children.Add(new AdminLeftPanel());
