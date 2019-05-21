@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для TestingWindow.xaml
+    /// Логика взаимодействия для MainTable.xaml
     /// </summary>
-    public partial class TestingWindow : UserControl
+    public partial class MainTable : UserControl
     {
-        public TestingWindow()
+        public MainTable()
         {
             InitializeComponent();
         }

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TestingProgram.User.TestingWindow"
+﻿<UserControl x:Class="TestingProgram.TestingWindow"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -91,7 +91,7 @@
                 </StackPanel>
 
 
-                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  >NEXT</Button>
+                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"   Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" >NEXT</Button>
 
             </DockPanel>
 

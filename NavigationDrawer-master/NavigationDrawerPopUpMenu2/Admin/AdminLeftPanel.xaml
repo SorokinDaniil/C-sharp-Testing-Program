@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       >
-    <Grid >
+    <Grid>
         <ListView x:Name="AdminListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
   MinWidth="220" BorderBrush="{x:Null}" SelectionChanged="AdminListView_SelectionChanged">
             <ListViewItem Height="60" >

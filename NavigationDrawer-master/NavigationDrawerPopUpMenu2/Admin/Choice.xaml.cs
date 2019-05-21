@@ -12,17 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для TestingWindow.xaml
+    /// Логика взаимодействия для ChoiceGroup.xaml
     /// </summary>
-    public partial class TestingWindow : UserControl
+    public partial class Choice : UserControl
     {
-        public TestingWindow()
+        public Choice()
         {
             InitializeComponent();
+        
         }
+
+      
     }
 }

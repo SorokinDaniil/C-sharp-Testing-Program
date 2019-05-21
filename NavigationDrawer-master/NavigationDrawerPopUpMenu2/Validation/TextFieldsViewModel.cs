@@ -14,7 +14,7 @@ namespace TestingProgram
         private string _signupUsername;
         private string _signupPassword;
         private string _signupName;
-        private string _group;
+        private string _choiceGroup;
 
 
 
@@ -39,7 +39,8 @@ namespace TestingProgram
         {
             DataTable dataTable = new DataTable("dataBase");                // создаём таблицу в приложении
                                                                             // подключаемся к базе данных
-            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-O6G977H;Trusted_Connection=Yes;DataBase=Test;");
+          //SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-O6G977H;Trusted_Connection=Yes;DataBase=Test;");
+            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-JKOUM0H;Trusted_Connection=Yes;DataBase=test;");
             sqlConnection.Open();                                           // открываем базу данных
             SqlCommand sqlCommand = sqlConnection.CreateCommand();          // создаём команду
             sqlCommand.CommandText = selectSQL;                             // присваиваем команде текст
@@ -90,6 +91,15 @@ namespace TestingProgram
             set
             {
                 this.MutateVerbose(ref _signupName, value, RaisePropertyChanged());
+            }
+        }
+
+        public string ChoiceGroup
+        {
+            get { return _choiceGroup; }
+            set
+            {
+                this.MutateVerbose(ref _choiceGroup, value, RaisePropertyChanged());
             }
         }
 

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="TestingProgram.ChoiceGroup"
+﻿<UserControl x:Class="TestingProgram.Choice"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:TestingProgram"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}">
+             d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}" >
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -17,22 +17,25 @@
     </UserControl.Resources>
 
     <Grid>
+     
+        
         <DockPanel LastChildFill="False">
-            <TextBlock Text="{Binding ChoiceTextBlock}" Style="{StaticResource MaterialDesignDisplay1TextBlock}" VerticalAlignment="Center" Margin="0,200,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top"/>
+            <TextBlock Text="Выберите группу" Style="{StaticResource MaterialDesignDisplay1TextBlock}" VerticalAlignment="Center" Margin="0,200,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top"/>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
 
 
 
-                        <ComboBox Style="{StaticResource MaterialDesignComboBox}" 
-  materialDesign:HintAssist.Hint="{Binding ChoiceHint}"
+                <ComboBox  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+   
+  materialDesign:HintAssist.Hint="Группа"
   MinWidth="72"
   VerticalAlignment="Bottom"
   IsEditable="True"
   ItemsSource="{Binding LongListToTestComboVirtualization}" Foreground="Black" IsSelected="True" Width="80">
                             <ComboBox.Text>
                                 <Binding
-      Path="SelectedTextTwo"
+      Path="ChoiceGroup"
       Mode="TwoWay"
       UpdateSourceTrigger="PropertyChanged">
                                     <Binding.ValidationRules>

@@ -80,9 +80,10 @@
     <Compile Include="Admin\AdminLeftPanel.xaml.cs">
       <DependentUpon>AdminLeftPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Admin\ChoiceGroup.xaml.cs">
-      <DependentUpon>ChoiceGroup.xaml</DependentUpon>
+    <Compile Include="Admin\Choice.xaml.cs">
+      <DependentUpon>Choice.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ChoiceViewModel.cs" />
     <Compile Include="Dialog\AnotherCommandImplementation.cs" />
     <Compile Include="Dialog\DialogsViewModel.cs" />
     <Compile Include="Dialog\SampleDialog.xaml.cs">
@@ -93,19 +94,13 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainTable.xaml.cs">
+      <DependentUpon>MainTable.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Validation\NotEmptyValidationRule.cs" />
     <Compile Include="Validation\NotifyPropertyChangedExtension.cs" />
     <Compile Include="Validation\NameValidationRule.cs" />
     <Compile Include="Grid\SelectableViewModel.cs" />
-    <Compile Include="Slider\Slide1_Intro.xaml.cs" />
-    <Compile Include="Slider\Slide2_Intro.xaml.cs" />
-    <Compile Include="Slider\Slide3_Intro.xaml.cs" />
-    <Compile Include="Slider\Slide4_CombineTransitions.xaml.cs" />
-    <Compile Include="Slider\Slide5_TransitioningContent.xaml.cs" />
-    <Compile Include="Slider\Slide6_Origins.xaml.cs" />
-    <Compile Include="Slider\Slide7_MasterModel.cs" />
-    <Compile Include="Slider\Slide7_MVVM.xaml.cs" />
-    <Compile Include="Slider\Slide8_Details.xaml.cs" />
     <Compile Include="Validation\TextFieldsViewModel.cs" />
     <Compile Include="User\PreviewTestingWindow.xaml.cs">
       <DependentUpon>PreviewTestingWindow.xaml</DependentUpon>
@@ -131,11 +126,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Admin\ChoiceGroup.xaml">
+    <Page Include="Admin\Choice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\SampleDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,38 +162,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Slider\Slide1_Intro.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Slider\Slide2_Intro.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Slider\Slide3_Intro.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Slider\Slide4_CombineTransitions.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Slider\Slide5_TransitioningContent.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Slider\Slide6_Origins.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Slider\Slide7_MVVM.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Slider\Slide8_Details.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="User\PreviewTestingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

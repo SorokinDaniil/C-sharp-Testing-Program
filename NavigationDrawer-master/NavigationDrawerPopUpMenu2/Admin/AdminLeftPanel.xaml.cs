@@ -22,6 +22,7 @@ namespace TestingProgram
         public AdminLeftPanel()
         {
             InitializeComponent();
+     
         }
 
         private void AdminListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -36,7 +37,8 @@ namespace TestingProgram
                         {
                             (window as Window1).MenuToggleButton.IsChecked = false;
                             (window as Window1).CenterGrid.Children.Clear();
-                            (window as Window1).CenterGrid.Children.Add(new ChoiceGroup("Group"));
+                            (window as Window1).CenterGrid.Children.Add(new Choice());
+                            (window as Window1).CenterGrid.DataContext = new ChoiceViewModel("Group");
                         }
                     }
                     break;
@@ -47,7 +49,8 @@ namespace TestingProgram
                         {
                             (window as Window1).MenuToggleButton.IsChecked = false;
                             (window as Window1).CenterGrid.Children.Clear();
-                            (window as Window1).CenterGrid.Children.Add(new ChoiceGroup("ChaphterNoEdit"));
+                            (window as Window1).CenterGrid.Children.Add(new Choice());
+                            (window as Window1).CenterGrid.DataContext = new ChoiceViewModel("ChaphterNoEdit");
                         }
                     }
                     break;

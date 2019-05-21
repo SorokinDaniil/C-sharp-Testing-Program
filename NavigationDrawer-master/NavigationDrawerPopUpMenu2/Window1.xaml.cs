@@ -31,9 +31,7 @@ namespace TestingProgram
             DataContext = new ListsAndGridsViewModel();
             HeadLabelName.Children.Add(new AdminLabelName());
             Panel.Children.Add(new AdminLeftPanel());
-           
 
-        
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)

@@ -215,66 +215,34 @@
                             </DockPanel>-->
 
                     <Grid x:Name="CenterGrid"  x:FieldModifier="public">
-                       
-                            <DockPanel LastChildFill="False">
+                        <materialDesign:Transitioner x:Name="Tran" SelectedIndex="0" AutoApplyTransitionOrigins="True">
+                            <materialDesign:Transitioner.InputBindings>
+                                <KeyBinding Key="Left" Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" />
+                                <KeyBinding Key="Right" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
+                            </materialDesign:Transitioner.InputBindings>
 
-                            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <TextBlock 
-    Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16" DockPanel.Dock="Top">Основы C#</TextBlock>
-                                <Button Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}">
-                                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="Autorenew"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24"/>
-                                </Button>
-                            </StackPanel>
+                            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                                <local:PreviewTestingWindow />
+                            </materialDesign:TransitionerSlide>
 
-                            <ListView
-  ItemsSource="{Binding Items1}" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,32">
-                                <ListView.View>
-                                    <GridView>
-                                        <GridViewColumn
-        DisplayMemberBinding="{Binding Code}"
-        Header="Название" />
-                                        <GridViewColumn
-        DisplayMemberBinding="{Binding Name}"
-        Header="Время" />
-                                        <GridViewColumn
-        DisplayMemberBinding="{Binding Description}"
-        Header="Количество вопросов" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
+                      
                             
-                   
-                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                                            PlacementMode="LeftAndAlignMiddles"
-    UnfurlOrientation="Horizontal"
-                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                 Margin="32" DockPanel.Dock="Right" >
-                                <materialDesign:PopupBox.ToggleContent>
-                                    <materialDesign:PackIcon
-      Kind="Pencil"
-      Width="22"
-      Height="22" />
-                                </materialDesign:PopupBox.ToggleContent>
-                                <materialDesign:PopupBox.ToggleCheckedContent>
-                                    <materialDesign:PackIcon
-      Kind="Close"
-      Width="22"
-      Height="22" />
-                                </materialDesign:PopupBox.ToggleCheckedContent>
+                            <materialDesign:TransitionerSlide>
+                                <materialDesign:TransitionerSlide.BackwardWipe>
+                                    <materialDesign:CircleWipe/>
+                                </materialDesign:TransitionerSlide.BackwardWipe>
+                                <local:PreviewTestingWindow />
+                            </materialDesign:TransitionerSlide>
+                            <materialDesign:TransitionerSlide>
+                                <materialDesign:TransitionerSlide.BackwardWipe>
+                                    <materialDesign:SlideWipe />
+                                </materialDesign:TransitionerSlide.BackwardWipe>
+                                <local:TestingWindow />
+                            </materialDesign:TransitionerSlide>
 
-                                <StackPanel Orientation="Horizontal">
-                                    <Button ToolTip="Add" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
-                                        <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
-                                    </Button>
-                                    <Button ToolTip="Edit">
-                                        <materialDesign:PackIcon Kind="Edit" />
-                                    </Button>
-                                    <Button ToolTip="Delete" >
-                                        <materialDesign:PackIcon Kind="Delete" />
-                                    </Button>
-                                </StackPanel>
-                            </materialDesign:PopupBox>
-                        </DockPanel>
+
+                        </materialDesign:Transitioner>
+
                     </Grid>
                     
                     <!--<Grid
@@ -344,58 +312,12 @@
                         <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6" Click="Button_Click_2" >NEXT</Button>
 
                     </DockPanel>-->
-<!--#endregion--> 
+<!--#endregion-->
+
                     
-                    
-                    <!--#region Transitioner-->
-                    <!--<materialDesign:Transitioner SelectedIndex="0" AutoApplyTransitionOrigins="True">
-                    <materialDesign:Transitioner.InputBindings>
-                        <KeyBinding Key="Right" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
-                    </materialDesign:Transitioner.InputBindings>
+                        <!--#region Transitioner-->
+           
 
-                    -->
-                    <!-- you can use a slide for each page, let's add a touch of fade for our first page  -->
-                    <!--<materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">-->
-                    <!--
-                        <local:Slide1_Intro Margin="0,0,0,0.4" />
-                    -->
-                    <!--</materialDesign:TransitionerSlide>-->
-
-                    <!-- but you can use bare xaml too -->
-                    <!--
-                    <local:Slide2_Intro />
-     <local:Slide1_Intro Margin="0,0,0,0.4" />
-                    -->
-                    <!-- you can control (and create your own) wipes -->
-                    <!--<materialDesign:TransitionerSlide>
-                        <materialDesign:TransitionerSlide.BackwardWipe>
-                            <materialDesign:CircleWipe />
-                        </materialDesign:TransitionerSlide.BackwardWipe>
-                        <materialDesign:TransitionerSlide.ForwardWipe>
-                            <materialDesign:SlideWipe Direction="Right" />
-                        </materialDesign:TransitionerSlide.ForwardWipe>-->
-                    <!--<local:Slide3_Intro />-->
-                    <!--</materialDesign:TransitionerSlide>-->
-
-                    <!-- now we are going to slide this in by combining some extra effects.  the inner content slides in, so we'll set the outer background and clip, to keep things nice -->
-                    <!--<materialDesign:TransitionerSlide Background="{DynamicResource MaterialDesignDarkBackground}"
-                                              Foreground="{DynamicResource MaterialDesignDarkForeground}"
-                                              ClipToBounds="True">
-                        <materialDesign:TransitionerSlide.OpeningEffects>
-                            <materialDesign:TransitionEffect Kind="SlideInFromLeft" Duration="0:0:0.8" />
-                            <materialDesign:TransitionEffect Kind="SlideInFromBottom" Duration="0:0:0.8" OffsetTime="0:0:0.15" />
-                        </materialDesign:TransitionerSlide.OpeningEffects>-->
-                    <!--<local:Slide4_CombineTransitions />-->
-                    <!--</materialDesign:TransitionerSlide>-->
-
-                    <!--<local:Slide5_TransitioningContent />
-
-                    <local:Slide6_Origins />
-
-                    <local:Slide7_MVVM />-->
-                    <!--
-
-                </materialDesign:Transitioner>-->
                     <!--#endregion-->
 
                 </DockPanel>
