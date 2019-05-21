@@ -97,6 +97,14 @@
     <Compile Include="MainTable.xaml.cs">
       <DependentUpon>MainTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="PreviewTestingWindowViewModel.cs" />
+    <Compile Include="TestingWindowViewModel.cs" />
+    <Compile Include="Transition\ISlideNavigationSubject.cs" />
+    <Compile Include="Transition\ITidyable.cs" />
+    <Compile Include="Transition\NavigationCommands.cs" />
+    <Compile Include="Transition\SlideNavigator.cs" />
+    <Compile Include="Transition\SlideNavigatorFrame.cs" />
     <Compile Include="Validation\NotEmptyValidationRule.cs" />
     <Compile Include="Validation\NotifyPropertyChangedExtension.cs" />
     <Compile Include="Validation\NameValidationRule.cs" />

@@ -7,53 +7,48 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:TestingProgram"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1080" Background="#FFFAFAFA">
+             d:DesignHeight="800" d:DesignWidth="1080" Background="#FFFAFAFA"
+             d:DataContext="{d:DesignInstance local:PreviewTestingWindowViewModel, d:IsDesignTimeCreatable=False}">
     <Grid>
-        <materialDesign:TransitioningContent>
-            <materialDesign:TransitionerSlide>
-                <materialDesign:TransitionerSlide.BackwardWipe>
-                    <materialDesign:CircleWipe/>
-                </materialDesign:TransitionerSlide.BackwardWipe>
-
-
-                <StackPanel x:Name="StartPanel" Margin="20,30">
-                    <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,30" TextWrapping="Wrap">Переменная</TextBlock>
 
 
 
-                    <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" TextWrapping="Wrap" Margin="0" Text="   Для хранения данных в программе применяются переменные. Переменная представляет именнованную область памяти, в которой хранится значение определенного типа. Переменная имеет тип, имя и значение. Тип определяет, какого рода информацию может хранить переменная. Перед использованием любую переменную надо определить. Синтаксис определения переменной выглядит следующим образом:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <StackPanel x:Name="StartPanel" Margin="20,30">
+            <TextBlock Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,30" TextWrapping="Wrap">Переменная</TextBlock>
 
-                    <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="ClockOutline" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <TextBlock  Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >Time:</TextBlock>
-                        <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >20:00</TextBlock>
-                    </StackPanel>
 
-                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                        <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                        <TextBlock  Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >Question:</TextBlock>
-                        <TextBlock  Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >10</TextBlock>
-                    </StackPanel>
-                    <Button
-  Style="{StaticResource MaterialDesignRaisedButton}"
-    Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Height="32"   Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" 
+
+            <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" TextWrapping="Wrap" Margin="0" Text="   Для хранения данных в программе применяются переменные. Переменная представляет именнованную область памяти, в которой хранится значение определенного типа. Переменная имеет тип, имя и значение. Тип определяет, какого рода информацию может хранить переменная. Перед использованием любую переменную надо определить. Синтаксис определения переменной выглядит следующим образом:" HorizontalAlignment="Left" VerticalAlignment="Center" />
+
+            <StackPanel Margin="0,30,0,0" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="ClockOutline" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock  Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >Time:</TextBlock>
+                <TextBlock Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >20:00</TextBlock>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="QuestionMarkCircleOutline" Width="20" Height="20" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <TextBlock  Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >Question:</TextBlock>
+                <TextBlock  Style="{StaticResource MaterialDesignSubheadingTextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Margin="8,0,0,0" >10</TextBlock>
+            </StackPanel>
+            <Button
+  Style="{StaticResource MaterialDesignRaisedButton}"   CommandParameter="{Binding }"
+    Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Height="32"  Command="{x:Static local:NavigationCommands.ShowSeasonCommand}"
   >
-                        START
-                    </Button>
-                    <ToggleButton Background="{x:Null}"
+                START
+            </Button>
+            <ToggleButton Background="{x:Null}"
   Style="{StaticResource MaterialDesignActionToggleButton}"
   ToolTip="MaterialDesignActionLightToggleButton" Width="64" Height="64">
-                        <ToggleButton.Content>
-                            <materialDesign:PackIcon
+                <ToggleButton.Content>
+                    <materialDesign:PackIcon
       Kind="Check" Width="40" Height="40" Foreground="ForestGreen"/>
-                        </ToggleButton.Content>
-                        <materialDesign:ToggleButtonAssist.OnContent>
-                            ""
-                        </materialDesign:ToggleButtonAssist.OnContent>
-                    </ToggleButton>
+                </ToggleButton.Content>
+                <materialDesign:ToggleButtonAssist.OnContent>
+                    ""
+                </materialDesign:ToggleButtonAssist.OnContent>
+            </ToggleButton>
 
-                </StackPanel>
-            </materialDesign:TransitionerSlide>
-        </materialDesign:TransitioningContent>
+        </StackPanel>
     </Grid>
 </UserControl>

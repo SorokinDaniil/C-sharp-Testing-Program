@@ -7,7 +7,8 @@
              xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1080" Background="#FFFAFAFA">
+             d:DesignHeight="800" d:DesignWidth="1080" Background="#FFFAFAFA"
+                d:DataContext="{d:DesignInstance local:TestingWindowViewModel, d:IsDesignTimeCreatable=False}">
     <Grid>
         <DockPanel>
 
@@ -91,7 +92,7 @@
                 </StackPanel>
 
 
-                <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"   Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" >NEXT</Button>
+                <Button    HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  Style="{StaticResource MaterialDesignRaisedButton}"  >NEXT</Button>
 
             </DockPanel>
 
