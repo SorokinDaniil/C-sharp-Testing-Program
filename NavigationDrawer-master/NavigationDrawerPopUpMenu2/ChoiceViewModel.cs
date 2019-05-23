@@ -23,18 +23,16 @@ namespace TestingProgram
     /// </summary>
     public partial class ChoiceViewModel : INotifyPropertyChanged
     {
-        string _choiceTextBlock;
-        string _choiceHint;
-        Visibility _choicePopupBox;
+        private int _selectedTabIndex;
+        private string _choiceTextBlock;
+        private string _choiceHint;
+        private Visibility _choicePopupBox;
 
         public ChoiceViewModel(string type)
         {
             switch (type)
             {
-                case "Group":
-                    _choiceTextBlock = "Выберите группу";
-                    _choiceHint = "Группа";
-                    _choicePopupBox = Visibility.Visible; break;
+             
                 case "Chaphter":
                     _choiceTextBlock = "Выберите раздел";
                     _choiceHint = "Раздел";
@@ -43,9 +41,24 @@ namespace TestingProgram
                     _choiceTextBlock = "Выберите раздел";
                     _choiceHint = "Раздел";
                     _choicePopupBox = Visibility.Hidden; break;
+                case "Group":
+                    _choiceTextBlock = "Выберите группу";
+                    _choiceHint = "Группа";
+                    _choicePopupBox = Visibility.Visible; break;
                 default: break;
             }
 
+        }
+
+        public void Show()
+        {
+            SelectedTabIndex = 0;
+        }
+
+        public int SelectedTabIndex
+        {
+            get { return _selectedTabIndex; }
+            set { this.MutateVerbose(ref _selectedTabIndex, value, RaisePropertyChanged()); }
         }
 
         public string ChoiceTextBlock
@@ -56,7 +69,7 @@ namespace TestingProgram
                 if (_choiceTextBlock != value)
                 {
                     _choiceTextBlock = value;
-                    OnPropertyChanged();
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -69,7 +82,7 @@ namespace TestingProgram
                 if (_choicePopupBox != value)
                 {
                     _choicePopupBox = value;
-                    OnPropertyChanged();
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -82,17 +95,16 @@ namespace TestingProgram
                 if (_choiceHint != value)
                 {
                     _choiceHint = value;
-                    OnPropertyChanged();
+                    RaisePropertyChanged();
                 }
             }
         }
 
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private Action<PropertyChangedEventArgs> RaisePropertyChanged()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return args => PropertyChanged?.Invoke(this, args);
         }
     }
 }

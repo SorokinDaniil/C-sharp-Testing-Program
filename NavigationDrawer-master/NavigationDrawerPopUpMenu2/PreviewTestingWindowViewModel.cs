@@ -6,17 +6,11 @@ namespace TestingProgram
 {
     public class PreviewTestingWindowViewModel : INotifyPropertyChanged
     {
-
-        public ICommand ShowSeasonCommand { get; }
-
         private int _selectedTabIndex;
 
         public void Show()
         {
-
-
             SelectedTabIndex = 0;
-
         }
 
         public int SelectedTabIndex

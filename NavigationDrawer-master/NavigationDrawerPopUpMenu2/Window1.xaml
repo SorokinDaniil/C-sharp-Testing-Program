@@ -90,6 +90,9 @@
         <DataTemplate DataType="{x:Type local:TestingWindowViewModel}">
             <local:TestingWindow />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ChoiceViewModel}">
+            <local:Choice />
+        </DataTemplate>
     </Window.Resources>
             <!--<DataTemplate DataType="{x:Type local:SeasonViewModel}">
             <local:SeasonView />
@@ -121,7 +124,32 @@
                                     HorizontalAlignment="Left" Margin="17.5"
                                     IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Width="25" Height="25" Foreground="#DDFFFFFF"/>
 
-                        <Grid x:Name="Panel" Background="{DynamicResource MaterialDesignPaper}"/>
+                        <Grid x:Name="Panel" Background="{DynamicResource MaterialDesignPaper}">
+                            <ListView x:Name="AdminListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+  MinWidth="220" BorderBrush="{x:Null}" SelectionChanged="SelectionChanged">
+                                <ListViewItem Height="60" >
+                                    <StackPanel 
+          Orientation="Horizontal">
+                                        <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="FileDocumentBoxOutline"  Margin="10" />
+                                        <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
+            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+          Журнал
+                                        </TextBlock>
+                                    </StackPanel >
+                                </ListViewItem>
+                                <ListViewItem Height="60" Selec>
+                                    <StackPanel 
+          Orientation="Horizontal">
+                                        <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="SquareEditOutline"  Margin="10"/>
+                                        <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
+            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+          Редактор
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView>
+
+                        </Grid>
 
 
 
@@ -237,10 +265,10 @@
                     <Grid x:Name="CenterGrid"  x:FieldModifier="public">
                         <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
                                      AutoApplyTransitionOrigins="True"
-                                     ItemsSource="{Binding Slides}"   
-                                    
-                                     />
-                      
+                                     ItemsSource="{Binding Slides}">
+                                
+                        </materialDesign:Transitioner>
+
 
                     </Grid>
 

@@ -9,28 +9,6 @@
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       >
     <Grid>
-        <ListView x:Name="AdminListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-  MinWidth="220" BorderBrush="{x:Null}" SelectionChanged="AdminListView_SelectionChanged">
-            <ListViewItem Height="60" >
-                <StackPanel 
-          Orientation="Horizontal">
-                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="FileDocumentBoxOutline"  Margin="10" />
-                    <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
-            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-          Журнал
-                    </TextBlock>
-                </StackPanel >
-            </ListViewItem>
-            <ListViewItem Height="60">
-                <StackPanel 
-          Orientation="Horizontal">
-                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="SquareEditOutline"  Margin="10"/>
-                    <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
-            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-          Редактор
-                    </TextBlock>
-                </StackPanel>
-            </ListViewItem>
-        </ListView>
+        
     </Grid>
 </UserControl>

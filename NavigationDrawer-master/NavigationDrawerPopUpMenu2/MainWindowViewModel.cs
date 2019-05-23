@@ -20,34 +20,55 @@ namespace TestingProgram
             //CultureInfo ci = new CultureInfo("en-GB");
             //Thread.CurrentThread.CurrentCulture = ci;
 
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowRaceCommand, ShowRaceExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowSeasonCommand, ShowSeasonExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseBack, GoBackExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseForward, GoForwardExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
 
-            Slides = new object[] { /*SeasonSet, SeasonViewModel, RaceViewModel*/PreviewTestingWindowViewModel ,TestingWindowViewModel };
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowRaceCommand, ShowRaceExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowSeasonCommand, ShowSeasonExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
+
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseBack, GoBackExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseForward, GoForwardExecuted));
+
+            Slides = new object[] { ChoiceChaphter , ChoiceGroup , ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
             _slideNavigator = new SlideNavigator(this, Slides);
-            _slideNavigator.GoTo(0);//Задается начальное окно 
+            _slideNavigator.GoTo(2);//Задается начальное окно 
         }
 
         public object[] Slides { get; }
-
-        //public SeasonSet SeasonSet { get; } = new SeasonSet();
-
-        //public RaceViewModel RaceViewModel { get; } = new RaceViewModel();
 
         public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
 
         public PreviewTestingWindowViewModel PreviewTestingWindowViewModel { get; } = new PreviewTestingWindowViewModel();
 
-        public string Version { get; } = Assembly.GetEntryAssembly().GetName().Version.ToString();
+        public ChoiceViewModel ChoiceChaphter { get; } = new ChoiceViewModel("Chaphter");
 
-        public int ActiveSlideIndex
+        public ChoiceViewModel ChoiceGroup { get; } = new ChoiceViewModel("Group");
+
+        public ChoiceViewModel ChoiceChaphterNoEdit { get; } = new ChoiceViewModel("ChaphterNoEdit");
+
+        private void ShowChoiceGroupExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            get { return _activeSlideIndex; }
-            set { this.MutateVerbose(ref _activeSlideIndex, value, RaisePropertyChanged()); }
+            _slideNavigator.GoTo(
+                IndexOfSlide<ChoiceViewModel>(),
+                () => ChoiceGroup.Show());
         }
+
+        private void ShowChoiceChaphterExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            _slideNavigator.GoTo(
+                IndexOfSlide<ChoiceViewModel>(),
+                () => ChoiceChaphter.Show());
+        }
+
+        private void ShowChoiceChaphterNoEditExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            _slideNavigator.GoTo(
+                IndexOfSlide<ChoiceViewModel>(),
+                () => ChoiceChaphterNoEdit.Show());
+        }
+
 
         private void ShowSeasonExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -63,12 +84,11 @@ namespace TestingProgram
                 () => PreviewTestingWindowViewModel.Show());
         }
 
-        //private void ShowRaceExecuted(object sender, ExecutedRoutedEventArgs e)
-        //{
-        //    _slideNavigator.GoTo(
-        //        IndexOfSlide<RaceViewModel>(),
-        //        () => RaceViewModel.Show((Race)e.Parameter));
-        //}
+        public int ActiveSlideIndex
+        {
+            get { return _activeSlideIndex; }
+            set { this.MutateVerbose(ref _activeSlideIndex, value, RaisePropertyChanged()); }
+        }
 
         private void GoBackExecuted(object sender, ExecutedRoutedEventArgs e)
         {

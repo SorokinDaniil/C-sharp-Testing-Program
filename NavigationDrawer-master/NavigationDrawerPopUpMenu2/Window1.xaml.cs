@@ -35,14 +35,14 @@ namespace TestingProgram
 
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MainGrid.Children.Clear();
+            MenuToggleButton.IsChecked = false;
         }
 
-      
 
-    }
+
+        }
 }
 
 

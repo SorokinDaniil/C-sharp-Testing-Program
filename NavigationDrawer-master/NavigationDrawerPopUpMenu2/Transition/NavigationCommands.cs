@@ -7,5 +7,8 @@ namespace TestingProgram
         public static RoutedCommand ShowRaceCommand = new RoutedCommand();
         public static RoutedCommand ShowSeasonCommand = new RoutedCommand();
         public static RoutedCommand GoBackCommand = new RoutedCommand();
+        public static RoutedCommand ShowChoiceGroupCommand = new RoutedCommand();
+        public static RoutedCommand ShowChoiceChaphterCommand = new RoutedCommand();
+        public static RoutedCommand ShowChoiceChaphterNoEditCommand = new RoutedCommand();
     }
 }

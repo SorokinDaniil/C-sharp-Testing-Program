@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:TestingProgram"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}" >
+             d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    d:DataContext="{d:DesignInstance local:ChoiceViewModel, d:IsDesignTimeCreatable=False}">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -20,7 +21,7 @@
      
         
         <DockPanel LastChildFill="False">
-            <TextBlock Text="Выберите группу" Style="{StaticResource MaterialDesignDisplay1TextBlock}" VerticalAlignment="Center" Margin="0,200,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top"/>
+            <TextBlock Text="{Binding ChoiceTextBlock}" Style="{StaticResource MaterialDesignDisplay1TextBlock}" VerticalAlignment="Center" Margin="0,200,0,50" HorizontalAlignment="Center" DockPanel.Dock="Top"/>
 
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
 
@@ -28,7 +29,7 @@
 
                 <ComboBox  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
    
-  materialDesign:HintAssist.Hint="Группа"
+  materialDesign:HintAssist.Hint="{Binding ChoiceHint}"
   MinWidth="72"
   VerticalAlignment="Bottom"
   IsEditable="True"
@@ -58,7 +59,7 @@
 
                     </Grid>
                 <Button 
-    Style="{StaticResource MaterialDesignFlatButton}"
+    Style="{StaticResource MaterialDesignFlatButton}" Command="{x:Static local:NavigationCommands.ShowChoiceChaphterCommand}"
    
    DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
                         ВЫБРАТЬ
