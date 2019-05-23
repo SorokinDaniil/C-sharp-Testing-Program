@@ -17,17 +17,19 @@ namespace TestingProgram
 
         public MainWindowViewModel()
         {
+            //CultureInfo ci = new CultureInfo("en-GB");
+            //Thread.CurrentThread.CurrentCulture = ci;
 
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
 
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowRaceCommand, ShowRaceExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowSeasonCommand, ShowSeasonExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowRaceCommand, ShowRaceExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.ShowSeasonCommand, ShowSeasonExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
 
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseBack, GoBackExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseForward, GoForwardExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseBack, GoBackExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(Window1), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseForward, GoForwardExecuted));
 
             Slides = new object[] { ChoiceChaphter , ChoiceGroup , ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
             _slideNavigator = new SlideNavigator(this, Slides);
@@ -66,6 +68,7 @@ namespace TestingProgram
                 IndexOfSlide<ChoiceViewModel>(),
                 () => ChoiceChaphterNoEdit.Show());
         }
+
 
         private void ShowSeasonExecuted(object sender, ExecutedRoutedEventArgs e)
         {

@@ -26,7 +26,6 @@ namespace TestingProgram
         public Choice()
         {
             InitializeComponent();
-        
         }
 
       

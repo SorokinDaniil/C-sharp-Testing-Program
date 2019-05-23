@@ -20,17 +20,17 @@ namespace TestingProgram
 
         public TextFieldsViewModel()
         {
-            DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
+            //DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
 
-            //for (int i = 0; i < dt_user.Rows.Count; i++)
-            //{ // перебираем данные
-            //    MessageBox.Show(dt_user.Rows[i][0] + "|" + dt_user.Rows[i][1] + dt_user.Rows[i][2]); // выводим данные
-            //}
-            LongListToTestComboVirtualization = new List<string>();
-            LongListToTestComboVirtualization.Add(dt_user.Rows[0][0].ToString());
-            LongListToTestComboVirtualization.Add(dt_user.Rows[0][1].ToString());
+            ////for (int i = 0; i < dt_user.Rows.Count; i++)
+            ////{ // перебираем данные
+            ////    MessageBox.Show(dt_user.Rows[i][0] + "|" + dt_user.Rows[i][1] + dt_user.Rows[i][2]); // выводим данные
+            ////}
+            //LongListToTestComboVirtualization = new List<string>();
+            //LongListToTestComboVirtualization.Add(dt_user.Rows[0][0].ToString());
+            //LongListToTestComboVirtualization.Add(dt_user.Rows[0][1].ToString());
           
-            LongListToTestComboVirtualization.Add("T-694");
+            //LongListToTestComboVirtualization.Add("T-694");
             //SelectedValueOne = LongListToTestComboVirtualization.Skip(2).First();
             //SelectedTextTwo = null;
         }
@@ -39,8 +39,8 @@ namespace TestingProgram
         {
             DataTable dataTable = new DataTable("dataBase");                // создаём таблицу в приложении
                                                                             // подключаемся к базе данных
-          //SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-O6G977H;Trusted_Connection=Yes;DataBase=Test;");
-            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-JKOUM0H;Trusted_Connection=Yes;DataBase=test;");
+            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-O6G977H;Trusted_Connection=Yes;DataBase=Test;");
+            //SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-JKOUM0H;Trusted_Connection=Yes;DataBase=test;");
             sqlConnection.Open();                                           // открываем базу данных
             SqlCommand sqlCommand = sqlConnection.CreateCommand();          // создаём команду
             sqlCommand.CommandText = selectSQL;                             // присваиваем команде текст

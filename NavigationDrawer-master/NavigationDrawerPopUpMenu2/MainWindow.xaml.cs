@@ -10,53 +10,39 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MaterialDesignThemes.Wpf;
+using System.Data;
+using System.Data.SqlClient;
+using NUnit.Framework;
 
 namespace TestingProgram
 {
+
     /// <summary>
-    /// Interação lógica para MainWindow.xam
+    /// Логика взаимодействия для Window1.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
-            //InitializeComponent();
-            Window1 window = new Window1();
-            window.Show();
-        }
-        
-        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
-        {
-            //ButtonCloseMenu.Visibility = Visibility.Visible;
-            //ButtonOpenMenu.Visibility = Visibility.Collapsed;
+          InitializeComponent();
+
+            DataContext = new MainWindowViewModel();
+            //DataContext = new ListsAndGridsViewModel();
+            HeadLabelName.Children.Add(new AdminLabelName());
+            Panel.Children.Add(new AdminLeftPanel());
+
         }
 
-        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ButtonCloseMenu.Visibility = Visibility.Collapsed;
-            //ButtonOpenMenu.Visibility = Visibility.Visible;
+            MenuToggleButton.IsChecked = false;
         }
 
-        private void ListViewMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //UserControl usc = null;
-            //GridMain.Children.Clear();
 
-            //switch (((ListViewItem)((ListView)sender).SelectedItem).Name)
-            //{
-            //    case "ItemHome":
-            //        usc = new UserControlHome();
-            //        GridMain.Children.Add(usc);
-            //        break;
-            //    case "ItemCreate":
-            //        usc = new UserControlCreate();
-            //        GridMain.Children.Add(usc);
-            //        break;
-            //    default:
-            //        break;
-            //}
+
         }
-    }
 }
+
+

@@ -4,157 +4,452 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingProgram"
+        mc:Ignorable="d"
+        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d" Height="600" Width="1080" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+        Title="Testing" Height="800" Width="1080" ResizeMode="NoResize" 
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" WindowStyle="None" 
+        d:DataContext="{d:DesignInstance local:MainWindowViewModel, d:IsDesignTimeCreatable=False}">
+   
+
+
+    <!--<Window.Resources>
+        <ResourceDictionary>
+           
+            <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource MaterialDesignTextBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource MaterialDesignPasswordBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MaterialDesignComboBox}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type Viewbox}">
+                <Setter Property="Width" Value="18" />
+                <Setter Property="Height" Value="18" />
+                <Setter Property="Margin" Value="0 0 8 0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+            <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource MaterialDesignSlider}">
+                <Setter Property="Margin" Value="0 8 0 8" />
+            </Style>
+            <Style TargetType="{x:Type materialDesign:PackIcon}" BasedOn="{StaticResource {x:Type materialDesign:PackIcon}}">
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="4 0 4 0" />
+                <Setter Property="Width" Value="40" />
+                <Setter Property="Height" Value="40" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>-->
+
+    <!--<Window.Resources>
+        
+    <ControlTemplate x:Key="ModifiedErrorTemplate">
+            <ControlTemplate.Resources>
+                <DataTemplate DataType="{x:Type ValidationError}">
+                    <TextBlock Foreground="{DynamicResource ValidationErrorBrush}"
+                           MaxWidth="{Binding ElementName=Placeholder, Path=ActualWidth}"
+                           HorizontalAlignment="Left"
+                           Margin="2"
+                           TextWrapping="Wrap"
+                           Text="{Binding ErrorContent}"
+                           UseLayoutRounding="false" />
+                </DataTemplate>
+            </ControlTemplate.Resources>
+        </ControlTemplate>
+   
+        <Style x:Key="ExtendedMaterialDesignComboBox"
+               BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}"
+               TargetType="ComboBox">
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ModifiedErrorTemplate}" />
+        </Style>
+        
+    </Window.Resources>-->
+
+    <!--<Window.Resources>
+        <Style x:Key="ExtendedMaterialDesignComboBox" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}" TargetType="{x:Type ComboBox}">
+            <Setter Property="Validation.ErrorTemplate">
+                <Setter.Value>
+                    <ControlTemplate>
+                     
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>-->
+  
+    
+  <!--<DataTemplate DataType="{x:Type local:SeasonViewModel}">
+            <local:SeasonView />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:RaceViewModel}">
+            <local:RaceView />
+        </DataTemplate>-->
+        
+        
+        <!--<Window.Resources>
+            <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>-->
    
     <Window.Resources>
-        <Storyboard x:Key="OpenMenu">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="300"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="CloseMenu">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Style x:Key="BlackAndWhite">
-            <Setter Property="Control.FontFamily" Value="Verdana" />
-            <Setter Property="Control.Background" Value="Black" />
-            <Setter Property="Control.Foreground" Value="White" />
-            <Setter Property="Control.Margin" Value="10" />
-        </Style>
+        <DataTemplate DataType="{x:Type local:PreviewTestingWindowViewModel}">
+            <local:PreviewTestingWindow />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TestingWindowViewModel}">
+            <local:TestingWindow />
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type local:ChoiceViewModel}">
+            <local:Choice />
+        </DataTemplate>
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenMenu">
-            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
-        </EventTrigger>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
-            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
-        </EventTrigger>
-    </Window.Triggers>
-    <Grid Background="#FFDEDEDE">
-        <Grid x:Name="GridMain" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="540" Width="830">
-       
-            
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="103*"/>
-                <RowDefinition Height="32*"/>
-            </Grid.RowDefinitions>
-        </Grid>
-        <Grid Height="60" VerticalAlignment="Top" Background="#FF222222">
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
-            </Grid.Effect>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Admin" VerticalAlignment="Center" FontSize="16" Foreground="LightGray"/>
-                <!--<materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="10" Foreground="LightGray">
-                    <StackPanel Width="150">
-                     
-                        <Button Content="Account"/>
-                        
-                        <Separator/>
-                        <Button Content="Logout"/>
-                    </StackPanel>
-                </materialDesign:PopupBox>-->
+    
+    <Grid x:Name="MainGrid">
+        <materialDesign:DialogHost Identifier="RootDialog" SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
+            <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" >
+
+                <!--#region LEFTPANEL-->
+                <materialDesign:DrawerHost.LeftDrawerContent>
+
+
+                    <DockPanel MinWidth="300" Width="300" Background="{StaticResource PrimaryHueMidBrush}" >
+                        <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                    DockPanel.Dock="Top"
+                                    HorizontalAlignment="Left" Margin="17.5"
+                                    IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}" Width="25" Height="25" Foreground="#DDFFFFFF"/>
+
+                        <Grid x:Name="Panel" Background="{DynamicResource MaterialDesignPaper}">
+                            <ListView x:Name="AdminListView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+  MinWidth="220" BorderBrush="{x:Null}" SelectionChanged="SelectionChanged">
+                                <ListViewItem Height="60" >
+                                    <StackPanel 
+          Orientation="Horizontal">
+                                        <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="FileDocumentBoxOutline"  Margin="10" />
+                                        <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
+            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+          Журнал
+                                        </TextBlock>
+                                    </StackPanel >
+                                </ListViewItem>
+                                <ListViewItem Height="60">
+                                    <StackPanel 
+          Orientation="Horizontal">
+                                        <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="SquareEditOutline"  Margin="10"/>
+                                        <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
+            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
+          Редактор
+                                        </TextBlock>
+                                    </StackPanel>
+                                </ListViewItem>
+                            </ListView>
+                        </Grid>
+                    </DockPanel>
+                  
+
+                </materialDesign:DrawerHost.LeftDrawerContent>
+                <!--#endregion-->
                 
-            </StackPanel>
-            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" Foreground="LightGray">Test</TextBlock>
-           
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-               
-            </StackPanel>
-        </Grid>
-        <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left" Background="#FF222222" Margin="0,60,0,-120">
-            <Grid.Effect>
-                <DropShadowEffect BlurRadius="2" ShadowDepth="1" Color="#FFAEAEAE"/>
-            </Grid.Effect>
-            <StackPanel>
-                <Grid Height="60" Background="#FF222222" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left">
-                    <Grid.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Grid.RenderTransform>
-                    <Button x:Name="ButtonOpenMenu" Height="60" Width="60" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" Click="ButtonOpenMenu_Click">
-                        <materialDesign:PackIcon Kind="Menu" Width="25" Height="25"/>
-                    </Button>
-                    <Button x:Name="ButtonCloseMenu" Visibility="Collapsed" Height="60" Width="60"  HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" Click="ButtonCloseMenu_Click">
-                        <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
-                    </Button>
-                </Grid>
+                <DockPanel>
 
-                <TreeView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Foreground="LightGray"
-  MinWidth="220">
-                    <TreeViewItem
-    Header="Основы программирования на C#">
-                        <TreeViewItem
-      Header="Переменные" />
-                        <TreeViewItem
-      Header="Литералы" />
-                        <TreeViewItem
-      Header="Типы данных" />
-                    </TreeViewItem>
-                    <TreeViewItem
-    Header="ООП"
-  >
-                        <TreeViewItem
-      Header="Классы и объекты" />
-                         <TreeViewItem
-      Header="Структуры" />
-                        <TreeViewItem
-      Header="Модификаторы доступа" />
-                    </TreeViewItem>
-                </TreeView>
+                    <!--#region  HEAD_PANEL-->
+                    <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                           DockPanel.Dock="Top"
+                                          Mode="PrimaryMid" Height="60"  >
+                        <!--<Grid>
+                        <TextBlock Style="{StaticResource BaseTextLightH2}" HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
+                    </Grid>-->
+
+                        <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
+
+                            <Grid x:Name="Head">
+                                <ToggleButton  Style="{StaticResource MaterialDesignHamburgerToggleButton}" IsChecked="False"
+                                        x:Name="MenuToggleButton" HorizontalAlignment="Left" Width="30" Height="30" Margin="15,0,0,0"/>
+
+                                <Grid x:Name="HeadLabelName">
+                                </Grid>
+
+                                <Button Command="{Binding RunDialogCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="32" Height="32" Margin="0,13,13,13" Background="{x:Null}" BorderBrush="{x:Null}">
+                                    <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="ExitToApp"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Button>
+
+                                <!--<Button Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" Width="40" Height="40" Margin="0,0,17.5,0" HorizontalAlignment="Right" VerticalAlignment="Center" >
+                                    <materialDesign:PackIcon Kind="ExitToApp" Width="30" Height="30"/>
+                                </Button>-->
+
+                            </Grid>
+                        </materialDesign:TransitioningContent>
+                    </materialDesign:ColorZone>
+<!--#endregion HEADPANEL-->
+
+                   
+                   
+
+                    <Grid x:Name="CenterGrid"  x:FieldModifier="public">
+                        <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
+                                     AutoApplyTransitionOrigins="True"
+                                     ItemsSource="{Binding Slides}">
+                                
+                        </materialDesign:Transitioner>
 
 
+                    </Grid>
+
+                    <!--<materialDesign:Transitioner x:Name="Tran" SelectedIndex="0" AutoApplyTransitionOrigins="True">
+                            <materialDesign:Transitioner.InputBindings>
+                                <KeyBinding Key="Left" Command="{x:Static materialDesign:Transitioner.MovePreviousCommand}" />
+                                <KeyBinding Key="Right" Command="{x:Static materialDesign:Transitioner.MoveNextCommand}" />
+                            </materialDesign:Transitioner.InputBindings>
+
+                            <materialDesign:TransitionerSlide OpeningEffect="{materialDesign:TransitionEffect FadeIn}">
+                                <local:PreviewTestingWindow />
+                            </materialDesign:TransitionerSlide>
+
+                      
+                            
+                            <materialDesign:TransitionerSlide>
+                                <materialDesign:TransitionerSlide.BackwardWipe>
+                                    <materialDesign:CircleWipe/>
+                                </materialDesign:TransitionerSlide.BackwardWipe>
+                                <local:PreviewTestingWindow />
+                            </materialDesign:TransitionerSlide>
+                            <materialDesign:TransitionerSlide>
+                                <materialDesign:TransitionerSlide.BackwardWipe>
+                                    <materialDesign:SlideWipe />
+                                </materialDesign:TransitionerSlide.BackwardWipe>
+                                <local:TestingWindow />
+                            </materialDesign:TransitionerSlide>
 
 
+                        </materialDesign:Transitioner>-->
+                    <!--#region TabControl-->
+                    <!--<Grid
+  Margin="4" DockPanel.Dock="Top" VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                         
+                        </Grid.ColumnDefinitions>
 
+                        <RadioButton 
+    Style="{StaticResource MaterialDesignTabRadioButton}"
+   
+    IsChecked="True"
+    Content="FIRST" />
+                        <RadioButton
+    Style="{StaticResource MaterialDesignTabRadioButton}"
+    
+    IsChecked="False"
+    Content="SECOND" Grid.Column="1" />
+                       
+                    </Grid>-->
+<!--#endregion-->
 
+                    <!--#region TESTING_WINDOW-->
+                    <!--<DockPanel Margin="0"  LastChildFill="False">
+                        <TextBox
+    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+    Margin="20"
+    VerticalAlignment="Center"
+    Height="100"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    materialDesign:HintAssist.Hint="This is a text area"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />
+                        --><!--<TextBox TextWrapping="WrapWithOverflow" Style="{StaticResource BaseTextDarkH3}" Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:</TextBox>--><!--
+                        <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="200"
+                    ShowLineNumbers="True"
+				Name="textEditor"
+				FontFamily="Consolas"
+				FontSize="10pt"
+				SyntaxHighlighting="C#"
+                                            HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFAFAFA" DockPanel.Dock="Top"
+			>Welcome to AvalonEdit!
 
+                        </avalonEdit:TextEditor>
 
-
-
-
-
-
-
-
-
-                <!--<ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged">
-                    <ListViewItem x:Name="ItemHome" Height="60" Foreground="LightGray">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="ViewDashboard" Height="25" Width="25" Margin="10" Foreground="LightGray"/>
-                            <TextBlock Text="Home" VerticalAlignment="Center" Margin="10"/>
+                        <StackPanel Style="{StaticResource BaseTextDarkH3}" Margin="0,20,0,0" HorizontalAlignment="Left" DockPanel.Dock="Top" >
+                            <CheckBox Margin="20,0,20,6">
+                                <TextBlock TextWrapping="WrapWithOverflow">
+                               public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                                </TextBlock>
+                            </CheckBox>
+                            <CheckBox Margin="20,0,20,6">
+                                internal
+                            </CheckBox>
+                            <CheckBox Margin="20,0,20,6">
+                                private
+                            </CheckBox>
+                            <CheckBox Margin="20,0,20,6">
+                                public
+                            </CheckBox>
                         </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem x:Name="ItemCreate" Height="60" Foreground="LightGray">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Pencil" Height="25" Width="25" Margin="10" Foreground="LightGray"/>
-                            <TextBlock Text="Create" VerticalAlignment="Center" Margin="10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60" Foreground="LightGray">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Ticket" Height="25" Width="25" Margin="10" Foreground="LightGray"/>
-                            <TextBlock Text="Tickets" VerticalAlignment="Center" Margin="10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                    <ListViewItem Height="60" Foreground="LightGray">
-                        <StackPanel Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Message" Height="25" Width="25" Margin="10" Foreground="LightGray"/>
-                            <TextBlock Text="Messages" VerticalAlignment="Center"  Margin="10"/>
-                        </StackPanel>
-                    </ListViewItem>
-                </ListView>-->
-            </StackPanel>
-        </Grid>
+
+
+                        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6" Click="Button_Click_2" >NEXT</Button>
+
+                    </DockPanel>-->
+<!--#endregion-->
+
+                    
+
+                </DockPanel>
+
+            </materialDesign:DrawerHost>
+        </materialDesign:DialogHost>
+
     </Grid>
 </Window>
+
+
+
+
+
+
+
+<!--<DockPanel LastChildFill="False">
+
+
+
+
+                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                            PlacementMode="LeftAndAlignMiddles"
+    UnfurlOrientation="Horizontal"
+                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                 Margin="32" DockPanel.Dock="Right" >
+                                <materialDesign:PopupBox.ToggleContent>
+                                    <materialDesign:PackIcon
+      Kind="Pencil"
+      Width="22"
+      Height="22" />
+                                </materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:PopupBox.ToggleCheckedContent>
+                                    <materialDesign:PackIcon
+      Kind="Close"
+      Width="22"
+      Height="22" />
+                                </materialDesign:PopupBox.ToggleCheckedContent>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Button ToolTip="Add" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                                        <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                                    </Button>
+                                    <Button ToolTip="Edit">
+                                        <materialDesign:PackIcon Kind="Edit" />
+                                    </Button>
+                                    <Button ToolTip="Delete" >
+                                        <materialDesign:PackIcon Kind="Delete" />
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
+                        </DockPanel>-->
+
+<!--<DockPanel>
+                                <Button  Style="{StaticResource MaterialDesignFlatButton}" Margin="8" HorizontalAlignment="Left" VerticalAlignment="Center">ADD</Button>
+                                <Button  Style="{StaticResource MaterialDesignFlatButton}" Margin="0,8,8,8" HorizontalAlignment="Left" VerticalAlignment="Center">EDIT</Button>
+                                <ComboBox  Style="{StaticResource MaterialDesignComboBox}" 
+  materialDesign:HintAssist.Hint="Group" Margin="8"
+  MinWidth="72"
+  VerticalAlignment="Bottom"
+  IsEditable="True"
+  ItemsSource="{Binding LongListToTestComboVirtualization}" Foreground="Black" IsSelected="True" Width="80">
+                                    <ComboBox.Text>
+                                        <Binding
+      Path="SelectedTextTwo"
+      Mode="TwoWay"
+      UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <local:NotEmptyValidationRule
+          ValidatesOnTargetUpdated="False"  />
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </ComboBox.Text>
+                                    <ComboBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <VirtualizingStackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ComboBox.ItemsPanel>
+                                </ComboBox>
+                                <Button  Style="{StaticResource MaterialDesignFlatButton}" Margin="8" HorizontalAlignment="Right" VerticalAlignment="Center">DELETE</Button>
+
+                            </DockPanel>-->
+
+
+
+<!--<materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" 
+  >
+                        <materialDesign:Flipper.FrontContent>
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                <TextBlock   Style="{StaticResource BaseTextDarkH1}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
+
+                                <Button  Height="24" Width="24" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0"  Command="{x:Static materialDesign:Flipper.FlipCommand}">
+                                    <materialDesign:PackIcon Kind="Edit" Width="Auto" Height="Auto" HorizontalAlignment="Left" Foreground="{StaticResource D}"/>
+                                </Button>
+
+
+                    <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="MainSnackbar"
+                                            Grid.Row="1" />-->
+
+
+
+
+<!--<materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" 
+  >
+                            <materialDesign:Flipper.FrontContent>
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <TextBlock   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
+
+                                    <Button  Height="24" Width="24" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
+                                        <materialDesign:PackIcon Kind="Edit" Width="Auto" Height="Auto" HorizontalAlignment="Left"/>
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:Flipper.FrontContent>
+                            <materialDesign:Flipper.BackContent>
+                                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <TextBlock   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBlock>
+
+                                    <Button  Height="24" Width="24" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
+                                        <materialDesign:PackIcon Kind="Check" Width="Auto" Height="Auto" HorizontalAlignment="Left"/>
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:Flipper.BackContent>
+                        </materialDesign:Flipper>-->
+
+
+<!--<ListBox x:Name="DemoItemsListBox" Margin="0 16 0 16" SelectedIndex="0"                         
+                             ItemsSource="{Binding DemoItems}"
+                             >-->
+
+
+
+
+
+
+<!--<ListBox.ItemTemplate>
+                            <DataTemplate DataType="domain:DemoItem">
+                                <TextBlock Text="{Binding Name}" Margin="32 0 32 0" />
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>-->
+<!--</ListBox>-->
+
+
+
+<!--<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    -->
+<!--<TextBox   Style="{StaticResource BaseTextLightH2}" VerticalAlignment="Center" Height="24" FontSize="24" HorizontalAlignment="Center">Admin</TextBox>-->
+<!--
+                                    <TextBox  Style="{StaticResource BaseTextLightH2}" Height="20"
+
+  materialDesign:HintAssist.Hint="Comment" >Admin</TextBox>
+                                        <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}" Height="20" Width="20" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Margin="8,0,0,0">
+                                        <materialDesign:PackIcon Kind="Check" Width="20" Height="20" HorizontalAlignment="Left"/>
+                                    </Button>
+                                </StackPanel>-->
+                    

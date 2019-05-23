@@ -40,6 +40,12 @@
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
@@ -53,6 +59,7 @@
       <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -80,10 +87,10 @@
     <Compile Include="Admin\AdminLeftPanel.xaml.cs">
       <DependentUpon>AdminLeftPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Admin\Choice.xaml.cs">
+    <Compile Include="MVVM\Choice.xaml.cs">
       <DependentUpon>Choice.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ChoiceViewModel.cs" />
+    <Compile Include="MVVM\ChoiceViewModel.cs" />
     <Compile Include="Dialog\AnotherCommandImplementation.cs" />
     <Compile Include="Dialog\DialogsViewModel.cs" />
     <Compile Include="Dialog\SampleDialog.xaml.cs">
@@ -91,15 +98,17 @@
     </Compile>
     <Compile Include="Dialog\SampleDialogViewModel.cs" />
     <Compile Include="Grid\ListsAndGridsViewModel.cs" />
-    <Compile Include="Login.xaml.cs">
+    <Compile Include="MVVM\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainTable.xaml.cs">
+    <Compile Include="MVVM\LoginViewModel.cs" />
+    <Compile Include="MVVM\MainTable.xaml.cs">
       <DependentUpon>MainTable.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\MainTableViewModel.cs" />
     <Compile Include="MainWindowViewModel.cs" />
-    <Compile Include="PreviewTestingWindowViewModel.cs" />
-    <Compile Include="TestingWindowViewModel.cs" />
+    <Compile Include="MVVM\PreviewTestingWindowViewModel.cs" />
+    <Compile Include="MVVM\TestingWindowViewModel.cs" />
     <Compile Include="Transition\ISlideNavigationSubject.cs" />
     <Compile Include="Transition\ITidyable.cs" />
     <Compile Include="Transition\NavigationCommands.cs" />
@@ -110,10 +119,10 @@
     <Compile Include="Validation\NameValidationRule.cs" />
     <Compile Include="Grid\SelectableViewModel.cs" />
     <Compile Include="Validation\TextFieldsViewModel.cs" />
-    <Compile Include="User\PreviewTestingWindow.xaml.cs">
+    <Compile Include="MVVM\PreviewTestingWindow.xaml.cs">
       <DependentUpon>PreviewTestingWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User\TestingWindow.xaml.cs">
+    <Compile Include="MVVM\TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="User\UserLabelName.xaml.cs">
@@ -123,8 +132,8 @@
       <DependentUpon>UserLeftPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validation\TextBoxValidationRule.cs" />
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Admin\AdminLabelName.xaml">
       <SubType>Designer</SubType>
@@ -134,7 +143,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Admin\Choice.xaml">
+    <Page Include="MVVM\Choice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -142,7 +151,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainTable.xaml">
+    <Page Include="MVVM\MainTable.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -154,27 +163,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
+    <Page Include="MVVM\Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="User\PreviewTestingWindow.xaml">
+    <Page Include="MVVM\PreviewTestingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="User\TestingWindow.xaml">
+    <Page Include="MVVM\TestingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,7 +187,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window1.xaml">
+    <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
