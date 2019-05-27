@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace TestingProgram
 {
-    public class TextFieldsViewModel : INotifyPropertyChanged
+    public class TextFieldsViewModel : INotifyPropertyChanged  
     {
         private string _loginUsername;
         private string _loginPassword;
@@ -16,7 +16,7 @@ namespace TestingProgram
         private string _signupName;
         private string _choiceGroup;
 
-
+      
 
         public TextFieldsViewModel()
         {

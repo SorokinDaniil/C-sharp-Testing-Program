@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище testModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Вопрос">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Текст" Type="varchar" MaxLength="643" Nullable="false" />
+          <Property Name="Код" Type="varchar" MaxLength="3000" />
+          <Property Name="Тип_Ответа" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Раздел_Id" Type="tinyint" Nullable="false" />
+          <Property Name="Тема_Id" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Группа">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="varchar" MaxLength="5" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ответ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Текст" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Значение" Type="bit" Nullable="false" />
+          <Property Name="Вопрос_Id" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Раздел">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Результат">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Оценка" Type="tinyint" Nullable="false" />
+          <Property Name="Дата_Прохождения" Type="datetime" Nullable="false" />
+          <Property Name="Количество_Вопросов" Type="tinyint" Nullable="false" />
+          <Property Name="Раздел_Название" Type="tinyint" Nullable="false" />
+          <Property Name="Тема_Название" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Студент">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Хэш" Type="char" MaxLength="128" Nullable="false" />
+          <Property Name="Группа_Id" Type="tinyint" Nullable="false" />
+          <Property Name="Результат_Id" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Тема">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Вопрос_Раздел">
+          <End Role="Раздел" Type="Self.Раздел" Multiplicity="1" />
+          <End Role="Вопрос" Type="Self.Вопрос" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Раздел">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Вопрос">
+              <PropertyRef Name="Раздел_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Вопрос_Тема">
+          <End Role="Тема" Type="Self.Тема" Multiplicity="1" />
+          <End Role="Вопрос" Type="Self.Вопрос" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тема">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Вопрос">
+              <PropertyRef Name="Тема_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ответ_Вопрос">
+          <End Role="Вопрос" Type="Self.Вопрос" Multiplicity="1" />
+          <End Role="Ответ" Type="Self.Ответ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вопрос">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ответ">
+              <PropertyRef Name="Вопрос_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Студент_Группа">
+          <End Role="Группа" Type="Self.Группа" Multiplicity="1" />
+          <End Role="Студент" Type="Self.Студент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Группа">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Студент">
+              <PropertyRef Name="Группа_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Студент_Результат">
+          <End Role="Результат" Type="Self.Результат" Multiplicity="1" />
+          <End Role="Студент" Type="Self.Студент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Результат">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Студент">
+              <PropertyRef Name="Результат_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище testModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Вопрос" EntityType="Self.Вопрос" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Группа" EntityType="Self.Группа" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ответ" EntityType="Self.Ответ" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Раздел" EntityType="Self.Раздел" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Результат" EntityType="Self.Результат" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Студент" EntityType="Self.Студент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тема" EntityType="Self.Тема" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Вопрос_Раздел" Association="Self.FK_Вопрос_Раздел">
+            <End Role="Раздел" EntitySet="Раздел" />
+            <End Role="Вопрос" EntitySet="Вопрос" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Вопрос_Тема" Association="Self.FK_Вопрос_Тема">
+            <End Role="Тема" EntitySet="Тема" />
+            <End Role="Вопрос" EntitySet="Вопрос" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ответ_Вопрос" Association="Self.FK_Ответ_Вопрос">
+            <End Role="Вопрос" EntitySet="Вопрос" />
+            <End Role="Ответ" EntitySet="Ответ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Студент_Группа" Association="Self.FK_Студент_Группа">
+            <End Role="Группа" EntitySet="Группа" />
+            <End Role="Студент" EntitySet="Студент" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Студент_Результат" Association="Self.FK_Студент_Результат">
+            <End Role="Результат" EntitySet="Результат" />
+            <End Role="Студент" EntitySet="Студент" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Вопрос">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Текст" Type="String" MaxLength="643" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Код" Type="String" MaxLength="3000" FixedLength="false" Unicode="false" />
+          <Property Name="Тип_Ответа" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Раздел_Id" Type="Byte" Nullable="false" />
+          <Property Name="Тема_Id" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Раздел" Relationship="Self.FK_Вопрос_Раздел" FromRole="Вопрос" ToRole="Раздел" />
+          <NavigationProperty Name="Тема" Relationship="Self.FK_Вопрос_Тема" FromRole="Вопрос" ToRole="Тема" />
+          <NavigationProperty Name="Ответ" Relationship="Self.FK_Ответ_Вопрос" FromRole="Вопрос" ToRole="Ответ" />
+        </EntityType>
+        <EntityType Name="Группа">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="5" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Студент" Relationship="Self.FK_Студент_Группа" FromRole="Группа" ToRole="Студент" />
+        </EntityType>
+        <EntityType Name="Ответ">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Текст" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Значение" Type="Boolean" Nullable="false" />
+          <Property Name="Вопрос_Id" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Вопрос" Relationship="Self.FK_Ответ_Вопрос" FromRole="Ответ" ToRole="Вопрос" />
+        </EntityType>
+        <EntityType Name="Раздел">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Вопрос" Relationship="Self.FK_Вопрос_Раздел" FromRole="Раздел" ToRole="Вопрос" />
+        </EntityType>
+        <EntityType Name="Результат">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Оценка" Type="Byte" Nullable="false" />
+          <Property Name="Дата_Прохождения" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Количество_Вопросов" Type="Byte" Nullable="false" />
+          <Property Name="Раздел_Название" Type="Byte" Nullable="false" />
+          <Property Name="Тема_Название" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Студент" Relationship="Self.FK_Студент_Результат" FromRole="Результат" ToRole="Студент" />
+        </EntityType>
+        <EntityType Name="Студент">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Хэш" Type="String" MaxLength="128" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Группа_Id" Type="Byte" Nullable="false" />
+          <Property Name="Результат_Id" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Группа" Relationship="Self.FK_Студент_Группа" FromRole="Студент" ToRole="Группа" />
+          <NavigationProperty Name="Результат" Relationship="Self.FK_Студент_Результат" FromRole="Студент" ToRole="Результат" />
+        </EntityType>
+        <EntityType Name="Тема">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Вопрос" Relationship="Self.FK_Вопрос_Тема" FromRole="Тема" ToRole="Вопрос" />
+        </EntityType>
+        <Association Name="FK_Вопрос_Раздел">
+          <End Role="Раздел" Type="Self.Раздел" Multiplicity="1" />
+          <End Role="Вопрос" Type="Self.Вопрос" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Раздел">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Вопрос">
+              <PropertyRef Name="Раздел_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Вопрос_Тема">
+          <End Role="Тема" Type="Self.Тема" Multiplicity="1" />
+          <End Role="Вопрос" Type="Self.Вопрос" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тема">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Вопрос">
+              <PropertyRef Name="Тема_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ответ_Вопрос">
+          <End Role="Вопрос" Type="Self.Вопрос" Multiplicity="1" />
+          <End Role="Ответ" Type="Self.Ответ" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вопрос">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Ответ">
+              <PropertyRef Name="Вопрос_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Студент_Группа">
+          <End Role="Группа" Type="Self.Группа" Multiplicity="1" />
+          <End Role="Студент" Type="Self.Студент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Группа">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Студент">
+              <PropertyRef Name="Группа_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Студент_Результат">
+          <End Role="Результат" Type="Self.Результат" Multiplicity="1" />
+          <End Role="Студент" Type="Self.Студент" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Результат">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Студент">
+              <PropertyRef Name="Результат_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Вопрос" EntityType="Self.Вопрос" />
+          <EntitySet Name="Группа" EntityType="Self.Группа" />
+          <EntitySet Name="Ответ" EntityType="Self.Ответ" />
+          <EntitySet Name="Раздел" EntityType="Self.Раздел" />
+          <EntitySet Name="Результат" EntityType="Self.Результат" />
+          <EntitySet Name="Студент" EntityType="Self.Студент" />
+          <EntitySet Name="Тема" EntityType="Self.Тема" />
+          <AssociationSet Name="FK_Вопрос_Раздел" Association="Self.FK_Вопрос_Раздел">
+            <End Role="Раздел" EntitySet="Раздел" />
+            <End Role="Вопрос" EntitySet="Вопрос" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Вопрос_Тема" Association="Self.FK_Вопрос_Тема">
+            <End Role="Тема" EntitySet="Тема" />
+            <End Role="Вопрос" EntitySet="Вопрос" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ответ_Вопрос" Association="Self.FK_Ответ_Вопрос">
+            <End Role="Вопрос" EntitySet="Вопрос" />
+            <End Role="Ответ" EntitySet="Ответ" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Студент_Группа" Association="Self.FK_Студент_Группа">
+            <End Role="Группа" EntitySet="Группа" />
+            <End Role="Студент" EntitySet="Студент" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Студент_Результат" Association="Self.FK_Студент_Результат">
+            <End Role="Результат" EntitySet="Результат" />
+            <End Role="Студент" EntitySet="Студент" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище testModelContainer" CdmEntityContainer="testEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="testModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Вопрос">
+            <EntityTypeMapping TypeName="testModel.Вопрос">
+              <MappingFragment StoreEntitySet="Вопрос">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Текст" ColumnName="Текст" />
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Тип_Ответа" ColumnName="Тип_Ответа" />
+                <ScalarProperty Name="Раздел_Id" ColumnName="Раздел_Id" />
+                <ScalarProperty Name="Тема_Id" ColumnName="Тема_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Группа">
+            <EntityTypeMapping TypeName="testModel.Группа">
+              <MappingFragment StoreEntitySet="Группа">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ответ">
+            <EntityTypeMapping TypeName="testModel.Ответ">
+              <MappingFragment StoreEntitySet="Ответ">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Текст" ColumnName="Текст" />
+                <ScalarProperty Name="Значение" ColumnName="Значение" />
+                <ScalarProperty Name="Вопрос_Id" ColumnName="Вопрос_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Раздел">
+            <EntityTypeMapping TypeName="testModel.Раздел">
+              <MappingFragment StoreEntitySet="Раздел">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Результат">
+            <EntityTypeMapping TypeName="testModel.Результат">
+              <MappingFragment StoreEntitySet="Результат">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Оценка" ColumnName="Оценка" />
+                <ScalarProperty Name="Дата_Прохождения" ColumnName="Дата_Прохождения" />
+                <ScalarProperty Name="Количество_Вопросов" ColumnName="Количество_Вопросов" />
+                <ScalarProperty Name="Раздел_Название" ColumnName="Раздел_Название" />
+                <ScalarProperty Name="Тема_Название" ColumnName="Тема_Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Студент">
+            <EntityTypeMapping TypeName="testModel.Студент">
+              <MappingFragment StoreEntitySet="Студент">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Хэш" ColumnName="Хэш" />
+                <ScalarProperty Name="Группа_Id" ColumnName="Группа_Id" />
+                <ScalarProperty Name="Результат_Id" ColumnName="Результат_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тема">
+            <EntityTypeMapping TypeName="testModel.Тема">
+              <MappingFragment StoreEntitySet="Тема">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

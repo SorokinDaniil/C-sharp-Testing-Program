@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
 namespace TestingProgram
 {
     /// <summary>
@@ -22,7 +23,7 @@ namespace TestingProgram
         public Login()
         {
             InitializeComponent();
-            DataContext = new TextFieldsViewModel();
+            DataContext = new LoginViewModel();
             
         }
 

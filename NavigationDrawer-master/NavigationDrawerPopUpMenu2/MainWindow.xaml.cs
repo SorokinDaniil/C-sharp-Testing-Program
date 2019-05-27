@@ -27,8 +27,14 @@ namespace TestingProgram
         public MainWindow()
         {
           InitializeComponent();
+            using (testEntities context = new testEntities()) {
+                Тема тема = new Тема { Название = "ООП" };
+                context.Тема.Add(тема);
+                context.SaveChanges();
 
-            DataContext = new MainWindowViewModel();
+            }
+
+            //DataContext = new MainWindowViewModel();
             //DataContext = new ListsAndGridsViewModel();
             HeadLabelName.Children.Add(new AdminLabelName());
             Panel.Children.Add(new AdminLeftPanel());

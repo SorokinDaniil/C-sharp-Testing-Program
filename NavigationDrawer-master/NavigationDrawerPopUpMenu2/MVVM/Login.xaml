@@ -60,7 +60,7 @@
             </StackPanel>
 
             <Grid >
-                <Button Content="Вход"   Style="{StaticResource MaterialDesignRaisedButton}"
+                <Button Content="Вход" Command="{Binding ClickAdd}"  Style="{StaticResource MaterialDesignRaisedButton}"
     Width="100" Foreground="#FFEFFBEB" Margin="0,16"/>
             </Grid>
 

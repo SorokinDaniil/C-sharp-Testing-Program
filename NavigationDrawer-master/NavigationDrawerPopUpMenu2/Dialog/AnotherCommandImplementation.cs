@@ -10,7 +10,7 @@ namespace TestingProgram
     {
         private readonly Action<object> _execute;
         private readonly Func<object, bool> _canExecute;
-
+            
         public AnotherCommandImplementation(Action<object> execute) : this(execute, null)
         {
         }

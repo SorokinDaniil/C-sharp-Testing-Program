@@ -11,9 +11,10 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}" WindowStyle="None" 
-        d:DataContext="{d:DesignInstance local:MainWindowViewModel, d:IsDesignTimeCreatable=False}">
-   
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" WindowStyle="None">
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
 
 
     <!--<Window.Resources>

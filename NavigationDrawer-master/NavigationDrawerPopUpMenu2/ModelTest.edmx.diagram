@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6254b37bc830407b95b9b61a528e025b" Name="Diagram1">
+        <EntityTypeShape EntityType="testModel.sysdiagrams" Width="1.5" PointX="11.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Вопрос" Width="1.5" PointX="4" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Группа" Width="1.5" PointX="2.375" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Ответ" Width="1.5" PointX="6.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Раздел" Width="1.5" PointX="4.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Результат" Width="1.5" PointX="2.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Студент" Width="1.5" PointX="5.625" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.Тема" Width="1.5" PointX="2.25" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="testModel.FK_Вопрос_Раздел" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_Вопрос_Тема" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_Ответ_Вопрос" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_Студент_Группа" ManuallyRouted="false" />
+        <AssociationConnector Association="testModel.FK_Студент_Результат" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
