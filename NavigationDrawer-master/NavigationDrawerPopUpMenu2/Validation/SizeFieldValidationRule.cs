@@ -4,13 +4,12 @@ using System.Text.RegularExpressions;
 
 namespace TestingProgram
 {
-    public class NameValidationRule : ValidationRule
+    public class SizeFieldValidationRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            var regex = new Regex(@"^[а-яА-Я ]+$");
 
-            return !(regex.IsMatch(value.ToString())) ? new ValidationResult(false, "Поле должно содержать только русские буквы")
+            return ((value.ToString().Length) < 10 || (value.ToString().Length) > 32) ? new ValidationResult(false, "Длинна должна быть не менее 10 символов")
                 : ValidationResult.ValidResult;
 
             //return string.IsNullOrWhiteSpace((value ?? "").ToString())

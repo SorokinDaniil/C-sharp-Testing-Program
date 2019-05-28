@@ -10,6 +10,7 @@ namespace TestingProgram
 
         public void Show()
         {
+           
             SelectedTabIndex = 0;
         }
 

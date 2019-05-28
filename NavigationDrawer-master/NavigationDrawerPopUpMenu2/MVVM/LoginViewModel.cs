@@ -13,6 +13,7 @@ namespace TestingProgram
     {
         public ICommand ClickAdd
         {
+            
             get
             {
                 return new DelegateCommand(() =>

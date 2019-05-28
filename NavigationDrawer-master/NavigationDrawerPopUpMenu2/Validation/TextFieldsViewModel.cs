@@ -4,6 +4,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Data;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Windows.Controls;
+using System.Text.RegularExpressions;
+using System.Collections.ObjectModel;
 
 namespace TestingProgram
 {
@@ -20,6 +24,7 @@ namespace TestingProgram
 
         public TextFieldsViewModel()
         {
+            ErrorList = new ObservableCollection<ValidationResult>();
             //DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
 
             ////for (int i = 0; i < dt_user.Rows.Count; i++)
@@ -29,11 +34,13 @@ namespace TestingProgram
             //LongListToTestComboVirtualization = new List<string>();
             //LongListToTestComboVirtualization.Add(dt_user.Rows[0][0].ToString());
             //LongListToTestComboVirtualization.Add(dt_user.Rows[0][1].ToString());
-          
+
             //LongListToTestComboVirtualization.Add("T-694");
             //SelectedValueOne = LongListToTestComboVirtualization.Skip(2).First();
             //SelectedTextTwo = null;
         }
+
+
 
         public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
         {
@@ -105,6 +112,7 @@ namespace TestingProgram
 
         public IList<string> LongListToTestComboVirtualization { get; }
 
+        ObservableCollection<ValidationResult> ErrorList;
         //public DemoItem DemoItem => new DemoItem("Mr. Test", null, Enumerable.Empty<DocumentationLink>());
 
         public event PropertyChangedEventHandler PropertyChanged;

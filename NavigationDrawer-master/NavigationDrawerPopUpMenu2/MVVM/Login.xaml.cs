@@ -23,9 +23,28 @@ namespace TestingProgram
         public Login()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            DataContext = new TextFieldsViewModel();
             
+            //using (testEntities context = new testEntities())
+            //{
+            //    Тема тема = new Тема { Название = "ООП" };
+            //    context.Тема.Add(тема);
+            //    context.SaveChanges();
+
+            //}
+
         }
 
+
+       
+
+        private void TextBox_Error(object sender, ValidationErrorEventArgs e)
+        {
+           
+            if (e.Action == ValidationRe.Added)
+            {
+                Console.WriteLine("YES");
+            }
+        }
     }
 }
