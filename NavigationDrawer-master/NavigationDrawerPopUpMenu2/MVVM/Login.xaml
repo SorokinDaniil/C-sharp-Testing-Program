@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingProgram"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
-          Title="Login" Height="400" Width="640" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" TextBlock.FontFamily="QUATTROCENTO SANS">
+          Title="Login" Height="400" Width="640" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" TextBlock.FontFamily="QUATTROCENTO SANS" x:Name="LoginWindow">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -35,12 +36,12 @@
             <Label Content="Вход" FontFamily="QUATTROCENTO SANS" FontSize="24" Margin="0,10,0,13" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="Account" />
-                <TextBox  Validation.. Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Логин" Width="250" Margin="0,0,0,16">
+                <TextBox x:Name="SignIn_Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Логин" Width="250" Margin="0,0,0,16" >
                     <TextBox.Text>
                         <Binding
       Path="LoginUsername"
       Mode="TwoWay"
-      UpdateSourceTrigger="PropertyChanged">
+      UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
                                 <local:NotEmptyValidationRule
           ValidatesOnTargetUpdated="False"  />
@@ -55,13 +56,13 @@
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="Key" />
-                <PasswordBox  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32">
+                <PasswordBox x:Name="SignIn_Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32">
    
                 </PasswordBox>
             </StackPanel>
 
             <Grid >
-                <Button Content="Вход" Command="{Binding ClickAdd}"  Style="{StaticResource MaterialDesignRaisedButton}"
+                <Button Click="SignIn_Click" Content="Вход"  CommandParameter="{Binding ElementName=LoginWindow}" Style="{StaticResource MaterialDesignRaisedButton}"
     Width="100" Foreground="#FFEFFBEB" Margin="0,16"/>
             </Grid>
 
@@ -70,7 +71,7 @@
             <Label Content="Регистрация" FontFamily="QUATTROCENTO SANS" FontSize="24" Margin="0,10" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="Account" />
-                <TextBox  Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Логин" Width="250" Margin="0,0,0,16">
+                <TextBox x:Name="SignUp_Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Логин" Width="250" Margin="0,0,0,16">
                     <TextBox.Text>
                         <Binding
       Path="SignupUsername"
@@ -90,7 +91,7 @@
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="Key" />
-                <TextBox  Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32">
+                <TextBox x:Name="SignUp_Password" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32">
                     <TextBox.Text>
                         <Binding
       Path="SignupPassword"
@@ -114,7 +115,7 @@
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="AccountCircle" />
-                <TextBox  Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Имя и фамилия" Width="250" Margin="0,0,0,16">
+                <TextBox x:Name="SignUp_FullName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Имя и фамилия" Width="250" Margin="0,0,0,16">
                     <TextBox.Text>
                         <Binding
       Path="SignupName"
@@ -135,21 +136,20 @@
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="AccountMultiple" />
-                <ComboBox Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-  materialDesign:HintAssist.Hint="Группа" 
+                <ComboBox x:Name="SignUp_Group" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+  materialDesign:HintAssist.Hint="Группа" ItemsSource="{Binding LongListToTestComboVirtualization}" 
   VerticalAlignment="Stretch" Margin="0,0,0,16" Background="{DynamicResource MaterialDesignPaper}">
-                    <ComboBoxItem>
-                        T-694
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        T-693
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        T-691
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        T-690
-                    </ComboBoxItem>
+                    <ComboBox.Text>
+                        <Binding
+      Path="SignUpGroup"
+      Mode="TwoWay"
+      UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local:NotEmptyValidationRule
+          ValidatesOnTargetUpdated="False"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </ComboBox.Text>
                 </ComboBox>
             </StackPanel>
             <!--<StackPanel Margin="0" Orientation="Horizontal">

@@ -8,6 +8,8 @@ using System.Globalization;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
+using System.Windows;
+
 
 namespace TestingProgram
 {
@@ -20,10 +22,11 @@ namespace TestingProgram
         private string _signupName;
         private string _choiceGroup;
 
-      
+
 
         public TextFieldsViewModel()
         {
+           
             ErrorList = new ObservableCollection<ValidationResult>();
             //DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
 
@@ -54,6 +57,19 @@ namespace TestingProgram
             SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand); // создаём обработчик
             sqlDataAdapter.Fill(dataTable);                                 // возращаем таблицу с результатом
             return dataTable;
+        }
+        private ValidationErrorEventArgs _error;
+        public ValidationErrorEventArgs Error
+        {
+            get
+            {
+                return this._error;
+            }
+            set
+            {
+                this._error = value;
+                RaisePropertyChanged();
+            }
         }
 
         public string LoginUsername

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 
+
 namespace TestingProgram
 {
     /// <summary>
@@ -23,8 +24,7 @@ namespace TestingProgram
         public Login()
         {
             InitializeComponent();
-            DataContext = new TextFieldsViewModel();
-            
+            DataContext = new LoginViewModel();
             //using (testEntities context = new testEntities())
             //{
             //    Тема тема = new Тема { Название = "ООП" };
@@ -32,19 +32,42 @@ namespace TestingProgram
             //    context.SaveChanges();
 
             //}
-
+            
         }
 
-
-       
-
-        private void TextBox_Error(object sender, ValidationErrorEventArgs e)
+        private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-           
-            if (e.Action == ValidationRe.Added)
-            {
-                Console.WriteLine("YES");
-            }
+            if(IsValid(SignIn_Login) && IsValid(SignIn_Password))
+
+            ((LoginViewModel)DataContext).SignIn();
         }
+
+        private void SignUp_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsValid(SignUp_Login) && IsValid(SignUp_Password) && IsValid(SignUp_FullName) && IsValid(SignUp_Group))
+                ((LoginViewModel)DataContext).SignUp();
+        }
+
+        bool IsValid (DependencyObject d)
+        {
+            return Validation.GetHasError(d);
+        }
+
+        //private void TextBox_Error(object sender, ValidationErrorEventArgs e)
+        //{
+
+        //}
+
+
+
+
+        //private void TextBox_Error(object sender, ValidationErrorEventArgs e)
+        //{
+
+        //    if (e.Action == ValidationRe.Added)
+        //    {
+        //        Console.WriteLine("YES");
+        //    }
+        //}
     }
 }

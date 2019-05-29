@@ -32,7 +32,6 @@
   materialDesign:HintAssist.Hint="{Binding ChoiceHint}"
   MinWidth="72"
   VerticalAlignment="Bottom"
-  IsEditable="True"
   ItemsSource="{Binding LongListToTestComboVirtualization}" Foreground="Black" IsSelected="True" Width="80">
                             <ComboBox.Text>
                                 <Binding
