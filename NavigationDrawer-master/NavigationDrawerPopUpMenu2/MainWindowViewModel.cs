@@ -31,7 +31,7 @@ namespace TestingProgram
 
             Slides = new object[] { ChoiceChaphter , ChoiceGroup , ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
             _slideNavigator = new SlideNavigator(this, Slides);
-            _slideNavigator.GoTo(2);//Задается начальное окно 
+            _slideNavigator.GoTo(1);//Задается начальное окно 
         }
 
         public object[] Slides { get; }

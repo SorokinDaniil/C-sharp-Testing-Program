@@ -34,17 +34,17 @@ namespace TestingProgram
             {
              
                 case "Chaphter":
-                    _choiceTextBlock = "Выберите раздел";
-                    _choiceHint = "Раздел";
-                    _choicePopupBox = Visibility.Visible; break;
+                    ChoiceTextBlock = "Выберите раздел";
+                    ChoiceHint = "Раздел";
+                    ChoicePopupBox = Visibility.Visible; break;
                 case "ChaphterNoEdit":
-                    _choiceTextBlock = "Выберите раздел";
-                    _choiceHint = "Раздел";
-                    _choicePopupBox = Visibility.Hidden; break;
+                    ChoiceTextBlock = "Выберите раздел";
+                    ChoiceHint = "Раздел";
+                    ChoicePopupBox = Visibility.Hidden; break;
                 case "Group":
-                    _choiceTextBlock = "Выберите группу";
-                    _choiceHint = "Группа";
-                    _choicePopupBox = Visibility.Visible; break;
+                    ChoiceTextBlock = "Выберите группу";
+                    ChoiceHint = "Группа";
+                    ChoicePopupBox = Visibility.Visible; break;
                 default: break;
             }
 

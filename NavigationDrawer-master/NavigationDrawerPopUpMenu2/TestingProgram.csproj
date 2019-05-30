@@ -101,6 +101,18 @@
     <Compile Include="Admin\AdminLeftPanel.xaml.cs">
       <DependentUpon>AdminLeftPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\AddGroupDialog.xaml.cs">
+      <DependentUpon>AddGroupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\AddGroupDialogViewModel.cs" />
+    <Compile Include="Dialog\DeleteGroupDialog.xaml.cs">
+      <DependentUpon>DeleteGroupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DeleteGroupDialogViewModel.cs" />
+    <Compile Include="Dialog\EditGroupDialog.xaml.cs">
+      <DependentUpon>EditGroupDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\EditGroupDialogViewModel.cs" />
     <Compile Include="ModelTest.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,6 +208,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Admin\AdminLeftPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\AddGroupDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DeleteGroupDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\EditGroupDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

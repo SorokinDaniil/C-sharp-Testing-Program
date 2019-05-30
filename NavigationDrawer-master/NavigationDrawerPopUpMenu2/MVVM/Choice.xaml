@@ -86,16 +86,16 @@
                     </materialDesign:PopupBox.ToggleCheckedContent>
 
                     <StackPanel Orientation="Horizontal">
-                    <Button ToolTip="Добавить"  Command="{Binding RunDialogCommand}" >
+                    <Button ToolTip="Добавить"  Command="{Binding RunDialogAddGroupCommand}" >
                         <Button.DataContext>
                             <local:DialogsViewModel/>
                         </Button.DataContext>
                             <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                         </Button>
-                        <Button ToolTip="Изменить">
+                    <Button ToolTip="Изменить" Command="{Binding RunDialogEditGroup}">
                             <materialDesign:PackIcon Kind="Edit" />
                         </Button>
-                        <Button ToolTip="Удалить">
+                    <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteGroup}">
                             <materialDesign:PackIcon Kind="Delete" />
                         </Button>
                     </StackPanel>

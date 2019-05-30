@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TestingProgram"
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-       xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+       
         mc:Ignorable="d"
           Title="Login" Height="400" Width="640" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" TextBlock.FontFamily="QUATTROCENTO SANS" x:Name="LoginWindow">
     <Window.Resources>

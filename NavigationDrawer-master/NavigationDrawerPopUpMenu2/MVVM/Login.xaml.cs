@@ -37,15 +37,15 @@ namespace TestingProgram
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            if(IsValid(SignIn_Login) && IsValid(SignIn_Password))
+            //if(IsValid(SignIn_Login) && IsValid(SignIn_Password))
 
-            ((LoginViewModel)DataContext).SignIn();
+            //((LoginViewModel)DataContext).SignIn();
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
         {
-            if (IsValid(SignUp_Login) && IsValid(SignUp_Password) && IsValid(SignUp_FullName) && IsValid(SignUp_Group))
-                ((LoginViewModel)DataContext).SignUp();
+            //if (IsValid(SignUp_Login) && IsValid(SignUp_Password) && IsValid(SignUp_FullName) && IsValid(SignUp_Group))
+            //    ((LoginViewModel)DataContext).SignUp();
         }
 
         bool IsValid (DependencyObject d)

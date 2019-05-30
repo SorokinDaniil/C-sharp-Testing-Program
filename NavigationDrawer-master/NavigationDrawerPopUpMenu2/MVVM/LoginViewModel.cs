@@ -21,11 +21,15 @@ namespace TestingProgram
         private string _signupFullName;
         private string _choiceGroup;
 
+        public IList<string> LongListToTestComboVirtualization { get; }
+
+        ObservableCollection<string> GroupCollection;
+
         void SignIn()
         {
             using (testEntities db = new testEntities())
             {
-                if()
+             
             }
         }
 
@@ -63,6 +67,11 @@ namespace TestingProgram
 
         public LoginViewModel()
         {
+            using (testEntities db = new testEntities())
+            {
+                GroupCollection = new ObservableCollection<string>();
+               
+            }
             //DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
 
             ////for (int i = 0; i < dt_user.Rows.Count; i++)
@@ -150,9 +159,7 @@ namespace TestingProgram
             }
         }
 
-        public IList<string> LongListToTestComboVirtualization { get; }
-
-        ObservableCollection<> ErrorList;
+       
         //public DemoItem DemoItem => new DemoItem("Mr. Test", null, Enumerable.Empty<DocumentationLink>());
 
         public event PropertyChangedEventHandler PropertyChanged;
