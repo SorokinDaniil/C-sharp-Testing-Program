@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Security.Cryptography;
 
 namespace TestingProgram
 {
@@ -19,24 +20,10 @@ namespace TestingProgram
         private string _signupUsername;
         private string _signupPassword;
         private string _signupFullName;
-        private string _choiceGroup;
+        private string _signupGroup;
+        private byte _signupGroupid;
 
-        public IList<string> LongListToTestComboVirtualization { get; }
-
-        ObservableCollection<string> GroupCollection;
-
-        void SignIn()
-        {
-            using (testEntities db = new testEntities())
-            {
-             
-            }
-        }
-
-        void SignUp()
-        {
-
-        }
+        public List<Группа> GroupCollection { get; set; }
 
         //private RelayCommand checkValidation;
         //public RelayCommand CheckValidation
@@ -69,7 +56,10 @@ namespace TestingProgram
         {
             using (testEntities db = new testEntities())
             {
-                GroupCollection = new ObservableCollection<string>();
+               var группы = db.Группы.Select(c => c.Название);
+                GroupCollection = db.Группы.ToList();
+                
+                //GroupCollection = new ObservableCollection<string>();
                
             }
             //DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
@@ -87,23 +77,23 @@ namespace TestingProgram
             //SelectedTextTwo = null;
         }
 
-
-
-        public DataTable Select(string selectSQL) // функция подключения к базе данных и обработка запросов
+        public void SignIn()
         {
-            DataTable dataTable = new DataTable("dataBase");                // создаём таблицу в приложении
-                                                                            // подключаемся к базе данных
-            SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-O6G977H;Trusted_Connection=Yes;DataBase=Test;");
-            //SqlConnection sqlConnection = new SqlConnection("server=DESKTOP-JKOUM0H;Trusted_Connection=Yes;DataBase=test;");
-            sqlConnection.Open();                                           // открываем базу данных
-            SqlCommand sqlCommand = sqlConnection.CreateCommand();          // создаём команду
-            sqlCommand.CommandText = selectSQL;                             // присваиваем команде текст
-            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sqlCommand); // создаём обработчик
-            sqlDataAdapter.Fill(dataTable);                                 // возращаем таблицу с результатом
-            return dataTable;
+          
         }
 
-       
+        public void SignUp()
+        {
+            MessageBox.Show(SignUpGroupId.ToString());
+            using (testEntities db = new testEntities())
+            {
+                Студент студент = new Студент { Имя = SignUpFullName ,Группа_Id = SignUpGroupId };
+
+            }
+            var a = ((object)SignUpGroup as Группа);
+            MessageBox.Show(a.Id.ToString());
+
+        }
 
         public string SignInUsername
         {
@@ -114,7 +104,7 @@ namespace TestingProgram
             }
         }
 
-        public string LoginPassword
+        public string SignInPassword
         {
             get { return _signinPassword; }
             set
@@ -123,7 +113,7 @@ namespace TestingProgram
             }
         }
 
-        public string SignupUsername
+        public string SignUpUsername
         {
             get { return _signupUsername; }
             set
@@ -132,7 +122,7 @@ namespace TestingProgram
             }
         }
 
-        public string SignupPassword
+        public string SignUpPassword
         {
             get { return _signupPassword; }
             set
@@ -141,7 +131,7 @@ namespace TestingProgram
             }
         }
 
-        public string SignupFullName
+        public string SignUpFullName
         {
             get { return _signupFullName; }
             set
@@ -150,16 +140,25 @@ namespace TestingProgram
             }
         }
 
-        public string ChoiceGroup
+        public string SignUpGroup
         {
-            get { return _choiceGroup; }
+            get { return _signupGroup; }
             set
             {
-                this.MutateVerbose(ref _choiceGroup, value, RaisePropertyChanged());
+                this.MutateVerbose(ref _signupGroup, value, RaisePropertyChanged());
             }
         }
 
-       
+        public byte SignUpGroupId
+        {
+            get { return _signupGroupid; }
+            set
+            {
+                _signupGroupid = value;
+            }
+        }
+
+
         //public DemoItem DemoItem => new DemoItem("Mr. Test", null, Enumerable.Empty<DocumentationLink>());
 
         public event PropertyChangedEventHandler PropertyChanged;

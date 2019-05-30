@@ -56,7 +56,7 @@
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="Key" />
-                <PasswordBox x:Name="SignIn_Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32">
+                <PasswordBox x:Name="SignIn_Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32" >
    
                 </PasswordBox>
             </StackPanel>
@@ -137,8 +137,12 @@
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="AccountMultiple" />
                 <ComboBox x:Name="SignUp_Group" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-  materialDesign:HintAssist.Hint="Группа" ItemsSource="{Binding LongListToTestComboVirtualization}" 
-  VerticalAlignment="Stretch" Margin="0,0,0,16" Background="{DynamicResource MaterialDesignPaper}">
+  materialDesign:HintAssist.Hint="Группа" 
+  VerticalAlignment="Stretch" Margin="0,0,0,16" Background="{DynamicResource MaterialDesignPaper}"
+                          ItemsSource="{Binding GroupCollection}"
+                          DisplayMemberPath="Название"
+                          SelectedValuePath="Id"
+                          SelectedValue="{Binding SignUpGroupId}">
                     <ComboBox.Text>
                         <Binding
       Path="SignUpGroup"
@@ -188,7 +192,7 @@ FontFamily="QUATTROCENTO SANS" materialDesign:HintAssist.Hint="Password"
 
             </StackPanel>-->
             <Grid>
-                <Button Content="Зарегестрироваться" FontFamily="QUATTROCENTO SANS"  Margin="0,16" Foreground="#FFEFFBEB" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <Button Content="Зарегестрироваться" FontFamily="QUATTROCENTO SANS"  Margin="0,16" Foreground="#FFEFFBEB" HorizontalAlignment="Center" VerticalAlignment="Center" Click="SignUp_Click"/>
             </Grid>
 
         </StackPanel>

@@ -26,8 +26,8 @@ namespace TestingProgram
     {
         public MainWindow()
         {
-          InitializeComponent();
-          
+            InitializeComponent();
+
 
             //DataContext = new MainWindowViewModel();
             //DataContext = new ListsAndGridsViewModel();
@@ -43,7 +43,14 @@ namespace TestingProgram
 
 
 
-        }
+
+
+
+
+
+
+
+    }
 }
 
 

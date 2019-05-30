@@ -147,7 +147,7 @@
       <DependentUpon>MainTable.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\MainTableViewModel.cs" />
-    <Compile Include="MainWindowViewModel.cs" />
+    <Compile Include="MVVM\MainWindowViewModel.cs" />
     <Compile Include="MVVM\PreviewTestingWindowViewModel.cs" />
     <Compile Include="MVVM\TestingWindowViewModel.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -178,7 +178,7 @@
       <DependentUpon>UserLeftPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validation\TextBoxValidationRule.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="MVVM\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Validation\Val.cs" />
@@ -267,7 +267,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="MVVM\MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
