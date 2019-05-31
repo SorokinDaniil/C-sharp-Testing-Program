@@ -28,11 +28,14 @@
 
 
                 <ComboBox  Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                            ItemsSource="{Binding ChoiceCollection}"
+                           SelectedValuePath="Id"
+                           DisplayMemberPath="Название"
    
   materialDesign:HintAssist.Hint="{Binding ChoiceHint}"
   MinWidth="72"
   VerticalAlignment="Bottom"
-  ItemsSource="{Binding LongListToTestComboVirtualization}" Foreground="Black" IsSelected="True" Width="80">
+  Foreground="Black" IsSelected="True" Width="80">
                             <ComboBox.Text>
                                 <Binding
       Path="ChoiceGroup"
@@ -92,11 +95,17 @@
                         </Button.DataContext>
                             <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                         </Button>
-                    <Button ToolTip="Изменить" Command="{Binding RunDialogEditGroup}">
-                            <materialDesign:PackIcon Kind="Edit" />
+                    <Button ToolTip="Изменить" Command="{Binding RunDialogEditGroupCommand}">
+                        <Button.DataContext>
+                            <local:DialogsViewModel/>
+                        </Button.DataContext>
+                        <materialDesign:PackIcon Kind="Edit" />
                         </Button>
-                    <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteGroup}">
-                            <materialDesign:PackIcon Kind="Delete" />
+                    <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteGroupCommand}">
+                        <Button.DataContext>
+                            <local:DialogsViewModel/>
+                        </Button.DataContext>
+                        <materialDesign:PackIcon Kind="Delete" />
                         </Button>
                     </StackPanel>
                 </materialDesign:PopupBox>

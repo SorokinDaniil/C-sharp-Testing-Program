@@ -23,6 +23,7 @@ namespace TestingProgram
         private async void AddGroupCommand(object o)
         {
             //let's set up a little MVVM, cos that's what the cool kids are doing:
+            Console.WriteLine(o.GetType());
             var view = new SampleDialog
             {
                 DataContext = new SampleDialogViewModel()
@@ -38,9 +39,9 @@ namespace TestingProgram
         private async void EditGroupCommand(object o)
         {
             //let's set up a little MVVM, cos that's what the cool kids are doing:
-            var view = new SampleDialog
+            var view = new EditGroupDialog
             {
-                DataContext = new SampleDialogViewModel()
+                DataContext = new EditGroupDialogViewModel()
             };
 
             //show the dialog
@@ -53,9 +54,9 @@ namespace TestingProgram
         private async void DeleteGroupCommand(object o)
         {
             //let's set up a little MVVM, cos that's what the cool kids are doing:
-            var view = new SampleDialog
+            var view = new DeleteGroupDialog
             {
-                DataContext = new SampleDialogViewModel()
+                DataContext = new DeleteGroupDialogViewModel()
             };
 
             //show the dialog

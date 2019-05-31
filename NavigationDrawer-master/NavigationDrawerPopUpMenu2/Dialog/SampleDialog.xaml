@@ -7,7 +7,7 @@
              xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:local="clr-namespace:TestingProgram"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             Background="White">
     <Grid Margin="16">
 
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
             <RowDefinition />
     
         </Grid.RowDefinitions>
-        <TextBlock>Введите название группы:</TextBlock>
+        <TextBlock FontSize="16">Введите название новой группы:</TextBlock>
         <TextBox          
                  Margin="0,16,0,0"
                  FontSize="16" Grid.Row="1">
@@ -25,8 +25,8 @@
                  Margin="0 8 0 0"
                  FontSize="16" Grid.Row="2"
                  />-->
-        <StackPanel Orientation="Horizontal" Grid.Row="3"
-                    Margin="0 16 0 0">
+        <StackPanel Orientation="Horizontal" Grid.Row="2"
+                    Margin="0 16 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
                     Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
                 <Button.CommandParameter>
@@ -39,7 +39,7 @@
                 <Button.CommandParameter>
                     <system:Boolean>False</system:Boolean>
                 </Button.CommandParameter>
-                НАЗАД
+                ОТМЕНА
             </Button>
         </StackPanel>
     </Grid>
