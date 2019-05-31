@@ -27,27 +27,33 @@ namespace TestingProgram
         private string _choiceTextBlock;
         private string _choiceHint;
         private Visibility _choicePopupBox;
-
+        private string _choicevalue;
+        List<Тема> ChoiceCollection;
+ 
         public ChoiceViewModel(string type)
         {
-            switch (type)
+            using (testEntities db = new testEntities())
             {
-             
-                case "Chaphter":
-                    ChoiceTextBlock = "Выберите раздел";
-                    ChoiceHint = "Раздел";
-                    ChoicePopupBox = Visibility.Visible; break;
-                case "ChaphterNoEdit":
-                    ChoiceTextBlock = "Выберите раздел";
-                    ChoiceHint = "Раздел";
-                    ChoicePopupBox = Visibility.Hidden; break;
-                case "Group":
-                    ChoiceTextBlock = "Выберите группу";
-                    ChoiceHint = "Группа";
-                    ChoicePopupBox = Visibility.Visible; break;
-                default: break;
+                switch (type)
+                {
+                    case "Chaphter":
+                        ChoiceCollection = db.Темы.ToList();
+                        ChoiceTextBlock = "Выберите раздел";
+                        ChoiceHint = "Раздел";
+                        ChoicePopupBox = Visibility.Visible; break;
+                    case "ChaphterNoEdit":
+                        ChoiceCollection = db.Темы.ToList();
+                        ChoiceTextBlock = "Выберите раздел";
+                        ChoiceHint = "Раздел";
+                        ChoicePopupBox = Visibility.Hidden; break;
+                    case "Group":
+                        ChoiceCollection = db.Темы.ToList();
+                        ChoiceTextBlock = "Выберите группу";
+                        ChoiceHint = "Группа";
+                        ChoicePopupBox = Visibility.Visible; break;
+                    default: break;
+                }
             }
-
         }
 
         public void Show()
@@ -95,6 +101,19 @@ namespace TestingProgram
                 if (_choiceHint != value)
                 {
                     _choiceHint = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+ public string ChoiceValue
+        {
+            get { return _choicevalue; }
+            set
+            {
+                if (_choicevalue != value)
+                {
+                    _choicevalue = value;
                     RaisePropertyChanged();
                 }
             }

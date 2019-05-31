@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestingProgram.Dialog
+namespace TestingProgram
 {
     class EditGroupDialogViewModel
     {
+
     }
 }

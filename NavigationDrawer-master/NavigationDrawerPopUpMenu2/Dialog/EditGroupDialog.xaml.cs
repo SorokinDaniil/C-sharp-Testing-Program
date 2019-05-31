@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TestingProgram.Dialog
+namespace TestingProgram
 {
     /// <summary>
     /// Логика взаимодействия для EditGroupDialog.xaml
