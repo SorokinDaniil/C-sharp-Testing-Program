@@ -156,6 +156,7 @@
     <Compile Include="Transition\NavigationCommands.cs" />
     <Compile Include="Transition\SlideNavigator.cs" />
     <Compile Include="Transition\SlideNavigatorFrame.cs" />
+    <Compile Include="Validation\NotEmptyGroupValidationRule.cs" />
     <Compile Include="Validation\NotEmptyValidationRule.cs" />
     <Compile Include="Validation\NotifyPropertyChangedExtension.cs" />
     <Compile Include="Validation\NameValidationRule.cs" />

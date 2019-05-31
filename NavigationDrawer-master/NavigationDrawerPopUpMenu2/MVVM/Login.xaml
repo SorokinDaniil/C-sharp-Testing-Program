@@ -7,7 +7,7 @@
          xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
        
         mc:Ignorable="d"
-          Title="Login" Height="400" Width="640" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" TextBlock.FontFamily="QUATTROCENTO SANS" x:Name="LoginWindow">
+          Title="Login" Height="400" Width="640" ResizeMode="NoResize" WindowStyle="None" AllowsTransparency="True" Background="Transparent" WindowStartupLocation="CenterScreen" TextBlock.FontFamily="QUATTROCENTO SANS">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -39,7 +39,7 @@
                 <TextBox x:Name="SignIn_Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Логин" Width="250" Margin="0,0,0,16" >
                     <TextBox.Text>
                         <Binding
-      Path="LoginUsername"
+      Path="SignInUsername"
       Mode="TwoWay"
       UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
@@ -62,7 +62,7 @@
             </StackPanel>
 
             <Grid >
-                <Button Click="SignIn_Click" Content="Вход"  CommandParameter="{Binding ElementName=LoginWindow}" Style="{StaticResource MaterialDesignRaisedButton}"
+                <Button Click="SignIn_Click" Content="Вход"  CommandParameter="{Binding ElementName=SignIn_Password}" Style="{StaticResource MaterialDesignRaisedButton}"
     Width="100" Foreground="#FFEFFBEB" Margin="0,16"/>
             </Grid>
 
@@ -74,7 +74,7 @@
                 <TextBox x:Name="SignUp_Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Логин" Width="250" Margin="0,0,0,16">
                     <TextBox.Text>
                         <Binding
-      Path="SignupUsername"
+      Path="SignUpUsername"
       Mode="TwoWay"
       UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -94,7 +94,7 @@
                 <TextBox x:Name="SignUp_Password" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32">
                     <TextBox.Text>
                         <Binding
-      Path="SignupPassword"
+      Path="SignUpPassword"
       Mode="TwoWay"
       UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
@@ -118,16 +118,16 @@
                 <TextBox x:Name="SignUp_FullName" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Имя и фамилия" Width="250" Margin="0,0,0,16">
                     <TextBox.Text>
                         <Binding
-      Path="SignupName"
+      Path="SignUpFullName"
       Mode="TwoWay"
       UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
+                            <Binding.ValidationRules >
                                 <local:NotEmptyValidationRule
-          ValidatesOnTargetUpdated="False"  />
+         ValidatesOnTargetUpdated="False"  />
                                 <local:NameValidationRule
-          ValidatesOnTargetUpdated="False"  />
+      ValidatesOnTargetUpdated="False"   />
                                 <local:SizeFieldValidationRule
-          ValidatesOnTargetUpdated="False"  />
+       ValidatesOnTargetUpdated="False"  />
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -149,7 +149,7 @@
       Mode="TwoWay"
       UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
-                                <local:NotEmptyValidationRule
+                                <local:NotEmptyGroupValidationRule
           ValidatesOnTargetUpdated="False"/>
                             </Binding.ValidationRules>
                         </Binding>

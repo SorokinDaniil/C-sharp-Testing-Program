@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Data;
+using System.Text;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.Windows.Controls;
@@ -87,12 +88,30 @@ namespace TestingProgram
             MessageBox.Show(SignUpGroupId.ToString());
             using (testEntities db = new testEntities())
             {
-                Студент студент = new Студент { Имя = SignUpFullName ,Группа_Id = SignUpGroupId };
-
+                Студент студент = new Студент { Имя = SignUpFullName ,Группа_Id = SignUpGroupId , Логин = SignUpUsername, Пароль= ComputeSha256Hash(SignUpPassword) ,  };
+                db.Студенты.Add(студент);
+                db.SaveChanges();
             }
-            var a = ((object)SignUpGroup as Группа);
-            MessageBox.Show(a.Id.ToString());
+            //var a = ((object)SignUpGroup as Группа);
+            MessageBox.Show(SignUpFullName  + SignUpGroupId + SignUpUsername + ComputeSha256Hash(SignUpPassword));
+        }
 
+        static string ComputeSha256Hash(string rawData)
+        {
+            // Create a SHA256   
+            using (SHA256 sha256Hash = SHA256.Create())
+            {
+                // ComputeHash - returns byte array  
+                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+
+                // Convert byte array to a string   
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < bytes.Length; i++)
+                {
+                    builder.Append(bytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
         }
 
         public string SignInUsername

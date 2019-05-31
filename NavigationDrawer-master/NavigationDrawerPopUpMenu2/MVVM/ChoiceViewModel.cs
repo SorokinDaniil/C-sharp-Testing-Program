@@ -27,33 +27,42 @@ namespace TestingProgram
         private string _choiceTextBlock;
         private string _choiceHint;
         private Visibility _choicePopupBox;
-        private string _choicevalue;
-        List<Тема> ChoiceCollection;
- 
+        private byte _choicevalue;
+        public List<Группа> ChoiceGroupCollection { get; set; }
+        public List<Раздел> ChoiceChaphterCollection { get; set; }
+
         public ChoiceViewModel(string type)
         {
-            using (testEntities db = new testEntities())
-            {
-                switch (type)
+            
+            switch (type)
                 {
                     case "Chaphter":
-                        ChoiceCollection = db.Темы.ToList();
-                        ChoiceTextBlock = "Выберите раздел";
+                    using (testEntities db = new testEntities())
+                    {
+                        ChoiceChaphterCollection = db.Разделы.ToList();
+                    }
+                    ChoiceTextBlock = "Выберите раздел";
                         ChoiceHint = "Раздел";
                         ChoicePopupBox = Visibility.Visible; break;
                     case "ChaphterNoEdit":
-                        ChoiceCollection = db.Темы.ToList();
-                        ChoiceTextBlock = "Выберите раздел";
+                    using (testEntities db = new testEntities())
+                    {
+                        ChoiceChaphterCollection = db.Разделы.ToList();
+                    }
+                    ChoiceTextBlock = "Выберите раздел";
                         ChoiceHint = "Раздел";
                         ChoicePopupBox = Visibility.Hidden; break;
                     case "Group":
-                        ChoiceCollection = db.Темы.ToList();
-                        ChoiceTextBlock = "Выберите группу";
+                    using (testEntities db = new testEntities())
+                    {
+                        ChoiceGroupCollection = db.Группы.ToList();
+                    }
+                    ChoiceTextBlock = "Выберите группу";
                         ChoiceHint = "Группа";
                         ChoicePopupBox = Visibility.Visible; break;
                     default: break;
                 }
-            }
+           
         }
 
         public void Show()
@@ -106,7 +115,7 @@ namespace TestingProgram
             }
         }
 
- public string ChoiceValue
+ public byte ChoiceValue
         {
             get { return _choicevalue; }
             set

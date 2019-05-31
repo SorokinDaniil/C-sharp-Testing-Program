@@ -17,7 +17,6 @@ namespace TestingProgram
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Раздел()
         {
-            
             this.Вопрос = new HashSet<Вопрос>();
         }
     
