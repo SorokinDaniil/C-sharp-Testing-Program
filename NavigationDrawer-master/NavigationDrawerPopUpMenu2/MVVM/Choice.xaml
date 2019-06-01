@@ -30,7 +30,7 @@
                 <ComboBox 
   materialDesign:HintAssist.Hint="{Binding ChoiceHint}"
   VerticalAlignment="Stretch" Margin="0,0,0,16" Background="{DynamicResource MaterialDesignPaper}"
-                          ItemsSource="{Binding ChoiceGroupCollection}"
+                          ItemsSource="{Binding ChoiceChaphterCollection}"
                           DisplayMemberPath="Название"
                           SelectedValuePath="Id"
                           SelectedValue="{Binding ChoiceValue}" Width="80">

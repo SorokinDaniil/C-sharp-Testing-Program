@@ -17,17 +17,16 @@ namespace TestingProgram
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Результат()
         {
-            this.Студент = new HashSet<Студент>();
+            this.Студент_Результат = new HashSet<Студент_Результат>();
         }
     
         public byte Id { get; set; }
         public byte Оценка { get; set; }
         public System.DateTime Дата_Прохождения { get; set; }
-        public byte Количество_Вопросов { get; set; }
         public byte Раздел_Название { get; set; }
         public byte Тема_Название { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Студент> Студент { get; set; }
+        public virtual ICollection<Студент_Результат> Студент_Результат { get; set; }
     }
 }

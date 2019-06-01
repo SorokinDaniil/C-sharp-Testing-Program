@@ -37,7 +37,7 @@ namespace TestingProgram
             switch (type)
                 {
                     case "Chaphter":
-                    using (testEntities db = new testEntities())
+                    using (TestEntities db = new TestEntities())
                     {
                         ChoiceChaphterCollection = db.Разделы.ToList();
                     }
@@ -45,7 +45,7 @@ namespace TestingProgram
                         ChoiceHint = "Раздел";
                         ChoicePopupBox = Visibility.Visible; break;
                     case "ChaphterNoEdit":
-                    using (testEntities db = new testEntities())
+                    using (TestEntities db = new TestEntities())
                     {
                         ChoiceChaphterCollection = db.Разделы.ToList();
                     }
@@ -53,7 +53,7 @@ namespace TestingProgram
                         ChoiceHint = "Раздел";
                         ChoicePopupBox = Visibility.Hidden; break;
                     case "Group":
-                    using (testEntities db = new testEntities())
+                    using (TestEntities db = new TestEntities())
                     {
                         ChoiceGroupCollection = db.Группы.ToList();
                     }
