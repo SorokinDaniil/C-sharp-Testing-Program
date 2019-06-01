@@ -55,7 +55,7 @@ namespace TestingProgram
 
         public LoginViewModel()
         {
-            using (testEntities db = new testEntities())
+            using (TestEntities db = new TestEntities())
             {
                var группы = db.Группы.Select(c => c.Название);
                 GroupCollection = db.Группы.ToList();
@@ -86,9 +86,9 @@ namespace TestingProgram
         public void SignUp()
         {
             MessageBox.Show(SignUpGroupId.ToString());
-            using (testEntities db = new testEntities())
+            using (TestEntities db = new TestEntities())
             {
-                Студент студент = new Студент { Имя = SignUpFullName ,Группа_Id = SignUpGroupId , Логин = SignUpUsername, Пароль= ComputeSha256Hash(SignUpPassword) ,  };
+                Студент студент = new Студент { ФИО = SignUpFullName ,Группа_Id = SignUpGroupId , Логин = SignUpUsername, Пароль= ComputeSha256Hash(SignUpPassword) ,  };
                 db.Студенты.Add(студент);
                 db.SaveChanges();
             }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище testModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище TestModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -56,7 +56,6 @@
           <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Оценка" Type="tinyint" Nullable="false" />
           <Property Name="Дата_Прохождения" Type="datetime" Nullable="false" />
-          <Property Name="Количество_Вопросов" Type="tinyint" Nullable="false" />
           <Property Name="Раздел_Название" Type="tinyint" Nullable="false" />
           <Property Name="Тема_Название" Type="tinyint" Nullable="false" />
         </EntityType>
@@ -65,12 +64,18 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Имя" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Фамилия" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Хэш" Type="char" MaxLength="128" Nullable="false" />
-          <Property Name="Группа_Id" Type="tinyint" Nullable="false" />
-          <Property Name="Результат_Id" Type="tinyint" Nullable="false" />
+          <Property Name="ФИО" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Логин" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="char" MaxLength="128" Nullable="false" />
+          <Property Name="Группа_Id" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Студент_Результат">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Студент_Id" Type="tinyint" Nullable="false" />
+          <Property Name="Результат_Id" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="Тема">
           <Key>
@@ -127,19 +132,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Студент_Результат">
+        <Association Name="FK_Студент_Результат_Результат">
           <End Role="Результат" Type="Self.Результат" Multiplicity="1" />
-          <End Role="Студент" Type="Self.Студент" Multiplicity="*" />
+          <End Role="Студент_Результат" Type="Self.Студент_Результат" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Результат">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Студент">
+            <Dependent Role="Студент_Результат">
               <PropertyRef Name="Результат_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище testModelContainer">
+        <Association Name="FK_Студент_Результат_Студент">
+          <End Role="Студент" Type="Self.Студент" Multiplicity="1" />
+          <End Role="Студент_Результат" Type="Self.Студент_Результат" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Студент">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Студент_Результат">
+              <PropertyRef Name="Студент_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TestModelContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Вопрос" EntityType="Self.Вопрос" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Группа" EntityType="Self.Группа" Schema="dbo" store:Type="Tables" />
@@ -147,6 +164,7 @@
           <EntitySet Name="Раздел" EntityType="Self.Раздел" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Результат" EntityType="Self.Результат" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Студент" EntityType="Self.Студент" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Студент_Результат" EntityType="Self.Студент_Результат" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Тема" EntityType="Self.Тема" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Вопрос_Раздел" Association="Self.FK_Вопрос_Раздел">
             <End Role="Раздел" EntitySet="Раздел" />
@@ -164,15 +182,20 @@
             <End Role="Группа" EntitySet="Группа" />
             <End Role="Студент" EntitySet="Студент" />
           </AssociationSet>
-          <AssociationSet Name="FK_Студент_Результат" Association="Self.FK_Студент_Результат">
+          <AssociationSet Name="FK_Студент_Результат_Результат" Association="Self.FK_Студент_Результат_Результат">
             <End Role="Результат" EntitySet="Результат" />
+            <End Role="Студент_Результат" EntitySet="Студент_Результат" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Студент_Результат_Студент" Association="Self.FK_Студент_Результат_Студент">
             <End Role="Студент" EntitySet="Студент" />
+            <End Role="Студент_Результат" EntitySet="Студент_Результат" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="testModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -230,24 +253,31 @@
           <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Оценка" Type="Byte" Nullable="false" />
           <Property Name="Дата_Прохождения" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Количество_Вопросов" Type="Byte" Nullable="false" />
           <Property Name="Раздел_Название" Type="Byte" Nullable="false" />
           <Property Name="Тема_Название" Type="Byte" Nullable="false" />
-          <NavigationProperty Name="Студент" Relationship="Self.FK_Студент_Результат" FromRole="Результат" ToRole="Студент" />
+          <NavigationProperty Name="Студент_Результат" Relationship="Self.FK_Студент_Результат_Результат" FromRole="Результат" ToRole="Студент_Результат" />
         </EntityType>
         <EntityType Name="Студент">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ФИО" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Логин" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Пароль" Type="String" MaxLength="128" FixedLength="true" Unicode="false" Nullable="false" />
           <Property Name="Группа_Id" Type="Byte" Nullable="false" />
-          <Property Name="Результат_Id" Type="Byte" Nullable="false" />
           <NavigationProperty Name="Группа" Relationship="Self.FK_Студент_Группа" FromRole="Студент" ToRole="Группа" />
-          <NavigationProperty Name="Результат" Relationship="Self.FK_Студент_Результат" FromRole="Студент" ToRole="Результат" />
-          <Property Name="Логин" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Студент_Результат" Relationship="Self.FK_Студент_Результат_Студент" FromRole="Студент" ToRole="Студент_Результат" />
+        </EntityType>
+        <EntityType Name="Студент_Результат">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Студент_Id" Type="Byte" Nullable="false" />
+          <Property Name="Результат_Id" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Результат" Relationship="Self.FK_Студент_Результат_Результат" FromRole="Студент_Результат" ToRole="Результат" />
+          <NavigationProperty Name="Студент" Relationship="Self.FK_Студент_Результат_Студент" FromRole="Студент_Результат" ToRole="Студент" />
         </EntityType>
         <EntityType Name="Тема">
           <Key>
@@ -305,19 +335,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Студент_Результат">
+        <Association Name="FK_Студент_Результат_Результат">
           <End Role="Результат" Type="Self.Результат" Multiplicity="1" />
-          <End Role="Студент" Type="Self.Студент" Multiplicity="*" />
+          <End Role="Студент_Результат" Type="Self.Студент_Результат" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Результат">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Студент">
+            <Dependent Role="Студент_Результат">
               <PropertyRef Name="Результат_Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="testEntities" annotation:LazyLoadingEnabled="true">
+        <Association Name="FK_Студент_Результат_Студент">
+          <End Role="Студент" Type="Self.Студент" Multiplicity="1" />
+          <End Role="Студент_Результат" Type="Self.Студент_Результат" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Студент">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Студент_Результат">
+              <PropertyRef Name="Студент_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Вопрос" EntityType="Self.Вопрос" />
           <EntitySet Name="Группа" EntityType="Self.Группа" />
@@ -325,6 +367,7 @@
           <EntitySet Name="Раздел" EntityType="Self.Раздел" />
           <EntitySet Name="Результат" EntityType="Self.Результат" />
           <EntitySet Name="Студент" EntityType="Self.Студент" />
+          <EntitySet Name="Студент_Результат" EntityType="Self.Студент_Результат" />
           <EntitySet Name="Тема" EntityType="Self.Тема" />
           <AssociationSet Name="FK_Вопрос_Раздел" Association="Self.FK_Вопрос_Раздел">
             <End Role="Раздел" EntitySet="Раздел" />
@@ -342,9 +385,13 @@
             <End Role="Группа" EntitySet="Группа" />
             <End Role="Студент" EntitySet="Студент" />
           </AssociationSet>
-          <AssociationSet Name="FK_Студент_Результат" Association="Self.FK_Студент_Результат">
+          <AssociationSet Name="FK_Студент_Результат_Результат" Association="Self.FK_Студент_Результат_Результат">
             <End Role="Результат" EntitySet="Результат" />
+            <End Role="Студент_Результат" EntitySet="Студент_Результат" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Студент_Результат_Студент" Association="Self.FK_Студент_Результат_Студент">
             <End Role="Студент" EntitySet="Студент" />
+            <End Role="Студент_Результат" EntitySet="Студент_Результат" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -352,9 +399,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище testModelContainer" CdmEntityContainer="testEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TestModelContainer" CdmEntityContainer="TestEntities">
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="testModel.sysdiagrams">
+            <EntityTypeMapping TypeName="TestModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -365,7 +412,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Вопрос">
-            <EntityTypeMapping TypeName="testModel.Вопрос">
+            <EntityTypeMapping TypeName="TestModel.Вопрос">
               <MappingFragment StoreEntitySet="Вопрос">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Текст" ColumnName="Текст" />
@@ -377,7 +424,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Группа">
-            <EntityTypeMapping TypeName="testModel.Группа">
+            <EntityTypeMapping TypeName="TestModel.Группа">
               <MappingFragment StoreEntitySet="Группа">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Название" ColumnName="Название" />
@@ -385,7 +432,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ответ">
-            <EntityTypeMapping TypeName="testModel.Ответ">
+            <EntityTypeMapping TypeName="TestModel.Ответ">
               <MappingFragment StoreEntitySet="Ответ">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Текст" ColumnName="Текст" />
@@ -395,7 +442,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Раздел">
-            <EntityTypeMapping TypeName="testModel.Раздел">
+            <EntityTypeMapping TypeName="TestModel.Раздел">
               <MappingFragment StoreEntitySet="Раздел">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Название" ColumnName="Название" />
@@ -403,32 +450,38 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Результат">
-            <EntityTypeMapping TypeName="testModel.Результат">
+            <EntityTypeMapping TypeName="TestModel.Результат">
               <MappingFragment StoreEntitySet="Результат">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Оценка" ColumnName="Оценка" />
                 <ScalarProperty Name="Дата_Прохождения" ColumnName="Дата_Прохождения" />
-                <ScalarProperty Name="Количество_Вопросов" ColumnName="Количество_Вопросов" />
                 <ScalarProperty Name="Раздел_Название" ColumnName="Раздел_Название" />
                 <ScalarProperty Name="Тема_Название" ColumnName="Тема_Название" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Студент">
-            <EntityTypeMapping TypeName="testModel.Студент">
+            <EntityTypeMapping TypeName="TestModel.Студент">
               <MappingFragment StoreEntitySet="Студент">
-                <ScalarProperty Name="Логин" ColumnName="Логин" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Имя" ColumnName="Имя" />
-                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
-                <ScalarProperty Name="Пароль" ColumnName="Хэш" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
                 <ScalarProperty Name="Группа_Id" ColumnName="Группа_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Студент_Результат">
+            <EntityTypeMapping TypeName="TestModel.Студент_Результат">
+              <MappingFragment StoreEntitySet="Студент_Результат">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Студент_Id" ColumnName="Студент_Id" />
                 <ScalarProperty Name="Результат_Id" ColumnName="Результат_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Тема">
-            <EntityTypeMapping TypeName="testModel.Тема">
+            <EntityTypeMapping TypeName="TestModel.Тема">
               <MappingFragment StoreEntitySet="Тема">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Название" ColumnName="Название" />

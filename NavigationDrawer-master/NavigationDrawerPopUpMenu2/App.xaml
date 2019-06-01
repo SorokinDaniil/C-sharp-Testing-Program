@@ -3,7 +3,7 @@
              xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:TestingProgram"
-             StartupUri="MVVM/Login.xaml"
+             StartupUri="MVVM/MainWindow.xaml"
             >
     <Application.Resources>
         <ResourceDictionary>

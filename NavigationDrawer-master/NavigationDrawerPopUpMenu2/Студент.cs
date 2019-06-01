@@ -14,15 +14,20 @@ namespace TestingProgram
     
     public partial class Студент
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Студент()
+        {
+            this.Студент_Результат = new HashSet<Студент_Результат>();
+        }
+    
         public byte Id { get; set; }
-        public string Имя { get; set; }
-        public string Фамилия { get; set; }
+        public string ФИО { get; set; }
+        public string Логин { get; set; }
         public string Пароль { get; set; }
         public byte Группа_Id { get; set; }
-        public byte Результат_Id { get; set; }
-        public string Логин { get; set; }
     
         public virtual Группа Группа { get; set; }
-        public virtual Результат Результат { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Студент_Результат> Студент_Результат { get; set; }
     }
 }
