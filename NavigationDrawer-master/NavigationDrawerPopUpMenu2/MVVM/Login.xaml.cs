@@ -62,9 +62,10 @@ namespace TestingProgram
 
         private void SignIn_Click(object sender, RoutedEventArgs e)
         {
-            Console.WriteLine(sender.GetType());
-            //if (IsValid(SignIn_Login) && IsValid(SignIn_Password))
-            //    ((LoginViewModel)DataContext).SignIn();
+            SignIn_Login.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+            SignIn_Password.GetBindingExpression(PasswordHelper.PasswordProperty).UpdateSource();
+            if (!IsValid(SignIn_Login) && !IsValid(SignIn_Password))
+                ((LoginViewModel)DataContext).SignIn();
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)
@@ -88,10 +89,7 @@ namespace TestingProgram
             return Validation.GetHasError(d);
         }
 
-        void UpdateProperty (object sender)
-        {
-        
-        }
+
 
         //private void TextBox_Error(object sender, ValidationErrorEventArgs e)
         //{

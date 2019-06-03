@@ -13,6 +13,7 @@ namespace TestingProgram
             
         public AnotherCommandImplementation(Action<object> execute) : this(execute, null)
         {
+
         }
 
         public AnotherCommandImplementation(Action<object> execute, Func<object, bool> canExecute)

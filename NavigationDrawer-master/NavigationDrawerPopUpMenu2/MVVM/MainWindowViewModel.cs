@@ -21,15 +21,16 @@ namespace TestingProgram
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowMainTableCommand, ShowMainTableExecuted));
 
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowRaceCommand, ShowRaceExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowSeasonCommand, ShowSeasonExecuted));
+            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowRaceCommand, ShowRaceExecuted));
+            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowSeasonCommand, ShowSeasonExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
 
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseBack, GoBackExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseForward, GoForwardExecuted));
 
-            Slides = new object[] { ChoiceChaphter , ChoiceGroup , ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
+            Slides = new object[] { ChoiceChaphter , MainTable , ChoiceGroup , ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
             _slideNavigator = new SlideNavigator(this, Slides);
             _slideNavigator.GoTo(1);//Задается начальное окно 
         }
@@ -45,6 +46,8 @@ namespace TestingProgram
         public ChoiceViewModel ChoiceGroup { get; } = new ChoiceViewModel("Group");
 
         public ChoiceViewModel ChoiceChaphterNoEdit { get; } = new ChoiceViewModel("ChaphterNoEdit");
+
+        public MainTableViewModel MainTable { get; } = new MainTableViewModel();
 
         private void ShowChoiceGroupExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -67,19 +70,26 @@ namespace TestingProgram
                 () => ChoiceChaphterNoEdit.Show());
         }
 
-        private void ShowSeasonExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void ShowMainTableExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             _slideNavigator.GoTo(
-                IndexOfSlide<TestingWindowViewModel>(),
-                () => TestingWindowViewModel.Show());
+                IndexOfSlide<MainTableViewModel>(),
+                () => MainTable.Show());
         }
 
-        private void ShowRaceExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            _slideNavigator.GoTo(
-                IndexOfSlide<PreviewTestingWindowViewModel>(),
-                () => PreviewTestingWindowViewModel.Show());
-        }
+        //private void ShowSeasonExecuted(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    _slideNavigator.GoTo(
+        //        IndexOfSlide<TestingWindowViewModel>(),
+        //        () => TestingWindowViewModel.Show());
+        //}
+
+        //private void ShowRaceExecuted(object sender, ExecutedRoutedEventArgs e)
+        //{
+        //    _slideNavigator.GoTo(
+        //        IndexOfSlide<PreviewTestingWindowViewModel>(),
+        //        () => PreviewTestingWindowViewModel.Show());
+        //}
 
         public int ActiveSlideIndex
         {

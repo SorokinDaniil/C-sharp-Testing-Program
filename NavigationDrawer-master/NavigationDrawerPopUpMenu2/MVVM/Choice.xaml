@@ -8,14 +8,19 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     d:DataContext="{d:DesignInstance local:ChoiceViewModel, d:IsDesignTimeCreatable=False}">
-
+   
     <UserControl.Resources>
+        <local:ConditionToItemSourceConverter x:Key="ConditionToItemSourceConverter"/>
+    </UserControl.Resources>
+
+    <!--<UserControl.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-    </UserControl.Resources>
+    </UserControl.Resources>-->
 
     <Grid>
      
@@ -30,10 +35,16 @@
                 <ComboBox 
   materialDesign:HintAssist.Hint="{Binding ChoiceHint}"
   VerticalAlignment="Stretch" Margin="0,0,0,16" Background="{DynamicResource MaterialDesignPaper}"
-                          ItemsSource="{Binding ChoiceChaphterCollection}"
                           DisplayMemberPath="Название"
-                          SelectedValuePath="Id"
+                          SelectedValuePath="Название"
                           SelectedValue="{Binding ChoiceValue}" Width="80">
+                    <ComboBox.ItemsSource>
+                        <MultiBinding Converter="{StaticResource ConditionToItemSourceConverter}">
+                            <Binding Path="IsCheckCollection"/>
+                            <Binding Path="ChoiceGroupCollection"/>
+                            <Binding Path="ChoiceChaphterCollection"/>
+                        </MultiBinding>
+                    </ComboBox.ItemsSource>
                     <ComboBox.Text>
                         <Binding
       Path="SignUpGroup"
@@ -113,21 +124,21 @@
 
                     <StackPanel Orientation="Horizontal">
                     <Button ToolTip="Добавить"  Command="{Binding RunDialogAddGroupCommand}" >
-                        <Button.DataContext>
+                        <!--<Button.DataContext>
                             <local:DialogsViewModel/>
-                        </Button.DataContext>
+                        </Button.DataContext>-->
                             <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                         </Button>
                     <Button ToolTip="Изменить" Command="{Binding RunDialogEditGroupCommand}">
-                        <Button.DataContext>
+                        <!--<Button.DataContext>
                             <local:DialogsViewModel/>
-                        </Button.DataContext>
+                        </Button.DataContext>-->
                         <materialDesign:PackIcon Kind="Edit" />
                         </Button>
                     <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteGroupCommand}">
-                        <Button.DataContext>
+                        <!--<Button.DataContext>
                             <local:DialogsViewModel/>
-                        </Button.DataContext>
+                        </Button.DataContext>-->
                         <materialDesign:PackIcon Kind="Delete" />
                         </Button>
                     </StackPanel>

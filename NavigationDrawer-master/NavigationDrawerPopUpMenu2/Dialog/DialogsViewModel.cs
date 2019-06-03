@@ -14,72 +14,72 @@ namespace TestingProgram
            
         }
 
-        #region SAMPLE 3
+        //#region SAMPLE 3
 
-        public ICommand RunDialogAddGroupCommand => new AnotherCommandImplementation(AddGroupCommand);
-        public ICommand RunDialogEditGroupCommand => new AnotherCommandImplementation(EditGroupCommand);
-        public ICommand RunDialogDeleteGroupCommand => new AnotherCommandImplementation(DeleteGroupCommand);
+        //public ICommand RunDialogAddGroupCommand => new AnotherCommandImplementation(AddGroupCommand);
+        //public ICommand RunDialogEditGroupCommand => new AnotherCommandImplementation(EditGroupCommand);
+        //public ICommand RunDialogDeleteGroupCommand => new AnotherCommandImplementation(DeleteGroupCommand);
 
-        private async void AddGroupCommand(object o)
-        {
-            //let's set up a little MVVM, cos that's what the cool kids are doing:
-            Console.WriteLine(o.GetType());
-            var view = new SampleDialog
-            {
-                DataContext = new SampleDialogViewModel()
-            };
+        //private async void AddGroupCommand(object o)
+        //{
+        //    //let's set up a little MVVM, cos that's what the cool kids are doing:
+        //    Console.WriteLine(o.GetType());
+        //    var view = new AddGroupDialog
+        //    {
+        //        DataContext = new AddGroupDialogViewModel()
+        //    };
             
-            //show the dialog
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+        //    //show the dialog
+        //    var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
 
-            //check the result...
-            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
-        }
+        //    //check the result...
+        //    Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+        //}
 
-        private async void EditGroupCommand(object o)
-        {
-            //let's set up a little MVVM, cos that's what the cool kids are doing:
-            var view = new EditGroupDialog
-            {
-                DataContext = new EditGroupDialogViewModel()
-            };
+        //private async void EditGroupCommand(object o)
+        //{
+        //    //let's set up a little MVVM, cos that's what the cool kids are doing:
+        //    var view = new EditGroupDialog
+        //    {
+        //        DataContext = new EditGroupDialogViewModel()
+        //    };
 
-            //show the dialog
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+        //    //show the dialog
+        //    var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
 
-            //check the result...
-            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
-        }
+        //    //check the result...
+        //    Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+        //}
 
-        private async void DeleteGroupCommand(object o)
-        {
-            //let's set up a little MVVM, cos that's what the cool kids are doing:
-            var view = new DeleteGroupDialog
-            {
-                DataContext = new DeleteGroupDialogViewModel()
-            };
+        //private async void DeleteGroupCommand(object o)
+        //{
+        //    //let's set up a little MVVM, cos that's what the cool kids are doing:
+        //    var view = new DeleteGroupDialog
+        //    {
+        //        DataContext = new DeleteGroupDialogViewModel()
+        //    };
 
-            //show the dialog
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+        //    //show the dialog
+        //    var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
 
-            //check the result...
-            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
-        }
-
-
+        //    //check the result...
+        //    Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+        //}
 
 
 
 
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
-        }
+
+
+        //private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        //{
+        //    Console.WriteLine("You can intercept the closing event, and cancel here.");
+        //}
 
      
         
 
-        #endregion
+        //#endregion
 
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -8,7 +8,7 @@ namespace TestingProgram
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-
+            
             return ((value.ToString().Length) < 10 || (value.ToString().Length) > 32) ? new ValidationResult(false, "Длинна должна быть не менее 10 символов")
                 : ValidationResult.ValidResult;
 

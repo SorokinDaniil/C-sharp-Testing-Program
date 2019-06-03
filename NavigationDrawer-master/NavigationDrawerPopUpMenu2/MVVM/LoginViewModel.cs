@@ -63,34 +63,46 @@ namespace TestingProgram
                 //GroupCollection = new ObservableCollection<string>();
                
             }
-            //DataTable dt_user = Select("SELECT * FROM [dbo].[Username]"); // получаем данные из таблицы
-
-            ////for (int i = 0; i < dt_user.Rows.Count; i++)
-            ////{ // перебираем данные
-            ////    MessageBox.Show(dt_user.Rows[i][0] + "|" + dt_user.Rows[i][1] + dt_user.Rows[i][2]); // выводим данные
-            ////}
-            //LongListToTestComboVirtualization = new List<string>();
-            //LongListToTestComboVirtualization.Add(dt_user.Rows[0][0].ToString());
-            //LongListToTestComboVirtualization.Add(dt_user.Rows[0][1].ToString());
-
-            //LongListToTestComboVirtualization.Add("T-694");
-            //SelectedValueOne = LongListToTestComboVirtualization.Skip(2).First();
-            //SelectedTextTwo = null;
         }
 
         public void SignIn()
         {
-          
+            using (TestEntities db = new TestEntities())
+            {
+                if (!(db.Студенты.SingleOrDefault(p => p.Логин == SignInUsername) == null))
+                {
+                    var checkpassword = ComputeSha256Hash(SignInPassword);
+                    if (!(db.Студенты.Where(p => p.Логин == SignInUsername).SingleOrDefault(p => p.Пароль == checkpassword) == null))
+                    {
+                        MessageBox.Show("Вы успешно вошли");
+                    }
+                    else
+                    MessageBox.Show("Пароль неверный");
+                }
+                else
+                {
+                    MessageBox.Show("Такой логин существует");
+                }
+            }
+    
         }
 
         public void SignUp()
         {
-            MessageBox.Show(SignUpGroupId.ToString());
+           
             using (TestEntities db = new TestEntities())
             {
-                Студент студент = new Студент { ФИО = SignUpFullName ,Группа_Id = SignUpGroupId , Логин = SignUpUsername, Пароль= ComputeSha256Hash(SignUpPassword) ,  };
-                db.Студенты.Add(студент);
-                db.SaveChanges();
+                if (db.Студенты.SingleOrDefault(p => p.Логин == SignUpUsername) == null)
+                {
+                    Студент студент = new Студент { ФИО = SignUpFullName, Группа_Id = SignUpGroupId, Логин = SignUpUsername, Пароль = ComputeSha256Hash(SignUpPassword) };
+                    db.Студенты.Add(студент);
+                    db.SaveChanges();
+                    MessageBox.Show("Вы успешно зарегестрировались);");
+                }
+               else
+                {
+                    MessageBox.Show("Такой логин существует");
+                }
             }
             //var a = ((object)SignUpGroup as Группа);
             MessageBox.Show(SignUpFullName  + SignUpGroupId + SignUpUsername + ComputeSha256Hash(SignUpPassword));

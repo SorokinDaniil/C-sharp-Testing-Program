@@ -98,10 +98,6 @@
     <Compile Include="Admin\AdminLeftPanel.xaml.cs">
       <DependentUpon>AdminLeftPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\AddGroupDialog.xaml.cs">
-      <DependentUpon>AddGroupDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Dialog\AddGroupDialogViewModel.cs" />
     <Compile Include="Dialog\DeleteGroupDialog.xaml.cs">
       <DependentUpon>DeleteGroupDialog.xaml</DependentUpon>
     </Compile>
@@ -125,16 +121,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelTest.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ConditionToItemSourceConverter.cs" />
     <Compile Include="MVVM\Choice.xaml.cs">
       <DependentUpon>Choice.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\ChoiceViewModel.cs" />
     <Compile Include="Dialog\AnotherCommandImplementation.cs" />
     <Compile Include="Dialog\DialogsViewModel.cs" />
-    <Compile Include="Dialog\SampleDialog.xaml.cs">
-      <DependentUpon>SampleDialog.xaml</DependentUpon>
+    <Compile Include="Dialog\AddGroupDialog.xaml.cs">
+      <DependentUpon>AddGroupDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Dialog\SampleDialogViewModel.cs" />
+    <Compile Include="Dialog\AddGroupDialogViewModel.cs" />
     <Compile Include="Grid\ListsAndGridsViewModel.cs" />
     <Compile Include="MVVM\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
@@ -147,6 +144,7 @@
     <Compile Include="MVVM\MainWindowViewModel.cs" />
     <Compile Include="MVVM\PreviewTestingWindowViewModel.cs" />
     <Compile Include="MVVM\TestingWindowViewModel.cs" />
+    <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="sysdiagrams.cs">
       <DependentUpon>ModelTest.tt</DependentUpon>
@@ -156,6 +154,7 @@
     <Compile Include="Transition\NavigationCommands.cs" />
     <Compile Include="Transition\SlideNavigator.cs" />
     <Compile Include="Transition\SlideNavigatorFrame.cs" />
+    <Compile Include="Validation\LoginExistsValidationRule.cs" />
     <Compile Include="Validation\NotEmptyGroupValidationRule.cs" />
     <Compile Include="Validation\NotEmptyValidationRule.cs" />
     <Compile Include="Validation\NotifyPropertyChangedExtension.cs" />
@@ -212,10 +211,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialog\AddGroupDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Dialog\DeleteGroupDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -228,7 +223,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Dialog\SampleDialog.xaml">
+    <Page Include="Dialog\AddGroupDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

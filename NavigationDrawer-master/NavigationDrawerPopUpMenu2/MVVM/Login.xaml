@@ -56,8 +56,19 @@
             </StackPanel>
             <StackPanel  Orientation="Horizontal">
                 <materialDesign:PackIcon Style="{StaticResource BaseIconLogin}" Kind="Key" />
-                <PasswordBox x:Name="SignIn_Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32" >
-   
+                <PasswordBox x:Name="SignIn_Password" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" materialDesign:HintAssist.Hint="Пароль" Width="250" Margin="0,0,0,16" MaxLength="32" local:PasswordHelper.Attach="True" 
+       >
+                    <local:PasswordHelper.Password>
+                        <Binding
+      Path="SignInPassword"
+      Mode="TwoWay"
+      UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <local:NotEmptyValidationRule
+          ValidatesOnTargetUpdated="False"  />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </local:PasswordHelper.Password>
                 </PasswordBox>
             </StackPanel>
 
