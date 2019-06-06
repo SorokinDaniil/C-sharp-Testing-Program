@@ -72,16 +72,20 @@ namespace TestingProgram
                     (selectcommand = new RelayCommand(obj =>
                     {
                         //(obj as Button).SetBinding(Button.CommandProperty, new Binding("SaveReservationCommand"));
-                       (obj as Button).Command = NavigationCommands.ShowMainTableCommand;
+                       (obj as Button).Command = NavigationCommands.ShowChoiceChaphterCommand;
                         //Console.WriteLine(obj.GetType());
                     }));
             }
         }
 
-      public void GetValues (out bool ischeckcollection ,out string choicevalue)
+      public void GetValues (out string choicevaluegroup, out string choicevaluechaphter)
         {
-            ischeckcollection = IsCheckCollection;
-            choicevalue = ChoiceValue;
+            choicevaluegroup = default(string);
+            choicevaluechaphter = default(string);
+            if (IsCheckCollection == true)
+                choicevaluegroup = ChoiceValue;
+            if (IsCheckCollection == false)
+                choicevaluechaphter = ChoiceValue;
         }
 
         void LoadGroupCollection ()

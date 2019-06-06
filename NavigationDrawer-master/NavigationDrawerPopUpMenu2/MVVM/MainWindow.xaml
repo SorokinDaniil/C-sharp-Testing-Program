@@ -12,7 +12,7 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignPaper}"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}" WindowStyle="None">
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}" WindowStyle="None" x:Name="MainWindowName"> 
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -135,9 +135,11 @@
   MinWidth="220" BorderBrush="{x:Null}" SelectedIndex="{Binding SelectedIndexListView}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" />
+                                        <i:InvokeCommandAction Command="{Binding SelectedItemChangedCommand}" CommandParameter="{Binding ElementName=MenuToggleButton}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
+                                
+                                
                                 <ListViewItem Height="60" >
                                     <StackPanel 
           Orientation="Horizontal">

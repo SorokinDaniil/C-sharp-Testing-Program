@@ -12,25 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для ChoiceGroup.xaml
+    /// Логика взаимодействия для TabControl.xaml
     /// </summary>
-    public partial class Choice : UserControl
+    public partial class TabControl : UserControl
     {
-        public Choice()
+        public TabControl()
         {
             InitializeComponent();
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            ChoiceSelectButton.Command = NavigationCommands.ShowChoiceChaphterCommand;
         }
     }
 }

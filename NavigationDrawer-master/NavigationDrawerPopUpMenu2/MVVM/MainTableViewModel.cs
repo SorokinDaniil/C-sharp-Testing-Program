@@ -22,20 +22,21 @@ namespace TestingProgram
         private string _headermaintable;
         private int _selectedTabIndex;
         private string _onecolumnname;
-        private Visibility _onecolumnvisability;
         private string _twocolumnname;
-        private Visibility _twocolumnvisability;
         private string _threecolumnname;
+        private string _fourcolumnname;
+        private Visibility _onecolumnvisability;
+        private Visibility _twocolumnvisability;
         private Visibility _threecolumnvisability;
+        private Visibility _fourcolumnvisability;
 
-        
-        
+
 
         public MainTableViewModel(string typeTable)
         {
             switch(typeTable)
             {
-                case "Editor_TableChaphterEdit":
+                case "Admin_Editor_TableChaphterEdit":
                     {
                         OneColumnName = "Название";
                         TwoColumnName = "Время";
@@ -43,14 +44,60 @@ namespace TestingProgram
                         OneColumnVisability = Visibility.Visible;
                         TwoColumnVisability = Visibility.Visible;
                         ThreeColumnVisability = Visibility.Visible;
+
+                        FourColumnVisability = Visibility.Hidden;
                     } break;
+                case "Admin_ListStudent_TableListStudentEdit":
+                    {
+                        OneColumnName = "Номер";
+                        TwoColumnName = "Имя и фамилия";
+                        ThreeColumnName = "Пройденые тесты";
+                        OneColumnVisability = Visibility.Visible;
+                        TwoColumnVisability = Visibility.Visible;
+                        ThreeColumnVisability = Visibility.Visible;
+
+                        FourColumnVisability = Visibility.Hidden;
+                    }
+                    break;
+                case "Admin_ListStudent_TableTestNoEdit":
+                    {
+                        OneColumnName = "Название";
+                        OneColumnVisability = Visibility.Visible;
+
+                        TwoColumnVisability = Visibility.Hidden;
+                        ThreeColumnVisability = Visibility.Hidden;
+                        FourColumnVisability = Visibility.Hidden;
+                    }
+                    break;
+                case "Admin_ListStudent_TablePassedTestNoEdit":
+                    {
+                        OneColumnName = "Номер";
+                        TwoColumnName = "Имя и фамилия";
+                        ThreeColumnName = "Оценка";
+                        FourColumnName = "Дата прохождения";
+                        OneColumnVisability = Visibility.Visible;
+                        TwoColumnVisability = Visibility.Visible;
+                        ThreeColumnVisability = Visibility.Visible;
+                        FourColumnVisability = Visibility.Visible;
+                    }
+                    break;
+                case "User_ListStudent_TableTestNoEdit":
+                    {
+                        OneColumnName = "Название";
+                        OneColumnVisability = Visibility.Visible;
+
+                        TwoColumnVisability = Visibility.Hidden;
+                        ThreeColumnVisability = Visibility.Hidden;
+                        FourColumnVisability = Visibility.Hidden;
+                    }
+                    break;
                 default: break;
             }   
             _items1 = CreateData();
             _items2 = CreateData();
             _items3 = CreateData();
 
-            //Editor_TableChaphterEdit 
+            //Admin_Editor_TableChaphterEdit 
 
             //ListStudent_TableGroupEdit
             //ListStudent_TableChaphterNoEdit
@@ -62,13 +109,11 @@ namespace TestingProgram
         public void Show(bool ischeckchoice, string selectevaluechoice)
         {
             SelectedTabIndex = 0;
-
             IsCheckChoice =  ischeckchoice ;
             SelecteValueChoice= selectevaluechoice;
             HeaderMainTable = SelecteValueChoice;
             //Console.WriteLine(IsCheckChoice);
             //Console.WriteLine(SelecteValueChoice);
-         
         }
         #region Property
         public int SelectedTabIndex
@@ -146,12 +191,34 @@ namespace TestingProgram
             }
         }
 
+        public string FourColumnName
+        {
+            get { return _fourcolumnname; }
+            set
+            {
+                _fourcolumnname = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         public Visibility ThreeColumnVisability
         {
             get { return _threecolumnvisability; }
             set
             {
                 _threecolumnvisability = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility FourColumnVisability
+        {
+            get { return _fourcolumnvisability; }
+            set
+            {
+                _fourcolumnvisability = value;
 
                 OnPropertyChanged();
             }

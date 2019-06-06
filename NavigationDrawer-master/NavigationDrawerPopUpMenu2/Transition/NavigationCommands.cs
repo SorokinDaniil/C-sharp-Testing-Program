@@ -11,5 +11,6 @@ namespace TestingProgram
         public static RoutedCommand ShowChoiceChaphterCommand = new RoutedCommand();
         public static RoutedCommand ShowChoiceChaphterNoEditCommand = new RoutedCommand();
         public static RoutedCommand ShowMainTableCommand = new RoutedCommand();
+        public static RoutedCommand GoForwardCommand = new RoutedCommand();
     }
 }

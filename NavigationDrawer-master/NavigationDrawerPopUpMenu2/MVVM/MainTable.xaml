@@ -43,7 +43,13 @@
                             <TextBlock Text="{Binding DataContext.ThreeColumnName, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
-                    
+                    <DataGridTextColumn Binding="{Binding FourColumnContent}"
+                        Visibility="{Binding DataContext.ThreeColumnVisability,
+                                          Source={x:Reference dummyElement}}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{Binding DataContext.FourColumnName, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
 
 
                 </DataGrid.Columns>

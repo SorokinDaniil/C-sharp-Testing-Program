@@ -145,6 +145,10 @@
     <Compile Include="MVVM\MainTableViewModel.cs" />
     <Compile Include="MVVM\MainWindowViewModel.cs" />
     <Compile Include="MVVM\PreviewTestingWindowViewModel.cs" />
+    <Compile Include="MVVM\TabControl.xaml.cs">
+      <DependentUpon>TabControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\TabControlViewModel.cs" />
     <Compile Include="MVVM\TestingWindowViewModel.cs" />
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -230,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\MainTable.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\TabControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

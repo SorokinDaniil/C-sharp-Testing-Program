@@ -10,6 +10,7 @@ namespace TestingProgram
         private string _twoColumnContent;
         private string _oneColumnContent;
         private string _threeColumnContent;
+        private string _fourColumnContent;
 
         public string OneColumnContent
         {
@@ -40,6 +41,17 @@ namespace TestingProgram
             {
                 if (_threeColumnContent == value) return;
                 _threeColumnContent = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FourColumnContent
+        {
+            get { return _fourColumnContent; }
+            set
+            {
+                if (_fourColumnContent == value) return;
+                _fourColumnContent = value;
                 OnPropertyChanged();
             }
         }
