@@ -14,9 +14,10 @@ namespace TestingProgram
         {
             if (slideNavigationSubject == null) throw new ArgumentNullException(nameof(slideNavigationSubject));
             if (slides == null) throw new ArgumentNullException(nameof(slides));
-
+            
             _slideNavigationSubject = slideNavigationSubject;
             _slides = slides;
+           
         }
 
         public void GoTo(int slideIndex)
@@ -25,7 +26,8 @@ namespace TestingProgram
         }
 
         public void GoTo(int slideIndex, Action setupSlide)
-        {            
+        {
+          
             if (_currentPositionNode == null)
             {
                 _currentPositionNode = new LinkedListNode<SlideNavigatorFrame>(new SlideNavigatorFrame(slideIndex, setupSlide));
@@ -43,7 +45,7 @@ namespace TestingProgram
                     tail = tail.Next;                    
                 }
             }
-
+            
             var tidyable = _slides[_currentPositionNode.Value.SlideIndex] as ITidyable;
             tidyable?.Tidy();
             setupSlide();

@@ -12,28 +12,71 @@
 
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock 
-    Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16" DockPanel.Dock="Top">Основы C#</TextBlock>
-                <Button Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}">
+    Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16" DockPanel.Dock="Top" Text="{Binding HeaderMainTable}" ></TextBlock>
+                <Button Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}" Command="{x:Static local:NavigationCommands.GoBackCommand}">
                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="Autorenew"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24"/>
                 </Button>
             </StackPanel>
+            <FrameworkElement x:Name="dummyElement"/>
+            <DataGrid  Margin="0 8 0 0" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding OneColumnContent}"
+                     Visibility="{Binding DataContext.OneColumnVisability,
+                                          Source={x:Reference dummyElement}}" >
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{Binding DataContext.OneColumnName, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataGridTextColumn.Header>
+                        </DataGridTextColumn>
 
-            <ListView
-  ItemsSource="{Binding Items1}" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="0,0,0,32">
+                    <DataGridTextColumn Binding="{Binding TwoColumnContent}" 
+                        Visibility="{Binding DataContext.TwoColumnVisability,
+                                          Source={x:Reference dummyElement}}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{Binding DataContext.TwoColumnName, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Binding="{Binding ThreeColumnContent}"
+                        Visibility="{Binding DataContext.ThreeColumnVisability,
+                                          Source={x:Reference dummyElement}}">
+                        <DataGridTextColumn.Header>
+                            <TextBlock Text="{Binding DataContext.ThreeColumnName, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
+                        </DataGridTextColumn.Header>
+                    </DataGridTextColumn>
+                    
+
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!--<ListView 
+  HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" Margin="393,0,389,32">
                 <ListView.View>
-                    <GridView>
+                    <GridView >
                         <GridViewColumn
-        DisplayMemberBinding="{Binding Code}"
-        Header="Название" />
+        DisplayMemberBinding="{Binding OneColumnContent}" 
+         >
+                            <GridViewColumnHeader  Content="чсмяс" Visibility="{Binding OneColumnVisability}"/>
+                        </GridViewColumn>
                         <GridViewColumn
+        DisplayMemberBinding="{Binding TwoColumnContent}" 
+         >
+                            <GridViewColumnHeader  Content="счмисми" Visibility="{Binding TwoColumnVisability}"/>
+                        </GridViewColumn>
+                        <GridViewColumn
+        DisplayMemberBinding="{Binding ThreeColumnContent}" 
+         >
+                            <GridViewColumnHeader  Content="ываива" Visibility="{Binding ThreeColumnVisability}"/>
+                        </GridViewColumn>
+                        --><!--<GridViewColumn
         DisplayMemberBinding="{Binding Name}"
-        Header="Время" />
+       Header="{Binding TwoColumnName}"  />
                         <GridViewColumn
-        DisplayMemberBinding="{Binding Description}"
-        Header="Количество вопросов" />
+        DisplayMemberBinding="{Binding ThreeColumnContent}"
+        Header="{Binding ThreeColumnName}" />--><!--
                     </GridView>
                 </ListView.View>
-            </ListView>
+            </ListView>-->
 
 
             <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"

@@ -7,11 +7,13 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Controls;
 
 namespace TestingProgram
 {
     public class MainWindowViewModel : INotifyPropertyChanged, ISlideNavigationSubject
     {
+        private int _selectedIndexListView;
         private readonly SlideNavigator _slideNavigator;
         private int _activeSlideIndex;
 
@@ -30,10 +32,27 @@ namespace TestingProgram
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseBack, GoBackExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseForward, GoForwardExecuted));
 
-            Slides = new object[] { ChoiceChaphter , MainTable , ChoiceGroup , ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
+            Slides = new object[] { ChoiceChaphter , Editor_TableChaphterEdit, ChoiceGroup , ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
             _slideNavigator = new SlideNavigator(this, Slides);
-            _slideNavigator.GoTo(1);//Задается начальное окно 
+            _slideNavigator.GoTo(0);//Задается начальное окно 
         }
+
+
+        private RelayCommand _selectedItemChangedCommand;
+        public RelayCommand SelectedItemChangedCommand
+        {
+
+            get
+            {
+                return _selectedItemChangedCommand ??
+                    (_selectedItemChangedCommand = new RelayCommand(obj =>
+                    {
+                        Console.WriteLine(SelectedIndexListView);
+                    }));
+            }
+        }
+
+
 
         public object[] Slides { get; }
 
@@ -47,10 +66,12 @@ namespace TestingProgram
 
         public ChoiceViewModel ChoiceChaphterNoEdit { get; } = new ChoiceViewModel("ChaphterNoEdit");
 
-        public MainTableViewModel MainTable { get; } = new MainTableViewModel();
+        public MainTableViewModel Editor_TableChaphterEdit { get; } = new MainTableViewModel("Editor_TableChaphterEdit");
+
 
         private void ShowChoiceGroupExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+          
             _slideNavigator.GoTo(
                 IndexOfSlide<ChoiceViewModel>(),
                 () => ChoiceGroup.Show());
@@ -72,9 +93,13 @@ namespace TestingProgram
 
         private void ShowMainTableExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            var IsCheck = (Slides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
+            var SelectValue = (Slides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
+            //Console.WriteLine(IsCheck);
+            //Console.WriteLine(SelectValue);
             _slideNavigator.GoTo(
                 IndexOfSlide<MainTableViewModel>(),
-                () => MainTable.Show());
+                () => Editor_TableChaphterEdit.Show(IsCheck,SelectValue));
         }
 
         //private void ShowSeasonExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -95,6 +120,12 @@ namespace TestingProgram
         {
             get { return _activeSlideIndex; }
             set { this.MutateVerbose(ref _activeSlideIndex, value, RaisePropertyChanged()); }
+        }
+
+         public int SelectedIndexListView
+        {
+            get { return _selectedIndexListView; }
+            set { this.MutateVerbose(ref _selectedIndexListView, value, RaisePropertyChanged()); }
         }
 
         private void GoBackExecuted(object sender, ExecutedRoutedEventArgs e)

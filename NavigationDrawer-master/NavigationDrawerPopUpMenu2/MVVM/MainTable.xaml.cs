@@ -22,6 +22,7 @@ namespace TestingProgram
     {
         public MainTable()
         {
+           
             InitializeComponent();
         }
     }

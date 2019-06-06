@@ -62,9 +62,27 @@ namespace TestingProgram
            
         }
 
-   
+        private RelayCommand selectcommand;
+        public RelayCommand SelectCommand
+        {
 
-     
+            get
+            {
+                return selectcommand ??
+                    (selectcommand = new RelayCommand(obj =>
+                    {
+                        //(obj as Button).SetBinding(Button.CommandProperty, new Binding("SaveReservationCommand"));
+                       (obj as Button).Command = NavigationCommands.ShowMainTableCommand;
+                        //Console.WriteLine(obj.GetType());
+                    }));
+            }
+        }
+
+      public void GetValues (out bool ischeckcollection ,out string choicevalue)
+        {
+            ischeckcollection = IsCheckCollection;
+            choicevalue = ChoiceValue;
+        }
 
         void LoadGroupCollection ()
         {
@@ -76,6 +94,7 @@ namespace TestingProgram
 
         void LoadChaphterCollection ()
         {
+
             using (TestEntities db = new TestEntities())
             {
                 ChoiceChaphterCollection = db.Разделы.ToList();

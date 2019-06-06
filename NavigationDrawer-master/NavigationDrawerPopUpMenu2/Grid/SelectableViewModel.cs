@@ -7,75 +7,39 @@ namespace TestingProgram
     
     public class SelectableViewModel : INotifyPropertyChanged
     {
-        private bool _isSelected;
-        private string _name;
-        private string _description;
-        private char _code;
-        private double _numeric;
-        private string _food;
+        private string _twoColumnContent;
+        private string _oneColumnContent;
+        private string _threeColumnContent;
 
-        public bool IsSelected
+        public string OneColumnContent
         {
-            get { return _isSelected; }
+            get { return _oneColumnContent; }
             set
             {
-                if (_isSelected == value) return;
-                _isSelected = value;
+                if (_oneColumnContent == value) return;
+                _oneColumnContent = value;
                 OnPropertyChanged();
             }
         }
 
-        public char Code
+        public string TwoColumnContent
         {
-            get { return _code; }
+            get { return _twoColumnContent; }
             set
             {
-                if (_code == value) return;
-                _code = value;
+                if (_twoColumnContent == value) return;
+                _twoColumnContent = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Name
+        public string ThreeColumnContent
         {
-            get { return _name; }
+            get { return _threeColumnContent; }
             set
             {
-                if (_name == value) return;
-                _name = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Description
-        {
-            get { return _description; }
-            set
-            {
-                if (_description == value) return;
-                _description = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public double Numeric
-        {
-            get { return _numeric; }
-            set
-            {
-                if (_numeric == value) return;
-                _numeric = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public string Food
-        {
-            get { return _food; }
-            set
-            {
-                if (_food == value) return;
-                _food = value;
+                if (_threeColumnContent == value) return;
+                _threeColumnContent = value;
                 OnPropertyChanged();
             }
         }

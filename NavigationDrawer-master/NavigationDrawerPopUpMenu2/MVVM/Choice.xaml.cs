@@ -28,6 +28,9 @@ namespace TestingProgram
             InitializeComponent();
         }
 
-      
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            ChoiceSelectButton.Command = NavigationCommands.ShowMainTableCommand;
+        }
     }
 }
