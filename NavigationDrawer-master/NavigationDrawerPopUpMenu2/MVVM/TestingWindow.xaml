@@ -92,7 +92,7 @@
                 </StackPanel>
 
 
-                <Button    Command="{x:Static local:NavigationCommands.ShowRaceCommand}"
+                <Button   
                                             CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  Style="{StaticResource MaterialDesignRaisedButton}"  >NEXT</Button>
 
             </DockPanel>

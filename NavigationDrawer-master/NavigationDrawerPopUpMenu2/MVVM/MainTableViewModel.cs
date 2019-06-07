@@ -17,7 +17,6 @@ namespace TestingProgram
         private readonly ObservableCollection<SelectableViewModel> _items2;
         private readonly ObservableCollection<SelectableViewModel> _items3;
         private bool? _isAllItems3Selected;
-        private bool _isCheckChoice;
         private string _selecteValueChoice;
         private string _headermaintable;
         private int _selectedTabIndex;
@@ -106,12 +105,11 @@ namespace TestingProgram
              
         }
 
-        public void Show(bool ischeckchoice, string selectevaluechoice)
+        public void Show(string selectevaluechoice)
         {
             SelectedTabIndex = 0;
-            IsCheckChoice =  ischeckchoice ;
             SelecteValueChoice= selectevaluechoice;
-            HeaderMainTable = SelecteValueChoice;
+            HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
             //Console.WriteLine(IsCheckChoice);
             //Console.WriteLine(SelecteValueChoice);
         }
@@ -125,16 +123,7 @@ namespace TestingProgram
             }
         }
 
-        public bool IsCheckChoice
-        {
-            get { return _isCheckChoice; }
-            set
-            {
-                _isCheckChoice = value;
-
-                OnPropertyChanged();
-            }
-        }
+      
 
         public string OneColumnName
         {

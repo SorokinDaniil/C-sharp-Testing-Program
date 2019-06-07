@@ -114,6 +114,9 @@
         <DataTemplate DataType="{x:Type local:MainTableViewModel}">
             <local:MainTable />
         </DataTemplate>
+        <DataTemplate DataType="{x:Type local:TabControlViewModel}">
+            <local:TabControl />
+        </DataTemplate>
     </Window.Resources>
     
     <Grid x:Name="MainGrid">
@@ -206,7 +209,7 @@
                     <Grid x:Name="CenterGrid"  x:FieldModifier="public">
                         <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
                                      AutoApplyTransitionOrigins="True"
-                                     ItemsSource="{Binding Slides}">
+                                     ItemsSource="{Binding AdminSlides}">
                                 
                         </materialDesign:Transitioner>
 

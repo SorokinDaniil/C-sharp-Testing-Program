@@ -33,7 +33,7 @@
             </StackPanel>
             <Button
   Style="{StaticResource MaterialDesignRaisedButton}"   CommandParameter="{Binding }"
-    Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Height="32"  Command="{x:Static local:NavigationCommands.ShowSeasonCommand}"
+    Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,80,0,0" Height="32"  
   >
                 START
             </Button>

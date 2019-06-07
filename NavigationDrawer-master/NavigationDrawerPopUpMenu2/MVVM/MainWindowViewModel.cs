@@ -17,7 +17,7 @@ namespace TestingProgram
     public class MainWindowViewModel : INotifyPropertyChanged, ISlideNavigationSubject
     {
         private int _selectedIndexListView;
-        private SlideNavigator _slideNavigator;
+        private readonly SlideNavigator _slideNavigator;
         private int _activeSlideIndex;
 
         public MainWindowViewModel()
@@ -26,21 +26,23 @@ namespace TestingProgram
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowMainTableCommand, ShowMainTableExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowMainTableCommand, ShowMainTableExecuted));
 
-            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowRaceCommand, ShowRaceExecuted));
-            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowSeasonCommand, ShowSeasonExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowMainTableCommand, ShowMainTableExecuted));
+     
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowTabControlCommand, ShowTabControlExecuted));
+
+
+
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoForwardCommand, GoForwardExecuted));
 
-            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseBack, GoBackExecuted));
-            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(System.Windows.Input.NavigationCommands.BrowseForward, GoForwardExecuted));
 
-            AdminSlides = new List<object> { ChoiceGroup, ChoiceChaphterNoEdit  ,  Admin_ListStudent_TablePassedTestNoEdit   /*Admin_Editor_TableChaphterEdit, Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit, Admin_ListStudent_TablePassedTestNoEdit , User_ListStudent_TableTestNoEdit ,*/ /* 
-                TestingWindowViewModel ,PreviewTestingWindowViewModel */};
+            AdminSlides = new object[] { ChoiceGroup, ChoiceChaphterNoEdit,TabControl};
             _slideNavigator = new SlideNavigator(this, AdminSlides);
             _slideNavigator.GoTo(1);//Задается начальное окно 
+
+            /*Admin_Editor_TableChaphterEdit, Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit, Admin_ListStudent_TablePassedTestNoEdit , User_ListStudent_TableTestNoEdit ,*/ /* 
+                TestingWindowViewModel ,PreviewTestingWindowViewModel */
         }
 
 
@@ -53,9 +55,7 @@ namespace TestingProgram
                 return _selectedItemChangedCommand ??
                     (_selectedItemChangedCommand = new RelayCommand(obj =>
                     {
-                        //(obj as Grid).Children.Clear();
-                        //Slides = new List<object> { Admin_Editor_TableChaphterEdit, ChoiceChaphter, ChoiceGroup, ChoiceChaphterNoEdit /* TestingWindowViewModel ,PreviewTestingWindowViewModel */};
-                        //_slideNavigator = new SlideNavigator(this, Slides);
+   
                
 
 
@@ -63,7 +63,7 @@ namespace TestingProgram
                         //Console.WriteLine(obj.GetType());
                         if (SelectedIndexListView == 0)
                         {
-                            _slideNavigator.GoTo(2);
+                            _slideNavigator.GoTo(0);
                         }
                         if (SelectedIndexListView == 1)
                         {
@@ -77,7 +77,7 @@ namespace TestingProgram
 
 
 
-        public List<object> AdminSlides { get; set; }
+        public object[] AdminSlides { get; }
 
         public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
 
@@ -88,6 +88,12 @@ namespace TestingProgram
         public ChoiceViewModel ChoiceGroup { get; } = new ChoiceViewModel("Group");
 
         public ChoiceViewModel ChoiceChaphterNoEdit { get; } = new ChoiceViewModel("ChaphterNoEdit");
+
+        public TabControlViewModel TabControl { get; } = new TabControlViewModel();
+
+
+
+
 
         public MainTableViewModel Admin_Editor_TableChaphterEdit { get; } = new MainTableViewModel("Admin_Editor_TableChaphterEdit");
 
@@ -105,35 +111,42 @@ namespace TestingProgram
 
         private void ShowChoiceGroupExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-          
-            _slideNavigator.GoTo(
-                IndexOfSlide<ChoiceViewModel>(),
-                () => ChoiceGroup.Show());
+
+         
         }
 
         private void ShowChoiceChaphterExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            _slideNavigator.GoTo(
-                IndexOfSlide<ChoiceViewModel>(),
-                () => ChoiceChaphter.Show());
+
+
         }
 
         private void ShowChoiceChaphterNoEditExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            _slideNavigator.GoTo(
-                IndexOfSlide<ChoiceViewModel>(),
-                () => ChoiceChaphterNoEdit.Show());
+            _slideNavigator.GoTo(1);
+            //_slideNavigator.GoTo(
+            //    IndexOfSlide<ChoiceViewModel>(),
+            //    () => ChoiceChaphterNoEdit.Show());
         }
 
         private void ShowMainTableExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var IsCheck = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
-            var SelectValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
+            string SelectedValue = "";
+            if (AdminSlides[ActiveSlideIndex].GetType()  ==  typeof(ChoiceViewModel)) {
+                SelectedValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
+            }
+            //var IsCheck = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
+            //var SelectValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
             //Console.WriteLine(IsCheck);
             //Console.WriteLine(SelectValue);
             _slideNavigator.GoTo(
                 IndexOfSlide<MainTableViewModel>(),
-                () => Admin_Editor_TableChaphterEdit.Show(IsCheck,SelectValue));
+                () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
+        }
+
+        private void ShowTabControlExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+       
         }
 
         //private void ShowSeasonExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -169,7 +182,20 @@ namespace TestingProgram
 
         private void GoForwardExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            _slideNavigator.GoForward();
+            //if (AdminSlides[ActiveSlideIndex + 1].GetType() == typeof(TabControl))
+            //{
+            //    string SelectedValueGroup;
+            //    string SelectedValueChaphter;
+            //    (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).GetValues(out SelectedValueGroup, out SelectedValueChaphter);
+            //    //Console.WriteLine(SelectedValueGroup);
+            //    //Console.WriteLine(SelectedValueChaphter);
+            //    _slideNavigator.GoTo(
+            //        IndexOfSlide<TabControlViewModel>(),
+            //        () => TabControl.Show(SelectedValueGroup, SelectedValueChaphter));
+            //}
+            //else
+            _slideNavigator.GoTo(ActiveSlideIndex + 1);
+            //_slideNavigator.GoForward();//Не работает
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

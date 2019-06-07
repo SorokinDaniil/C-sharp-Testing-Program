@@ -14,15 +14,15 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <RadioButton 
+            <RadioButton Command="{Binding TabControlCommand}" CommandParameter="{Binding ElementName=TabControlGrid}"
     Style="{StaticResource MaterialDesignTabRadioButton}"
     Grid.Column="0"
-    IsChecked="True"
+    IsChecked="{Binding IsCheckedOneTab}"
     Content="FIRST" />
-            <RadioButton
+            <RadioButton  Command="{Binding TabControlCommand}" CommandParameter="{Binding ElementName=TabControlGrid}"
     Style="{StaticResource MaterialDesignTabRadioButton}"
-    
-    IsChecked="False"
+                          
+       IsChecked="{Binding IsCheckedTwoTab}"
     Content="SECOND" Grid.Column="1" />
         </Grid>
         

@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-    d:DataContext="{d:DesignInstance local:ChoiceViewModel, d:IsDesignTimeCreatable=False}" Loaded="UserControl_Loaded">
+    d:DataContext="{d:DesignInstance local:ChoiceViewModel, d:IsDesignTimeCreatable=False}" >
    
     <UserControl.Resources>
         <local:ConditionToItemSourceConverter x:Key="ConditionToItemSourceConverter"/>
@@ -92,10 +92,10 @@
                         </ComboBox>-->
 
 
-
-                    </Grid>
+                <!--Command="{Binding SelectCommand}" CommandParameter="{Binding ElementName=ChoiceSelectButton}"-->
+            </Grid>
                 <Button x:Name="ChoiceSelectButton"
-    Style="{StaticResource MaterialDesignFlatButton}" Command="{Binding SelectCommand}" CommandParameter="{Binding ElementName=ChoiceSelectButton}"
+    Style="{StaticResource MaterialDesignFlatButton}"   Command="{x:Static local:NavigationCommands.GoForwardCommand}"
    
    DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
                         ВЫБРАТЬ

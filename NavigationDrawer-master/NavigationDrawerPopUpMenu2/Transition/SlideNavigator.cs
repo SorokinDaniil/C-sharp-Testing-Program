@@ -5,12 +5,13 @@ namespace TestingProgram
 {
     internal class SlideNavigator
     {
+ 
         private readonly ISlideNavigationSubject _slideNavigationSubject;
-        private readonly List<object> _slides;
+        private readonly object[] _slides;
         private readonly LinkedList<SlideNavigatorFrame> _historyLinkedList = new LinkedList<SlideNavigatorFrame>();
         private LinkedListNode<SlideNavigatorFrame> _currentPositionNode = null;
 
-        public SlideNavigator(ISlideNavigationSubject slideNavigationSubject, List<object> slides)
+        public SlideNavigator(ISlideNavigationSubject slideNavigationSubject, object[] slides)
         {
             if (slideNavigationSubject == null) throw new ArgumentNullException(nameof(slideNavigationSubject));
             if (slides == null) throw new ArgumentNullException(nameof(slides));

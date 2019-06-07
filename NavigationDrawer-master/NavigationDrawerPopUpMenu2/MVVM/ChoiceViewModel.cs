@@ -72,7 +72,7 @@ namespace TestingProgram
                     (selectcommand = new RelayCommand(obj =>
                     {
                         //(obj as Button).SetBinding(Button.CommandProperty, new Binding("SaveReservationCommand"));
-                       (obj as Button).Command = NavigationCommands.ShowChoiceChaphterCommand;
+                       (obj as Button).Command = NavigationCommands.ShowChoiceChaphterNoEditCommand;
                         //Console.WriteLine(obj.GetType());
                     }));
             }
