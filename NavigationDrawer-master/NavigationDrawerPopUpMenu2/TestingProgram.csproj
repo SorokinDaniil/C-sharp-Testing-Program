@@ -149,6 +149,9 @@
       <DependentUpon>TabControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\TabControlViewModel.cs" />
+    <Compile Include="MVVM\TestingEditor.xaml.cs">
+      <DependentUpon>TestingEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MVVM\TestingWindowViewModel.cs" />
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
@@ -238,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MVVM\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\TestingEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

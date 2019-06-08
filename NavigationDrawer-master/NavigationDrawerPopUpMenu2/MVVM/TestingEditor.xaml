@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="TestingProgram.MVVM.TestingEditor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestingProgram.MVVM"
+            xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1080" Background="White">
+    <Grid>
+        <DockPanel>
+
+            <!--#region  HEAD_PANEL-->
+            <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                           DockPanel.Dock="Top"
+                                        Mode="PrimaryMid" Height="60" >
+                <!--<Grid>
+                        <TextBlock Style="{StaticResource BaseTextLightH2}" HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
+                    </Grid>-->
+
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
+
+                    <DockPanel x:Name="Head" >
+
+                        <!--<Grid x:Name="HeadLabelName">
+                        </Grid>-->
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="0,0,8,0">Код</TextBlock>
+                        <ToggleButton
+  Style="{StaticResource MaterialDesignSwitchToggleButton}" HorizontalAlignment="Left" VerticalAlignment="Center"
+   />
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="0,0,8,0">Тип ответа</TextBlock>
+                        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <ComboBoxItem>
+                                Один вариант
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                Один и более вариантов
+                            </ComboBoxItem>
+                        </ComboBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">1/10</TextBlock>
+
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
+                            <materialDesign:PackIcon Kind="Close" Width="25" Height="25"/>
+                        </Button>
+
+                    </DockPanel>
+                </materialDesign:TransitioningContent>
+
+
+            </materialDesign:ColorZone>
+            <!--#endregion HEADPANEL-->
+
+
+
+
+
+            <DockPanel Margin="0"  LastChildFill="False">
+                <!--<TextBox
+    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
+    Margin="20"
+    VerticalAlignment="Center"
+    Height="100"
+    AcceptsReturn="True"
+    TextWrapping="Wrap"
+    VerticalScrollBarVisibility="Auto"
+    materialDesign:HintAssist.Hint="This is a text area"
+    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />-->
+
+                <TextBox TextWrapping="WrapWithOverflow"     Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}" Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top" TextChanged="TextBox_TextChanged" FontSize="15">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведетfff</TextBox>
+
+                <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="200"
+                    ShowLineNumbers="True" 
+				Name="textEditor"
+				FontFamily="Consolas"
+				FontSize="10pt"
+				SyntaxHighlighting="C#"
+                                            HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFAFAFA" DockPanel.Dock="Top"
+			>Welcome to AvalonEdit!
+
+                </avalonEdit:TextEditor>
+
+                <StackPanel  HorizontalAlignment="Left" DockPanel.Dock="Top" >
+                    <CheckBox Margin="20,0,20,6">
+                        <TextBox TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}" TextChanged="TextBox_TextChanged_1" FontSize="15">
+                            public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   publicblic   publicblic   publicblic   pff
+                        </TextBox>
+                    </CheckBox>
+                    <CheckBox Margin="20,0,20,6">
+                        <TextBox TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}" FontSize="15">
+                            public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                        </TextBox>
+                    </CheckBox>
+                    <CheckBox Margin="20,0,20,6">
+                        <TextBox TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}" FontSize="15">
+                            public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                        </TextBox>
+                    </CheckBox>
+                    <CheckBox Margin="20,0,20,6">
+                        <TextBox TextWrapping="WrapWithOverflow" Style="{StaticResource MaterialDesignSubheadingTextBlock}" FontSize="15">
+                            public   public   public   public   public      public   public   public   public   public   public   public   public   public   publicpublic   public   public   public
+                        </TextBox>
+                    </CheckBox>
+                </StackPanel>
+
+
+                <Button   
+                                            CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  Style="{StaticResource MaterialDesignRaisedButton}"  >NEXT</Button>
+
+            </DockPanel>
+
+
+
+
+        </DockPanel>
+    </Grid>
+</UserControl>
