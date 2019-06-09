@@ -109,6 +109,7 @@
       <DependentUpon>EditGroupDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\EditGroupDialogViewModel.cs" />
+    <Compile Include="ConditionToItemSourceConverter.cs" />
     <Compile Include="ModelTest.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,7 +125,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelTest.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ConditionToItemSourceConverter.cs" />
     <Compile Include="MVVM\ChaphterEdit.xaml.cs">
       <DependentUpon>ChaphterEdit.xaml</DependentUpon>
     </Compile>

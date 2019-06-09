@@ -24,10 +24,8 @@ namespace TestingProgram
         public string Текст { get; set; }
         public string Код { get; set; }
         public string Тип_Ответа { get; set; }
-        public byte Раздел_Id { get; set; }
         public byte Тема_Id { get; set; }
     
-        public virtual Раздел Раздел { get; set; }
         public virtual Тема Тема { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ответ> Ответ { get; set; }

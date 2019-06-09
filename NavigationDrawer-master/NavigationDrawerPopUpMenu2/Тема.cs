@@ -22,8 +22,11 @@ namespace TestingProgram
     
         public byte Id { get; set; }
         public string Название { get; set; }
+        public byte Раздел_Id { get; set; }
+        public System.TimeSpan Время_Прохождения { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Вопрос> Вопрос { get; set; }
+        public virtual Раздел Раздел { get; set; }
     }
 }

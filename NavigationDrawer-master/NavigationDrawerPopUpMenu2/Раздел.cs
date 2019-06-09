@@ -17,13 +17,13 @@ namespace TestingProgram
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Раздел()
         {
-            this.Вопрос = new HashSet<Вопрос>();
+            this.Тема = new HashSet<Тема>();
         }
     
         public byte Id { get; set; }
         public string Название { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Вопрос> Вопрос { get; set; }
+        public virtual ICollection<Тема> Тема { get; set; }
     }
 }

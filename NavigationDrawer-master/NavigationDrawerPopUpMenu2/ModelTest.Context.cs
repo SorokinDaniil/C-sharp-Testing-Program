@@ -13,10 +13,10 @@ namespace TestingProgram
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TestEntities : DbContext
+    public partial class testEntities : DbContext
     {
-        public TestEntities()
-            : base("name=TestEntities")
+        public testEntities()
+            : base("name=testEntities")
         {
         }
     
@@ -26,13 +26,13 @@ namespace TestingProgram
         }
     
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Вопрос> Вопрос { get; set; }
-        public virtual DbSet<Группа> Группа { get; set; }
-        public virtual DbSet<Ответ> Ответ { get; set; }
-        public virtual DbSet<Раздел> Раздел { get; set; }
-        public virtual DbSet<Результат> Результат { get; set; }
-        public virtual DbSet<Студент> Студент { get; set; }
+        public virtual DbSet<Вопрос> Вопросы { get; set; }
+        public virtual DbSet<Группа> Группы { get; set; }
+        public virtual DbSet<Ответ> Ответы { get; set; }
+        public virtual DbSet<Раздел> Разделы { get; set; }
+        public virtual DbSet<Результат> Результаты { get; set; }
+        public virtual DbSet<Студент> Студенты { get; set; }
         public virtual DbSet<Студент_Результат> Студент_Результат { get; set; }
-        public virtual DbSet<Тема> Тема { get; set; }
+        public virtual DbSet<Тема> Темы { get; set; }
     }
 }
