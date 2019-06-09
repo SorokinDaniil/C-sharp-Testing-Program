@@ -18,11 +18,20 @@ namespace TestingProgram.MVVM
     /// <summary>
     /// Логика взаимодействия для TestingEditor.xaml
     /// </summary>
-    public partial class TestingEditor : UserControl
+    public partial class TestingEditor : Window
     {
         public TestingEditor()
         {
             InitializeComponent();
+            DataContext = new TestingEditorViewModel();
+            //CheckBox oneanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29} , MinHeight = 20, IsChecked = false , Margin = new Thickness(20, 0, 20, 6) };
+            //CheckBox twoanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+            //CheckBox threeanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+            //CheckBox fouranswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+            //AnswerBlock.Children.Add(oneanswer);
+            //AnswerBlock.Children.Add(twoanswer);
+            //AnswerBlock.Children.Add(threeanswer);
+            //AnswerBlock.Children.Add(fouranswer);
         }
 
      

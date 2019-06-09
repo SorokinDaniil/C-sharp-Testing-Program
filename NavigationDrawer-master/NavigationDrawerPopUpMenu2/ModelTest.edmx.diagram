@@ -13,7 +13,7 @@
         <EntityTypeShape EntityType="TestModel.Результат" Width="1.5" PointX="5" PointY="9" IsExpanded="true" />
         <EntityTypeShape EntityType="TestModel.Студент" Width="1.5" PointX="5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="TestModel.Студент_Результат" Width="1.5" PointX="7.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TestModel.Тема" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestModel.Тема" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <AssociationConnector Association="TestModel.FK_Вопрос_Раздел" ManuallyRouted="false" />
         <AssociationConnector Association="TestModel.FK_Вопрос_Тема" ManuallyRouted="false" />
         <AssociationConnector Association="TestModel.FK_Ответ_Вопрос" ManuallyRouted="false" />

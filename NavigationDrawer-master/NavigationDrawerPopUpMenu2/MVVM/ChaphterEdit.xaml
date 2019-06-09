@@ -1,4 +1,4 @@
-﻿<Window x:Class="TestingProgram.MVVM.TestingEditor"
+﻿<Window x:Class="TestingProgram.MVVM.ChaphterEdit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -28,35 +28,18 @@
 
                         <!--<Grid x:Name="HeadLabelName">
                         </Grid>-->
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="20,0,16,0">Код</TextBlock>
-                        <ToggleButton x:Name="ChangeVisabilityCodeBlock"
-  Style="{StaticResource MaterialDesignSwitchToggleButton}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,16,0"  Command="{Binding ChangeVisabilityCodeBoxCommand}" CommandParameter="{Binding ElementName=ChangeVisabilityCodeBlock , Path=IsChecked}"
-   />
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="0,0,16,0">Тип ответа</TextBlock>
-                        <ComboBox  x:Name="ComboBoxChangeAnswer" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="100" Margin="0,0,16,0" SelectedIndex="{Binding SelectedIndexChangeAnswer}">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding ChangeTypeAnswerCommand}" CommandParameter="{Binding ElementName=AnswerBlock}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <ComboBoxItem>
-                               CheckBox
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                RadionButton
-                            </ComboBoxItem>
-                        </ComboBox>
-                        
-                        <!--<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">1/10</TextBlock>
-                        
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Название темы</TextBlock>
+                        <TextBox></TextBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">1/10</TextBlock>
+
                         <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="16,0">Время</TextBlock>
-                     
+
                         <materialDesign:TimePicker
-  materialDesign:HintAssist.Hint="With Seconds"
+
   Is24Hours="True"
   x:Name="WithSecondsTimePicker"
-  Width="100" />-->
-                        
+  Width="94" FontSize="15" Margin="0,16" />
+
                         <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
                             <materialDesign:PackIcon Kind="Close" Width="25" Height="25"/>
                         </Button>
@@ -84,9 +67,9 @@
     materialDesign:HintAssist.Hint="This is a text area"
     IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />-->
 
-                <TextBox  AcceptsReturn="True"  TextWrapping="WrapWithOverflow"  MaxLength="670" Height="109" Width="1040"  Margin="20,40,20,20" HorizontalAlignment="Left" DockPanel.Dock="Top"  FontSize="15">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль слddедующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведетffffffffffffffffffffffffffff</TextBox>
+                <TextBlock   TextWrapping="WrapWithOverflow" Height="109" Width="1040"  Margin="20,40,20,20" HorizontalAlignment="Left" DockPanel.Dock="Top"  FontSize="15">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль слddедующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведетffffffffffffffffffffffffffff</TextBlock>
 
-                <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="260" Visibility="{Binding CodeBoxVisibility}"
+                <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="260" Visibility="{Binding CodeBoxVisibility}" IsReadOnly="True"
                     ShowLineNumbers="True" 
 				Name="textEditor"
 				FontFamily="Consolas"
