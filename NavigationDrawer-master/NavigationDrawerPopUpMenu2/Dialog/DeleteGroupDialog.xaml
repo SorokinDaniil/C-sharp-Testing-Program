@@ -28,7 +28,7 @@
         <StackPanel Orientation="Horizontal" Grid.Row="3"
                     Margin="0 16 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
-                  Command="{Binding Add}">
+                  Command="{Binding DeleteCommand}">
                 <Button.CommandParameter>
                     <system:String>True</system:String>
                 </Button.CommandParameter>

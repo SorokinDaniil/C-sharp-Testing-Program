@@ -65,7 +65,7 @@ namespace TestingProgram
             SignIn_Login.GetBindingExpression(TextBox.TextProperty).UpdateSource();
             SignIn_Password.GetBindingExpression(PasswordHelper.PasswordProperty).UpdateSource();
             if (!IsValid(SignIn_Login) && !IsValid(SignIn_Password))
-                ((LoginViewModel)DataContext).SignIn();
+                ((LoginViewModel)DataContext).SignIn(this);
         }
 
         private void SignUp_Click(object sender, RoutedEventArgs e)

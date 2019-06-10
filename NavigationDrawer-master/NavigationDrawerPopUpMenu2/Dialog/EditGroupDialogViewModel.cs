@@ -101,7 +101,7 @@ namespace TestingProgram
                     {
                         if (IsCheck == true)
                         {
-                            using (TestEntities db = new TestEntities())
+                            using (testEntities db = new testEntities())
                             {
                                 Группа группа = db.Группы.Where(s => s.Название == SelectValue).SingleOrDefault();
                                 группа.Название = EditTextBox;
@@ -111,7 +111,7 @@ namespace TestingProgram
                         else
                              if (IsCheck == false)
                         {
-                            using (TestEntities db = new TestEntities())
+                            using (testEntities db = new testEntities())
                             {
                                 Раздел раздел = db.Разделы.Where(s => s.Название == SelectValue).SingleOrDefault();
                                 раздел.Название = EditTextBox;

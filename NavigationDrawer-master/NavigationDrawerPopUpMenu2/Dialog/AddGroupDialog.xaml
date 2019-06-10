@@ -19,7 +19,7 @@
         <TextBlock FontSize="16" Text="{Binding AddText}"></TextBlock>
         <TextBox x:Name="AddText"   
                  Margin="0,16,0,0"
-                 FontSize="16" Grid.Row="1" Text="{Binding AddTextBox}">
+                 FontSize="15" Grid.Row="1" Text="{Binding AddTextBox}" Width="204">
         </TextBox>
         <!--<TextBox wpf:HintAssist.Hint="Number" Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                  Margin="0 8 0 0"

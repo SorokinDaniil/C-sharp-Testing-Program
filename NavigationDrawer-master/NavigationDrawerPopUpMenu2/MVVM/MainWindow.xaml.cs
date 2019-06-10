@@ -24,21 +24,21 @@ namespace TestingProgram
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(string typeAccount)
         {
             InitializeComponent();
-
-
-            //DataContext = new MainWindowViewModel();
-            //DataContext = new ListsAndGridsViewModel();
+            DataContext = new MainWindowViewModel(typeAccount);
             HeadLabelName.Children.Add(new AdminLabelName());
-            Panel.Children.Add(new AdminLeftPanel());
-
+            TextOneItem.Text = "Журнал";
         }
 
-        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public MainWindow(string typeAccount,string logincurrentuser)
         {
-            MenuToggleButton.IsChecked = false;
+            InitializeComponent();
+            DataContext = new MainWindowViewModel(typeAccount);
+            HeadLabelName.Children.Add(new UserLabelName(logincurrentuser));
+            TextOneItem.Text = "Тесты";
+            TwoItem.Visibility = Visibility.Collapsed;
         }
 
 

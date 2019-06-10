@@ -7,14 +7,14 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
   >
-    <materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" >
+    <materialDesign:Flipper HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" >
 
         <materialDesign:Flipper.FrontContent>
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <TextBlock   Style="{StaticResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center">Сорокин Даниил</TextBlock>
+                <TextBlock  x:Name="TextLabelUserPanel" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
 
-                <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True">
-                    <materialDesign:PackIcon Kind="Edit" Width="25" Height="25" HorizontalAlignment="Left"/>
+                <Button Command="{x:Static materialDesign:Flipper.FlipCommand}" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Click="Button_Click_1">
+                    <materialDesign:PackIcon Kind="Edit" Width="24" Height="24" HorizontalAlignment="Left"/>
                 </Button>
             </StackPanel>
         </materialDesign:Flipper.FrontContent>
@@ -22,12 +22,35 @@
         <materialDesign:Flipper.BackContent>
 
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Orientation="Horizontal">
-                <TextBlock   Style="{StaticResource MaterialDesignTitleTextBlock}" VerticalAlignment="Center" HorizontalAlignment="Center">Сорокин Даниил</TextBlock>
 
-                <Button   Command="{x:Static materialDesign:Flipper.FlipCommand}"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" 
+                <!--<materialDesign:ColorZone
+        Mode="Standard"
+        CornerRadius="2"
+        Panel.ZIndex="1"
+        materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <Grid>
+                        <TextBox FontSize="24"
+  
+
+            materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+            BorderThickness="0"
+            VerticalAlignment="Center" />
+                        <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Click="Button_Click"
                           >
-                    <materialDesign:PackIcon Kind="Check" Width="25" Height="25" HorizontalAlignment="Left"/>
+                            <materialDesign:PackIcon Kind="Check" Width="25" Height="25" HorizontalAlignment="Left"/>
+                        </Button>
+                    </Grid>
+                    
+                </materialDesign:ColorZone>-->
+                <TextBox  x:Name="TextBoxUserPanel" VerticalAlignment="Center" HorizontalAlignment="Center"   Background="White" Foreground="Black"
+          
+           ></TextBox>
+
+                <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"  HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  VerticalAlignment="Center" materialDesign:RippleAssist.IsDisabled="True" Click="Button_Click"
+                          >
+                    <materialDesign:PackIcon Kind="Check" Width="24" Height="24" HorizontalAlignment="Left"/>
                 </Button>
+                
             </StackPanel>
         </materialDesign:Flipper.BackContent>
     </materialDesign:Flipper>

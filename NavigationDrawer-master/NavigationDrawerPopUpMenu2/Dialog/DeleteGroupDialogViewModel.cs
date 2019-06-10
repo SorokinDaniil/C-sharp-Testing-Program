@@ -75,19 +75,19 @@ namespace TestingProgram
             }
         }
 
-        private RelayCommand add;
-        public RelayCommand Add
+        private RelayCommand deletecommand;
+        public RelayCommand DeleteCommand
 
         {
 
             get
             {
-                return add ??
-                    (add = new RelayCommand(obj =>
+                return deletecommand ??
+                    (deletecommand = new RelayCommand(obj =>
                     {
                         if(IsCheck == true)
                         {
-                            using (TestEntities db = new TestEntities())
+                            using (testEntities db = new testEntities())
                             {
                                 Группа группа = db.Группы.Where(s => s.Название == SelectValue).SingleOrDefault();
                                 db.Группы.Remove(группа);
@@ -97,7 +97,7 @@ namespace TestingProgram
                         else
                              if (IsCheck == false)
                         {
-                            using (TestEntities db = new TestEntities())
+                            using (testEntities db = new testEntities())
                             {
                                 Раздел раздел = db.Разделы.Where(s => s.Название == SelectValue).SingleOrDefault();
                                 db.Разделы.Remove(раздел);

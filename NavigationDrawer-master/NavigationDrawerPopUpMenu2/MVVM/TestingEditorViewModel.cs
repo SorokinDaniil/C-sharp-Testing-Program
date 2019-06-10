@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 
-namespace TestingProgram.MVVM 
+namespace TestingProgram
 {
     class TestingEditorViewModel : INotifyPropertyChanged
     {

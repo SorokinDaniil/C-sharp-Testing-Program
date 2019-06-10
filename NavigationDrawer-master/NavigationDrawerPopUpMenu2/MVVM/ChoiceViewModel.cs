@@ -90,7 +90,7 @@ namespace TestingProgram
 
         void LoadGroupCollection ()
         {
-            using (TestEntities db = new TestEntities())
+            using (testEntities db = new testEntities())
             {
                 ChoiceGroupCollection = db.Группы.ToList();
             }
@@ -99,7 +99,7 @@ namespace TestingProgram
         void LoadChaphterCollection ()
         {
 
-            using (TestEntities db = new TestEntities())
+            using (testEntities db = new testEntities())
             {
                 ChoiceChaphterCollection = db.Разделы.ToList();
             }
@@ -215,7 +215,7 @@ namespace TestingProgram
 
         public ICommand RunDialogAddGroupCommand => new AnotherCommandImplementation(AddGroupCommand);
         public ICommand RunDialogEditGroupCommand => new AnotherCommandImplementation(EditGroupCommand);
-        public ICommand RunDialogDeleteGroupCommand => new AnotherCommandImplementation(DeleteGroupCommand);
+        public ICommand RunDialogDeleteGroupCommand  => new AnotherCommandImplementation(DeleteGroupCommand);
 
         private async void AddGroupCommand(object o)
         {

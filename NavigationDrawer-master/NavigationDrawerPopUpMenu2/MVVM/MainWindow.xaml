@@ -13,9 +13,7 @@
         TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen"
         Background="{DynamicResource MaterialDesignPaper}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}" WindowStyle="None" x:Name="MainWindowName"> 
-    <Window.DataContext>
-        <local:MainWindowViewModel/>
-    </Window.DataContext>
+
 
 
     <!--<Window.Resources>
@@ -147,13 +145,13 @@
                                     <StackPanel 
           Orientation="Horizontal">
                                         <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="FileDocumentBoxOutline"  Margin="10" />
-                                        <TextBlock Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
-            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-          Журнал
+                                        <TextBlock x:Name="TextOneItem" Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
+            Margin="10,10,20,10" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding TextOneItem}">
+         
                                         </TextBlock>
                                     </StackPanel >
                                 </ListViewItem>
-                                <ListViewItem Height="60">
+                                <ListViewItem Height="60" x:Name="TwoItem">
                                     <StackPanel 
           Orientation="Horizontal">
                                         <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="SquareEditOutline"  Margin="10"/>
@@ -190,7 +188,7 @@
                                 <Grid x:Name="HeadLabelName">
                                 </Grid>
 
-                                <Button Command="{Binding RunDialogCommand}" VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="32" Height="32" Margin="0,13,13,13" Background="{x:Null}" BorderBrush="{x:Null}">
+                                <Button VerticalAlignment="Center" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniButton}" Width="32" Height="32" Margin="0,13,13,13" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding RunDialogExitAppCommand}" CommandParameter="{Binding ElementName=MainWindowName}">
                                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="ExitToApp"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Button>
 
@@ -210,10 +208,8 @@
                         <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
                                      AutoApplyTransitionOrigins="True"
                                      ItemsSource="{Binding AdminSlides}">
-                                
+
                         </materialDesign:Transitioner>
-
-
                     </Grid>
 
                     <!--<materialDesign:Transitioner x:Name="Tran" SelectedIndex="0" AutoApplyTransitionOrigins="True">
@@ -265,7 +261,6 @@
                        
                     </Grid>-->
 <!--#endregion-->
-
                     <!--#region TESTING_WINDOW-->
                     <!--<DockPanel Margin="0"  LastChildFill="False">
                         <TextBox

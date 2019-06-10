@@ -55,33 +55,40 @@ namespace TestingProgram
 
         public LoginViewModel()
         {
-            using (TestEntities db = new TestEntities())
+            using (testEntities db = new testEntities())
             {
                var группы = db.Группы.Select(c => c.Название);
                 GroupCollection = db.Группы.ToList();
-                
-                //GroupCollection = new ObservableCollection<string>();
-               
             }
         }
 
-        public void SignIn()
+        public void SignIn(Login currentobject)
         {
-            using (TestEntities db = new TestEntities())
+            using (testEntities db = new testEntities())
             {
+                if(SignInUsername == "adminadmin" && SignInPassword == "adminadmin")
+                {
+
+                    MainWindow adminWindow = new MainWindow("Admin");
+                    adminWindow.Show();
+                    currentobject.Close();
+                }
+                else
                 if (!(db.Студенты.SingleOrDefault(p => p.Логин == SignInUsername) == null))
                 {
                     var checkpassword = ComputeSha256Hash(SignInPassword);
                     if (!(db.Студенты.Where(p => p.Логин == SignInUsername).SingleOrDefault(p => p.Пароль == checkpassword) == null))
                     {
-                        MessageBox.Show("Вы успешно вошли");
+                        MainWindow userWindow = new MainWindow("User", SignInUsername);
+                        userWindow.Show();
+                        currentobject.Close();
                     }
                     else
                     MessageBox.Show("Пароль неверный");
                 }
                 else
                 {
-                    MessageBox.Show("Такой логин существует");
+                    MessageBox.Show("Такого логина не существует");
                 }
             }
     
@@ -90,14 +97,14 @@ namespace TestingProgram
         public void SignUp()
         {
            
-            using (TestEntities db = new TestEntities())
+            using (testEntities db = new testEntities())
             {
-                if (db.Студенты.SingleOrDefault(p => p.Логин == SignUpUsername) == null)
+                if (db.Студенты.SingleOrDefault(p => p.Логин == SignUpUsername) == null &&  SignUpUsername != "adminadmin")
                 {
                     Студент студент = new Студент { ФИО = SignUpFullName, Группа_Id = SignUpGroupId, Логин = SignUpUsername, Пароль = ComputeSha256Hash(SignUpPassword) };
                     db.Студенты.Add(студент);
                     db.SaveChanges();
-                    MessageBox.Show("Вы успешно зарегестрировались);");
+                    MessageBox.Show("Вы успешно зарегестрировались)");
                 }
                else
                 {
@@ -105,7 +112,7 @@ namespace TestingProgram
                 }
             }
             //var a = ((object)SignUpGroup as Группа);
-            MessageBox.Show(SignUpFullName  + SignUpGroupId + SignUpUsername + ComputeSha256Hash(SignUpPassword));
+            
         }
 
         static string ComputeSha256Hash(string rawData)

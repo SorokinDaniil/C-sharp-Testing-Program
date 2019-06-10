@@ -8,13 +8,13 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows;
+using DevExpress;
 
 namespace TestingProgram
 {
     public class MainTableViewModel : INotifyPropertyChanged
     {
-        private readonly ObservableCollection<SelectableViewModel> _items1;
-        private readonly ObservableCollection<SelectableViewModel> _items2;
+     
         private readonly ObservableCollection<SelectableViewModel> _items3;
         private bool? _isAllItems3Selected;
         private string _selecteValueChoice;
@@ -28,12 +28,13 @@ namespace TestingProgram
         private Visibility _twocolumnvisability;
         private Visibility _threecolumnvisability;
         private Visibility _fourcolumnvisability;
-
+        string TypeTable;
 
 
         public MainTableViewModel(string typeTable)
         {
-            switch(typeTable)
+            TypeTable = typeTable;
+            switch (TypeTable)
             {
                 case "Admin_Editor_TableChaphterEdit":
                     {
@@ -92,27 +93,115 @@ namespace TestingProgram
                     break;
                 default: break;
             }   
-            _items1 = CreateData();
-            _items2 = CreateData();
+      
             _items3 = CreateData();
-
+        
             //Admin_Editor_TableChaphterEdit 
 
             //ListStudent_TableGroupEdit
             //ListStudent_TableChaphterNoEdit
 
             //Student_TableChaphterNoEdit
-             
+
         }
+
+        private RelayCommand createdate;
+        public RelayCommand CreateDate
+        {
+
+            get
+            {
+                return createdate ??
+                    (createdate = new RelayCommand(obj =>
+                    {
+
+                        CreateTableContent();
+
+                    }));
+            }
+        }
+
 
         public void Show(string selectevaluechoice)
         {
-            SelectedTabIndex = 0;
+      
             SelecteValueChoice= selectevaluechoice;
             HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
+            CreateTableContent();
             //Console.WriteLine(IsCheckChoice);
             //Console.WriteLine(SelecteValueChoice);
         }
+
+        void CreateTableContent ()
+        {
+
+            using (testEntities db = new testEntities())
+            {
+                switch (TypeTable)
+                {
+                    case "Admin_Editor_TableChaphterEdit":
+                        {
+                            foreach (var chaphter in db.Темы.Select(p => p.Название))
+                            {
+                                _items3.Add(new SelectableViewModel
+                                {
+                                    OneColumnContent = chaphter
+                                    //TwoColumnContent = chaphter.Время_Прохождения.ToString(),
+                                    //ThreeColumnContent = db.Вопросы.Where(p => p.Тема == chaphter).Count().ToString()
+                                });
+                            }
+                        }
+                        break;
+                    case "Admin_ListStudent_TableListStudentEdit":
+                        {
+                            OneColumnName = "Номер";
+                            TwoColumnName = "Имя и фамилия";
+                            ThreeColumnName = "Пройденые тесты";
+                            OneColumnVisability = Visibility.Visible;
+                            TwoColumnVisability = Visibility.Visible;
+                            ThreeColumnVisability = Visibility.Visible;
+
+                            FourColumnVisability = Visibility.Hidden;
+                        }
+                        break;
+                    case "Admin_ListStudent_TableTestNoEdit":
+                        {
+                            OneColumnName = "Название";
+                            OneColumnVisability = Visibility.Visible;
+
+                            TwoColumnVisability = Visibility.Hidden;
+                            ThreeColumnVisability = Visibility.Hidden;
+                            FourColumnVisability = Visibility.Hidden;
+                        }
+                        break;
+                    case "Admin_ListStudent_TablePassedTestNoEdit":
+                        {
+                            OneColumnName = "Номер";
+                            TwoColumnName = "Имя и фамилия";
+                            ThreeColumnName = "Оценка";
+                            FourColumnName = "Дата прохождения";
+                            OneColumnVisability = Visibility.Visible;
+                            TwoColumnVisability = Visibility.Visible;
+                            ThreeColumnVisability = Visibility.Visible;
+                            FourColumnVisability = Visibility.Visible;
+                        }
+                        break;
+                    case "User_ListStudent_TableTestNoEdit":
+                        {
+                            OneColumnName = "Название";
+                            OneColumnVisability = Visibility.Visible;
+
+                            TwoColumnVisability = Visibility.Hidden;
+                            ThreeColumnVisability = Visibility.Hidden;
+                            FourColumnVisability = Visibility.Hidden;
+                        }
+                        break;
+                    default: break;
+                }
+            }
+       
+        }
+
         #region Property
         public int SelectedTabIndex
         {
@@ -292,8 +381,8 @@ namespace TestingProgram
             };
         }
 
-        public ObservableCollection<SelectableViewModel> Items1 => _items1;
-        public ObservableCollection<SelectableViewModel> Items2 => _items2;
+        //public ObservableCollection<SelectableViewModel> Items1 => _items1;
+        //public ObservableCollection<SelectableViewModel> Items2 => _items2;
 
         public ObservableCollection<SelectableViewModel> Items3 => _items3;
 

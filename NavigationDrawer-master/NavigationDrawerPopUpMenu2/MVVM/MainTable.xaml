@@ -13,7 +13,7 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock 
     Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16" DockPanel.Dock="Top" Text="{Binding HeaderMainTable}" ></TextBlock>
-                <Button Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}" Command="{x:Static local:NavigationCommands.GoBackCommand}">
+                <Button Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding CreateDate}">
                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="Autorenew"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24"/>
                 </Button>
             </StackPanel>

@@ -86,7 +86,7 @@ namespace TestingProgram
                     {
                         if (IsCheck == true)
                         {
-                            using (TestEntities db = new TestEntities())
+                            using (testEntities db = new testEntities())
                             {
                                 Группа группа = new Группа { Название = AddTextBox };
                                 db.Группы.Add(группа);
@@ -96,7 +96,7 @@ namespace TestingProgram
                         else
                              if (IsCheck == false)
                         {
-                            using (TestEntities db = new TestEntities())
+                            using (testEntities db = new testEntities())
                             {
                                 Раздел раздел = new Раздел { Название = AddTextBox };
                                 db.Разделы.Add(раздел);

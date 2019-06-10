@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для ChaphterEdit.xaml
+    /// Логика взаимодействия для ExitAppDialog.xaml
     /// </summary>
-    public partial class ChaphterEdit : Window
+    public partial class ExitAppDialog : UserControl
     {
-        public ChaphterEdit()
+        public ExitAppDialog()
         {
             InitializeComponent();
         }
