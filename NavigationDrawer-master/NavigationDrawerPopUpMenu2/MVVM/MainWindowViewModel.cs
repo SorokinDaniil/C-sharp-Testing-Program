@@ -24,10 +24,14 @@ namespace TestingProgram
         public MainWindowViewModel(string typeAccount)
         {
             TypeAccount = typeAccount;
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
+            //РЕДАКТОР
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand,ShowAdmin_Editor_TableChaphterEditExecuted));
 
+
+          
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowMainTableCommand, ShowMainTableExecuted));
      
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowTabControlCommand, ShowTabControlExecuted));
@@ -40,16 +44,13 @@ namespace TestingProgram
             }
             if (TypeAccount == "Admin")
             {
-                AdminSlides = new object[] { ChoiceGroup, ChoiceChaphterNoEdit, Admin_Editor_TableChaphterEdit };
+                AdminSlides = new object[] { ChoiceChaphter, Admin_Editor_TableChaphterEdit  , ChoiceGroup, ChoiceChaphterNoEdit };
             }
-
             _slideNavigator = new SlideNavigator(this, AdminSlides);
-            _slideNavigator.GoTo(2);//Задается начальное окно 
-
+            //_slideNavigator.GoTo(1);//Задается начальное окно 
             /*Admin_Editor_TableChaphterEdit, Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit, Admin_ListStudent_TablePassedTestNoEdit , User_ListStudent_TableTestNoEdit ,*/ /* 
                 TestingWindowViewModel ,PreviewTestingWindowViewModel */
         }
-
 
         private RelayCommand _selectedItemChangedCommand;
         public RelayCommand SelectedItemChangedCommand
@@ -65,21 +66,29 @@ namespace TestingProgram
                         {
                             if (TypeAccount == "Admin")
                             {
-                                if ((AdminSlides[0] as ChoiceViewModel).ChoiceValue == null)
+                                if ((AdminSlides[2] as ChoiceViewModel).ChoiceValue == null)
                                 {
-                                    _slideNavigator.GoTo(0);
-                                }
-                                else
-                                if ((AdminSlides[1] as ChoiceViewModel).ChoiceValue == null)
-                                {
-                                    _slideNavigator.GoTo(1);
-                                }
-                                else
                                     _slideNavigator.GoTo(2);
+                                }
+                                else
+                                if ((AdminSlides[3] as ChoiceViewModel).ChoiceValue == null)
+                                {
+                                    _slideNavigator.GoTo(3);
+                                }
+                                else
+                                    _slideNavigator.GoTo(4);
                             }
                         }
+                        if (SelectedIndexListView == 1)
+                        {
+                            if ((AdminSlides[0] as ChoiceViewModel).ChoiceValue == null)
+                            {
+                                _slideNavigator.GoTo(0);
+                            }
+                            else
+                                _slideNavigator.GoTo(1);
+                        }
 
-                      
                         //Console.WriteLine(obj.GetType());
                         //if (SelectedIndexListView == 0)
                         //{
@@ -125,8 +134,6 @@ namespace TestingProgram
             Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
 
-
-
         public object[] AdminSlides { get; }
 
         public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
@@ -167,6 +174,23 @@ namespace TestingProgram
 
         }
 
+   private void ShowAdmin_Editor_TableChaphterEditExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            string SelectedValue = "";
+            if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
+            {
+                SelectedValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
+            }
+
+            //var IsCheck = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
+            //var SelectValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
+            //Console.WriteLine(IsCheck);
+            //Console.WriteLine(SelectValue);
+            _slideNavigator.GoTo(
+                IndexOfSlide<MainTableViewModel>(),
+                () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
+
+        }
         private void ShowChoiceChaphterNoEditExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             _slideNavigator.GoTo(1);

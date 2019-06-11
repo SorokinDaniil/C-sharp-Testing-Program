@@ -12,27 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для ChoiceGroup.xaml
+    /// Логика взаимодействия для AddChaphterDialog.xaml
     /// </summary>
-    public partial class Choice : UserControl
+    public partial class AddChaphterDialog : UserControl
     {
-        public Choice()
+        public AddChaphterDialog()
         {
             InitializeComponent();
-        }
-
-       
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Console.WriteLine("КЛАК");
         }
     }
 }

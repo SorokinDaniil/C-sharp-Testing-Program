@@ -28,6 +28,7 @@ namespace TestingProgram
         private int _selectedTabIndex;
         private string _choiceTextBlock;
         private string _choiceHint;
+        private bool _isEnabledPopupBoxChoice;
         private Visibility _choicePopupBox;
         private string _choicevalue;
         private bool _isCheckCollection;
@@ -36,7 +37,7 @@ namespace TestingProgram
 
         public ChoiceViewModel(string type)
         {
-            
+            IsEnabledPopupBoxChoice = false;
             switch (type)
                 {
                     case "Chaphter":
@@ -72,13 +73,29 @@ namespace TestingProgram
                     (selectcommand = new RelayCommand(obj =>
                     {
                         //(obj as Button).SetBinding(Button.CommandProperty, new Binding("SaveReservationCommand"));
-                       (obj as Button).Command = NavigationCommands.ShowChoiceChaphterNoEditCommand;
+                       //(obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand;
                         //Console.WriteLine(obj.GetType());
                     }));
             }
         }
 
-      public void GetValues (out string choicevaluegroup, out string choicevaluechaphter)
+        private RelayCommand selectedItemChoiceCommand;
+        public RelayCommand SelectedItemChoiceCommand
+        {
+
+            get
+            {
+                return selectedItemChoiceCommand ??
+                    (selectedItemChoiceCommand = new RelayCommand(obj =>
+                    {
+                        Console.WriteLine("JJJJJJJJJJJ");
+                        IsEnabledPopupBoxChoice = true;
+
+                    }));
+            }
+        }
+
+        public void GetValues (out string choicevaluegroup, out string choicevaluechaphter)
         {
             choicevaluegroup = default(string);
             choicevaluechaphter = default(string);
@@ -118,6 +135,16 @@ namespace TestingProgram
                     _isCheckCollection = value;
                     RaisePropertyChanged();
                 }
+            }
+        }
+
+        public bool IsEnabledPopupBoxChoice
+        {
+            get { return _isEnabledPopupBoxChoice; }
+            set
+            {
+                _isEnabledPopupBoxChoice = value;
+                RaisePropertyChanged();
             }
         }
 

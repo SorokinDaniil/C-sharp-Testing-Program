@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:TestingProgram"
              mc:Ignorable="d" 
@@ -18,7 +19,12 @@
                 </Button>
             </StackPanel>
             <FrameworkElement x:Name="dummyElement"/>
-            <DataGrid  Margin="0 8 0 0" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top">
+            <DataGrid  Margin="0 8 0 0" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" SelectedIndex="{Binding SelectedIndexTable}">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding SelectedItemGridCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding OneColumnContent}"
                      Visibility="{Binding DataContext.OneColumnVisability,
@@ -44,7 +50,7 @@
                         </DataGridTextColumn.Header>
                     </DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding FourColumnContent}"
-                        Visibility="{Binding DataContext.ThreeColumnVisability,
+                        Visibility="{Binding DataContext.FourColumnVisability,
                                           Source={x:Reference dummyElement}}">
                         <DataGridTextColumn.Header>
                             <TextBlock Text="{Binding DataContext.FourColumnName, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
@@ -85,7 +91,7 @@
             </ListView>-->
 
 
-            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" IsEnabled="{Binding IsEnabledPopupBox}" 
                                             PlacementMode="LeftAndAlignMiddles"
     UnfurlOrientation="Horizontal"
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
@@ -104,13 +110,13 @@
                 </materialDesign:PopupBox.ToggleCheckedContent>
 
                 <StackPanel Orientation="Horizontal">
-                    <Button ToolTip="Add" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" >
+                    <Button ToolTip="Добавить" Command="{Binding RunDialogAddChaphterCommand}" >
                         <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                     </Button>
-                    <Button ToolTip="Edit">
+                    <Button ToolTip="Редактировать">
                         <materialDesign:PackIcon Kind="Edit" />
                     </Button>
-                    <Button ToolTip="Delete" >
+                    <Button ToolTip="Удалить" >
                         <materialDesign:PackIcon Kind="Delete" />
                     </Button>
                 </StackPanel>

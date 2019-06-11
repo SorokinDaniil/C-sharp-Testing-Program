@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestingProgram"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="1080" Background="White" TextElement.Foreground="{DynamicResource MaterialDesignBody}"
     d:DataContext="{d:DesignInstance local:ChoiceViewModel, d:IsDesignTimeCreatable=False}" >
@@ -32,12 +33,17 @@
 
 
 
-                <ComboBox 
+                <ComboBox SelectionChanged="ComboBox_SelectionChanged" 
   materialDesign:HintAssist.Hint="{Binding ChoiceHint}"
-  VerticalAlignment="Stretch" Margin="0,0,0,16" Background="{DynamicResource MaterialDesignPaper}"
+  VerticalAlignment="Stretch" Margin="0,0,0,16" Background="{DynamicResource MaterialDesignPaper}" 
                           DisplayMemberPath="Название"
                           SelectedValuePath="Название"
                           SelectedValue="{Binding ChoiceValue}" Width="80">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding SelectedItemChoiceCommand}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                     <ComboBox.ItemsSource>
                         <MultiBinding Converter="{StaticResource ConditionToItemSourceConverter}">
                             <Binding Path="IsCheckCollection"/>
@@ -95,7 +101,7 @@
                 <!--Command="{Binding SelectCommand}" CommandParameter="{Binding ElementName=ChoiceSelectButton}"-->
             </Grid>
                 <Button x:Name="ChoiceSelectButton"
-    Style="{StaticResource MaterialDesignFlatButton}"   Command="{x:Static local:NavigationCommands.ShowMainTableCommand}"
+    Style="{StaticResource MaterialDesignFlatButton}"   Command="{x:Static local:NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand}"
    
    DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,50,0,0">
                         ВЫБРАТЬ
@@ -104,7 +110,7 @@
              
               
 
-                <materialDesign:PopupBox Visibility="{Binding ChoicePopupBox}" Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                <materialDesign:PopupBox Visibility="{Binding ChoicePopupBox}" Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" IsEnabled="{Binding IsEnabledPopupBoxChoice}"
                                             PlacementMode="LeftAndAlignMiddles"
     UnfurlOrientation="Horizontal"
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom"

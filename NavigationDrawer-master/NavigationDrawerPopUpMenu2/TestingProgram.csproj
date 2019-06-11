@@ -101,6 +101,14 @@
     <Compile Include="Admin\AdminLeftPanel.xaml.cs">
       <DependentUpon>AdminLeftPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialog\AddChaphterDialog.xaml.cs">
+      <DependentUpon>AddChaphterDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\AddChaphterDialogViewModel.cs" />
+    <Compile Include="Dialog\DeleteChaphterDialog.xaml.cs">
+      <DependentUpon>DeleteChaphterDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\DeleteChaphterDialogViewModel.cs" />
     <Compile Include="Dialog\DeleteGroupDialog.xaml.cs">
       <DependentUpon>DeleteGroupDialog.xaml</DependentUpon>
     </Compile>
@@ -225,6 +233,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Admin\AdminLeftPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\AddChaphterDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\DeleteChaphterDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
-using System.Windows;
+using MaterialDesignThemes.Wpf;
+using System.Collections.ObjectModel;
 using DevExpress;
+using System.Data.Entity;
 
 namespace TestingProgram
 {
@@ -16,8 +25,8 @@ namespace TestingProgram
     {
      
         private readonly ObservableCollection<SelectableViewModel> _items3;
-        private bool? _isAllItems3Selected;
         private string _selecteValueChoice;
+        private bool _isEnabledPopupBox;
         private string _headermaintable;
         private int _selectedTabIndex;
         private string _onecolumnname;
@@ -29,11 +38,14 @@ namespace TestingProgram
         private Visibility _threecolumnvisability;
         private Visibility _fourcolumnvisability;
         string TypeTable;
+        byte IdSelectedChaphterValue;
+
 
 
         public MainTableViewModel(string typeTable)
         {
             TypeTable = typeTable;
+            IsEnabledPopupBox = false;
             switch (TypeTable)
             {
                 case "Admin_Editor_TableChaphterEdit":
@@ -45,7 +57,7 @@ namespace TestingProgram
                         TwoColumnVisability = Visibility.Visible;
                         ThreeColumnVisability = Visibility.Visible;
 
-                        FourColumnVisability = Visibility.Hidden;
+                        FourColumnVisability = Visibility.Collapsed;
                     } break;
                 case "Admin_ListStudent_TableListStudentEdit":
                     {
@@ -56,7 +68,7 @@ namespace TestingProgram
                         TwoColumnVisability = Visibility.Visible;
                         ThreeColumnVisability = Visibility.Visible;
 
-                        FourColumnVisability = Visibility.Hidden;
+                        FourColumnVisability = Visibility.Collapsed;
                     }
                     break;
                 case "Admin_ListStudent_TableTestNoEdit":
@@ -64,9 +76,9 @@ namespace TestingProgram
                         OneColumnName = "Название";
                         OneColumnVisability = Visibility.Visible;
 
-                        TwoColumnVisability = Visibility.Hidden;
-                        ThreeColumnVisability = Visibility.Hidden;
-                        FourColumnVisability = Visibility.Hidden;
+                        TwoColumnVisability = Visibility.Collapsed;
+                        ThreeColumnVisability = Visibility.Collapsed;
+                        FourColumnVisability = Visibility.Collapsed;
                     }
                     break;
                 case "Admin_ListStudent_TablePassedTestNoEdit":
@@ -86,9 +98,9 @@ namespace TestingProgram
                         OneColumnName = "Название";
                         OneColumnVisability = Visibility.Visible;
 
-                        TwoColumnVisability = Visibility.Hidden;
-                        ThreeColumnVisability = Visibility.Hidden;
-                        FourColumnVisability = Visibility.Hidden;
+                        TwoColumnVisability = Visibility.Collapsed;
+                        ThreeColumnVisability = Visibility.Collapsed;
+                        FourColumnVisability = Visibility.Collapsed;
                     }
                     break;
                 default: break;
@@ -121,11 +133,60 @@ namespace TestingProgram
             }
         }
 
+     private RelayCommand selectedItemGridCommand;
+        public RelayCommand SelectedItemGridCommand
+        {
+
+            get
+            {
+                return selectedItemGridCommand ??
+                    (selectedItemGridCommand = new RelayCommand(obj =>
+                    {
+                        IsEnabledPopupBox = true;
+
+                    }));
+            }
+        }
+
+        public ICommand RunDialogAddChaphterCommand => new AnotherCommandImplementation(AddChaphterCommand);
+        public ICommand RunDialogDeleteChaphterCommand => new AnotherCommandImplementation(DeleteChaphterCommand);
+
+        private async void AddChaphterCommand(object o)
+        {
+         
+            var view = new AddChaphterDialog
+            {
+                DataContext = new AddChaphterDialogViewModel(IdSelectedChaphterValue)
+            };
+
+            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+
+            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+        }
+
+        private async void DeleteChaphterCommand(object o)
+        {
+            using (testEntities db = new testEntities())
+            {
+                var IdSelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == (_items3[SelectedTabIndex].OneColumnContent));
+                var view = new DeleteChaphterDialog
+                {
+                    DataContext = new DeleteChaphterDialogViewModel(IdSelectedChaphterValue, IdSelectedThemeValue.Id)
+                };
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            }
+            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+        }
+
+        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+            Console.WriteLine("You can intercept the closing event, and cancel here.");
+        }
+
 
         public void Show(string selectevaluechoice)
         {
-      
-            SelecteValueChoice= selectevaluechoice;
+                SelecteValueChoice = selectevaluechoice;
             HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
             CreateTableContent();
             //Console.WriteLine(IsCheckChoice);
@@ -134,34 +195,57 @@ namespace TestingProgram
 
         void CreateTableContent ()
         {
-
             using (testEntities db = new testEntities())
             {
                 switch (TypeTable)
                 {
-                    case "Admin_Editor_TableChaphterEdit":
+                    case "Admin_Editor_TableChaphterEdit"://Готов
                         {
-                            foreach (var chaphter in db.Темы.Select(p => p.Название))
+                            var idchaphter = db.Разделы.SingleOrDefault(p => p.Название == SelecteValueChoice);//Получение id выбраного элемента
+                            IdSelectedChaphterValue = idchaphter.Id;
+                            IEnumerable<Тема> chaphters = db.Темы.Where(p => p.Раздел_Id == IdSelectedChaphterValue).Select(p => new { Название = p.Название, Время_Прохождения = p.Время_Прохождения , Id = p.Id})
+          .AsEnumerable()
+          .Select(an => new Тема
+          {
+              Название = an.Название,
+              Время_Прохождения = an.Время_Прохождения,
+              Id = an.Id
+          });
+                            foreach (var chaphter in chaphters)
                             {
+                                db.Вопросы.Where(p => p.Тема_Id == chaphter.Id).Load();
                                 _items3.Add(new SelectableViewModel
                                 {
-                                    OneColumnContent = chaphter
-                                    //TwoColumnContent = chaphter.Время_Прохождения.ToString(),
-                                    //ThreeColumnContent = db.Вопросы.Where(p => p.Тема == chaphter).Count().ToString()
+                                    OneColumnContent = chaphter.Название,
+                                    TwoColumnContent = chaphter.Время_Прохождения.ToString(),
+                                   ThreeColumnContent = db.Вопросы.Local.Count.ToString()//Количество вопросов
                                 });
                             }
                         }
                         break;
-                    case "Admin_ListStudent_TableListStudentEdit":
+                    case "Admin_ListStudent_TableListStudentEdit"://Редактировать
                         {
-                            OneColumnName = "Номер";
-                            TwoColumnName = "Имя и фамилия";
-                            ThreeColumnName = "Пройденые тесты";
-                            OneColumnVisability = Visibility.Visible;
-                            TwoColumnVisability = Visibility.Visible;
-                            ThreeColumnVisability = Visibility.Visible;
-
-                            FourColumnVisability = Visibility.Hidden;
+                            int index = 1;
+                            var idgroup = db.Группы.SingleOrDefault(p => p.Название == SelecteValueChoice);//Получение id выбраного элемента
+                            IdSelectedChaphterValue = idgroup.Id;
+                            IEnumerable<Студент> groups = db.Студенты.Where(p => p.Группа_Id == IdSelectedChaphterValue).Select(p => new {  ФИО = p.ФИО, Id = p.Id })
+          .AsEnumerable()
+          .Select(an => new Студент
+          {
+       
+              ФИО = an.ФИО,
+              Id = an.Id
+          });
+                            foreach (var group in groups)
+                            {
+                                db.Студент_Результат.Where(p => p.Студент_Id == group.Id) .Load();
+                                _items3.Add(new SelectableViewModel
+                                {
+                                    OneColumnContent = index++.ToString(),
+                                    TwoColumnContent = group.ФИО,
+                                    ThreeColumnContent = db.Вопросы.Local.Count.ToString()//Количество пройденых тестов в разделе
+                                });
+                            }
                         }
                         break;
                     case "Admin_ListStudent_TableTestNoEdit":
@@ -212,7 +296,15 @@ namespace TestingProgram
             }
         }
 
-      
+       public bool IsEnabledPopupBox
+        {
+            get { return _isEnabledPopupBox; }
+            set {
+                _isEnabledPopupBox = value;
+
+                OnPropertyChanged();
+            }
+        }
 
         public string OneColumnName
         {
@@ -340,49 +432,12 @@ namespace TestingProgram
         //}
 #endregion
 
-
-        //private static void SelectAll(bool select, IEnumerable<SelectableViewModel> models)
-        //{
-        //    foreach (var model in models)
-        //    {
-        //        model.IsSelected = select;
-        //    }
-        //}
-
         private static ObservableCollection<SelectableViewModel> CreateData()
         {
             return new ObservableCollection<SelectableViewModel>
             {
-                new SelectableViewModel
-                {
-                    OneColumnContent = "M",
-                    TwoColumnContent = "Material Design",
-                    ThreeColumnContent = "Material Design in XAML Toolkit"
-                },
-                new SelectableViewModel
-                {
-                    OneColumnContent = "D",
-                    TwoColumnContent = "Dragablz",
-                    ThreeColumnContent = "Dragablz Tab Control",
-                },
-                new SelectableViewModel
-                {
-                    OneColumnContent = "P",
-                    TwoColumnContent = "Predator",
-                    ThreeColumnContent = "If it bleeds, we can kill it"
-                },
-               
-                new SelectableViewModel
-                {
-                    OneColumnContent = "F",
-                    TwoColumnContent = "Predator",
-                    ThreeColumnContent = "If it bleeds, we can kill it"
-                }
             };
         }
-
-        //public ObservableCollection<SelectableViewModel> Items1 => _items1;
-        //public ObservableCollection<SelectableViewModel> Items2 => _items2;
 
         public ObservableCollection<SelectableViewModel> Items3 => _items3;
 
