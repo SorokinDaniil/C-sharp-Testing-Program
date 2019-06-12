@@ -1,4 +1,4 @@
-﻿<Window x:Class="TestingProgram.ChaphterEdit"
+﻿<Window x:Class="TestingProgram.ThemeEdit"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -24,25 +24,42 @@
 
                 <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
 
-                    <DockPanel x:Name="Head" >
+                    <DockPanel x:Name="Head" HorizontalAlignment="Right" Width="1080" >
 
                         <!--<Grid x:Name="HeadLabelName">
                         </Grid>-->
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">Название темы</TextBlock>
-                        <TextBox></TextBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20">1/10</TextBlock>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="17.5,0,16,0" >
+                            <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                        </Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="2*" />
+                            
+                       
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Название темы</TextBlock>
+                                <TextBox Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0" materialDesign:HintAssist.Hint="Название" FontSize="15" Text="{Binding TextTextBox}"></TextBox>
+                            </StackPanel>
+                            
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.Column="1">1/10</TextBlock>
 
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="16,0">Время</TextBlock>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="20" Margin="16,0" Grid.Column="3">Время прохождения</TextBlock>
 
-                        <materialDesign:TimePicker
-
+                                <materialDesign:TimePicker Text="{Binding TextTimePicker}"
+materialDesign:HintAssist.Hint="Время"
   Is24Hours="True"
   x:Name="WithSecondsTimePicker"
-  Width="94" FontSize="15" Margin="0,16" />
+  Width="100" FontSize="15" Margin="0,0,16,0" HorizontalAlignment="Right" />
+                            </StackPanel>
+                       
+                        </Grid>
+                        
 
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
-                            <materialDesign:PackIcon Kind="Close" Width="25" Height="25"/>
-                        </Button>
+                     
 
                     </DockPanel>
                 </materialDesign:TransitioningContent>

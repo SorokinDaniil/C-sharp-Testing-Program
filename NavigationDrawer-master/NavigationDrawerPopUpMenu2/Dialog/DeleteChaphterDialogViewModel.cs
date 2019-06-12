@@ -20,20 +20,17 @@ namespace TestingProgram
         private bool _isCheck;
         private string _selectValue;
         private string _deletetext;
+        byte IdSelectedChaphterValue;
+        byte IdSelectedThemeValue;
 
         public DeleteChaphterDialogViewModel(byte idSelectedChaphterValue, byte idSelectedThemeValue)
         {
-            IsCheck = ischeck;
-            SelectValue = selectvalue;
-            if (IsCheck == true)
-            {
-                DeleteText = "Вы действительно хотите удалить группу ?";
-            }
-            else
-            if (IsCheck == false)
-            {
-                DeleteText = "Вы действительно хотите удалить раздел?";
-            }
+            IdSelectedChaphterValue = idSelectedChaphterValue;
+            IdSelectedThemeValue = idSelectedThemeValue;
+            DeleteText = "Вы действительно хотите удалить тему  и все вопросы связаные с ней ?";
+           
+             
+            
         }
 
         public bool IsCheck
@@ -79,32 +76,24 @@ namespace TestingProgram
         public RelayCommand DeleteCommand
 
         {
-
             get
             {
                 return deletecommand ??
                     (deletecommand = new RelayCommand(obj =>
                     {
-                        if (IsCheck == true)
-                        {
+                       
                             using (testEntities db = new testEntities())
                             {
-                                Группа группа = db.Группы.Where(s => s.Название == SelectValue).SingleOrDefault();
-                                db.Группы.Remove(группа);
+                               var тема = db.Темы.Where(s => s.Id == IdSelectedThemeValue).SingleOrDefault();
+                            //var вопросы = db.Вопросы.Where(s => s.Тема_Id == IdSelectedThemeValue);
+
+                                db.Темы.Remove(тема);
+
                                 db.SaveChanges();
                             }
-                        }
-                        else
-                             if (IsCheck == false)
-                        {
-                            using (testEntities db = new testEntities())
-                            {
-                                Раздел раздел = db.Разделы.Where(s => s.Название == SelectValue).SingleOrDefault();
-                                db.Разделы.Remove(раздел);
-                                db.SaveChanges();
-                            }
-                        }
-                        DialogHost.CloseDialogCommand.Execute(null, null);
+                   
+                   
+                        DialogHost.CloseDialogCommand.Execute(true, null);
                     }));
             }
         }

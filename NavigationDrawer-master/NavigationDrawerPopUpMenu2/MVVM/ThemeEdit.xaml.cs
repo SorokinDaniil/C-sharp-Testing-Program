@@ -18,9 +18,9 @@ namespace TestingProgram
     /// <summary>
     /// Логика взаимодействия для ChaphterEdit.xaml
     /// </summary>
-    public partial class ChaphterEdit : Window
+    public partial class ThemeEdit : Window
     {
-        public ChaphterEdit()
+        public ThemeEdit()
         {
             InitializeComponent();
         }

@@ -153,29 +153,66 @@ namespace TestingProgram
 
         private async void AddChaphterCommand(object o)
         {
-         
-            var view = new AddChaphterDialog
+      
+                var view = new AddChaphterDialog
+                {
+                    DataContext = new AddChaphterDialogViewModel(IdSelectedChaphterValue)
+                };
+
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            if ((bool)result == true)
             {
-                DataContext = new AddChaphterDialogViewModel(IdSelectedChaphterValue)
-            };
+                using (testEntities db = new testEntities())
+                {
+                    var lastShowPieceId = db.Темы.Max(x => x.Id);
+                    var  LastTheme  = db.Темы.FirstOrDefault(x => x.Id == lastShowPieceId);
+                    db.Вопросы.Where(p => p.Тема_Id == lastShowPieceId).Load();
+                    _items3.Add(new SelectableViewModel { OneColumnContent = LastTheme.Название, TwoColumnContent = LastTheme.Время_Прохождения.ToString(), ThreeColumnContent = db.Вопросы.Local.Count.ToString() });
+                }
+            }
 
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
 
-            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
-        }
+                Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+            }
 
         private async void DeleteChaphterCommand(object o)
         {
             using (testEntities db = new testEntities())
             {
-                var IdSelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == (_items3[SelectedTabIndex].OneColumnContent));
+                var name = _items3[SelectedTabIndex].OneColumnContent;
+                var IdSelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == name);
                 var view = new DeleteChaphterDialog
                 {
                     DataContext = new DeleteChaphterDialogViewModel(IdSelectedChaphterValue, IdSelectedThemeValue.Id)
                 };
                 var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
-            }
+            if ((bool)result == true)
+                {
+                    _items3.Remove(_items3[SelectedTabIndex]);
+                }
+
             Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+            }
+        }
+
+        private async void EditChaphterCommand(object o)
+        {
+            using (testEntities db = new testEntities())
+            {
+                var name = _items3[SelectedTabIndex].OneColumnContent;
+                var IdSelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == name);
+                var view = new DeleteChaphterDialog
+                {
+                    DataContext = new DeleteChaphterDialogViewModel(IdSelectedChaphterValue, IdSelectedThemeValue.Id)
+                };
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                if ((bool)result == true)
+                {
+                    _items3.Remove(_items3[SelectedTabIndex]);
+                }
+
+                Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+            }
         }
 
         private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
@@ -186,7 +223,7 @@ namespace TestingProgram
 
         public void Show(string selectevaluechoice)
         {
-                SelecteValueChoice = selectevaluechoice;
+            SelecteValueChoice = selectevaluechoice;
             HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
             CreateTableContent();
             //Console.WriteLine(IsCheckChoice);

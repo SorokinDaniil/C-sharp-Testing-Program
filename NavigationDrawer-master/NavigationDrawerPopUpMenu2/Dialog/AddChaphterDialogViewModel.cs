@@ -83,7 +83,7 @@ namespace TestingProgram
                                 db.Темы.Add(тема);
                                 db.SaveChanges();
                             }
-                        DialogHost.CloseDialogCommand.Execute(null, null);
+                        DialogHost.CloseDialogCommand.Execute(true, null);
                     }));
             }
         }
