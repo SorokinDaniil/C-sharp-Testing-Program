@@ -19,10 +19,11 @@ namespace TestingProgram
 {
    public class ThemeEditorViewModel : INotifyPropertyChanged
     {
-        public ThemeEditorViewModel(string editThemeText , string editThemeTime)
+        public ThemeEditorViewModel()
         {
-            TextTextBox = editThemeText;
-            TextTimePicker = editThemeTime;
+           // string editThemeText, string editThemeTime
+            //TextTextBox = editThemeText;
+            //TextTimePicker = editThemeTime;
         }
 
 

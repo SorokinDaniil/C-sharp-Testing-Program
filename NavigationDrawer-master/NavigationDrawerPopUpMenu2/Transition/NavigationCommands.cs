@@ -16,5 +16,13 @@ public static RoutedCommand ShowAdmin_Editor_TableChaphterEditCommand = new Rout
         public static RoutedCommand GoBackCommand = new RoutedCommand();
         public static RoutedCommand GoForwardCommand = new RoutedCommand();
 
+
+
+
+        public static RoutedCommand ShowMainWindowCommand = new RoutedCommand();
+        public static RoutedCommand ShowTestingEditorCommand = new RoutedCommand();
+        public static RoutedCommand ShowThemeEditorCommand = new RoutedCommand();
+        public static RoutedCommand ShowTestingWindowCommand = new RoutedCommand();
     }
 }
+
