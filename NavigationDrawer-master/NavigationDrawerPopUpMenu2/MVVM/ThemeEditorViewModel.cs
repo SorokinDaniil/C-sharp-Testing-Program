@@ -17,7 +17,7 @@ using System.Data.Entity;
 
 namespace TestingProgram
 {
-    class ThemeEditorViewModel : INotifyPropertyChanged
+   public class ThemeEditorViewModel : INotifyPropertyChanged
     {
         public ThemeEditorViewModel(string editThemeText , string editThemeTime)
         {

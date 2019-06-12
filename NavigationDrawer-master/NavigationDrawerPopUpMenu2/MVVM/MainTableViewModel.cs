@@ -45,7 +45,7 @@ namespace TestingProgram
         public MainTableViewModel(string typeTable)
         {
             TypeTable = typeTable;
-            IsEnabledPopupBox = false;
+     
             switch (TypeTable)
             {
                 case "Admin_Editor_TableChaphterEdit":
@@ -117,21 +117,21 @@ namespace TestingProgram
 
         }
 
-        private RelayCommand createdate;
-        public RelayCommand CreateDate
-        {
+        //private RelayCommand createdate;
+        //public RelayCommand CreateDate
+        //{
 
-            get
-            {
-                return createdate ??
-                    (createdate = new RelayCommand(obj =>
-                    {
+        //    get
+        //    {
+        //        return createdate ??
+        //            (createdate = new RelayCommand(obj =>
+        //            {
 
-                        CreateTableContent();
+        //                CreateTableContent();
 
-                    }));
-            }
-        }
+        //            }));
+        //    }
+        //}
 
      private RelayCommand selectedItemGridCommand;
         public RelayCommand SelectedItemGridCommand
@@ -142,6 +142,9 @@ namespace TestingProgram
                 return selectedItemGridCommand ??
                     (selectedItemGridCommand = new RelayCommand(obj =>
                     {
+                        if (SelectedTabIndex == -1)
+                            IsEnabledPopupBox = false;
+                        else
                         IsEnabledPopupBox = true;
 
                     }));
@@ -232,6 +235,8 @@ namespace TestingProgram
 
         void CreateTableContent ()
         {
+           
+            _items3.Clear();
             using (testEntities db = new testEntities())
             {
                 switch (TypeTable)

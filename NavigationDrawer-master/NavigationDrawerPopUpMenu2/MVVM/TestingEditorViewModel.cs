@@ -10,8 +10,14 @@ using System.Windows.Controls;
 
 namespace TestingProgram
 {
-    class TestingEditorViewModel : INotifyPropertyChanged
+  public class TestingEditorViewModel : INotifyPropertyChanged
     {
+
+        public TestingEditorViewModel ()
+        {
+
+        }
+
         private bool _isCheckedTestEditor;
         private int _selectedIndexChangeAnswer;
         private Visibility _codeBoxVisibility;

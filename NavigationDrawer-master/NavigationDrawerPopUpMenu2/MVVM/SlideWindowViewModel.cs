@@ -14,42 +14,33 @@ using System.Collections.Generic;
 
 namespace TestingProgram
 {
-    public class MainWindowViewModel : INotifyPropertyChanged, ISlideNavigationSubject
+    public class SlideWindowViewModel : INotifyPropertyChanged, ISlideNavigationSubject
     {
         private int _selectedIndexListView;
         private readonly SlideNavigator _slideNavigator;
         private int _activeSlideIndex;
-        string TypeAccount;
+        static string TypeAccount;
 
-        public MainWindowViewModel(string typeAccount)
+        public SlideWindowViewModel(string typeAccount)
         {
             TypeAccount = typeAccount;
-            //РЕДАКТОР
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand,ShowAdmin_Editor_TableChaphterEditExecuted));
 
-
-          
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditCommand, ShowChoiceChaphterNoEditExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowMainTableCommand, ShowMainTableExecuted));
-     
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowTabControlCommand, ShowTabControlExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoForwardCommand, GoForwardExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowMainWindowCommand, ShowMainWindowExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowTestingEditorCommand,ShowTestingEditorExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowThemeEditorCommand,ShowThemeEditorExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowTestingWindowCommand, ShowTestingWindowExecuted));
 
             if (TypeAccount == "User")
             {
-                AdminSlides = new object[] { ChoiceGroup, ChoiceChaphterNoEdit, Admin_Editor_TableChaphterEdit };
+                AdminSlides = new object[] { MainWindowViewModel , TestingWindowViewModel };
             }
             if (TypeAccount == "Admin")
             {
-                AdminSlides = new object[] { ChoiceChaphter, Admin_Editor_TableChaphterEdit  , ChoiceGroup, ChoiceChaphterNoEdit };
+                AdminSlides = new object[] { MainWindowViewModel, ThemeEditorViewModel, TestingEditorViewModel };
             }
             _slideNavigator = new SlideNavigator(this, AdminSlides);
             //_slideNavigator.GoTo(1);//Задается начальное окно 
-            /*Admin_Editor_TableChaphterEdit, Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit, Admin_ListStudent_TablePassedTestNoEdit , User_ListStudent_TableTestNoEdit ,*/ /* 
-                TestingWindowViewModel ,PreviewTestingWindowViewModel */
+    
         }
 
         private RelayCommand _selectedItemChangedCommand;
@@ -104,77 +95,48 @@ namespace TestingProgram
             }
         }
 
-        public ICommand RunDialogExitAppCommand => new AnotherCommandImplementation(ExitAppCommand);
-
-        private async void ExitAppCommand(object o)
-        {
-            //let's set up a little MVVM, cos that's what the cool kids are doing:
-            Console.WriteLine(o.GetType());
-            var view = new ExitAppDialog
-            {
-                DataContext = new ExitAppDialogViewModel()
-            };
-
-            //show the dialog
-            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
-            Console.WriteLine(result);
-            if ((bool)result == true)
-            {
-                Login login = new Login();
-                login.Show();
-                (o as MainWindow).Close();
-              
-            }
-            ////check the result...
-            //Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
-        }
-
-        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
-        {
-            Console.WriteLine("You can intercept the closing event, and cancel here.");
-        }
-
         public object[] AdminSlides { get; }
+
+        public MainWindowViewModel MainWindowViewModel { get; } = new MainWindowViewModel(TypeAccount);
+
+        public TestingEditorViewModel TestingEditorViewModel { get; } = new TestingEditorViewModel();
 
         public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
 
-        public PreviewTestingWindowViewModel PreviewTestingWindowViewModel { get; } = new PreviewTestingWindowViewModel();
+        public ThemeEditorViewModel ThemeEditorViewModel { get; } = new ThemeEditorViewModel();
 
-        public ChoiceViewModel ChoiceChaphter { get; } = new ChoiceViewModel("Chaphter");
-
-        public ChoiceViewModel ChoiceGroup { get; } = new ChoiceViewModel("Group");
-
-        public ChoiceViewModel ChoiceChaphterNoEdit { get; } = new ChoiceViewModel("ChaphterNoEdit");
-
-        public TabControlViewModel TabControl { get; } = new TabControlViewModel();
-
-        public MainTableViewModel Admin_Editor_TableChaphterEdit { get; } = new MainTableViewModel("Admin_Editor_TableChaphterEdit");
-
-        //public MainTableViewModel Admin_ListStudent_TableListStudentEdit { get; } = new MainTableViewModel("Admin_ListStudent_TableListStudentEdit");
-
-        //public MainTableViewModel Admin_ListStudent_TableTestNoEdit { get; } = new MainTableViewModel("Admin_ListStudent_TableTestNoEdit");
-
-        public MainTableViewModel Admin_ListStudent_TablePassedTestNoEdit { get; } = new MainTableViewModel("Admin_ListStudent_TablePassedTestNoEdit");
-
-        public MainTableViewModel User_ListStudent_TableTestNoEdit { get; } = new MainTableViewModel("User_ListStudent_TableTestNoEdit");
-
-        //public TabControlViewModel User_ListStudent_TableTestNoEdit { get; } = new TabControlViewModel("User_ListStudent_TableTestNoEdit");
-
-
-
-        private void ShowChoiceGroupExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-
-         
-        }
-
-        private void ShowChoiceChaphterExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void ShowMainWindowExecuted(object sender, ExecutedRoutedEventArgs e)
         {
 
 
         }
 
-   private void ShowAdmin_Editor_TableChaphterEditExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void ShowTestingEditorExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+
+
+        }
+
+        private void ShowThemeEditorExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+
+
+        }
+
+        private void ShowTestingWindowExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+
+
+        }
+
+
+
+
+
+
+
+
+        private void ShowAdmin_Editor_TableChaphterEditExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             string SelectedValue = "";
             if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
@@ -202,10 +164,11 @@ namespace TestingProgram
         private void ShowMainTableExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             string SelectedValue = "";
-            if (AdminSlides[ActiveSlideIndex].GetType()  ==  typeof(ChoiceViewModel)) {
+            if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
+            {
                 SelectedValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
             }
-            
+
             //var IsCheck = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
             //var SelectValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
             //Console.WriteLine(IsCheck);
@@ -240,7 +203,7 @@ namespace TestingProgram
             set { this.MutateVerbose(ref _activeSlideIndex, value, RaisePropertyChanged()); }
         }
 
-         public int SelectedIndexListView
+        public int SelectedIndexListView
         {
             get { return _selectedIndexListView; }
             set { this.MutateVerbose(ref _selectedIndexListView, value, RaisePropertyChanged()); }
@@ -270,7 +233,7 @@ namespace TestingProgram
             //_slideNavigator.GoForward();//Не работает
         }
 
-    
+
 
         private int IndexOfSlide<TSlide>()
         {
