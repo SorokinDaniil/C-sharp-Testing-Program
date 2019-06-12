@@ -137,6 +137,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelTest.edmx</DependentUpon>
     </Compile>
+    <Compile Include="MVVM\QuestionCollection.xaml.cs">
+      <DependentUpon>QuestionCollection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MVVM\QuestionsCollectionViewModel.cs" />
     <Compile Include="MVVM\SlideWindow.xaml.cs">
       <DependentUpon>SlideWindow.xaml</DependentUpon>
     </Compile>
@@ -258,6 +262,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\ExitAppDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MVVM\QuestionCollection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

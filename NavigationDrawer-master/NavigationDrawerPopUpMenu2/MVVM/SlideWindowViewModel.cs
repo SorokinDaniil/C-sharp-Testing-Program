@@ -36,7 +36,7 @@ namespace TestingProgram
             }
             if (TypeAccount == "Admin")
             {
-                AdminSlides = new object[] { MainWindowViewModel, ThemeEditorViewModel, TestingEditorViewModel };
+                AdminSlides = new object[] { MainWindowViewModel, TestingEditorViewModel };
             }
             _slideNavigator = new SlideNavigator(this, AdminSlides);
             _slideNavigator.GoTo(0);//Задается начальное окно 
@@ -51,7 +51,7 @@ namespace TestingProgram
 
         public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
 
-        public ThemeEditorViewModel ThemeEditorViewModel { get; } = new ThemeEditorViewModel();
+        //public ThemeEditorViewModel ThemeEditorViewModel { get; } = new ThemeEditorViewModel();
 
         private void ShowMainWindowExecuted(object sender, ExecutedRoutedEventArgs e)
         {

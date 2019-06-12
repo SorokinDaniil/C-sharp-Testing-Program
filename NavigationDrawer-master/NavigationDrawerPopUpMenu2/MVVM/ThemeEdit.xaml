@@ -43,8 +43,17 @@
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Название темы</TextBlock>
                                 <TextBox Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0" materialDesign:HintAssist.Hint="Название" FontSize="15" Text="{Binding TextTextBox}"></TextBox>
                             </StackPanel>
-                            
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.Column="1">1/10</TextBlock>
+
+
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" >
+                                    <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                                </Button>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.Column="1">1/10</TextBlock>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" >
+                                    <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
+                                </Button>
+                            </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
                                 <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="20" Margin="16,0" Grid.Column="3">Время прохождения</TextBlock>
@@ -70,35 +79,21 @@ materialDesign:HintAssist.Hint="Время"
 
 
 
+            <Grid>
+                
+            </Grid>
 
 
-            <DockPanel Margin="0"  LastChildFill="False">
-                <!--<TextBox
-    Style="{StaticResource MaterialDesignOutlinedTextFieldTextBox}"
-    Margin="20"
-    VerticalAlignment="Center"
-    Height="100"
-    AcceptsReturn="True"
-    TextWrapping="Wrap"
-    VerticalScrollBarVisibility="Auto"
-    materialDesign:HintAssist.Hint="This is a text area"
-    IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignOutlinedTextFieldTextBoxEnabledComboBox}" DockPanel.Dock="Top" />-->
 
-                <TextBlock   TextWrapping="WrapWithOverflow" Height="109" Width="1040"  Margin="20,40,20,20" HorizontalAlignment="Left" DockPanel.Dock="Top"  FontSize="15">Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль слddедующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведет на консоль следующий код:Что выведетffffffffffffffffffffffffffff</TextBlock>
 
-                <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="260" Visibility="{Binding CodeBoxVisibility}" IsReadOnly="True"
-                    ShowLineNumbers="True" 
-				Name="textEditor"
-				FontFamily="Consolas"
-				FontSize="10pt"
-				SyntaxHighlighting="C#"
-                                            HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFAFAFA" DockPanel.Dock="Top"
-			>
 
-                </avalonEdit:TextEditor>
+        </DockPanel>
+    </Grid>
+</Window>
 
-                <StackPanel DockPanel.Dock="Top" x:Name="AnswerBlock">
-                    <!--<CheckBox Margin="20,0,20,6">
+
+
+<!--<CheckBox Margin="20,0,20,6">
                         <ContentControl>
                             <TextBox FontSize="15" MaxLength="204" Width="1017" Height="29">
                             </TextBox>
@@ -120,17 +115,12 @@ materialDesign:HintAssist.Hint="Время"
 
                         </TextBox>
                     </CheckBox>-->
-                </StackPanel>
 
 
-                <Button   
+<!--<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                    <Button   
                                             CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  Style="{StaticResource MaterialDesignRaisedButton}"  >СОХРАНИТЬ</Button>
-
-            </DockPanel>
-
-
-
-
-        </DockPanel>
-    </Grid>
-</Window>
+                    <Button   
+                                            CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  Style="{StaticResource MaterialDesignRaisedButton}"  >СОХРАНИТЬ</Button>
+                </StackPanel>-->
+        

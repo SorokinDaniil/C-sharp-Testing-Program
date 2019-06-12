@@ -153,6 +153,7 @@ namespace TestingProgram
 
         public ICommand RunDialogAddChaphterCommand => new AnotherCommandImplementation(AddChaphterCommand);
         public ICommand RunDialogDeleteChaphterCommand => new AnotherCommandImplementation(DeleteChaphterCommand);
+        public ICommand RunDialogEditChaphterCommand => new AnotherCommandImplementation(EditChaphterCommand);
 
         private async void AddChaphterCommand(object o)
         {
@@ -198,23 +199,16 @@ namespace TestingProgram
             }
         }
 
-        private async void EditChaphterCommand(object o)
+        private void EditChaphterCommand(object o)
         {
+            
             using (testEntities db = new testEntities())
             {
                 var name = _items3[SelectedTabIndex].OneColumnContent;
-                var IdSelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == name);
-                var view = new DeleteChaphterDialog
-                {
-                    DataContext = new DeleteChaphterDialogViewModel(IdSelectedChaphterValue, IdSelectedThemeValue.Id)
-                };
-                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
-                if ((bool)result == true)
-                {
-                    _items3.Remove(_items3[SelectedTabIndex]);
-                }
+                var SelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == name);
 
-                Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+                ThemeEdit themeEdit = new ThemeEdit() { DataContext = new ThemeEditorViewModel(SelectedThemeValue.Название, SelectedThemeValue.Время_Прохождения.ToString(), SelectedThemeValue.Id) };
+                themeEdit.Show();
             }
         }
 

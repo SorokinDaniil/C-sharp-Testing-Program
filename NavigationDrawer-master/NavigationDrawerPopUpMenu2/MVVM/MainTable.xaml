@@ -113,7 +113,7 @@
                     <Button ToolTip="Добавить" Command="{Binding RunDialogAddChaphterCommand}" >
                         <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                     </Button>
-                    <Button ToolTip="Редактировать">
+                    <Button ToolTip="Редактировать" Command="{Binding RunDialogEditChaphterCommand}">
                         <materialDesign:PackIcon Kind="Edit" />
                     </Button>
                     <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteChaphterCommand}">
