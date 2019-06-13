@@ -25,7 +25,7 @@ namespace TestingProgram
         private string _textTextBox;
         private string _textTimePicker;
         byte EditThemeId;
-
+        
         public List<object> QuestionsSlides { get; set; }
 
 
@@ -36,11 +36,37 @@ namespace TestingProgram
             EditThemeId = editThemeId;
             CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoBackQuestionCommand, GoBackQuestionExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoNextQuestionCommand, GoNextQuestionExecuted));
+
             QuestionsSlides = new List<object>();
-            QuestionsSlides.Add(new QuestionCollection { });
+
+            CreateQuestionSlide(editThemeText);
+
             _slideNavigator = new SlideNavigator(this, QuestionsSlides); 
             _slideNavigator.GoTo(0);//Задается начальное окно 
 
+        }
+
+        void CreateQuestionSlide (string editThemeText)
+        {
+            using (testEntities db= new testEntities())
+            {
+             var idtheme = db.Темы.SingleOrDefault(p => p.Название == editThemeText);//Получение id выбраного элемента
+                IEnumerable<Вопрос> questions = db.Вопросы.Where(p => p.Тема_Id == idtheme.Id).Select(p => new { Текст = p.Текст, Код = p.Код, Тип_Ответа = p.Тип_Ответа , Id = p.Id })
+.AsEnumerable()
+.Select(an => new Вопрос
+{
+    Текст = an.Текст,
+    Код = an.Код,
+    Тип_Ответа =an.Тип_Ответа,
+  Id = an.Id
+});
+                foreach (var question in questions)
+                {
+                    db.Ответы.Where(p => p.Вопрос_Id == question.Id).Load();
+
+                    QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id));
+                }
+            }
         }
 
         private void GoBackQuestionExecuted(object sender, ExecutedRoutedEventArgs e)

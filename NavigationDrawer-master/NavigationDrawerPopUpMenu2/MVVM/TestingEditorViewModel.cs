@@ -7,6 +7,7 @@ using System.Windows;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace TestingProgram
 {
@@ -15,7 +16,7 @@ namespace TestingProgram
 
         public TestingEditorViewModel ()
         {
-
+            AnswerCollection = new ObservableCollection<RadioButton>();
         }
 
         private bool _isCheckedTestEditor;
@@ -78,7 +79,16 @@ namespace TestingProgram
             }
         }
 
-private RelayCommand changeTypeAnswerCommand;
+
+        public ObservableCollection<RadioButton> AnswerCollection
+        {
+            get;
+            set;
+        }
+
+
+
+        private RelayCommand changeTypeAnswerCommand;
         public RelayCommand ChangeTypeAnswerCommand
         {
 
@@ -87,8 +97,11 @@ private RelayCommand changeTypeAnswerCommand;
                 return changeTypeAnswerCommand ??
                     (changeTypeAnswerCommand = new RelayCommand(obj =>
                     {
+
+
                        if (SelectedIndexChangeAnswer == 0)
                         {
+
                             (obj as StackPanel).Children.Clear();
                             CheckBox oneanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
                             CheckBox twoanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
@@ -106,10 +119,10 @@ private RelayCommand changeTypeAnswerCommand;
                             RadioButton twoanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
                             RadioButton threeanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
                             RadioButton fouranswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            (obj as StackPanel).Children.Add(oneanswer);
-                            (obj as StackPanel).Children.Add(twoanswer);
-                            (obj as StackPanel).Children.Add(threeanswer);
-                            (obj as StackPanel).Children.Add(fouranswer);
+                           AnswerCollection.Add(oneanswer);
+                            AnswerCollection.Add(twoanswer);
+                            AnswerCollection.Add(threeanswer);
+                            AnswerCollection.Add(fouranswer);
                         }   
                       
                     }));

@@ -32,18 +32,18 @@ namespace TestingProgram
 
             if (TypeAccount == "User")
             {
-                AdminSlides = new object[] { MainWindowViewModel , TestingWindowViewModel };
+                AdminSlides = new List<object>{ MainWindowViewModel , TestingWindowViewModel };
             }
             if (TypeAccount == "Admin")
             {
-                AdminSlides = new object[] { MainWindowViewModel, TestingEditorViewModel };
+                AdminSlides = new List<object> { MainWindowViewModel, TestingEditorViewModel };
             }
             _slideNavigator = new SlideNavigator(this, AdminSlides);
             _slideNavigator.GoTo(0);//Задается начальное окно 
     
         }
 
-        public object[] AdminSlides { get; }
+        public List<object> AdminSlides { get; }
 
         public MainWindowViewModel MainWindowViewModel { get; } = new MainWindowViewModel(TypeAccount);
 

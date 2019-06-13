@@ -40,11 +40,11 @@ namespace TestingProgram
 
             if (TypeAccount == "User")
             {
-                AdminSlides = new object[] { ChoiceGroup, ChoiceChaphterNoEdit, Admin_Editor_TableChaphterEdit };
+                AdminSlides = new List<object> { ChoiceGroup, ChoiceChaphterNoEdit, Admin_Editor_TableChaphterEdit };
             }
             if (TypeAccount == "Admin")
             {
-                AdminSlides = new object[] { ChoiceChaphter, Admin_Editor_TableChaphterEdit  , ChoiceGroup, ChoiceChaphterNoEdit };
+                AdminSlides = new List<object> { ChoiceChaphter, Admin_Editor_TableChaphterEdit  , ChoiceGroup, ChoiceChaphterNoEdit };
             }
             _slideNavigator = new SlideNavigator(this, AdminSlides);
             //_slideNavigator.GoTo(1);//Задается начальное окно 
@@ -134,7 +134,7 @@ namespace TestingProgram
             Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
 
-        public object[] AdminSlides { get; }
+        public List<object> AdminSlides { get; }
 
         public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
 
