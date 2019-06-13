@@ -18,193 +18,111 @@ using System.Data.Entity;
 
 namespace TestingProgram
 {
-   //public class ThemeEditorViewModel : INotifyPropertyChanged
-   // {
-   //     byte EditThemeId;
-   //     public ThemeEditorViewModel(string editThemeText, string editThemeTime , byte editThemeId)
-   //     {
-   //         TextTextBox = editThemeText;
-   //         TextTimePicker = editThemeTime;
-   //         EditThemeId = editThemeId;
-   //     }
+    public class ThemeEditorViewModel : INotifyPropertyChanged, ISlideNavigationSubject
+    {
+        private readonly SlideNavigator _slideNavigator;
+        private int _activeSlideIndex;
+        private string _textTextBox;
+        private string _textTimePicker;
+        byte EditThemeId;
 
+        public List<object> QuestionsSlides { get; set; }
 
-   //     private string _textTextBox;
-   //     private string _textTimePicker;
-
-   //     public string TextTextBox
-   //     {
-   //         get { return _textTextBox; }
-   //         set
-   //         {
-   //             _textTextBox = value;
-
-   //             OnPropertyChanged();
-   //         }
-   //     }
-
-   //     public string TextTimePicker
-   //     {
-   //         get { return _textTimePicker; }
-   //         set
-   //         {
-   //             _textTimePicker = value;
-
-   //             OnPropertyChanged();
-   //         }
-   //     }
-
-   //     public event PropertyChangedEventHandler PropertyChanged;
-
-   //     protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-   //     {
-   //         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-   //     }
-   // }
-
-        public class ThemeEditorViewModel : INotifyPropertyChanged, ISlideNavigationSubject
-        {
-            private readonly SlideNavigator _slideNavigator;
-            private int _activeSlideIndex;
 
         public ThemeEditorViewModel(string editThemeText, string editThemeTime, byte editThemeId)
         {
             TextTextBox = editThemeText;
             TextTimePicker = editThemeTime;
             EditThemeId = editThemeId;
+            CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoBackQuestionCommand, GoBackQuestionExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoNextQuestionCommand, GoNextQuestionExecuted));
+            QuestionsSlides = new List<object>();
+            QuestionsSlides.Add(new QuestionCollection { });
+            _slideNavigator = new SlideNavigator(this, QuestionsSlides); 
+            _slideNavigator.GoTo(0);//Задается начальное окно 
 
+        }
 
+        private void GoBackQuestionExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            _slideNavigator.GoTo(ActiveSlideIndex - 1);
+        }
 
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoBackCommand, GoBackExecuted));
-                CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.GoForwardCommand, GoForwardExecuted));
+        private void GoNextQuestionExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            _slideNavigator.GoTo(ActiveSlideIndex + 1);
 
-                if (TypeAccount == "User")
-                {
-                    AdminSlides = new object[] { ChoiceGroup, ChoiceChaphterNoEdit, Admin_Editor_TableChaphterEdit };
-                }
-                if (TypeAccount == "Admin")
-                {
-                    AdminSlides = new object[] { ChoiceChaphter, Admin_Editor_TableChaphterEdit, ChoiceGroup, ChoiceChaphterNoEdit };
-                }
-                _slideNavigator = new SlideNavigator(this, AdminSlides);
-                //_slideNavigator.GoTo(1);//Задается начальное окно 
-                /*Admin_Editor_TableChaphterEdit, Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit, Admin_ListStudent_TablePassedTestNoEdit , User_ListStudent_TableTestNoEdit ,*/ /* 
-                    TestingWindowViewModel ,PreviewTestingWindowViewModel */
-            }
+        }
 
+        public string TextTextBox
+        {
+            get { return _textTextBox; }
+            set { this.MutateVerbose(ref _textTextBox, value, RaisePropertyChanged()); }
+        }
 
-        
+        public string TextTimePicker
+        {
+            get { return _textTimePicker; }
+            set { this.MutateVerbose(ref _textTimePicker, value, RaisePropertyChanged()); }
+        }
 
-            public object[] AdminSlides { get; }
+        public int ActiveSlideIndex
+        {
+            get { return _activeSlideIndex; }
+            set { this.MutateVerbose(ref _activeSlideIndex, value, RaisePropertyChanged()); }
+        }
 
-            public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
+        private int IndexOfSlide<TSlide>()
+        {
+            return QuestionsSlides.Select((o, i) => new { o, i }).First(a => a.o.GetType() == typeof(TSlide)).i;
+        }
 
+        public event PropertyChangedEventHandler PropertyChanged;
 
-            private void ShowChoiceGroupExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-
-
-            }
-
-            private void ShowChoiceChaphterExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-
-
-            }
-
-            private void ShowAdmin_Editor_TableChaphterEditExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-                string SelectedValue = "";
-                if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
-                {
-                    SelectedValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
-                }
-
-                //var IsCheck = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
-                //var SelectValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
-                //Console.WriteLine(IsCheck);
-                //Console.WriteLine(SelectValue);
-                _slideNavigator.GoTo(
-                    IndexOfSlide<MainTableViewModel>(),
-                    () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
-
-            }
-            private void ShowChoiceChaphterNoEditExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-                _slideNavigator.GoTo(1);
-                //_slideNavigator.GoTo(
-                //    IndexOfSlide<ChoiceViewModel>(),
-                //    () => ChoiceChaphterNoEdit.Show());
-            }
-
-            private void ShowMainTableExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-                string SelectedValue = "";
-                if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
-                {
-                    SelectedValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
-                }
-
-                //var IsCheck = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
-                //var SelectValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
-                //Console.WriteLine(IsCheck);
-                //Console.WriteLine(SelectValue);
-                _slideNavigator.GoTo(
-                    IndexOfSlide<MainTableViewModel>(),
-                    () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
-            }
-
-            private void ShowTabControlExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-                _slideNavigator.GoTo(2);
-            }
-
-            //private void ShowSeasonExecuted(object sender, ExecutedRoutedEventArgs e)
-            //{
-            //    _slideNavigator.GoTo(
-            //        IndexOfSlide<TestingWindowViewModel>(),
-            //        () => TestingWindowViewModel.Show());
-            //}
-
-            //private void ShowRaceExecuted(object sender, ExecutedRoutedEventArgs e)
-            //{
-            //    _slideNavigator.GoTo(
-            //        IndexOfSlide<PreviewTestingWindowViewModel>(),
-            //        () => PreviewTestingWindowViewModel.Show());
-            //}
-
-            public int ActiveSlideIndex
-            {
-                get { return _activeSlideIndex; }
-                set { this.MutateVerbose(ref _activeSlideIndex, value, RaisePropertyChanged()); }
-            }
-
-            private void GoBackExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-                _slideNavigator.GoTo(0);
-                //_slideNavigator.GoBack();
-            }
-
-            private void GoForwardExecuted(object sender, ExecutedRoutedEventArgs e)
-            {
-                _slideNavigator.GoTo(ActiveSlideIndex + 1);
-                //_slideNavigator.GoForward();//Не работает
-            }
-
-
-
-            private int IndexOfSlide<TSlide>()
-            {
-                return AdminSlides.Select((o, i) => new { o, i }).First(a => a.o.GetType() == typeof(TSlide)).i;
-            }
-
-            public event PropertyChangedEventHandler PropertyChanged;
-
-            private Action<PropertyChangedEventArgs> RaisePropertyChanged()
-            {
-                return args => PropertyChanged?.Invoke(this, args);
-            }
+        private Action<PropertyChangedEventArgs> RaisePropertyChanged()
+        {
+            return args => PropertyChanged?.Invoke(this, args);
         }
     }
+
+    //public class ThemeEditorViewModel : INotifyPropertyChanged
+    //{
+
+
+    //public ThemeEditorViewModel(string editThemeText, string editThemeTime, byte editThemeId)
+    //{
+    //    TextTextBox = editThemeText;
+    //    TextTimePicker = editThemeTime;
+    //    EditThemeId = editThemeId;
+
+
+
+
+
+    //        if (TypeAccount == "User")
+    //        {
+    //            QuestionsSlides = new object[] { ChoiceGroup, ChoiceChaphterNoEdit, Admin_Editor_TableChaphterEdit };
+    //        }
+    //        if (TypeAccount == "Admin")
+    //        {
+    //        
+    //        }
+    //    //        /*Admin_Editor_TableChaphterEdit, Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit, Admin_ListStudent_TablePassedTestNoEdit , User_ListStudent_TableTestNoEdit ,*/ /* 
+    //            TestingWindowViewModel ,PreviewTestingWindowViewModel */
+    //    }
+
+    //    
+
+    //    public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
+
+
+
+
+
+
+
+
+    //}
+}
 
 

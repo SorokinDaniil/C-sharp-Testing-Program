@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
-namespace TestingProgram.MVVM
+
+namespace TestingProgram
 {
-    class QuestionsCollectionViewModel
+    class QuestionsCollectionViewModel : INotifyPropertyChanged, ISlideNavigationSubject
     {
+        
 
     }
 }

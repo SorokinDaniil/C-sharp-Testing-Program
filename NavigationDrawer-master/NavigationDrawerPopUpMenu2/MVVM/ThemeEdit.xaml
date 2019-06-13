@@ -61,6 +61,7 @@
                                 <materialDesign:TimePicker Text="{Binding TextTimePicker}"
 materialDesign:HintAssist.Hint="Время"
   Is24Hours="True"
+  WithSeconds="True"
   x:Name="WithSecondsTimePicker"
   Width="100" FontSize="15" Margin="0,0,16,0" HorizontalAlignment="Right" />
                             </StackPanel>

@@ -23,6 +23,11 @@ public static RoutedCommand ShowAdmin_Editor_TableChaphterEditCommand = new Rout
         public static RoutedCommand ShowTestingEditorCommand = new RoutedCommand();
         public static RoutedCommand ShowThemeEditorCommand = new RoutedCommand();
         public static RoutedCommand ShowTestingWindowCommand = new RoutedCommand();
+
+
+        public static RoutedCommand GoBackQuestionCommand = new RoutedCommand();
+        public static RoutedCommand GoNextQuestionCommand = new RoutedCommand();
+
     }
 }
 
