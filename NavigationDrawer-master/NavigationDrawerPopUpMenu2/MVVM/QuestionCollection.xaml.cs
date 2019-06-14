@@ -23,6 +23,7 @@ namespace TestingProgram
         public QuestionCollection()
         {
             InitializeComponent();
+            
         }
     }
 }

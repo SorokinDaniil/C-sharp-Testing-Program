@@ -11,10 +11,14 @@
              Title="Testing" Height="800" Width="1080"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen" Background="White" WindowStyle="None" ResizeMode="NoResize">
+
+
     <Window.Resources>
+        
         <DataTemplate DataType="{x:Type local:QuestionsCollectionViewModel}">
             <local:QuestionCollection />
         </DataTemplate>
+
     </Window.Resources>
     <Grid>
         <DockPanel>
@@ -51,11 +55,11 @@
 
 
                             <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" >
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" Command="{Binding LeftArrowCommand}" Visibility="{Binding VisabilityLeftArrow}">
                                     <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
                                 </Button>
-                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.Column="1">1/10</TextBlock>
-                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" >
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.Column="1" Text="{Binding TextShowCurrentSlide}"></TextBlock>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" Command="{Binding RightArrowCommand}" Visibility="{Binding VisabilityRightArrow}">
                                     <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
                                 </Button>
                             </StackPanel>
@@ -84,15 +88,47 @@ materialDesign:HintAssist.Hint="Время"
             <!--#endregion HEADPANEL-->
 
 
-
-            <Grid x:Name="CenterGridTheme"  x:FieldModifier="public">
-                <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
+            <DockPanel LastChildFill="False">
+                <Grid x:Name="CenterGridTheme"  x:FieldModifier="public">
+                    <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
                                      AutoApplyTransitionOrigins="True"
                                      ItemsSource="{Binding QuestionsSlides}">
 
-                </materialDesign:Transitioner>
-            </Grid>
+                    </materialDesign:Transitioner>
+                </Grid>
+                <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                            PlacementMode="LeftAndAlignMiddles"
+    UnfurlOrientation="Horizontal"
+                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                 Margin="32" DockPanel.Dock="Right" >
+                    <materialDesign:PopupBox.ToggleContent>
+                        <materialDesign:PackIcon
+      Kind="Pencil"
+      Width="22"
+      Height="22" />
+                    </materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PopupBox.ToggleCheckedContent>
+                        <materialDesign:PackIcon
+      Kind="Close"
+      Width="22"
+      Height="22" />
+                    </materialDesign:PopupBox.ToggleCheckedContent>
 
+                    <StackPanel Orientation="Horizontal">
+                        <Button ToolTip="Добавить" Command="{Binding RunDialogAddChaphterCommand}" >
+                            <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                        </Button>
+                        <Button ToolTip="Редактировать" Command="{Binding RunDialogEditChaphterCommand}">
+                            <materialDesign:PackIcon Kind="Edit" />
+                        </Button>
+                        <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteChaphterCommand}">
+                            <materialDesign:PackIcon Kind="Delete" />
+                        </Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+
+            </DockPanel>
+          
 
 
 

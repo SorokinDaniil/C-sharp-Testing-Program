@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 
 namespace TestingProgram
@@ -12,44 +13,71 @@ namespace TestingProgram
   public  class QuestionsCollectionViewModel : INotifyPropertyChanged
     {
         string _textQuestion;
+        string TypeAnswerQuestion;
+        byte IdQuestion;
+        StackPanel AnswerStackPanel;
 
         public QuestionsCollectionViewModel (string textQuestion,string codeQuestion,string typeAnswerQuestion,byte idQuestion)
         {
-            TextQuestion = textQuestion;
+            TextQuestion = textQuestion;//Загрузка текста вопроса
+            IdQuestion = idQuestion;
+            TypeAnswerQuestion = typeAnswerQuestion;
 
-            CreateAnswers(idQuestion);
 
-            if(typeAnswerQuestion == "CheckBox")
-            {
+        
 
-            }
-            else
-            if (typeAnswerQuestion == "RadioButton")
-            {
-
-            }
+         
         }
 
-        void CreateAnswers (byte idQuestion)
+        void CreateAnswers ()
         {
             using (testEntities db = new testEntities())
             {  
-                IEnumerable<Ответ> answers = db.Ответы.Where(p => p.Вопрос_Id == idQuestion).Select(p => new { Текст = p.Текст, Значение = p.Значение, })
+                IEnumerable<Ответ> answers = db.Ответы.Where(p => p.Вопрос_Id == IdQuestion).Select(p => new { Текст = p.Текст, Значение = p.Значение, })
 .AsEnumerable()
 .Select(an => new Ответ
 {
     Текст = an.Текст,
     Значение = an.Значение,
 });
-                foreach (var answer in answers)
+                if (TypeAnswerQuestion == "CheckBox")
                 {
-                    
+                    foreach (var answer in answers)
+                    {
+                        CheckBox radionanswer = new CheckBox { Content = new TextBlock { FontSize = 15, Width = 1017, Height = 29, Text = answer.Текст }, MinHeight = 20, IsChecked = answer.Значение, Margin = new System.Windows.Thickness(20, 0, 20, 6) };
+                        AnswerStackPanel.Children.Add(radionanswer);
+                    }
+                }
+                else
+                if (TypeAnswerQuestion == "RadioButton")
+                {
+                    foreach (var answer in answers)
+                    {
+                        RadioButton radionanswer = new RadioButton { Content = new TextBlock { FontSize = 15, Width = 1017, Height = 29 ,Text=answer.Текст }, MinHeight = 20, IsChecked = answer.Значение, Margin = new System.Windows.Thickness(20, 0, 20, 6) };
+                        AnswerStackPanel.Children.Add(radionanswer);
+                    }
+                }
                     //Тут закончил
                     //QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id));
                 }
             }
+        
+
+        private RelayCommand loadedStackPanel;
+        public RelayCommand LoadedStackPanel
+        {
+
+            get
+            {
+                return loadedStackPanel ??
+                    (loadedStackPanel = new RelayCommand(obj =>
+                    {
+                        AnswerStackPanel = (obj as StackPanel);
+                        CreateAnswers();//Загрузка вариантов ответа
+                    }));
+            }
         }
- 
+
         public string TextQuestion
         {
             get { return _textQuestion; }

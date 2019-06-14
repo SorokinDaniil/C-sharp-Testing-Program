@@ -11,19 +11,13 @@
              Height="800" Width="1080"
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"  Background="White">
+  
     <Grid>
         <DockPanel Margin="0"  LastChildFill="False">
 
-            <TextBlock   TextWrapping="WrapWithOverflow"  Height="109" Width="1040"  Margin="20,40,20,20" HorizontalAlignment="Left" DockPanel.Dock="Top"  FontSize="15" Text="{Binding TextQuestion}"></TextBlock>
+            <TextBlock   TextWrapping="WrapWithOverflow" Width="1040"  Margin="20,40,20,20" HorizontalAlignment="Left" DockPanel.Dock="Top"  FontSize="15" Text="{Binding TextQuestion}"></TextBlock>
 
-            <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="260" Visibility="{Binding VisibilityCodeBlockQuestion}"  Text="namespace TestingProgram.MVVM
-{
-    class QuestionsCollectionViewModel
-    {
-
-    }
-}
-"
+            <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="260" Visibility="{Binding VisibilityCodeBlockQuestion}"  Text=""
                     ShowLineNumbers="True" 
 				Name="textEditor"
 				FontFamily="Consolas"
@@ -35,40 +29,15 @@
             </avalonEdit:TextEditor>
 
             <StackPanel DockPanel.Dock="Top" x:Name="AnswerBlock">
-
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Loaded">
+                        <i:InvokeCommandAction Command="{Binding LoadedStackPanel}" CommandParameter="{Binding ElementName=AnswerBlock}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </StackPanel>
 
 
-            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" IsEnabled="{Binding IsEnabledPopupBox}" 
-                                            PlacementMode="LeftAndAlignMiddles"
-    UnfurlOrientation="Horizontal"
-                                 HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                 Margin="32" DockPanel.Dock="Right" >
-                <materialDesign:PopupBox.ToggleContent>
-                    <materialDesign:PackIcon
-      Kind="Pencil"
-      Width="22"
-      Height="22" />
-                </materialDesign:PopupBox.ToggleContent>
-                <materialDesign:PopupBox.ToggleCheckedContent>
-                    <materialDesign:PackIcon
-      Kind="Close"
-      Width="22"
-      Height="22" />
-                </materialDesign:PopupBox.ToggleCheckedContent>
-
-                <StackPanel Orientation="Horizontal">
-                    <Button ToolTip="Добавить" Command="{Binding RunDialogAddChaphterCommand}" >
-                        <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
-                    </Button>
-                    <Button ToolTip="Редактировать" Command="{Binding RunDialogEditChaphterCommand}">
-                        <materialDesign:PackIcon Kind="Edit" />
-                    </Button>
-                    <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteChaphterCommand}">
-                        <materialDesign:PackIcon Kind="Delete" />
-                    </Button>
-                </StackPanel>
-            </materialDesign:PopupBox>
+     
 
         </DockPanel>
     </Grid>

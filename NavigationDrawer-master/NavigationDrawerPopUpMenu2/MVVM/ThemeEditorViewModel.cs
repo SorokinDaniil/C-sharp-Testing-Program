@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using MaterialDesignThemes.Wpf;
 using System.Windows.Controls.Primitives;
 using System.Collections.Generic;
-
+using System.Windows;
 using System.Collections.ObjectModel;
 using DevExpress;
 using System.Data.Entity;
@@ -24,9 +24,13 @@ namespace TestingProgram
         private int _activeSlideIndex;
         private string _textTextBox;
         private string _textTimePicker;
+       private string _textShowCurrentSlide;
+        private Visibility _visabilityLeftArrow;
+      private Visibility _visabilityRightArrow;
+        int NumberQuestion;
         byte EditThemeId;
         
-        public List<object> QuestionsSlides { get; set; }
+        public List<object> QuestionsSlides { get; set; } = new List<object>();
 
 
         public ThemeEditorViewModel(string editThemeText, string editThemeTime, byte editThemeId)
@@ -34,22 +38,28 @@ namespace TestingProgram
             TextTextBox = editThemeText;
             TextTimePicker = editThemeTime;
             EditThemeId = editThemeId;
+            VisabilityLeftArrow = Visibility.Hidden;
             CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoBackQuestionCommand, GoBackQuestionExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoNextQuestionCommand, GoNextQuestionExecuted));
 
-            QuestionsSlides = new List<object>();
+
+            using (testEntities db = new testEntities())
+            {
+                db.Вопросы.Where(p => p.Тема_Id == EditThemeId).Load();
+                NumberQuestion = db.Вопросы.Local.Count;
+            }
 
             CreateQuestionSlide(editThemeText);
-
             _slideNavigator = new SlideNavigator(this, QuestionsSlides); 
             _slideNavigator.GoTo(0);//Задается начальное окно 
-
         }
+
 
         void CreateQuestionSlide (string editThemeText)
         {
             using (testEntities db= new testEntities())
             {
+               TextShowCurrentSlide = $"{ActiveSlideIndex + 1}/{NumberQuestion}";
              var idtheme = db.Темы.SingleOrDefault(p => p.Название == editThemeText);//Получение id выбраного элемента
                 IEnumerable<Вопрос> questions = db.Вопросы.Where(p => p.Тема_Id == idtheme.Id).Select(p => new { Текст = p.Текст, Код = p.Код, Тип_Ответа = p.Тип_Ответа , Id = p.Id })
 .AsEnumerable()
@@ -62,11 +72,73 @@ namespace TestingProgram
 });
                 foreach (var question in questions)
                 {
-                    db.Ответы.Where(p => p.Вопрос_Id == question.Id).Load();
-
                     QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id));
                 }
             }
+        }
+
+        private RelayCommand leftArrowCommand;
+        public RelayCommand LeftArrowCommand
+        {
+
+            get
+            {
+                return leftArrowCommand ??
+                    (leftArrowCommand = new RelayCommand(obj =>
+                    {
+                        _slideNavigator.GoTo(ActiveSlideIndex - 1);
+                        TextShowCurrentSlide = $"{ActiveSlideIndex + 1}/{NumberQuestion}";
+                        CheckSlide();
+                    }));
+            }
+        }
+
+        private RelayCommand rightArrowCommand;
+        public RelayCommand RightArrowCommand
+        {
+
+            get
+            {
+                return rightArrowCommand ??
+                    (rightArrowCommand = new RelayCommand(obj =>
+                    {
+
+                        _slideNavigator.GoTo(ActiveSlideIndex + 1);
+                        TextShowCurrentSlide = $"{ActiveSlideIndex + 1}/{NumberQuestion}";
+                        CheckSlide();
+                    }));
+            }
+        }
+
+        void CheckSlide ()
+        {
+            if (ActiveSlideIndex == 0)
+            {
+                VisabilityLeftArrow = Visibility.Hidden;
+                VisabilityRightArrow = Visibility.Visible;
+            } 
+            else
+
+            if (ActiveSlideIndex == (QuestionsSlides.Count - 1))
+            {
+                VisabilityLeftArrow = Visibility.Visible;
+                VisabilityRightArrow = Visibility.Hidden;
+            }
+            else
+            {
+                VisabilityLeftArrow = Visibility.Visible;
+                VisabilityRightArrow = Visibility.Visible;
+            }
+             
+            //if (QuestionsSlides.Count == 1)
+            //{
+            //    VisabilityLeftArrow = Visibility.Visible;
+            //    VisabilityRightArrow = Visibility.Visible;
+            //}
+
+            //else VisabilityLeftArrow = Visibility.Visible;
+            //VisabilityRightArrow = Visibility.Collapsed;
+            //            else VisabilityRightArrow = Visibility.Visible;
         }
 
         private void GoBackQuestionExecuted(object sender, ExecutedRoutedEventArgs e)
@@ -90,6 +162,24 @@ namespace TestingProgram
         {
             get { return _textTimePicker; }
             set { this.MutateVerbose(ref _textTimePicker, value, RaisePropertyChanged()); }
+        }
+
+        public Visibility VisabilityLeftArrow
+        {
+            get { return _visabilityLeftArrow; }
+            set { this.MutateVerbose(ref _visabilityLeftArrow, value, RaisePropertyChanged()); }
+        }
+
+        public Visibility VisabilityRightArrow
+        {
+            get { return _visabilityRightArrow; }
+            set { this.MutateVerbose(ref _visabilityRightArrow, value, RaisePropertyChanged()); }
+        }
+
+        public string TextShowCurrentSlide
+        {
+            get { return _textShowCurrentSlide; }
+            set { this.MutateVerbose(ref _textShowCurrentSlide, value, RaisePropertyChanged()); }
         }
 
         public int ActiveSlideIndex

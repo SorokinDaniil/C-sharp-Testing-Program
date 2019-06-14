@@ -91,13 +91,7 @@
         </DataTemplate>-->
         
         
-        <!--<Window.Resources>
-            <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>-->
+     
    
     <Window.Resources>
         <DataTemplate DataType="{x:Type local:PreviewTestingWindowViewModel}">

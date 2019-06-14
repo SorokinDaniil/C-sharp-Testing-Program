@@ -13,10 +13,10 @@ namespace TestingProgram
 {
   public class TestingEditorViewModel : INotifyPropertyChanged
     {
-
+        StackPanel AnswerStackPanel;
         public TestingEditorViewModel ()
         {
-            AnswerCollection = new ObservableCollection<RadioButton>();
+         
         }
 
         private bool _isCheckedTestEditor;
@@ -79,11 +79,19 @@ namespace TestingProgram
             }
         }
 
-
-        public ObservableCollection<RadioButton> AnswerCollection
+        private RelayCommand loadedStackPanel;
+        public RelayCommand LoadedStackPanel
         {
-            get;
-            set;
+
+            get
+            {
+                return loadedStackPanel ??
+                    (loadedStackPanel = new RelayCommand(obj =>
+                    {
+                        AnswerStackPanel = (obj as StackPanel);
+
+                    }));
+            }
         }
 
 
@@ -119,10 +127,10 @@ namespace TestingProgram
                             RadioButton twoanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
                             RadioButton threeanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
                             RadioButton fouranswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                           AnswerCollection.Add(oneanswer);
-                            AnswerCollection.Add(twoanswer);
-                            AnswerCollection.Add(threeanswer);
-                            AnswerCollection.Add(fouranswer);
+                            AnswerStackPanel.Children.Add(oneanswer);
+                            AnswerStackPanel.Children.Add(twoanswer);
+                            AnswerStackPanel.Children.Add(threeanswer);
+                            AnswerStackPanel.Children.Add(fouranswer);
                         }   
                       
                     }));
