@@ -101,6 +101,7 @@
     <Compile Include="Admin\AdminLeftPanel.xaml.cs">
       <DependentUpon>AdminLeftPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AvalonEditBehaviour.cs" />
     <Compile Include="Dialog\AddChaphterDialog.xaml.cs">
       <DependentUpon>AddChaphterDialog.xaml</DependentUpon>
     </Compile>
@@ -137,15 +138,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelTest.edmx</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\QuestionCollection.xaml.cs">
+    <Compile Include="MVVM\Editor\QuestionCollection.xaml.cs">
       <DependentUpon>QuestionCollection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\QuestionsCollectionViewModel.cs" />
+    <Compile Include="MVVM\Editor\QuestionsCollectionViewModel.cs" />
     <Compile Include="MVVM\SlideWindow.xaml.cs">
       <DependentUpon>SlideWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\SlideWindowViewModel.cs" />
-    <Compile Include="MVVM\ThemeEdit.xaml.cs">
+    <Compile Include="MVVM\Editor\ThemeEdit.xaml.cs">
       <DependentUpon>ThemeEdit.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\Choice.xaml.cs">
@@ -172,12 +173,12 @@
       <DependentUpon>TabControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\TabControlViewModel.cs" />
-    <Compile Include="MVVM\TestingEditor.xaml.cs">
+    <Compile Include="MVVM\Editor\TestingEditor.xaml.cs">
       <DependentUpon>TestingEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\TestingEditorViewModel.cs" />
+    <Compile Include="MVVM\Editor\TestingEditorViewModel.cs" />
     <Compile Include="MVVM\TestingWindowViewModel.cs" />
-    <Compile Include="MVVM\ThemeEditorViewModel.cs" />
+    <Compile Include="MVVM\Editor\ThemeEditorViewModel.cs" />
     <Compile Include="PasswordHelper.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="sysdiagrams.cs">
@@ -265,7 +266,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\QuestionCollection.xaml">
+    <Page Include="MVVM\Editor\QuestionCollection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -273,7 +274,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\ThemeEdit.xaml">
+    <Page Include="MVVM\Editor\ThemeEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,7 +294,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\TestingEditor.xaml">
+    <Page Include="MVVM\Editor\TestingEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

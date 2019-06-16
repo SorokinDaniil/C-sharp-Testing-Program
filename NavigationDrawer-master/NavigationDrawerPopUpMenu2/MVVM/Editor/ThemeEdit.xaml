@@ -1,0 +1,178 @@
+﻿<Window x:Class="TestingProgram.ThemeEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TestingProgram"
+             xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             Title="Testing" Height="800" Width="1080"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen" Background="White" WindowStyle="None" ResizeMode="NoResize" x:Name="ThemeEditName">
+
+
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type local:QuestionsCollectionViewModel}">
+            <local:QuestionCollection />
+        </DataTemplate>
+
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+
+            <!--#region  HEAD_PANEL-->
+            <materialDesign:ColorZone x:Name="ColorZone"  materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                           DockPanel.Dock="Top"
+                                        Mode="PrimaryMid" Height="60" >
+                <!--<Grid>
+                        <TextBlock Style="{StaticResource BaseTextLightH2}" HorizontalAlignment="Center" VerticalAlignment="Center">1/10</TextBlock>
+                    </Grid>-->
+
+                <materialDesign:TransitioningContent OpeningEffect="{materialDesign:TransitionEffect ExpandIn, Duration=0:0:1}">
+
+                    <DockPanel x:Name="Head" HorizontalAlignment="Right" Width="1080" >
+
+                        <!--<Grid x:Name="HeadLabelName">
+                        </Grid>-->
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="17.5,0,16,0" >
+                            <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                        </Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="2*" />
+
+
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" >Название темы</TextBlock>
+                                <TextBox Width="100" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0" materialDesign:HintAssist.Hint="Название" FontSize="15" Text="{Binding TextTextBox}"></TextBox>
+                            </StackPanel>
+
+
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" Command="{Binding LeftArrowCommand}" Visibility="{Binding VisabilityLeftArrow}">
+                                    <materialDesign:PackIcon Kind="ArrowLeft" Width="25" Height="25"/>
+                                </Button>
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" Grid.Column="1" Text="{Binding TextShowCurrentSlide}"></TextBlock>
+                                <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="16,0,16,0" Command="{Binding RightArrowCommand}" Visibility="{Binding VisabilityRightArrow}">
+                                    <materialDesign:PackIcon Kind="ArrowRight" Width="25" Height="25"/>
+                                </Button>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="20" Margin="16,0" Grid.Column="3">Время прохождения</TextBlock>
+
+                                <materialDesign:TimePicker Text="{Binding TextTimePicker}"
+materialDesign:HintAssist.Hint="Время"
+  Is24Hours="True"
+  WithSeconds="True"
+  x:Name="WithSecondsTimePicker"
+  Width="100" FontSize="15" Margin="0,0,16,0" HorizontalAlignment="Right" />
+                            </StackPanel>
+
+                        </Grid>
+
+
+
+
+                    </DockPanel>
+                </materialDesign:TransitioningContent>
+
+
+            </materialDesign:ColorZone>
+            <!--#endregion HEADPANEL-->
+
+
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="88"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="CenterGridTheme"  x:FieldModifier="public" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="0">
+                    <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
+                                     AutoApplyTransitionOrigins="True"
+                                     ItemsSource="{Binding QuestionsSlides}">
+
+                    </materialDesign:Transitioner>
+                </Grid>
+
+                <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" Grid.Row="1"
+                                            PlacementMode="LeftAndAlignMiddles"
+    UnfurlOrientation="Horizontal"
+                                 HorizontalAlignment="Right"
+                                 Margin="0,0,32,32" DockPanel.Dock="Bottom" Height="Auto" >
+                    <materialDesign:PopupBox.ToggleContent>
+                        <materialDesign:PackIcon
+      Kind="Pencil"
+      Width="22"
+      Height="22" />
+                    </materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PopupBox.ToggleCheckedContent>
+                        <materialDesign:PackIcon
+      Kind="Close"
+      Width="22"
+      Height="22" />
+                    </materialDesign:PopupBox.ToggleCheckedContent>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Button ToolTip="Добавить" Command="{Binding RunAddQustionCommand}" CommandParameter="{Binding ElementName=ThemeEditName}">
+                            <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
+                        </Button>
+                        <Button ToolTip="Редактировать" Command="{Binding RunEditQuestionCommand}" CommandParameter="{Binding ElementName=ThemeEditName}">
+                            <materialDesign:PackIcon Kind="Edit" />
+                        </Button>
+                        <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteQuestionCommand}">
+                            <materialDesign:PackIcon Kind="Delete" />
+                        </Button>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+
+
+
+            </Grid>
+
+
+
+
+        </DockPanel>
+    </Grid>
+</Window>
+
+
+
+<!--<CheckBox Margin="20,0,20,6">
+                        <ContentControl>
+                            <TextBox FontSize="15" MaxLength="204" Width="1017" Height="29">
+                            </TextBox>
+                        </ContentControl>
+
+                    </CheckBox>
+                    <CheckBox Margin="20,0,20,6">
+                        <TextBox  FontSize="15" MaxLength="204" Width="1017" Height="29">
+
+                        </TextBox>
+                    </CheckBox>
+                    <CheckBox Margin="20,0,20,6" >
+                        <TextBox  FontSize="15" MaxLength="204" Width="1017" Height="29">
+
+                        </TextBox>
+                    </CheckBox>
+                    <CheckBox Margin="20,0,20,6">
+                        <TextBox  FontSize="15" MaxLength="204" Width="1017" Height="29"  >
+
+                        </TextBox>
+                    </CheckBox>-->
+
+
+<!--<StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                    <Button   
+                                            CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  Style="{StaticResource MaterialDesignRaisedButton}"  >СОХРАНИТЬ</Button>
+                    <Button   
+                                            CommandParameter="{Binding}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,20,20,20" DockPanel.Dock="Bottom" Height="31.6"  Style="{StaticResource MaterialDesignRaisedButton}"  >СОХРАНИТЬ</Button>
+                </StackPanel>-->
+        
