@@ -110,6 +110,39 @@ namespace TestingProgram
             }
         }
 
+        private RelayCommand runAddQustionCommand;
+        public RelayCommand RunAddQustionCommand
+        {
+
+            get
+            {
+                return runAddQustionCommand ??
+                    (runAddQustionCommand = new RelayCommand(obj =>
+                    {
+                        TestingEditor testingEditor = new TestingEditor();
+                        testingEditor.Show();
+                        (obj as ThemeEdit).Close(); 
+                    }));
+            }
+        }
+
+        private RelayCommand runEditQuestionCommand;
+        public RelayCommand RunEditQuestionCommand
+        {
+
+            get
+            {
+                return runEditQuestionCommand ??
+                    (runEditQuestionCommand = new RelayCommand(obj =>
+                    {
+                        TestingEditor testingEditor = new TestingEditor();
+                        testingEditor.Show();
+                        (obj as ThemeEdit).Close();
+
+                    }));
+            }
+        }
+
         void CheckSlide ()
         {
             if (ActiveSlideIndex == 0)

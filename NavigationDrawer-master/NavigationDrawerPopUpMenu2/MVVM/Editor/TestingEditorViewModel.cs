@@ -210,6 +210,57 @@ namespace TestingProgram
             }
         }
 
+        private RelayCommand saveQuestion;
+        public RelayCommand SaveQuestion
+        {
+
+            get
+            {
+                return saveQuestion ??
+                    (saveQuestion = new RelayCommand(obj =>
+                    {
+                        using (testEntities db = new testEntities())
+                        {
+                            var children = AnswerStackPanel.Children.OfType<UIElement>().ToList();
+                            if (IsCheckCodeQuestion == false) CodeQuestion = null;
+                            if (EditQuestionId == 0)//Добавление нового элемента 
+                            {
+                                Вопрос вопрос = new Вопрос { Текст = TextQuestion, Код = CodeQuestion, Тип_Ответа = (obj as string), Тема_Id = EditThemeId };
+                                db.Вопросы.Add(вопрос);
+                                foreach (var ans in children)
+                                {
+                                    db.Ответы.Add(new Ответ { Текст = ((ans as RadioButton).Content as TextBox).Text, Значение = (bool)(ans as RadioButton).IsChecked, Вопрос_Id = db.Вопросы.Last().Id });
+                                    db.SaveChanges();
+                                }
+                            }
+                        }
+                    
+                    
+
+
+                        //AnswerStackPanel = (obj as StackPanel);
+                        //if (TextQuestion == "")
+                        //{
+                        //    for (int i = 0; i < 4; i++)
+                        //    {
+                        //        if (i == 0) RadioAnswer("", true);
+                        //        else
+                        //            RadioAnswer("", false);
+                        //    }
+                        //}
+                        //else
+                        // if (TextQuestion != "")
+                        //{
+                        //    CreateAnswers();
+                        //}
+
+
+
+                    }));
+            }
+        }
+
+
         private RelayCommand changeTypeAnswerCommand;
 
         public RelayCommand ChangeTypeAnswerCommand
@@ -239,28 +290,6 @@ namespace TestingProgram
                             }
                                 
 
-                            //    if (ans == 0) CheckAnswer(ans.Content.ToString(), true);
-                            //    else
-                            //        CheckAnswer("", false);
-
-                            //}
-                            //AnswerStackPanel.Children.
-                            //AnswerStackPanel.Children.Clear();
-                            //for(int i =0; i< 4;i++)
-                            //{
-                            //    if (i == 0) CheckAnswer("", true);
-                            //    else
-                            //        CheckAnswer("", false);
-                            
-              
-                            // CheckBox oneanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //CheckBox twoanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //CheckBox threeanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //CheckBox fouranswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //(obj as StackPanel).Children.Add(oneanswer);
-                            //(obj as StackPanel).Children.Add(twoanswer);
-                            //(obj as StackPanel).Children.Add(threeanswer);
-                            //(obj as StackPanel).Children.Add(fouranswer);
                         }
                         if (SelectedIndexChangeAnswer == 1)
                         {
@@ -280,14 +309,7 @@ namespace TestingProgram
                                     AnswerStackPanel.Children.Remove((CheckBox)ans);
                                 }
                             }
-                            //RadioButton oneanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //RadioButton twoanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //RadioButton threeanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //RadioButton fouranswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
-                            //AnswerStackPanel.Children.Add(oneanswer);
-                            //AnswerStackPanel.Children.Add(twoanswer);
-                            //AnswerStackPanel.Children.Add(threeanswer);
-                            //AnswerStackPanel.Children.Add(fouranswer);
+                    
                         }   
                       
                     }));
@@ -326,3 +348,36 @@ namespace TestingProgram
         }
     }
 }
+
+
+
+
+//    if (ans == 0) CheckAnswer(ans.Content.ToString(), true);
+//    else
+//        CheckAnswer("", false);
+
+//}
+//AnswerStackPanel.Children.
+//AnswerStackPanel.Children.Clear();
+//for(int i =0; i< 4;i++)
+//{
+//    if (i == 0) CheckAnswer("", true);
+//    else
+//        CheckAnswer("", false);
+// CheckBox oneanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//CheckBox twoanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//CheckBox threeanswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//CheckBox fouranswer = new CheckBox { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//(obj as StackPanel).Children.Add(oneanswer);
+//(obj as StackPanel).Children.Add(twoanswer);
+//(obj as StackPanel).Children.Add(threeanswer);
+//(obj as StackPanel).Children.Add(fouranswer);
+
+//RadioButton oneanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//RadioButton twoanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//RadioButton threeanswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//RadioButton fouranswer = new RadioButton { Content = new TextBox { FontSize = 15, MaxLength = 204, Width = 1017, Height = 29 }, MinHeight = 20, IsChecked = false, Margin = new Thickness(20, 0, 20, 6) };
+//AnswerStackPanel.Children.Add(oneanswer);
+//AnswerStackPanel.Children.Add(twoanswer);
+//AnswerStackPanel.Children.Add(threeanswer);
+//AnswerStackPanel.Children.Add(fouranswer);

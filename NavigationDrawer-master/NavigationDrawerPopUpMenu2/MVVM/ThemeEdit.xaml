@@ -10,7 +10,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              Title="Testing" Height="800" Width="1080"
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen" Background="White" WindowStyle="None" ResizeMode="NoResize">
+        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen" Background="White" WindowStyle="None" ResizeMode="NoResize" x:Name="ThemeEditName">
 
 
     <Window.Resources>
@@ -88,19 +88,24 @@ materialDesign:HintAssist.Hint="Время"
             <!--#endregion HEADPANEL-->
 
 
-            <DockPanel LastChildFill="False">
-                <Grid x:Name="CenterGridTheme"  x:FieldModifier="public">
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="88"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="CenterGridTheme"  x:FieldModifier="public" DockPanel.Dock="Top" VerticalAlignment="Top" Grid.Row="0">
                     <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
                                      AutoApplyTransitionOrigins="True"
                                      ItemsSource="{Binding QuestionsSlides}">
 
                     </materialDesign:Transitioner>
                 </Grid>
-                <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+              
+                           <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" Grid.Row="1"
                                             PlacementMode="LeftAndAlignMiddles"
     UnfurlOrientation="Horizontal"
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                 Margin="32" DockPanel.Dock="Right" >
+                                 Margin="32,0,32,32" DockPanel.Dock="Bottom" >
                     <materialDesign:PopupBox.ToggleContent>
                         <materialDesign:PackIcon
       Kind="Pencil"
@@ -115,19 +120,21 @@ materialDesign:HintAssist.Hint="Время"
                     </materialDesign:PopupBox.ToggleCheckedContent>
 
                     <StackPanel Orientation="Horizontal">
-                        <Button ToolTip="Добавить" Command="{Binding RunDialogAddChaphterCommand}" >
+                        <Button ToolTip="Добавить" Command="{Binding RunAddQustionCommand}" CommandParameter="{Binding ElementName=ThemeEditName}">
                             <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                         </Button>
-                        <Button ToolTip="Редактировать" Command="{Binding RunDialogEditChaphterCommand}">
+                        <Button ToolTip="Редактировать" Command="{Binding RunEditQuestionCommand}" CommandParameter="{Binding ElementName=ThemeEditName}">
                             <materialDesign:PackIcon Kind="Edit" />
                         </Button>
-                        <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteChaphterCommand}">
+                        <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteQuestionCommand}">
                             <materialDesign:PackIcon Kind="Delete" />
                         </Button>
                     </StackPanel>
                 </materialDesign:PopupBox>
+              
+         
 
-            </DockPanel>
+            </Grid>
           
 
 
