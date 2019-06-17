@@ -227,35 +227,98 @@ namespace TestingProgram
                             {
                                 Вопрос вопрос = new Вопрос { Текст = TextQuestion, Код = CodeQuestion, Тип_Ответа = (obj as string), Тема_Id = EditThemeId };
                                 db.Вопросы.Add(вопрос);
+                            
                                 foreach (var ans in children)
                                 {
-                                    db.Ответы.Add(new Ответ { Текст = ((ans as RadioButton).Content as TextBox).Text, Значение = (bool)(ans as RadioButton).IsChecked, Вопрос_Id = db.Вопросы.Last().Id });
-                                    db.SaveChanges();
+                                    if((string)obj == "RadioButton")
+                                    {
+                                        db.Ответы.Add(new Ответ { Текст = ((ans as RadioButton).Content as TextBox).Text, Значение = (bool)(ans as RadioButton).IsChecked, Вопрос_Id = вопрос.Id });
+                                    
+                                    }
+                                    else
+                                    if ((string)obj == "CheckBox")
+                                    {
+                                        db.Ответы.Add(new Ответ { Текст = ((ans as CheckBox).Content as TextBox).Text, Значение = (bool)(ans as CheckBox).IsChecked, Вопрос_Id = вопрос.Id });
+                                   
+                                    }
+                                    
                                 }
+                                db.SaveChanges();
+                            }
+
+                            if (EditQuestionId != 0)//Редактирование элемента
+                            {
+                                Вопрос вопрос = db.Вопросы.Where(s => s.Id == EditQuestionId).SingleOrDefault();
+                                вопрос.Текст = TextQuestion;
+                                вопрос.Код = CodeQuestion;
+                                вопрос.Тип_Ответа = (obj as string);
+                                List<Ответ> ответы = db.Ответы.Where(S => S.Вопрос_Id == EditQuestionId).ToList();
+                                for (int i = 0; i < ответы.Count; i++)
+                                {
+                                    if ((string)obj == "RadioButton")
+                                    {
+                                        ответы[i].Текст = ((children[i] as RadioButton).Content as TextBox).Text;
+                                        ответы[i].Значение = (bool)(children[i] as RadioButton).IsChecked;
+                                    }
+                                    else
+                                   if ((string)obj == "CheckBox")
+                                    {
+                                        ответы[i].Текст = ((children[i] as CheckBox).Content as TextBox).Text;
+                                        ответы[i].Значение = (bool)(children[i] as CheckBox).IsChecked;
+                                    }
+
+
+
+
+                                }
+                                db.SaveChanges();
+
                             }
                         }
-                    
-                    
+                    }));
+            }
+        }
+
+        private RelayCommand deleteQuestion;
+        public RelayCommand DeleteQuestion
+        {
+
+            get
+            {
+                return deleteQuestion ??
+                    (deleteQuestion = new RelayCommand(obj =>
+                    {
 
 
-                        //AnswerStackPanel = (obj as StackPanel);
-                        //if (TextQuestion == "")
-                        //{
-                        //    for (int i = 0; i < 4; i++)
-                        //    {
-                        //        if (i == 0) RadioAnswer("", true);
-                        //        else
-                        //            RadioAnswer("", false);
-                        //    }
-                        //}
-                        //else
-                        // if (TextQuestion != "")
-                        //{
-                        //    CreateAnswers();
-                        //}
+                        using (testEntities db = new testEntities())
+                        {
+                            var children = AnswerStackPanel.Children.OfType<UIElement>().ToList();
+                            if (IsCheckCodeQuestion == false) CodeQuestion = null;
+                            if (EditQuestionId == 0)//Добавление нового элемента 
+                            {
+                                Вопрос вопрос = new Вопрос { Текст = TextQuestion, Код = CodeQuestion, Тип_Ответа = (obj as string), Тема_Id = EditThemeId };
+                                db.Вопросы.Add(вопрос);
 
+                                foreach (var ans in children)
+                                {
+                                    if ((string)obj == "RadioButton")
+                                    {
+                                        db.Ответы.Add(new Ответ { Текст = ((ans as RadioButton).Content as TextBox).Text, Значение = (bool)(ans as RadioButton).IsChecked, Вопрос_Id = вопрос.Id });
 
+                                    }
+                                    else
+                                    if ((string)obj == "CheckBox")
+                                    {
+                                        db.Ответы.Add(new Ответ { Текст = ((ans as CheckBox).Content as TextBox).Text, Значение = (bool)(ans as CheckBox).IsChecked, Вопрос_Id = вопрос.Id });
 
+                                    }
+
+                                }
+                                db.SaveChanges();
+                            }
+                      
+
+                            }
                     }));
             }
         }
@@ -349,6 +412,24 @@ namespace TestingProgram
     }
 }
 
+
+
+
+//AnswerStackPanel = (obj as StackPanel);
+//if (TextQuestion == "")
+//{
+//    for (int i = 0; i < 4; i++)
+//    {
+//        if (i == 0) RadioAnswer("", true);
+//        else
+//            RadioAnswer("", false);
+//    }
+//}
+//else
+// if (TextQuestion != "")
+//{
+//    CreateAnswers();
+//}
 
 
 

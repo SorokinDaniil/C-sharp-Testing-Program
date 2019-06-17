@@ -28,7 +28,11 @@
 
                         <!--<Grid x:Name="HeadLabelName">
                         </Grid>-->
-                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="20,0,16,0">Код</TextBlock>
+
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="17.5,0,16,0" Command="{Binding SaveQuestion}" CommandParameter="{Binding ElementName=ComboBoxChangeAnswer, Path=SelectionBoxItem}">
+                            <materialDesign:PackIcon Kind="ContentSave" Width="24" Height="24"/>
+                        </Button>
+                        <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center"  FontSize="20" Margin="0,0,16,0">Код</TextBlock>
                         <ToggleButton x:Name="ChangeVisabilityCodeBlock"
   Style="{StaticResource MaterialDesignSwitchToggleButton}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,16,0" IsChecked="{Binding IsCheckCodeQuestion}" Command="{Binding ChangeVisabilityCodeBoxCommand}"
    />
@@ -43,7 +47,7 @@
                                CheckBox
                             </ComboBoxItem>
                             <ComboBoxItem>
-                                RadionButton
+                                RadioButton
                             </ComboBoxItem>
                         </ComboBox>
                         
@@ -57,8 +61,8 @@
   x:Name="WithSecondsTimePicker"
   Width="100" />-->
                         
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="LightGray" materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
-                            <materialDesign:PackIcon Kind="Close" Width="25" Height="25"/>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
+                            <materialDesign:PackIcon Kind="Delete" Width="25" Height="25"/>
                         </Button>
 
                     </DockPanel>
