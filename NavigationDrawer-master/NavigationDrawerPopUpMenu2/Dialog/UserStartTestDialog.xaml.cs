@@ -12,18 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
 
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для ChoiceGroup.xaml
+    /// Логика взаимодействия для UserStartTestDialog.xaml
     /// </summary>
-    public partial class Choice : UserControl
+    public partial class UserStartTestDialog : UserControl
     {
-        public Choice()
+        public UserStartTestDialog()
         {
             InitializeComponent();
         }

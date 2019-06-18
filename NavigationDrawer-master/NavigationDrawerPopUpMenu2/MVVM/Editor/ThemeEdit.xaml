@@ -126,9 +126,6 @@ materialDesign:HintAssist.Hint="Время"
                         <Button ToolTip="Редактировать" Command="{Binding RunEditQuestionCommand}" CommandParameter="{Binding ElementName=ThemeEditName}">
                             <materialDesign:PackIcon Kind="Edit" />
                         </Button>
-                        <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteQuestionCommand}">
-                            <materialDesign:PackIcon Kind="Delete" />
-                        </Button>
                     </StackPanel>
                 </materialDesign:PopupBox>
 

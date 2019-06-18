@@ -45,7 +45,6 @@ namespace TestingProgram
         public MainTableViewModel(string typeTable)
         {
             TypeTable = typeTable;
-     
             switch (TypeTable)
             {
                 case "Admin_Editor_TableChaphterEdit":
@@ -105,16 +104,7 @@ namespace TestingProgram
                     break;
                 default: break;
             }   
-      
             _items3 = CreateData();
-        
-            //Admin_Editor_TableChaphterEdit 
-
-            //ListStudent_TableGroupEdit
-            //ListStudent_TableChaphterNoEdit
-
-            //Student_TableChaphterNoEdit
-
         }
 
         //private RelayCommand createdate;
@@ -150,14 +140,14 @@ namespace TestingProgram
                     }));
             }
         }
-
+        #region ADD EDIT DELETE
         public ICommand RunDialogAddChaphterCommand => new AnotherCommandImplementation(AddChaphterCommand);
-        public ICommand RunDialogDeleteChaphterCommand => new AnotherCommandImplementation(DeleteChaphterCommand);
         public ICommand RunDialogEditChaphterCommand => new AnotherCommandImplementation(EditChaphterCommand);
+        public ICommand RunDialogDeleteChaphterCommand => new AnotherCommandImplementation(DeleteChaphterCommand);
+        public ICommand RunUserStartTestDialogCommand => new AnotherCommandImplementation(UserStartTestDialogCommand);
 
         private async void AddChaphterCommand(object o)
         {
-      
                 var view = new AddChaphterDialog
                 {
                     DataContext = new AddChaphterDialogViewModel(IdSelectedChaphterValue)
@@ -174,30 +164,8 @@ namespace TestingProgram
                     _items3.Add(new SelectableViewModel { OneColumnContent = LastTheme.Название, TwoColumnContent = LastTheme.Время_Прохождения.ToString(), ThreeColumnContent = db.Вопросы.Local.Count.ToString() });
                 }
             }
-
-
                 Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
             }
-
-        private async void DeleteChaphterCommand(object o)
-        {
-            using (testEntities db = new testEntities())
-            {
-                var name = _items3[SelectedTabIndex].OneColumnContent;
-                var IdSelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == name);
-                var view = new DeleteChaphterDialog
-                {
-                    DataContext = new DeleteChaphterDialogViewModel(IdSelectedChaphterValue, IdSelectedThemeValue.Id)
-                };
-                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
-            if ((bool)result == true)
-                {
-                    _items3.Remove(_items3[SelectedTabIndex]);
-                }
-
-            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
-            }
-        }
 
         private void EditChaphterCommand(object o)
         {
@@ -212,11 +180,63 @@ namespace TestingProgram
             }
         }
 
+        private async void DeleteChaphterCommand(object o)
+        {
+            using (testEntities db = new testEntities())
+            {
+                var name = _items3[SelectedTabIndex].OneColumnContent;
+                var IdSelectedThemeValue = db.Темы.SingleOrDefault(p => p.Название == name);
+                var view = new DeleteChaphterDialog
+                {
+                    DataContext = new DeleteChaphterDialogViewModel(IdSelectedChaphterValue, IdSelectedThemeValue.Id)
+                };
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                if ((bool)result == true)
+                {
+                    _items3.Remove(_items3[SelectedTabIndex]);
+                }
+
+                Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+            }
+        }
+
+        private async void UserStartTestDialogCommand(object o)
+        {
+            using(testEntities db = new testEntities())
+            {
+             
+                var name = _items3[SelectedTabIndex].OneColumnContent;
+                var theme = db.Темы.SingleOrDefault(p => p.Название == name);
+             //var a =  db.Вопросы.Where(p => p.Тема_Id == theme.Id).SelectMany(p => p.Id).Count();
+                var countquestion = db.Вопросы.Count(t => t.Тема_Id == theme.Id);
+                var view = new UserStartTestDialog
+                {
+                    DataContext = new UserStartTestDialogViewModel(theme.Название,theme.Время_Прохождения.ToString(),countquestion)
+                };
+                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                if ((bool)result == true)
+                {
+                    //ОТКРЫТИ НОВОГО ОКНА С ТЕСТАМИ
+
+                    //using (testEntities db = new testEntities())
+                    //{
+                    //    var lastShowPieceId = db.Темы.Max(x => x.Id);
+                    //    var LastTheme = db.Темы.FirstOrDefault(x => x.Id == lastShowPieceId);
+                    //    db.Вопросы.Where(p => p.Тема_Id == lastShowPieceId).Load();
+                    //    _items3.Add(new SelectableViewModel { OneColumnContent = LastTheme.Название, TwoColumnContent = LastTheme.Время_Прохождения.ToString(), ThreeColumnContent = db.Вопросы.Local.Count.ToString() });
+                    //}
+                }
+                Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+            }
+
+           
+        }
+
         private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
         {
             Console.WriteLine("You can intercept the closing event, and cancel here.");
         }
-
+        #endregion
 
         public void Show(string selectevaluechoice)
         {
@@ -229,7 +249,6 @@ namespace TestingProgram
 
         void CreateTableContent ()
         {
-           
             _items3.Clear();
             using (testEntities db = new testEntities())
             {
@@ -249,12 +268,13 @@ namespace TestingProgram
           });
                             foreach (var chaphter in chaphters)
                             {
-                                db.Вопросы.Where(p => p.Тема_Id == chaphter.Id).Load();
+                                var countquestion = db.Вопросы.Count(p => p.Тема_Id == chaphter.Id);
+                                //db.Вопросы.Where(p => p.Тема_Id == chaphter.Id).Load();
                                 _items3.Add(new SelectableViewModel
                                 {
                                     OneColumnContent = chaphter.Название,
                                     TwoColumnContent = chaphter.Время_Прохождения.ToString(),
-                                   ThreeColumnContent = db.Вопросы.Local.Count.ToString()//Количество вопросов
+                                    ThreeColumnContent = countquestion.ToString()//Количество вопросов
                                 });
                             }
                         }
@@ -308,12 +328,23 @@ namespace TestingProgram
                         break;
                     case "User_ListStudent_TableTestNoEdit":
                         {
-                            OneColumnName = "Название";
-                            OneColumnVisability = Visibility.Visible;
-
-                            TwoColumnVisability = Visibility.Hidden;
-                            ThreeColumnVisability = Visibility.Hidden;
-                            FourColumnVisability = Visibility.Hidden;
+                            var idchaphter = db.Разделы.SingleOrDefault(p => p.Название == SelecteValueChoice);//Получение id выбраного раздела
+                            IdSelectedChaphterValue = idchaphter.Id;
+                            IEnumerable<Тема> themes = db.Темы.Where(p => p.Раздел_Id == IdSelectedChaphterValue).Select(p => new { Название = p.Название, Id = p.Id })
+          .AsEnumerable()
+          .Select(an => new Тема
+          {
+              Название = an.Название,
+              Id = an.Id
+          });
+                            foreach (var theme in themes)
+                            {
+                                //db.Вопросы.Where(p => p.Тема_Id == theme.Id).Load();
+                                _items3.Add(new SelectableViewModel
+                                {
+                                    OneColumnContent = theme.Название,
+                                });
+                            }
                         }
                         break;
                     default: break;

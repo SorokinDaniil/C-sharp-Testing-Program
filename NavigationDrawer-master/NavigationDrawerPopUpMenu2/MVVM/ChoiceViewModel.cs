@@ -34,11 +34,14 @@ namespace TestingProgram
         private bool _isCheckCollection;
         public List<Группа> _сhoiceGroupCollection { get; set; }
         public List<Раздел> _сhoiceChaphterCollection { get; set; }
+        string Type;
+        
 
         public ChoiceViewModel(string type)
         {
+            Type = type;
             IsEnabledPopupBoxChoice = false;
-            switch (type)
+            switch (Type)
                 {
                     case "Chaphter":
                     LoadChaphterCollection();
@@ -66,14 +69,23 @@ namespace TestingProgram
         private RelayCommand selectcommand;
         public RelayCommand SelectCommand
         {
-
             get
             {
                 return selectcommand ??
                     (selectcommand = new RelayCommand(obj =>
                     {
+                        switch (Type)
+                        {
+                            case "Chaphter":
+                                (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
+                            //case "ChaphterNoEdit":
+                            //    (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
+                            //case "Group":
+                            //    (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
+                            default: break;
+                        }
                         //(obj as Button).SetBinding(Button.CommandProperty, new Binding("SaveReservationCommand"));
-                       //(obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand;
+
                         //Console.WriteLine(obj.GetType());
                     }));
             }
@@ -88,9 +100,7 @@ namespace TestingProgram
                 return selectedItemChoiceCommand ??
                     (selectedItemChoiceCommand = new RelayCommand(obj =>
                     {
-                        Console.WriteLine("JJJJJJJJJJJ");
                         IsEnabledPopupBoxChoice = true;
-
                     }));
             }
         }

@@ -33,7 +33,8 @@ namespace TestingProgram
                 return ExitAppcommand ??
                     (ExitAppcommand = new RelayCommand(obj =>
                     {
-                        DialogHost.CloseDialogCommand.Execute(true , null);
+                        Application.Current.Shutdown();
+                        //DialogHost.CloseDialogCommand.Execute(true , null);
                     }));
             }
         }

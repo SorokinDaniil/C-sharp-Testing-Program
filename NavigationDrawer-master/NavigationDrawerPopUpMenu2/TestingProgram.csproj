@@ -123,6 +123,10 @@
       <DependentUpon>ExitAppDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\ExitAppDialogViewModel.cs" />
+    <Compile Include="Dialog\UserStartTestDialog.xaml.cs">
+      <DependentUpon>UserStartTestDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialog\UserStartTestDialogViewModel.cs" />
     <Compile Include="ModelTest.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -263,6 +267,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\ExitAppDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\UserStartTestDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

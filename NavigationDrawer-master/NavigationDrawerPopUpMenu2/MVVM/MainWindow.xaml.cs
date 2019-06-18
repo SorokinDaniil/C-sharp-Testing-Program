@@ -27,7 +27,7 @@ namespace TestingProgram
         public MainWindow(string typeAccount)
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel(typeAccount);
+            //DataContext = new MainWindowViewModel(typeAccount);
             HeadLabelName.Children.Add(new AdminLabelName());
             TextOneItem.Text = "Журнал";
         }
@@ -35,7 +35,7 @@ namespace TestingProgram
         public MainWindow(string typeAccount,string logincurrentuser)
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel(typeAccount);
+            //DataContext = new MainWindowViewModel(typeAccount);
             HeadLabelName.Children.Add(new UserLabelName(logincurrentuser));
             TextOneItem.Text = "Тесты";
             TwoItem.Visibility = Visibility.Collapsed;

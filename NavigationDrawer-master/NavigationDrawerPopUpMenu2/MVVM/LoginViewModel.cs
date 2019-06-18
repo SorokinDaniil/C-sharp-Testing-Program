@@ -68,10 +68,9 @@ namespace TestingProgram
             {
                 if(SignInUsername == "adminadmin" && SignInPassword == "adminadmin")
                 {
-
-                    MainWindow adminWindow = new MainWindow("Admin");
+                    MainWindow adminWindow = new MainWindow("Admin") { DataContext =   new MainWindowViewModel("Admin") };
                     adminWindow.Show();
-                    currentobject.Close();
+                    currentobject.Close() ;
                 }
                 else
                 if (!(db.Студенты.SingleOrDefault(p => p.Логин == SignInUsername) == null))
