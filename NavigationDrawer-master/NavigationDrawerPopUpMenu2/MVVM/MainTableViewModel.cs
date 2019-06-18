@@ -21,7 +21,7 @@ using System.Data.Entity;
 
 namespace TestingProgram
 {
-    public class MainTableViewModel : INotifyPropertyChanged
+    public class MainTableViewModel : INotifyPropertyChanged 
     {
      
         private readonly ObservableCollection<SelectableViewModel> _items3;

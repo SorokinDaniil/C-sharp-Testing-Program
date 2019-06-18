@@ -133,7 +133,7 @@ namespace TestingProgram
                 if (_isCheckCollection != value)
                 {
                     _isCheckCollection = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -144,7 +144,7 @@ namespace TestingProgram
             set
             {
                 _isEnabledPopupBoxChoice = value;
-                RaisePropertyChanged();
+                OnPropertyChanged();
             }
         }
 
@@ -156,7 +156,14 @@ namespace TestingProgram
         public int SelectedTabIndex
         {
             get { return _selectedTabIndex; }
-            set { this.MutateVerbose(ref _selectedTabIndex, value, RaisePropertyChanged()); }
+            set
+            {
+                if (_selectedTabIndex != value)
+                {
+                    _selectedTabIndex = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
         public string ChoiceTextBlock
@@ -167,7 +174,7 @@ namespace TestingProgram
                 if (_choiceTextBlock != value)
                 {
                     _choiceTextBlock = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -180,7 +187,7 @@ namespace TestingProgram
                 if (_choicePopupBox != value)
                 {
                     _choicePopupBox = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -193,7 +200,7 @@ namespace TestingProgram
                 if (_choiceHint != value)
                 {
                     _choiceHint = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -206,7 +213,7 @@ namespace TestingProgram
                 if (_choicevalue != value)
                 {
                     _choicevalue = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -219,7 +226,7 @@ namespace TestingProgram
                 if (_сhoiceGroupCollection != value)
                 {
                     _сhoiceGroupCollection = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -232,7 +239,7 @@ namespace TestingProgram
                 if (_сhoiceChaphterCollection != value)
                 {
                     _сhoiceChaphterCollection = value;
-                    RaisePropertyChanged();
+                    OnPropertyChanged();
                 }
             }
         }
@@ -309,9 +316,9 @@ namespace TestingProgram
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Action<PropertyChangedEventArgs> RaisePropertyChanged()
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            return args => PropertyChanged?.Invoke(this, args);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

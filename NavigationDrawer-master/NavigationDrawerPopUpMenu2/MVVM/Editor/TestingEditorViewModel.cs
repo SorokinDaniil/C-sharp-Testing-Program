@@ -274,6 +274,9 @@ namespace TestingProgram
                                 db.SaveChanges();
 
                             }
+
+                            ThemeEdit themeEdit = new ThemeEdit() { DataContext = new ThemeEditorViewModel(db.Темы.Where(p => p.Id == EditThemeId).SingleOrDefault().Название, db.Темы.Where(p => p.Id == EditThemeId).SingleOrDefault().Время_Прохождения.ToString(), EditThemeId) };
+                            themeEdit.Show();
                         }
                     }));
             }
@@ -292,33 +295,15 @@ namespace TestingProgram
 
                         using (testEntities db = new testEntities())
                         {
-                            var children = AnswerStackPanel.Children.OfType<UIElement>().ToList();
-                            if (IsCheckCodeQuestion == false) CodeQuestion = null;
-                            if (EditQuestionId == 0)//Добавление нового элемента 
-                            {
-                                Вопрос вопрос = new Вопрос { Текст = TextQuestion, Код = CodeQuestion, Тип_Ответа = (obj as string), Тема_Id = EditThemeId };
-                                db.Вопросы.Add(вопрос);
+                            Вопрос вопрос = db.Вопросы.Where(s => s.Id == EditQuestionId).SingleOrDefault();
+                            db.Вопросы.Remove(вопрос);
+                            IEnumerable<Ответ> ответ = db.Ответы.Where(s => s.Вопрос_Id == EditQuestionId);
+                            db.Ответы.RemoveRange(ответ);
+                            db.SaveChanges();
 
-                                foreach (var ans in children)
-                                {
-                                    if ((string)obj == "RadioButton")
-                                    {
-                                        db.Ответы.Add(new Ответ { Текст = ((ans as RadioButton).Content as TextBox).Text, Значение = (bool)(ans as RadioButton).IsChecked, Вопрос_Id = вопрос.Id });
-
-                                    }
-                                    else
-                                    if ((string)obj == "CheckBox")
-                                    {
-                                        db.Ответы.Add(new Ответ { Текст = ((ans as CheckBox).Content as TextBox).Text, Значение = (bool)(ans as CheckBox).IsChecked, Вопрос_Id = вопрос.Id });
-
-                                    }
-
-                                }
-                                db.SaveChanges();
-                            }
-                      
-
-                            }
+                            ThemeEdit themeEdit = new ThemeEdit() { DataContext = new ThemeEditorViewModel(db.Темы.Where(p =>p.Id == EditThemeId).SingleOrDefault().Название, db.Темы.Where(p => p.Id == EditThemeId).SingleOrDefault().Время_Прохождения.ToString(), EditThemeId) };
+                            themeEdit.Show();
+                        }
                     }));
             }
         }

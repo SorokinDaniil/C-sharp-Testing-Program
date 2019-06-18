@@ -60,8 +60,8 @@
   Is24Hours="True"
   x:Name="WithSecondsTimePicker"
   Width="100" />-->
-                        
-                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" >
+
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}"  materialDesign:RippleAssist.IsDisabled="False" VerticalAlignment="Center" HorizontalAlignment="Right" Width="25" Height="25" Margin="0,0,17.5,0" Command="{Binding DeleteQuestion}">
                             <materialDesign:PackIcon Kind="Delete" Width="25" Height="25"/>
                         </Button>
 
