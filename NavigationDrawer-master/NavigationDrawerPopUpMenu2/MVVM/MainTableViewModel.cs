@@ -39,6 +39,7 @@ namespace TestingProgram
         private Visibility _fourcolumnvisability;
         string TypeTable;
         byte IdSelectedChaphterValue;
+        Visibility _visabilityPopupButton;
 
 
 
@@ -49,6 +50,7 @@ namespace TestingProgram
             {
                 case "Admin_Editor_TableChaphterEdit":
                     {
+                        VisabilityPopupButton = Visibility.Visible;
                         OneColumnName = "Название";
                         TwoColumnName = "Время";
                         ThreeColumnName = "Количество вопросов";
@@ -60,6 +62,7 @@ namespace TestingProgram
                     } break;
                 case "Admin_ListStudent_TableListStudentEdit":
                     {
+                        VisabilityPopupButton = Visibility.Visible;
                         OneColumnName = "Номер";
                         TwoColumnName = "Имя и фамилия";
                         ThreeColumnName = "Пройденые тесты";
@@ -72,6 +75,7 @@ namespace TestingProgram
                     break;
                 case "Admin_ListStudent_TableTestNoEdit":
                     {
+                        VisabilityPopupButton = Visibility.Collapsed;
                         OneColumnName = "Название";
                         OneColumnVisability = Visibility.Visible;
 
@@ -82,6 +86,7 @@ namespace TestingProgram
                     break;
                 case "Admin_ListStudent_TablePassedTestNoEdit":
                     {
+                        VisabilityPopupButton = Visibility.Collapsed;
                         OneColumnName = "Номер";
                         TwoColumnName = "Имя и фамилия";
                         ThreeColumnName = "Оценка";
@@ -94,6 +99,7 @@ namespace TestingProgram
                     break;
                 case "User_ListStudent_TableTestNoEdit":
                     {
+                        VisabilityPopupButton = Visibility.Collapsed;
                         OneColumnName = "Название";
                         OneColumnVisability = Visibility.Visible;
 
@@ -140,6 +146,50 @@ namespace TestingProgram
                     }));
             }
         }
+
+
+        private RelayCommand updateButtonCommand;
+        public RelayCommand UpdateButtonCommand
+        {
+
+            get
+            {
+                return updateButtonCommand ??
+                    (updateButtonCommand = new RelayCommand(obj =>
+                    {
+                        switch (TypeTable)
+                        {
+                            case "Admin_Editor_TableChaphterEdit":
+                                {
+                                    (obj as Button).Command = NavigationCommands.ShowChoiceChaphterCommand; break;
+                                }
+                           
+                            case "Admin_ListStudent_TableListStudentEdit":
+                                {
+                                  
+                                }
+                                break;
+                            case "Admin_ListStudent_TableTestNoEdit":
+                                {
+                            
+                                }
+                                break;
+                            case "Admin_ListStudent_TablePassedTestNoEdit":
+                                {
+                                
+                                }
+                                break;
+                             case "User_ListStudent_TableTestNoEdit":
+                                {
+                                    (obj as Button).Command = NavigationCommands.ShowChoiceChaphterNoEditCommand; break;
+                                }
+                              
+                            default: break;
+                        }
+                    }));
+            }
+        }
+
         #region ADD EDIT DELETE
         public ICommand RunDialogAddChaphterCommand => new AnotherCommandImplementation(AddChaphterCommand);
         public ICommand RunDialogEditChaphterCommand => new AnotherCommandImplementation(EditChaphterCommand);
@@ -368,6 +418,16 @@ namespace TestingProgram
             get { return _isEnabledPopupBox; }
             set {
                 _isEnabledPopupBox = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+         public Visibility VisabilityPopupButton
+        {
+            get { return _visabilityPopupButton; }
+            set {
+                _visabilityPopupButton = value;
 
                 OnPropertyChanged();
             }

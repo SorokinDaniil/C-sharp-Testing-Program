@@ -68,7 +68,7 @@ namespace TestingProgram
             {
                 if(SignInUsername == "adminadmin" && SignInPassword == "adminadmin")
                 {
-                    MainWindow adminWindow = new MainWindow("Admin") { DataContext =   new MainWindowViewModel("Admin") };
+                    MainWindow adminWindow = new MainWindow("Admin");
                     adminWindow.Show();
                     currentobject.Close() ;
                 }

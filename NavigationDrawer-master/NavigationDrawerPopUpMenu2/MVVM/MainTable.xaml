@@ -14,8 +14,13 @@
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock 
     Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16" DockPanel.Dock="Top" Text="{Binding HeaderMainTable}" ></TextBlock>
-                <Button Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}" Command="{x:Static local:NavigationCommands.GoBackCommand}">
+                <Button x:Name="UpdateButton" Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}" >
                     <materialDesign:PackIcon Style="{StaticResource BaseIcon}" Kind="Autorenew"  HorizontalAlignment="Center" VerticalAlignment="Center" Height="24" Width="24"/>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="Loaded">
+                            <i:InvokeCommandAction Command="{Binding UpdateButtonCommand}" CommandParameter="{Binding ElementName=UpdateButton}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
                 </Button>
             </StackPanel>
             <FrameworkElement x:Name="dummyElement"/>
@@ -94,7 +99,7 @@
             </ListView>-->
 
 
-            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" IsEnabled="{Binding IsEnabledPopupBox}" 
+            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" IsEnabled="{Binding IsEnabledPopupBox}" Visibility="{Binding VisabilityPopupButton}"
                                             PlacementMode="LeftAndAlignMiddles"
     UnfurlOrientation="Horizontal"
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom"

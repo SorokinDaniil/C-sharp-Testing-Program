@@ -84,13 +84,13 @@ namespace TestingProgram
 
         //public TabControlViewModel User_ListStudent_TableTestNoEdit { get; } = new TabControlViewModel("User_ListStudent_TableTestNoEdit");
 
-
+        #region Редакор
         private void ShowChoiceChaphterExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             _slideNavigator.GoTo(0);
         }
 
-        private void ShowMainTableExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void ShowAdmin_Editor_TableChaphterEditExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             string SelectedValue = "";
             if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
@@ -100,9 +100,11 @@ namespace TestingProgram
             _slideNavigator.GoTo(
                 IndexOfSlide<MainTableViewModel>(),
                 () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
+
         }
+        #endregion
 
-
+        #region Тесты
         private void ShowChoiceChaphterNoEditExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             _slideNavigator.GoTo(0);
@@ -117,11 +119,27 @@ namespace TestingProgram
             }
             _slideNavigator.GoTo(
                 IndexOfSlide<MainTableViewModel>(),
+                () => User_ListStudent_TableTestNoEdit.Show(SelectedValue));
+        }
+        #endregion
+
+
+
+
+
+
+
+        private void ShowMainTableExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            string SelectedValue = "";
+            if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
+            {
+                SelectedValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
+            }
+            _slideNavigator.GoTo(
+                IndexOfSlide<MainTableViewModel>(),
                 () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
         }
-
-
-
 
 
 
@@ -131,23 +149,7 @@ namespace TestingProgram
 
         }
 
-        private void ShowAdmin_Editor_TableChaphterEditExecuted(object sender, ExecutedRoutedEventArgs e)
-        {
-            string SelectedValue = "";
-            if (AdminSlides[ActiveSlideIndex].GetType() == typeof(ChoiceViewModel))
-            {
-                SelectedValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
-            }
-
-            //var IsCheck = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).IsCheckCollection;
-            //var SelectValue = (AdminSlides[ActiveSlideIndex] as ChoiceViewModel).ChoiceValue;
-            //Console.WriteLine(IsCheck);
-            //Console.WriteLine(SelectValue);
-            _slideNavigator.GoTo(
-                IndexOfSlide<MainTableViewModel>(),
-                () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
-
-        }
+      
 
         private void ShowTabControlExecuted(object sender, ExecutedRoutedEventArgs e)
         {

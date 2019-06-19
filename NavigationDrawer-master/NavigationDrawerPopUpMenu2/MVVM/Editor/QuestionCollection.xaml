@@ -17,7 +17,7 @@
 
             <TextBlock   TextWrapping="Wrap" Width="1040"  Margin="20" HorizontalAlignment="Left" DockPanel.Dock="Top"  FontSize="15" Text="{Binding TextQuestion}"></TextBlock>
 
-            <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="260" Visibility="{Binding VisibilityCodeBlockQuestion}"  Text=""
+            <avalonEdit:TextEditor Margin="20,0,20,20"  MinHeight="16" MaxHeight="260" Visibility="{Binding VisibilityCodeBlockQuestion}"
                     ShowLineNumbers="True" 
 				Name="textEditor"
 				FontFamily="Consolas"

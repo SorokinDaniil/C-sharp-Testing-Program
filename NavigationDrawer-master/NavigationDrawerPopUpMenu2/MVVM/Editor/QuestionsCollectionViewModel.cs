@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Windows;
 
 
 namespace TestingProgram
@@ -17,13 +18,23 @@ namespace TestingProgram
       public  byte IdQuestion;
         StackPanel AnswerStackPanel;
         private string _codeQuestion;
+        private Visibility _visibilityCodeBlockQuestion;
 
         public QuestionsCollectionViewModel (string textQuestion,string codeQuestion,string typeAnswerQuestion,byte idQuestion)
         {
             TextQuestion = textQuestion;//Загрузка текста вопроса
             IdQuestion = idQuestion;
             TypeAnswerQuestion = typeAnswerQuestion;
-            CodeQuestion = codeQuestion;
+            if(codeQuestion == null)
+            {
+                VisibilityCodeBlockQuestion = Visibility.Collapsed;
+            }
+            else
+            {
+                VisibilityCodeBlockQuestion = Visibility.Visible;
+                CodeQuestion = codeQuestion;
+            }
+           
         }
 
         void CreateAnswers ()
@@ -81,6 +92,17 @@ namespace TestingProgram
             set
             {
                 _textQuestion = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        public Visibility VisibilityCodeBlockQuestion
+        {
+            get { return _visibilityCodeBlockQuestion; }
+            set
+            {
+                _visibilityCodeBlockQuestion = value;
 
                 OnPropertyChanged();
             }

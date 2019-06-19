@@ -78,8 +78,9 @@ namespace TestingProgram
                         {
                             case "Chaphter":
                                 (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
-                            //case "ChaphterNoEdit":
-                            //    (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
+
+                            case "ChaphterNoEdit":
+                                (obj as Button).Command = NavigationCommands.ShowUser_ListStudent_TableTestNoEditCommand; break;
                             //case "Group":
                             //    (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
                             default: break;
