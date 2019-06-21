@@ -8,35 +8,52 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Input;
+using MaterialDesignThemes.Wpf;
+using System.Windows.Controls.Primitives;
+
 
 namespace TestingProgram
 {
-   public class TabControlViewModel : INotifyPropertyChanged
+    public class TabControlViewModel : INotifyPropertyChanged, ISlideNavigationSubject
     {
+     
+        private readonly SlideNavigator _slideNavigator;
+        private int _activeSlideIndex;
         private bool _ischeckedonetab;
         private bool _ischeckedtwotab;
-        private int _selectedTabIndex;
-        public MainTableViewModel Admin_ListStudent_TableListStudentEdit_ViewModel = new MainTableViewModel("Admin_ListStudent_TableListStudentEdit");
-        public MainTableViewModel Admin_ListStudent_TableTestNoEdit_ViewModel = new MainTableViewModel("Admin_ListStudent_TableTestNoEdit");
-        MainTable Admin_ListStudent_TableListStudentEdit;
-        MainTable Admin_ListStudent_TableTestNoEdit;
+        string SelectedValueGroup;
+        string SelectedValueChaphter;
 
-      public TabControlViewModel()
+        public TabControlViewModel()
         {
-             Admin_ListStudent_TableListStudentEdit = new MainTable() { DataContext = Admin_ListStudent_TableListStudentEdit_ViewModel };
-             Admin_ListStudent_TableTestNoEdit = new MainTable() { DataContext = Admin_ListStudent_TableTestNoEdit_ViewModel };
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowAdmin_ListStudent_TableListStudentEditExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand, ShowAdmin_ListStudent_TableTestNoEditExecuted));
+            TabControlSlides = new List<object> { Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit };
+            _slideNavigator = new SlideNavigator(this, TabControlSlides);
+            IsCheckedOneTab = true;
+            _slideNavigator.GoTo(0);//Задается начальное окно 
         }
 
-        public void Show(string selectedvaluegroup, string selectedvaluechaphter)
+        public List<object> TabControlSlides { get; }
+
+        public MainTableViewModel Admin_ListStudent_TableListStudentEdit { get; } = new MainTableViewModel("Admin_ListStudent_TableListStudentEdit");
+
+        public MainTableViewModel Admin_ListStudent_TableTestNoEdit { get; } = new MainTableViewModel("Admin_ListStudent_TableTestNoEdit");
+    
+     
+        private void ShowAdmin_ListStudent_TableListStudentEditExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            SelectedTabIndex = 0;
-            Admin_ListStudent_TableListStudentEdit_ViewModel.Show(selectedvaluegroup);
-            Admin_ListStudent_TableTestNoEdit_ViewModel.Show(selectedvaluechaphter);
-            //IsCheckChoice = ischeckchoice;
-            //SelecteValueChoice = selectevaluechoice;
-            //HeaderMainTable = SelecteValueChoice;
-            //Console.WriteLine(IsCheckChoice);
-            //Console.WriteLine(SelecteValueChoice);
+            _slideNavigator.GoTo(
+                IndexOfSlide<MainTableViewModel>(),
+                () => Admin_ListStudent_TableListStudentEdit.Show(SelectedValueGroup, ""));
+        }
+
+        private void ShowAdmin_ListStudent_TableTestNoEditExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            _slideNavigator.GoTo(
+               IndexOfSlide<MainTableViewModel>(),
+               () => Admin_ListStudent_TableTestNoEdit.Show(SelectedValueChaphter, ""));
         }
 
         private RelayCommand _tabcontrolcommand;
@@ -47,30 +64,33 @@ namespace TestingProgram
                 return _tabcontrolcommand ??
                     (_tabcontrolcommand = new RelayCommand(obj =>
                     {
+                        NavigationCommands.ShowAdmin_ListStudent_TableTestNoEditCommand.Execute(null);
                         if (IsCheckedOneTab == true)
                         {
-                            (obj as Grid).Children.Clear();
-                            (obj as Grid).Children.Add(Admin_ListStudent_TableListStudentEdit);
+                            ShowAdmin_ListStudent_TableListStudentEditExecuted();
                         }
-                        if(IsCheckedTwoTab == true)
+                        if (IsCheckedTwoTab == true)
                         {
-                            (obj as Grid).Children.Clear();
-                            (obj as Grid).Children.Add(Admin_ListStudent_TableTestNoEdit);
+                            ShowAdmin_ListStudent_TableTestNoEditExecuted();
                         }
                     }));
             }
         }
 
-        public int SelectedTabIndex
+      public  void Show(string selectedvaluegroup, string selectedvaluechaphter)
         {
-            get { return _selectedTabIndex; }
-            set
-            {
-                _selectedTabIndex = value;
+            SelectedValueGroup = selectedvaluegroup;
+            SelectedValueChaphter = selectedvaluechaphter;
 
-                OnPropertyChanged();
-            }
+            ShowAdmin_ListStudent_TableListStudentEditExecuted();
+            //IsCheckedOneTab = true;
+            //ShowAdmin_ListStudent_TableListStudentEditExecuted(selectedvaluegroup);
+
         }
+
+
+
+     
 
         public bool IsCheckedTwoTab
         {
@@ -79,7 +99,7 @@ namespace TestingProgram
             {
                 _ischeckedtwotab = value;
 
-                OnPropertyChanged();
+                RaisePropertyChanged();
             }
         }
 
@@ -90,15 +110,81 @@ namespace TestingProgram
             {
                 _ischeckedonetab = value;
 
-                OnPropertyChanged();
+                RaisePropertyChanged();
             }
+        }
+
+        public int ActiveSlideIndex
+        {
+            get { return _activeSlideIndex; }
+            set { this.MutateVerbose(ref _activeSlideIndex, value, RaisePropertyChanged()); }
+        }
+
+        private int IndexOfSlide<TSlide>()
+        {
+            return TabControlSlides.Select((o, i) => new { o, i }).First(a => a.o.GetType() == typeof(TSlide)).i;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private Action<PropertyChangedEventArgs> RaisePropertyChanged()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return args => PropertyChanged?.Invoke(this, args);
         }
     }
 }
+
+
+
+//namespace TestingProgram
+//{
+//   public class TabControlViewModel : INotifyPropertyChanged
+//    {
+
+//        private int _selectedTabIndex;
+//        public MainTableViewModel Admin_ListStudent_TableListStudentEdit_ViewModel = new MainTableViewModel("Admin_ListStudent_TableListStudentEdit");
+//        public MainTableViewModel Admin_ListStudent_TableTestNoEdit_ViewModel = new MainTableViewModel("Admin_ListStudent_TableTestNoEdit");
+//        MainTable Admin_ListStudent_TableListStudentEdit;
+//        MainTable Admin_ListStudent_TableTestNoEdit;
+
+//      public TabControlViewModel()
+//        {
+//             Admin_ListStudent_TableListStudentEdit = new MainTable() { DataContext = Admin_ListStudent_TableListStudentEdit_ViewModel };
+//             Admin_ListStudent_TableTestNoEdit = new MainTable() { DataContext = Admin_ListStudent_TableTestNoEdit_ViewModel };
+//        }
+
+//        public void Show(string selectedvaluegroup, string selectedvaluechaphter)
+//        {
+//            SelectedTabIndex = 0;
+//            Admin_ListStudent_TableListStudentEdit_ViewModel.Show(selectedvaluegroup,"");
+//            Admin_ListStudent_TableTestNoEdit_ViewModel.Show(selectedvaluechaphter,"");
+//            //IsCheckChoice = ischeckchoice;
+//            //SelecteValueChoice = selectevaluechoice;
+//            //HeaderMainTable = SelecteValueChoice;
+//            //Console.WriteLine(IsCheckChoice);
+//            //Console.WriteLine(SelecteValueChoice);
+//        }
+
+
+
+//        public int SelectedTabIndex
+//        {
+//            get { return _selectedTabIndex; }
+//            set
+//            {
+//                _selectedTabIndex = value;
+
+//                OnPropertyChanged();
+//            }
+//        }
+
+
+
+//        public event PropertyChangedEventHandler PropertyChanged;
+
+//        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+//        {
+//            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+//        }
+//    }
+//}

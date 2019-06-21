@@ -97,9 +97,6 @@
         <DataTemplate DataType="{x:Type local:PreviewTestingWindowViewModel}">
             <local:PreviewTestingWindow />
         </DataTemplate>
-        <DataTemplate DataType="{x:Type local:TestingWindowViewModel}">
-            <local:TestingWindow />
-        </DataTemplate>
         <DataTemplate DataType="{x:Type local:ChoiceViewModel}">
             <local:Choice />
         </DataTemplate>

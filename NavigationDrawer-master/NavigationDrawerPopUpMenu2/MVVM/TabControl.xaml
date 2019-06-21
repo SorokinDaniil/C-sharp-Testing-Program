@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TestingProgram"
+              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Background="White">
     <StackPanel>
@@ -14,10 +15,10 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <RadioButton Command="{Binding TabControlCommand}" CommandParameter="{Binding ElementName=TabControlGrid}"
+            <RadioBut   ton Command="{Binding TabControlCommand}" CommandParameter="{Binding ElementName=TabControlGrid}"
     Style="{StaticResource MaterialDesignTabRadioButton}"
     Grid.Column="0"
-    IsChecked="{Binding IsCheckedOneTab}"
+    IsChecked="{Binding IsCheckedOneTab}" 
     Content="FIRST" />
             <RadioButton  Command="{Binding TabControlCommand}" CommandParameter="{Binding ElementName=TabControlGrid}"
     Style="{StaticResource MaterialDesignTabRadioButton}"
@@ -25,11 +26,15 @@
        IsChecked="{Binding IsCheckedTwoTab}"
     Content="SECOND" Grid.Column="1" />
         </Grid>
-        
-        <Grid x:Name="TabControlGrid">
-            
+
+        <Grid x:Name="TabControlGrid"  x:FieldModifier="public">
+            <materialDesign:Transitioner SelectedIndex="{Binding ActiveSlideIndex}" 
+                                     AutoApplyTransitionOrigins="True"
+                                     ItemsSource="{Binding TabControlSlides}">
+
+            </materialDesign:Transitioner>
         </Grid>
-        <RadioButton></RadioButton>
+
     </StackPanel>
         
 

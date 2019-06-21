@@ -142,12 +142,18 @@ namespace TestingProgram
                         }
                         if (ActiveSlideIndex == QuestionsSlides.Count - 1)
                         {
-                            using(testEntities db = new testEntities())
+                            _timer.Stop();
+                            using (testEntities db = new testEntities())
                             {
-                                Результат результат = new Результат() { Тема_Название = ThemeText , Оценка =(byte)Mark, Раздел_Название = };
+                                var студент = db.Студенты.Where(s => s.Логин == LoginName).SingleOrDefault();
+                                var chaphter = db.Темы.Where(s => s.Id == EditThemeId).SingleOrDefault();
+                                Результат результат = new Результат() { Тема_Название = EditThemeId , Раздел_Название = chaphter.Раздел_Id, Оценка =(byte)Mark, Дата_Прохождения = DateTime.Now };
+                                Студент_Результат студент_Результат = new Студент_Результат() { Результат_Id = результат.Id, Студент_Id = студент.Id };
+                                db.Результаты.Add(результат);
+                                db.Студент_Результат.Add(студент_Результат);
+                                db.SaveChanges();
                             }
                             Console.WriteLine("ИТОГОВАЯ ОЦЕНКА " + Mark);
-
                             if (RunFinishDialogCommand.CanExecute(null))
                             {
                                 RunFinishDialogCommand.Execute(null);
@@ -180,7 +186,7 @@ namespace TestingProgram
             {
 
                 Application.Current.Windows[0].ShowDialog();
-                //Application.Current.Windows[1].Hide();
+                Application.Current.Windows[1].Hide();
             }
             Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
         }

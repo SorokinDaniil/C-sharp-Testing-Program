@@ -4,11 +4,18 @@ namespace TestingProgram
 {
     public static class NavigationCommands
     {
+        //РЕДАКТОР
         public static RoutedCommand ShowChoiceChaphterCommand = new RoutedCommand();
         public static RoutedCommand ShowAdmin_Editor_TableChaphterEditCommand = new RoutedCommand();
-
-        public static RoutedCommand ShowChoiceChaphterNoEditCommand = new RoutedCommand();
+        //ЖУРНАЛ
+        public static RoutedCommand ShowChoiceChaphterNoEditAdminCommand = new RoutedCommand();
         public static RoutedCommand ShowUser_ListStudent_TableTestNoEditCommand = new RoutedCommand();
+        //ТЕСТЫ
+        public static RoutedCommand ShowChoiceChaphterNoEditUserCommand = new RoutedCommand();
+
+
+   public static RoutedCommand ShowAdmin_ListStudent_TableListStudentEditCommand = new RoutedCommand();
+   public static RoutedCommand ShowAdmin_ListStudent_TableTestNoEditCommand = new RoutedCommand();
 
 
 

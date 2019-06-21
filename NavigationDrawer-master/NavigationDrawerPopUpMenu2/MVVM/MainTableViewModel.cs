@@ -46,6 +46,7 @@ namespace TestingProgram
 
         public MainTableViewModel(string typeTable)
         {
+            SelecteValueChoice = "";
             TypeTable = typeTable;
             switch (TypeTable)
             {
@@ -114,22 +115,6 @@ namespace TestingProgram
             _items3 = CreateData();
         }
 
-        //private RelayCommand createdate;
-        //public RelayCommand CreateDate
-        //{
-
-        //    get
-        //    {
-        //        return createdate ??
-        //            (createdate = new RelayCommand(obj =>
-        //            {
-
-        //                CreateTableContent();
-
-        //            }));
-        //    }
-        //}
-
      private RelayCommand selectedItemGridCommand;
         public RelayCommand SelectedItemGridCommand
         {
@@ -158,6 +143,7 @@ namespace TestingProgram
                 return updateButtonCommand ??
                     (updateButtonCommand = new RelayCommand(obj =>
                     {
+                        SelecteValueChoice = "";
                         switch (TypeTable)
                         {
                             case "Admin_Editor_TableChaphterEdit":
@@ -182,7 +168,7 @@ namespace TestingProgram
                                 break;
                              case "User_ListStudent_TableTestNoEdit":
                                 {
-                                    (obj as Button).Command = NavigationCommands.ShowChoiceChaphterNoEditCommand; break;
+                                    (obj as Button).Command = NavigationCommands.ShowChoiceChaphterNoEditUserCommand; break;
                                 }
                               
                             default: break;
@@ -276,32 +262,72 @@ namespace TestingProgram
                     break;
                 case "User_ListStudent_TableTestNoEdit":
                     {
-                        using (testEntities db = new testEntities())
-                        {
-                       
-                            var name = _items3[SelectedTabIndex].OneColumnContent;
-                            var theme = db.Темы.SingleOrDefault(p => p.Название == name);
-                            var countquestion = db.Вопросы.Count(t => t.Тема_Id == theme.Id);
-                            var view = new UserStartTestDialog
+                        if (_items3.Count > 0 ) {
+                            using (testEntities db = new testEntities())
                             {
-                                DataContext = new UserStartTestDialogViewModel(theme.Название, theme.Время_Прохождения.ToString(), countquestion)
-                            };
-                            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
-                            if ((bool)result == true)
-                            {
-                                //ОТКРЫТИ НОВОГО ОКНА С ТЕСТАМИ
-                                TestingWindow themeEdit = new TestingWindow() { DataContext = new TestingWindowViewModel(theme.Название, theme.Время_Прохождения.ToString(), theme.Id , LoginName) };
-                                themeEdit.Show();
-                                Application.Current.Windows[0].Hide();
+                                var name = _items3[SelectedTabIndex].OneColumnContent;
+                                var theme = db.Темы.SingleOrDefault(p => p.Название == name);
+                                var countquestion = db.Вопросы.Count(t => t.Тема_Id == theme.Id);
+
+                                if (CheckTheme(theme.Id) == false)
+                                {
+                                    var view = new UserStartTestDialog
+                                    {
+                                        DataContext = new UserStartTestDialogViewModel(theme.Название, theme.Время_Прохождения.ToString(), countquestion)
+                                    };
+                                    var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                                    if ((bool)result == true)
+                                    {
+                                        //ОТКРЫТИ НОВОГО ОКНА С ТЕСТАМИ
+                                        TestingWindow themeEdit = new TestingWindow() { DataContext = new TestingWindowViewModel(theme.Название, theme.Время_Прохождения.ToString(), theme.Id, LoginName) };
+                                        themeEdit.Show();
+                                        Application.Current.Windows[0].Hide();
+                                    }
+                                    Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+                                }
                             }
-                            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
                         }
+                      
                     } break;
 
                 default: break;
             }
         }
 
+
+        bool CheckTheme(byte themeid)
+        {
+            using (testEntities db = new testEntities())
+            {
+                var student = db.Студенты.Where(p => p.Логин == LoginName).SingleOrDefault();
+                var allteststudent = db.Студент_Результат.Where(p => p.Студент_Id == student.Id).ToList();
+                if (allteststudent.Count == 0) return false;
+                for (int i=0; i< allteststudent.Count;i++)
+                {
+                    var resaultid = allteststudent[i].Результат_Id;
+                    var resault = db.Результаты.Where(s => s.Id == resaultid).SingleOrDefault();
+                    if (resault.Раздел_Название == IdSelectedChaphterValue && resault.Тема_Название == themeid)
+                    {
+                        Finish(resault.Оценка);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        private async void Finish(byte Mark)
+        {
+            var view = new FinishDialog
+            {
+                DataContext = new FinishDialogViewModel(Mark)
+            };
+
+            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+        }
+
+     
         private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
         {
             Console.WriteLine("You can intercept the closing event, and cancel here.");
@@ -365,36 +391,24 @@ namespace TestingProgram
           });
                             foreach (var group in groups)
                             {
-                                db.Студент_Результат.Where(p => p.Студент_Id == group.Id) .Load();
+                                var count = db.Студент_Результат.Count(p => p.Студент_Id == group.Id);
                                 _items3.Add(new SelectableViewModel
                                 {
                                     OneColumnContent = index++.ToString(),
                                     TwoColumnContent = group.ФИО,
-                                    ThreeColumnContent = db.Вопросы.Local.Count.ToString()//Количество пройденых тестов в разделе
+                                    ThreeColumnContent = count.ToString()//Количество пройденых тестов в разделе
                                 });
                             }
                         }
                         break;
                     case "Admin_ListStudent_TableTestNoEdit":
                         {
-                            OneColumnName = "Название";
-                            OneColumnVisability = Visibility.Visible;
-
-                            TwoColumnVisability = Visibility.Hidden;
-                            ThreeColumnVisability = Visibility.Hidden;
-                            FourColumnVisability = Visibility.Hidden;
+                         
                         }
                         break;
                     case "Admin_ListStudent_TablePassedTestNoEdit":
                         {
-                            OneColumnName = "Номер";
-                            TwoColumnName = "Имя и фамилия";
-                            ThreeColumnName = "Оценка";
-                            FourColumnName = "Дата прохождения";
-                            OneColumnVisability = Visibility.Visible;
-                            TwoColumnVisability = Visibility.Visible;
-                            ThreeColumnVisability = Visibility.Visible;
-                            FourColumnVisability = Visibility.Visible;
+                          
                         }
                         break;
                     case "User_ListStudent_TableTestNoEdit":

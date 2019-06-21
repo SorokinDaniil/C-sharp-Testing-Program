@@ -49,13 +49,19 @@ namespace TestingProgram
                     ChoiceTextBlock = "Выберите раздел";
                         ChoiceHint = "Раздел";
                         ChoicePopupBox = Visibility.Visible; break;
-                    case "ChaphterNoEdit":
+                    case "ChaphterNoEditAdmin":
                     IsCheckCollection = false;
                     LoadChaphterCollection();
                     ChoiceTextBlock = "Выберите раздел";
                         ChoiceHint = "Раздел";
                         ChoicePopupBox = Visibility.Hidden; break;
-                    case "Group":
+                case "ChaphterNoEditUser":
+                    IsCheckCollection = false;
+                    LoadChaphterCollection();
+                    ChoiceTextBlock = "Выберите раздел";
+                    ChoiceHint = "Раздел";
+                    ChoicePopupBox = Visibility.Hidden; break;
+                case "Group":
                     IsCheckCollection = true;
                     LoadGroupCollection();
                     ChoiceTextBlock = "Выберите группу";
@@ -78,11 +84,12 @@ namespace TestingProgram
                         {
                             case "Chaphter":
                                 (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
-
-                            case "ChaphterNoEdit":
+                            case "ChaphterNoEditAdmin":
+                                (obj as Button).Command = NavigationCommands.ShowTabControlCommand; break;
+                            case "ChaphterNoEditUser":
                                 (obj as Button).Command = NavigationCommands.ShowUser_ListStudent_TableTestNoEditCommand; break;
-                            //case "Group":
-                            //    (obj as Button).Command = NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand; break;
+                            case "Group":
+                                (obj as Button).Command = NavigationCommands.ShowChoiceChaphterNoEditAdminCommand; break;
                             default: break;
                         }
                         //(obj as Button).SetBinding(Button.CommandProperty, new Binding("SaveReservationCommand"));
@@ -114,7 +121,7 @@ namespace TestingProgram
                 choicevaluegroup = ChoiceValue;
             if (IsCheckCollection == false)
                 choicevaluechaphter = ChoiceValue;
-        }
+        }      
 
         void LoadGroupCollection ()
         {
