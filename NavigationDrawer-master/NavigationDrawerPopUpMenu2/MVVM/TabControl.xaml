@@ -29,6 +29,7 @@
         <Grid x:Name="TabControlGrid">
             
         </Grid>
+        <RadioButton></RadioButton>
     </StackPanel>
         
 

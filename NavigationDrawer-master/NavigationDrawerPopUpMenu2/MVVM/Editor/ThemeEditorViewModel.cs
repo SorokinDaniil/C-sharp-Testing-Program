@@ -29,19 +29,18 @@ namespace TestingProgram
       private Visibility _visabilityRightArrow;
         int NumberQuestion;
         byte EditThemeId;
+      
         
         public List<object> QuestionsSlides { get; set; } = new List<object>();
 
 
         public ThemeEditorViewModel(string editThemeText, string editThemeTime, byte editThemeId)
         {
+     
             TextTextBox = editThemeText;
             TextTimePicker = editThemeTime;
             EditThemeId = editThemeId;
             VisabilityLeftArrow = Visibility.Hidden;
-            CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoBackQuestionCommand, GoBackQuestionExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(ThemeEdit), new CommandBinding(NavigationCommands.GoNextQuestionCommand, GoNextQuestionExecuted));
-
             using (testEntities db = new testEntities())
             {
                 db.Вопросы.Where(p => p.Тема_Id == EditThemeId).Load();
@@ -71,7 +70,7 @@ namespace TestingProgram
 });
                 foreach (var question in questions)
                 {
-                    QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id));
+                    QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id,"Admin"));
                 }
             }
         }
@@ -138,6 +137,21 @@ namespace TestingProgram
                         byte EditQuestionId = (QuestionsSlides[ActiveSlideIndex] as QuestionsCollectionViewModel).IdQuestion;
                         TestingEditor testingEditor = new TestingEditor(EditThemeId, EditQuestionId);
                         testingEditor.Show();
+                        (obj as ThemeEdit).Close();
+                    }));
+            }
+        }
+
+        private RelayCommand goBackCommand;
+        public RelayCommand GoBackCommand
+        {
+
+            get
+            {
+                return goBackCommand ??
+                    (goBackCommand = new RelayCommand(obj =>
+                    {
+                       
                         (obj as ThemeEdit).Close();
                     }));
             }

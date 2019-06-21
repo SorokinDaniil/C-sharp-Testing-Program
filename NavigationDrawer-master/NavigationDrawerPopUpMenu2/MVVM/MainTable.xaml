@@ -11,7 +11,7 @@
     <Grid>
         <DockPanel LastChildFill="False">
 
-            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="TableObject">
                 <TextBlock 
     Style="{StaticResource MaterialDesignDisplay1TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,16" DockPanel.Dock="Top" Text="{Binding HeaderMainTable}" ></TextBlock>
                 <Button x:Name="UpdateButton" Opacity=".85" VerticalAlignment="Center" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniLightButton}" Width="26" Height="26" Margin="8,16,16,16" Background="{x:Null}" BorderBrush="{x:Null}" >
@@ -121,7 +121,7 @@
                     <Button ToolTip="Добавить" Command="{Binding RunDialogAddChaphterCommand}" >
                         <materialDesign:PackIcon Kind="Plus" Height="20" Width="20" />
                     </Button>
-                    <Button ToolTip="Редактировать" Command="{Binding RunDialogEditChaphterCommand}">
+                    <Button ToolTip="Редактировать" Command="{Binding RunDialogEditChaphterCommand}" CommandParameter="{Binding ElementName=TableObject}">
                         <materialDesign:PackIcon Kind="Edit" />
                     </Button>
                     <Button ToolTip="Удалить" Command="{Binding RunDialogDeleteChaphterCommand}">

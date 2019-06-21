@@ -16,12 +16,15 @@ namespace TestingProgram
         string _textQuestion;
         string TypeAnswerQuestion;
       public  byte IdQuestion;
-        StackPanel AnswerStackPanel;
+       public StackPanel AnswerStackPanel;
         private string _codeQuestion;
         private Visibility _visibilityCodeBlockQuestion;
+        string TypeAccount;
+       
 
-        public QuestionsCollectionViewModel (string textQuestion,string codeQuestion,string typeAnswerQuestion,byte idQuestion)
+        public QuestionsCollectionViewModel (string textQuestion,string codeQuestion,string typeAnswerQuestion,byte idQuestion,string typeaccount)
         {
+            TypeAccount = typeaccount;
             TextQuestion = textQuestion;//Загрузка текста вопроса
             IdQuestion = idQuestion;
             TypeAnswerQuestion = typeAnswerQuestion;
@@ -40,7 +43,8 @@ namespace TestingProgram
         void CreateAnswers ()
         {
             using (testEntities db = new testEntities())
-            {  
+            {
+                bool IsCheckedAnswer = false;
                 IEnumerable<Ответ> answers = db.Ответы.Where(p => p.Вопрос_Id == IdQuestion).Select(p => new { Текст = p.Текст, Значение = p.Значение, })
 .AsEnumerable()
 .Select(an => new Ответ
@@ -48,11 +52,14 @@ namespace TestingProgram
     Текст = an.Текст,
     Значение = an.Значение,
 });
+       
+
                 if (TypeAnswerQuestion == "CheckBox")
                 {
                     foreach (var answer in answers)
                     {
-                        CheckBox radionanswer = new CheckBox { Content = new TextBlock { FontSize = 15, Width = 1017, Height = 29, Text = answer.Текст }, MinHeight = 20, IsChecked = answer.Значение, Margin = new System.Windows.Thickness(20, 0, 20, 6) };
+                        if (TypeAccount == "Admin") IsCheckedAnswer = answer.Значение;
+                            CheckBox radionanswer = new CheckBox {  Content = new TextBlock { FontSize = 15, Width = 1017, Height = 29, Text = answer.Текст }, MinHeight = 20, IsChecked = IsCheckedAnswer, Margin = new System.Windows.Thickness(20, 0, 20, 6) };
                         AnswerStackPanel.Children.Add(radionanswer);
                     }
                 }
@@ -61,12 +68,12 @@ namespace TestingProgram
                 {
                     foreach (var answer in answers)
                     {
-                        RadioButton radionanswer = new RadioButton { Content = new TextBlock { FontSize = 15, Width = 1017, Height = 29 ,Text=answer.Текст }, MinHeight = 20, IsChecked = answer.Значение, Margin = new System.Windows.Thickness(20, 0, 20, 6) };
+                        if (TypeAccount == "Admin") IsCheckedAnswer = answer.Значение;
+                        RadioButton radionanswer = new RadioButton {  Content = new TextBlock { FontSize = 15, Width = 1017, Height = 29 ,Text=answer.Текст }, MinHeight = 20, IsChecked = IsCheckedAnswer, Margin = new System.Windows.Thickness(20, 0, 20, 6) };
                         AnswerStackPanel.Children.Add(radionanswer);
                     }
                 }
-                    //Тут закончил
-                    //QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id));
+                 
                 }
             }
         

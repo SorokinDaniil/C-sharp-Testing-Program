@@ -18,7 +18,7 @@ namespace TestingProgram
     /// <summary>
     /// Логика взаимодействия для TestingWindow.xaml
     /// </summary>
-    public partial class TestingWindow : UserControl
+    public partial class TestingWindow : Window
     {
         public TestingWindow()
         {

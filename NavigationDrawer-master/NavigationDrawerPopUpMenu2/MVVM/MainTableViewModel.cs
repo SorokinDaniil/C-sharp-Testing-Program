@@ -219,7 +219,6 @@ namespace TestingProgram
 
         private void EditChaphterCommand(object o)
         {
-            
             using (testEntities db = new testEntities())
             {
                 var name = _items3[SelectedTabIndex].OneColumnContent;
@@ -252,34 +251,53 @@ namespace TestingProgram
 
         private async void UserStartTestDialogCommand(object o)
         {
-            using(testEntities db = new testEntities())
+            switch (TypeTable)
             {
-             
-                var name = _items3[SelectedTabIndex].OneColumnContent;
-                var theme = db.Темы.SingleOrDefault(p => p.Название == name);
-             //var a =  db.Вопросы.Where(p => p.Тема_Id == theme.Id).SelectMany(p => p.Id).Count();
-                var countquestion = db.Вопросы.Count(t => t.Тема_Id == theme.Id);
-                var view = new UserStartTestDialog
-                {
-                    DataContext = new UserStartTestDialogViewModel(theme.Название,theme.Время_Прохождения.ToString(),countquestion)
-                };
-                var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
-                if ((bool)result == true)
-                {
-                    //ОТКРЫТИ НОВОГО ОКНА С ТЕСТАМИ
+                case "Admin_Editor_TableChaphterEdit":
+                    {
+                      
+                    }
+                    break;
+                case "Admin_ListStudent_TableListStudentEdit":
+                    {
 
-                    //using (testEntities db = new testEntities())
-                    //{
-                    //    var lastShowPieceId = db.Темы.Max(x => x.Id);
-                    //    var LastTheme = db.Темы.FirstOrDefault(x => x.Id == lastShowPieceId);
-                    //    db.Вопросы.Where(p => p.Тема_Id == lastShowPieceId).Load();
-                    //    _items3.Add(new SelectableViewModel { OneColumnContent = LastTheme.Название, TwoColumnContent = LastTheme.Время_Прохождения.ToString(), ThreeColumnContent = db.Вопросы.Local.Count.ToString() });
-                    //}
-                }
-                Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+                    }
+                    break;
+                case "Admin_ListStudent_TableTestNoEdit":
+                    {
+
+                    }
+                    break;
+                case "Admin_ListStudent_TablePassedTestNoEdit":
+                    {
+
+                    }
+                    break;
+                case "User_ListStudent_TableTestNoEdit":
+                    {
+                        using (testEntities db = new testEntities())
+                        {
+
+                            var name = _items3[SelectedTabIndex].OneColumnContent;
+                            var theme = db.Темы.SingleOrDefault(p => p.Название == name);
+                            var countquestion = db.Вопросы.Count(t => t.Тема_Id == theme.Id);
+                            var view = new UserStartTestDialog
+                            {
+                                DataContext = new UserStartTestDialogViewModel(theme.Название, theme.Время_Прохождения.ToString(), countquestion)
+                            };
+                            var result = await DialogHost.Show(view, "RootDialog", ClosingEventHandler);
+                            if ((bool)result == true)
+                            {
+                                //ОТКРЫТИ НОВОГО ОКНА С ТЕСТАМИ
+                                TestingWindow themeEdit = new TestingWindow() { DataContext = new TestingWindowViewModel(theme.Название, theme.Время_Прохождения.ToString(), theme.Id) };
+                                themeEdit.Show();
+                            }
+                            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+                        }
+                    } break;
+
+                default: break;
             }
-
-           
         }
 
         private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
@@ -297,7 +315,7 @@ namespace TestingProgram
             //Console.WriteLine(SelecteValueChoice);
         }
 
-        void CreateTableContent ()
+       public void CreateTableContent ()
         {
             _items3.Clear();
             using (testEntities db = new testEntities())
@@ -389,11 +407,12 @@ namespace TestingProgram
           });
                             foreach (var theme in themes)
                             {
-                                //db.Вопросы.Where(p => p.Тема_Id == theme.Id).Load();
-                                _items3.Add(new SelectableViewModel
-                                {
-                                    OneColumnContent = theme.Название,
-                                });
+                                if (db.Вопросы.Count(t => t.Тема_Id == theme.Id) >= 5) {
+                                    _items3.Add(new SelectableViewModel
+                                    {
+                                        OneColumnContent = theme.Название,
+                                    });
+                                }
                             }
                         }
                         break;

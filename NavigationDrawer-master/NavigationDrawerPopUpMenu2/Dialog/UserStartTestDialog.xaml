@@ -42,7 +42,7 @@
             <StackPanel Orientation="Horizontal" 
                     Margin="0,24,0,0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button IsDefault="True" Style="{DynamicResource MaterialDesignRaisedButton}"
-                    Command="{Binding StartTestCommand}" CommandParameter="{Binding ElementName=AddText , Path=Text}" Background="#FF00B147" BorderBrush="#FF00B147">
+                    Command="{Binding StartTestCommand}" Background="#FF00B147" BorderBrush="#FF00B147">
                     <!--<Button.CommandParameter>
                     <system:Boolean>True</system:Boolean>
                 </Button.CommandParameter>-->

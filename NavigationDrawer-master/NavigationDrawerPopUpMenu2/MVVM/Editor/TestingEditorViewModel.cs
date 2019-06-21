@@ -23,6 +23,7 @@ namespace TestingProgram
         private int _selectedIndexChangeAnswer;
         private Visibility _codeBoxVisibility;
         string TypeQuestion;
+        TestingEditor CurrentObject;
 
         public TestingEditorViewModel (byte editthemeid , byte editquestionid)
         {
@@ -188,7 +189,8 @@ namespace TestingProgram
                 return loadedStackPanel ??
                     (loadedStackPanel = new RelayCommand(obj =>
                     {
-                        AnswerStackPanel = (obj as StackPanel);
+                        AnswerStackPanel = (obj as TestingEditor).AnswerBlock;
+                        CurrentObject = (obj as TestingEditor);
                         if (TextQuestion == "")
                         {
                             for (int i = 0; i < 4; i++)
@@ -222,7 +224,7 @@ namespace TestingProgram
                         using (testEntities db = new testEntities())
                         {
                             var children = AnswerStackPanel.Children.OfType<UIElement>().ToList();
-                            if (IsCheckCodeQuestion == false) CodeQuestion = null;
+                            if (IsCheckCodeQuestion == false || CodeQuestion == "") CodeQuestion = null;
                             if (EditQuestionId == 0)//Добавление нового элемента 
                             {
                                 Вопрос вопрос = new Вопрос { Текст = TextQuestion, Код = CodeQuestion, Тип_Ответа = (obj as string), Тема_Id = EditThemeId };
@@ -250,6 +252,7 @@ namespace TestingProgram
                             {
                                 Вопрос вопрос = db.Вопросы.Where(s => s.Id == EditQuestionId).SingleOrDefault();
                                 вопрос.Текст = TextQuestion;
+                                if (CodeQuestion == null || CodeQuestion == "") вопрос.Код = null; else
                                 вопрос.Код = CodeQuestion;
                                 вопрос.Тип_Ответа = (obj as string);
                                 List<Ответ> ответы = db.Ответы.Where(S => S.Вопрос_Id == EditQuestionId).ToList();
@@ -277,6 +280,7 @@ namespace TestingProgram
 
                             ThemeEdit themeEdit = new ThemeEdit() { DataContext = new ThemeEditorViewModel(db.Темы.Where(p => p.Id == EditThemeId).SingleOrDefault().Название, db.Темы.Where(p => p.Id == EditThemeId).SingleOrDefault().Время_Прохождения.ToString(), EditThemeId) };
                             themeEdit.Show();
+                            CurrentObject.Close();
                         }
                     }));
             }
@@ -291,18 +295,20 @@ namespace TestingProgram
                 return deleteQuestion ??
                     (deleteQuestion = new RelayCommand(obj =>
                     {
-
-
                         using (testEntities db = new testEntities())
                         {
-                            Вопрос вопрос = db.Вопросы.Where(s => s.Id == EditQuestionId).SingleOrDefault();
-                            db.Вопросы.Remove(вопрос);
-                            IEnumerable<Ответ> ответ = db.Ответы.Where(s => s.Вопрос_Id == EditQuestionId);
-                            db.Ответы.RemoveRange(ответ);
-                            db.SaveChanges();
-
+                        
+                           if (EditQuestionId != 0)
+                            { 
+                                Вопрос вопрос = db.Вопросы.Where(s => s.Id == EditQuestionId).SingleOrDefault();
+                                db.Вопросы.Remove(вопрос);
+                                IEnumerable<Ответ> ответ = db.Ответы.Where(s => s.Вопрос_Id == EditQuestionId);
+                                db.Ответы.RemoveRange(ответ);
+                                db.SaveChanges();
+                            }
                             ThemeEdit themeEdit = new ThemeEdit() { DataContext = new ThemeEditorViewModel(db.Темы.Where(p =>p.Id == EditThemeId).SingleOrDefault().Название, db.Темы.Where(p => p.Id == EditThemeId).SingleOrDefault().Время_Прохождения.ToString(), EditThemeId) };
                             themeEdit.Show();
+                            CurrentObject.Close();
                         }
                     }));
             }

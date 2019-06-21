@@ -21,7 +21,7 @@ namespace TestingProgram
         private string _startTestheader;
         private int _startTestcountquestion;
         private string _startTesttime;
-        byte IdSelectedValue;
+     
 
         public UserStartTestDialogViewModel(string starttestheader , string starttesttime , int starttestcountquestion)
         {
@@ -71,25 +71,19 @@ namespace TestingProgram
             }
         }
 
-        //private RelayCommand startTestcommand;
-        //public RelayCommand StartTestCommand
-        //{
+        private RelayCommand startTestcommand;
+        public RelayCommand StartTestCommand
+        {
 
-        //    get
-        //    {
-        //        return startTestcommand ??
-        //            (startTestcommand = new RelayCommand(obj =>
-        //            {
-        //                using (testEntities db = new testEntities())
-        //                {
-        //                    Тема тема = new Тема { Название = StartTestTextBox, Время_Прохождения = TimeSpan.Parse(StartTestTimePicker), Раздел_Id = IdSelectedValue };
-        //                    db.Темы.StartTest(тема);
-        //                    db.SaveChanges();
-        //                }
-        //                DialogHost.CloseDialogCommand.Execute(true, null);
-        //            }));
-        //    }
-        //}
+            get
+            {
+                return startTestcommand ??
+                    (startTestcommand = new RelayCommand(obj =>
+                    {
+                        DialogHost.CloseDialogCommand.Execute(true, null);
+                    }));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

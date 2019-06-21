@@ -49,7 +49,7 @@ namespace TestingProgram
 
         //public TestingEditorViewModel TestingEditorViewModel { get; } = new TestingEditorViewModel();
 
-        public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
+        //public TestingWindowViewModel TestingWindowViewModel { get; } = new TestingWindowViewModel();
 
         //public ThemeEditorViewModel ThemeEditorViewModel { get; } = new ThemeEditorViewModel();
 

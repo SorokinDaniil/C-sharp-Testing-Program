@@ -15,6 +15,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using DevExpress;
 using System.Data.Entity;
+using System.Windows.Threading;
 
 namespace TestingProgram
 {
@@ -25,10 +26,12 @@ namespace TestingProgram
         private string _textTextBox;
         private string _textTimePicker;
         private string _textShowCurrentSlide;
-        private Visibility _visabilityLeftArrow;
-        private Visibility _visabilityRightArrow;
         int NumberQuestion;
         byte EditThemeId;
+        DispatcherTimer _timer;
+        TimeSpan _time;
+        List<Вопрос> questions;
+        double ValueScore;
 
         public List<object> QuestionsSlides { get; set; } = new List<object>();
 
@@ -39,14 +42,27 @@ namespace TestingProgram
             EditThemeId = editThemeId;
             using (testEntities db = new testEntities())
             {
+                questions = db.Вопросы.Where(s => s.Тема_Id == EditThemeId).ToList();
                 NumberQuestion = db.Вопросы.Count(p => p.Тема_Id == EditThemeId);
+                ValueScore = 10 / NumberQuestion;/////////////////////////////////////////////////////////////
             }
 
             CreateQuestionSlide(editThemeText);
+             
             _slideNavigator = new SlideNavigator(this, QuestionsSlides);
             _slideNavigator.GoTo(0);//Задается начальное окно 
-        }
 
+            _time = TimeSpan.Parse(editThemeTime);
+
+            _timer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                TextTimePicker = _time.ToString("c");
+                if (_time == TimeSpan.Zero) _timer.Stop();
+                _time = _time.Add(TimeSpan.FromSeconds(-1));
+            }, Application.Current.Dispatcher);
+
+            _timer.Start();
+        }
 
         void CreateQuestionSlide(string editThemeText)
         {
@@ -65,7 +81,7 @@ namespace TestingProgram
 });
                 foreach (var question in questions)
                 {
-                    QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id));
+                    QuestionsSlides.Add(new QuestionsCollectionViewModel(question.Текст, question.Код, question.Тип_Ответа, question.Id,"User"));
                 }
             }
         }
@@ -81,14 +97,40 @@ namespace TestingProgram
                 return rightArrowCommand ??
                     (rightArrowCommand = new RelayCommand(obj =>
                     {
+                        using (testEntities db = new testEntities())
+                        {
+                            var answers = db.Ответы.Where(s => s.Вопрос_Id == questions[ActiveSlideIndex].Id).ToList();
+
+
+                            var children = (QuestionsSlides[ActiveSlideIndex] as QuestionsCollectionViewModel).AnswerStackPanel.Children.OfType<UIElement>().ToList();
+                            for (int i = 0; i < children.Count; i++)
+                            {
+                                if (answers[i].Значение == true)
+                                {
+                                    if (children[i].GetType() == typeof(RadioButton))
+                                    {
+                                        Console.WriteLine((children[i] as RadioButton).IsChecked);
+                                    }
+                                    else
+                                   if (children[i].GetType() == typeof(CheckBox))
+                                    {
+                                        Console.WriteLine((children[i] as CheckBox).IsChecked);
+                                    }
+                                }
+                                   
+                            }
+                        }    
                         _slideNavigator.GoTo(ActiveSlideIndex + 1);
                         TextShowCurrentSlide = $"{ActiveSlideIndex + 1}/{NumberQuestion}";
+                        
                     }));
+              
             }
         }
 
      
         #endregion
+
         #region Property
         private void GoBackQuestionExecuted(object sender, ExecutedRoutedEventArgs e)
         {
