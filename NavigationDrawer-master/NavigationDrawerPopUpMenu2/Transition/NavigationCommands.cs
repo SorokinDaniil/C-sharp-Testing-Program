@@ -16,7 +16,7 @@ namespace TestingProgram
 
    public static RoutedCommand ShowAdmin_ListStudent_TableListStudentEditCommand = new RoutedCommand();
    public static RoutedCommand ShowAdmin_ListStudent_TableTestNoEditCommand = new RoutedCommand();
-
+        public static RoutedCommand ShowAdmin_ListStudent_TablePassedTestNoEditCommand = new RoutedCommand();
 
 
 

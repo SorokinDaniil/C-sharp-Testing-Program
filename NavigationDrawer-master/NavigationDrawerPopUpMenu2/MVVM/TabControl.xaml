@@ -15,7 +15,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <RadioBut   ton Command="{Binding TabControlCommand}" CommandParameter="{Binding ElementName=TabControlGrid}"
+            <RadioButton Command="{Binding TabControlCommand}" CommandParameter="{Binding ElementName=TabControlGrid}"
     Style="{StaticResource MaterialDesignTabRadioButton}"
     Grid.Column="0"
     IsChecked="{Binding IsCheckedOneTab}" 

@@ -112,6 +112,7 @@ namespace TestingProgram
                             List<Ответ> answers = db.Ответы.Where(s => s.Вопрос_Id == IdQuestion).ToList();
                             ValueScoreCheckbox = ValueScoreRadioButton / answers.Where(p => p.Значение == true).Count();
                             ValueScoreCheckbox = Math.Round(ValueScoreCheckbox, 1);
+
                             var children = (QuestionsSlides[ActiveSlideIndex] as QuestionsCollectionViewModel).AnswerStackPanel.Children.OfType<UIElement>().ToList();
                             for (int i = 0; i < children.Count; i++)
                             {

@@ -27,9 +27,9 @@ namespace TestingProgram
 
         public TabControlViewModel()
         {
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowAdmin_ListStudent_TableListStudentEditExecuted));
-            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand, ShowAdmin_ListStudent_TableTestNoEditExecuted));
-            TabControlSlides = new List<object> { Admin_ListStudent_TableListStudentEdit, Admin_ListStudent_TableTestNoEdit };
+            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowAdmin_ListStudent_TableListStudentEditExecuted));
+            //CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand, ShowAdmin_ListStudent_TableTestNoEditExecuted));
+            TabControlSlides = new List<object> { Admin_ListStudent_TableTestNoEdit  , Admin_ListStudent_TableListStudentEdit,  };
             _slideNavigator = new SlideNavigator(this, TabControlSlides);
             IsCheckedOneTab = true;
             _slideNavigator.GoTo(0);//Задается начальное окно 
@@ -42,14 +42,14 @@ namespace TestingProgram
         public MainTableViewModel Admin_ListStudent_TableTestNoEdit { get; } = new MainTableViewModel("Admin_ListStudent_TableTestNoEdit");
     
      
-        private void ShowAdmin_ListStudent_TableListStudentEditExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void ShowAdmin_ListStudent_TableListStudentEditExecuted()
         {
             _slideNavigator.GoTo(
                 IndexOfSlide<MainTableViewModel>(),
                 () => Admin_ListStudent_TableListStudentEdit.Show(SelectedValueGroup, ""));
         }
 
-        private void ShowAdmin_ListStudent_TableTestNoEditExecuted(object sender, ExecutedRoutedEventArgs e)
+        private void ShowAdmin_ListStudent_TableTestNoEditExecuted()
         {
             _slideNavigator.GoTo(
                IndexOfSlide<MainTableViewModel>(),
@@ -64,14 +64,13 @@ namespace TestingProgram
                 return _tabcontrolcommand ??
                     (_tabcontrolcommand = new RelayCommand(obj =>
                     {
-                        NavigationCommands.ShowAdmin_ListStudent_TableTestNoEditCommand.Execute(null);
                         if (IsCheckedOneTab == true)
                         {
-                            ShowAdmin_ListStudent_TableListStudentEditExecuted();
+                            ShowAdmin_ListStudent_TableTestNoEditExecuted();
                         }
                         if (IsCheckedTwoTab == true)
                         {
-                            ShowAdmin_ListStudent_TableTestNoEditExecuted();
+                            ShowAdmin_ListStudent_TableListStudentEditExecuted();
                         }
                     }));
             }
@@ -82,7 +81,7 @@ namespace TestingProgram
             SelectedValueGroup = selectedvaluegroup;
             SelectedValueChaphter = selectedvaluechaphter;
 
-            ShowAdmin_ListStudent_TableListStudentEditExecuted();
+            ShowAdmin_ListStudent_TableTestNoEditExecuted();
             //IsCheckedOneTab = true;
             //ShowAdmin_ListStudent_TableListStudentEditExecuted(selectedvaluegroup);
 

@@ -39,6 +39,7 @@ namespace TestingProgram
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceGroupCommand, ShowChoiceGroupExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterNoEditAdminCommand, ShowChoiceChaphterNoEditAdminExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowTabControlCommand, ShowTabControlExecuted));
+            CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowAdmin_ListStudent_TablePassedTestNoEditCommand, ShowAdmin_ListStudent_TablePassedTestNoEditCommandExecuted));
 
 
 
@@ -78,17 +79,17 @@ namespace TestingProgram
         public ChoiceViewModel ChoiceGroup { get; } = new ChoiceViewModel("Group");
         public ChoiceViewModel ChoiceChaphterNoEditAdmin { get; } = new ChoiceViewModel("ChaphterNoEditAdmin");
         public TabControlViewModel TabControl { get; } = new TabControlViewModel();
+        public MainTableViewModel Admin_ListStudent_TablePassedTestNoEdit { get; } = new MainTableViewModel("Admin_ListStudent_TablePassedTestNoEdit");
+
+
 
         //public PreviewTestingWindowViewModel PreviewTestingWindowViewModel { get; } = new PreviewTestingWindowViewModel();
-
-
-
 
         //public MainTableViewModel Admin_ListStudent_TableListStudentEdit { get; } = new MainTableViewModel("Admin_ListStudent_TableListStudentEdit");
 
         //public MainTableViewModel Admin_ListStudent_TableTestNoEdit { get; } = new MainTableViewModel("Admin_ListStudent_TableTestNoEdit");
 
-        //public MainTableViewModel Admin_ListStudent_TablePassedTestNoEdit { get; } = new MainTableViewModel("Admin_ListStudent_TablePassedTestNoEdit");
+
 
         //public TabControlViewModel User_ListStudent_TableTestNoEdit { get; } = new TabControlViewModel("User_ListStudent_TableTestNoEdit");
 
@@ -143,6 +144,14 @@ namespace TestingProgram
                 IndexOfSlide<TabControlViewModel>(),
                 () => TabControl.Show((AdminSlides[2] as ChoiceViewModel).ChoiceValue, (AdminSlides[3] as ChoiceViewModel).ChoiceValue));
         }
+
+        private void ShowAdmin_ListStudent_TablePassedTestNoEditCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            _slideNavigator.GoTo(
+                IndexOfSlide<TabControlViewModel>(),
+                () => Admin_ListStudent_TablePassedTestNoEdit.Show((AdminSlides[2] as ChoiceViewModel).ChoiceValue, (AdminSlides[3] as ChoiceViewModel).ChoiceValue),"");
+        }
+
         #endregion
 
 

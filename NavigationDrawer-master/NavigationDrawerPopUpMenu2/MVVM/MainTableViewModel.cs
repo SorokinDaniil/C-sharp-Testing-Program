@@ -41,6 +41,7 @@ namespace TestingProgram
         byte IdSelectedChaphterValue;
         Visibility _visabilityPopupButton;
         string LoginName;
+        string SelectedValueChoiceTwo;
 
 
 
@@ -340,11 +341,18 @@ namespace TestingProgram
             HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
             LoginName = loginname;
             CreateTableContent();
-            //Console.WriteLine(IsCheckChoice);
-            //Console.WriteLine(SelecteValueChoice);
         }
 
-       public void CreateTableContent ()
+        public void Show(string selectevaluechoice , string selectevaluechoicetwo,  string loginname)
+        {
+            SelecteValueChoice = selectevaluechoice;
+            SelectedValueChoiceTwo = selectevaluechoicetwo;
+            HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
+            LoginName = loginname;
+            CreateTableContent();
+        }
+
+        public void CreateTableContent ()
         {
             _items3.Clear();
             using (testEntities db = new testEntities())
@@ -403,12 +411,74 @@ namespace TestingProgram
                         break;
                     case "Admin_ListStudent_TableTestNoEdit":
                         {
-                         
+                          var idchaphter = db.Разделы.SingleOrDefault(p => p.Название == SelecteValueChoice);//Получение id выбраного раздела
+                            IdSelectedChaphterValue = idchaphter.Id;
+                            IEnumerable<Тема> themes = db.Темы.Where(p => p.Раздел_Id == IdSelectedChaphterValue).Select(p => new { Название = p.Название, Id = p.Id })
+          .AsEnumerable()
+          .Select(an => new Тема
+          {
+              Название = an.Название,
+              Id = an.Id
+          });
+                            foreach (var theme in themes)
+                            {
+                                if (db.Вопросы.Count(t => t.Тема_Id == theme.Id) >= 5) {
+                                    _items3.Add(new SelectableViewModel
+                                    {
+                                        OneColumnContent = theme.Название,
+                                    });
+                                }
+                            }
                         }
                         break;
                     case "Admin_ListStudent_TablePassedTestNoEdit":
                         {
-                          
+                            int three;
+                            DateTime four;
+                            int index = 1;
+                            var idgroup = db.Группы.SingleOrDefault(p => p.Название == SelectedValueChoiceTwo);//Получение id выбраного элемента
+                            IdSelectedChaphterValue = idgroup.Id;
+                            IEnumerable<Студент> groups = db.Студенты.Where(p => p.Группа_Id == IdSelectedChaphterValue).Select(p => new { ФИО = p.ФИО, Id = p.Id })
+          .AsEnumerable()
+          .Select(an => new Студент
+          {
+
+              ФИО = an.ФИО,
+              Id = an.Id
+          });
+
+
+                           
+                         
+                        
+
+
+
+
+                            foreach (var student in students)
+                            {
+                                var allteststudent = db.Студент_Результат.Where(p => p.Студент_Id == student.Id).ToList();
+                                if (allteststudent.Count == 0) return false;
+                                for (int i = 0; i < allteststudent.Count; i++)
+                                {
+                                    var resaultid = allteststudent[i].Результат_Id;
+                                    var resault = db.Результаты.Where(s => s.Id == resaultid).SingleOrDefault();
+                                    if (resault.Раздел_Название == IdSelectedChaphterValue && resault.Тема_Название == themeid)
+                                    {
+                                        four = resault.Дата_Прохождения;
+                                        three = resault.Оценка;
+                                    }
+                                }
+                                var count = db.Студент_Результат.Count(p => p.Студент_Id == group.Id);
+                                _items3.Add(new SelectableViewModel
+                                {
+                                    OneColumnContent = index++.ToString(),
+                                    TwoColumnContent = group.ФИО,
+                                    ThreeColumnContent = count.ToString()//Количество пройденых тестов в разделе
+                                });
+                            }
+
+
                         }
                         break;
                     case "User_ListStudent_TableTestNoEdit":
