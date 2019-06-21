@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="TestingProgram.FinishDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:local="clr-namespace:TestingProgram"
+             mc:Ignorable="d" 
+            Background="White">
+    <Grid Margin="16">
+
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+
+        </Grid.RowDefinitions>
+        <StackPanel  Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,8">
+            <TextBlock FontSize="20"  Margin="0,0,6,0" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding FinishText}"></TextBlock>
+            <wpf:PackIcon Kind="CloseCircle" Width="24" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Red" Visibility="{Binding VisibilityClose}"/>
+            <wpf:PackIcon Kind="CheckboxMarkedCircle" Width="24" Height="24" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="ForestGreen" Visibility="{Binding VisibilityCheck}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+               <TextBlock FontSize="16"  >Ваша оценка:</TextBlock>
+            <TextBlock FontSize="16" Text="{Binding FinishMark}" ></TextBlock>
+        </StackPanel>
+     
+        <StackPanel Orientation="Horizontal" Grid.Row="3"
+                    Margin="0 16 0 0" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+              Command="{x:Static wpf:DialogHost.CloseDialogCommand}"     >
+                <Button.CommandParameter>
+                    <system:Boolean>True</system:Boolean>
+                </Button.CommandParameter>
+                НА ГЛАВНУЮ
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

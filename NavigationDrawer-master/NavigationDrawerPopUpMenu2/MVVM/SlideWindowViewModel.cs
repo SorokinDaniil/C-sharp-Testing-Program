@@ -30,22 +30,22 @@ namespace TestingProgram
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowThemeEditorCommand,ShowThemeEditorExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowTestingWindowCommand, ShowTestingWindowExecuted));
 
-            if (TypeAccount == "User")
-            {
-                AdminSlides = new List<object>{ MainWindowViewModel };
-            }
-            if (TypeAccount == "Admin")
-            {
-                AdminSlides = new List<object> { MainWindowViewModel };
-            }
-            _slideNavigator = new SlideNavigator(this, AdminSlides);
-            _slideNavigator.GoTo(0);//Задается начальное окно 
+            //if (TypeAccount == "User")
+            //{
+            //    AdminSlides = new List<object>{ MainWindowViewModel };
+            //}
+            //if (TypeAccount == "Admin")
+            //{
+            //    AdminSlides = new List<object> { MainWindowViewModel };
+            //}
+            //_slideNavigator = new SlideNavigator(this, AdminSlides);
+            //_slideNavigator.GoTo(0);//Задается начальное окно 
     
         }
 
         public List<object> AdminSlides { get; }
 
-        public MainWindowViewModel MainWindowViewModel { get; } = new MainWindowViewModel(TypeAccount);
+        //public MainWindowViewModel MainWindowViewModel { get; } = new MainWindowViewModel(TypeAccount);
 
         //public TestingEditorViewModel TestingEditorViewModel { get; } = new TestingEditorViewModel();
 

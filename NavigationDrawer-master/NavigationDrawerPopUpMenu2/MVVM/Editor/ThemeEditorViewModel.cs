@@ -36,7 +36,6 @@ namespace TestingProgram
 
         public ThemeEditorViewModel(string editThemeText, string editThemeTime, byte editThemeId)
         {
-     
             TextTextBox = editThemeText;
             TextTimePicker = editThemeTime;
             EditThemeId = editThemeId;

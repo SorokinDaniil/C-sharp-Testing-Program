@@ -26,25 +26,32 @@ namespace TestingProgram
         private string _textTextBox;
         private string _textTimePicker;
         private string _textShowCurrentSlide;
-        int NumberQuestion;
+        double NumberQuestion;
         byte EditThemeId;
         DispatcherTimer _timer;
         TimeSpan _time;
         List<Вопрос> questions;
-        double ValueScore;
+        double ValueScoreRadioButton;
+        double ValueScoreCheckbox;
+        double Mark;
+        string LoginName;
+        string ThemeText;
 
         public List<object> QuestionsSlides { get; set; } = new List<object>();
 
 
-        public TestingWindowViewModel(string editThemeText, string editThemeTime, byte editThemeId)
+        public TestingWindowViewModel(string editThemeText, string editThemeTime, byte editThemeId,string loginname)
         {
+            ThemeText = editThemeText;
+            LoginName = loginname;
             TextTimePicker = editThemeTime;
             EditThemeId = editThemeId;
             using (testEntities db = new testEntities())
             {
                 questions = db.Вопросы.Where(s => s.Тема_Id == EditThemeId).ToList();
                 NumberQuestion = db.Вопросы.Count(p => p.Тема_Id == EditThemeId);
-                ValueScore = 10 / NumberQuestion;/////////////////////////////////////////////////////////////
+               ValueScoreRadioButton = 10 / NumberQuestion ;
+                ValueScoreRadioButton =  Math.Round(ValueScoreRadioButton, 1);
             }
 
             CreateQuestionSlide(editThemeText);
@@ -88,6 +95,8 @@ namespace TestingProgram
 
         #region Command
 
+        public ICommand RunFinishDialogCommand => new AnotherCommandImplementation(Finish);
+
         private RelayCommand rightArrowCommand;
         public RelayCommand RightArrowCommand
         {
@@ -99,36 +108,89 @@ namespace TestingProgram
                     {
                         using (testEntities db = new testEntities())
                         {
-                            var answers = db.Ответы.Where(s => s.Вопрос_Id == questions[ActiveSlideIndex].Id).ToList();
-
-
+                            var IdQuestion = questions[ActiveSlideIndex].Id;
+                            List<Ответ> answers = db.Ответы.Where(s => s.Вопрос_Id == IdQuestion).ToList();
+                            ValueScoreCheckbox = ValueScoreRadioButton / answers.Where(p => p.Значение == true).Count();
+                            ValueScoreCheckbox = Math.Round(ValueScoreCheckbox, 1);
                             var children = (QuestionsSlides[ActiveSlideIndex] as QuestionsCollectionViewModel).AnswerStackPanel.Children.OfType<UIElement>().ToList();
                             for (int i = 0; i < children.Count; i++)
                             {
+                               
                                 if (answers[i].Значение == true)
                                 {
                                     if (children[i].GetType() == typeof(RadioButton))
                                     {
-                                        Console.WriteLine((children[i] as RadioButton).IsChecked);
+                                        if((children[i] as RadioButton).IsChecked == true)
+                                        {
+                                            Mark += ValueScoreRadioButton;
+                                        }
+                                        //Console.WriteLine((children[i] as RadioButton).IsChecked);
                                     }
                                     else
-                                   if (children[i].GetType() == typeof(CheckBox))
+                                    if (children[i].GetType() == typeof(CheckBox))
                                     {
-                                        Console.WriteLine((children[i] as CheckBox).IsChecked);
+                                        if ((children[i] as CheckBox).IsChecked == true)
+                                        {
+                                            Mark += ValueScoreCheckbox;
+                                        }
+                                 
                                     }
                                 }
                                    
                             }
-                        }    
-                        _slideNavigator.GoTo(ActiveSlideIndex + 1);
-                        TextShowCurrentSlide = $"{ActiveSlideIndex + 1}/{NumberQuestion}";
+                            Console.WriteLine(Mark);
+                        }
+                        if (ActiveSlideIndex == QuestionsSlides.Count - 1)
+                        {
+                            using(testEntities db = new testEntities())
+                            {
+                                Результат результат = new Результат() { Тема_Название = ThemeText , Оценка =(byte)Mark, Раздел_Название = };
+                            }
+                            Console.WriteLine("ИТОГОВАЯ ОЦЕНКА " + Mark);
+
+                            if (RunFinishDialogCommand.CanExecute(null))
+                            {
+                                RunFinishDialogCommand.Execute(null);
+                            } 
+
+                        }
+                        else
+                        {
+                            _slideNavigator.GoTo(ActiveSlideIndex + 1);
+                            TextShowCurrentSlide = $"{ActiveSlideIndex + 1}/{NumberQuestion}";
+                        }
+                      
                         
                     }));
               
             }
         }
 
-     
+
+
+        private async void Finish(object o)
+        {
+            var view = new FinishDialog
+            {
+                DataContext = new FinishDialogViewModel((int)Math.Round(Mark,0))
+            };
+
+            var result = await DialogHost.Show(view, "TestingDialog", ClosingEventHandler);
+            if ((bool)result == true)
+            {
+
+                Application.Current.Windows[0].ShowDialog();
+                //Application.Current.Windows[1].Hide();
+            }
+            Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
+        }
+
+        private void ClosingEventHandler(object sender, DialogClosingEventArgs eventArgs)
+        {
+            Console.WriteLine("You can intercept the closing event, and cancel here.");
+        }
+
+
         #endregion
 
         #region Property

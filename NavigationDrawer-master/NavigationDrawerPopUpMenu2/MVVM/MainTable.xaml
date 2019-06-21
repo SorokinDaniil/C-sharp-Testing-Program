@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:TestingProgram"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Background="White">
+             d:DesignHeight="450" d:DesignWidth="800" Background="White" x:Name="MainTableObject">
     <Grid>
         <DockPanel LastChildFill="False">
 
@@ -30,7 +30,7 @@
                         <i:InvokeCommandAction Command="{Binding SelectedItemGridCommand}" />
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding RunUserStartTestDialogCommand}" />
+                        <i:InvokeCommandAction Command="{Binding RunUserStartTestDialogCommand}" CommandParameter="{Binding ElementName=MainTableObject}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>

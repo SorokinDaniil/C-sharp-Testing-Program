@@ -40,6 +40,7 @@ namespace TestingProgram
         string TypeTable;
         byte IdSelectedChaphterValue;
         Visibility _visabilityPopupButton;
+        string LoginName;
 
 
 
@@ -277,7 +278,7 @@ namespace TestingProgram
                     {
                         using (testEntities db = new testEntities())
                         {
-
+                       
                             var name = _items3[SelectedTabIndex].OneColumnContent;
                             var theme = db.Темы.SingleOrDefault(p => p.Название == name);
                             var countquestion = db.Вопросы.Count(t => t.Тема_Id == theme.Id);
@@ -289,8 +290,9 @@ namespace TestingProgram
                             if ((bool)result == true)
                             {
                                 //ОТКРЫТИ НОВОГО ОКНА С ТЕСТАМИ
-                                TestingWindow themeEdit = new TestingWindow() { DataContext = new TestingWindowViewModel(theme.Название, theme.Время_Прохождения.ToString(), theme.Id) };
+                                TestingWindow themeEdit = new TestingWindow() { DataContext = new TestingWindowViewModel(theme.Название, theme.Время_Прохождения.ToString(), theme.Id , LoginName) };
                                 themeEdit.Show();
+                                Application.Current.Windows[0].Hide();
                             }
                             Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
                         }
@@ -306,10 +308,11 @@ namespace TestingProgram
         }
         #endregion
 
-        public void Show(string selectevaluechoice)
+        public void Show(string selectevaluechoice,string loginname)
         {
             SelecteValueChoice = selectevaluechoice;
             HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
+            LoginName = loginname;
             CreateTableContent();
             //Console.WriteLine(IsCheckChoice);
             //Console.WriteLine(SelecteValueChoice);

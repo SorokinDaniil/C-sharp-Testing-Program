@@ -123,6 +123,10 @@
       <DependentUpon>ExitAppDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialog\ExitAppDialogViewModel.cs" />
+    <Compile Include="Dialog\FinishDialogViewModel.cs" />
+    <Compile Include="Dialog\FinishDialog.xaml.cs">
+      <DependentUpon>FinishDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialog\UserStartTestDialog.xaml.cs">
       <DependentUpon>UserStartTestDialog.xaml</DependentUpon>
     </Compile>
@@ -267,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialog\ExitAppDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialog\FinishDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

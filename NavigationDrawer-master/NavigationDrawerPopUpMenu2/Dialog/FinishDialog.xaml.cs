@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace TestingProgram
 {
     /// <summary>
-    /// Логика взаимодействия для ChaphterEdit.xaml
+    /// Логика взаимодействия для FinishDialog.xaml
     /// </summary>
-    public partial class ThemeEdit : Window
+    public partial class FinishDialog : UserControl
     {
-        public ThemeEdit()
+        public FinishDialog()
         {
             InitializeComponent();
-            
         }
     }
 }

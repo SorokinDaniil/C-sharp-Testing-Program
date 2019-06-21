@@ -20,11 +20,12 @@ namespace TestingProgram
         private readonly SlideNavigator _slideNavigator;
         private int _activeSlideIndex;
         string TypeAccount;
+        string LoginName;
 
-        public MainWindowViewModel(string typeAccount)
+        public MainWindowViewModel(string typeAccount,string loginname)
         {
             TypeAccount = typeAccount;
-           
+            LoginName = loginname;
             //РЕДАКТОР
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowChoiceChaphterCommand, ShowChoiceChaphterExecuted));
             CommandManager.RegisterClassCommandBinding(typeof(MainWindow), new CommandBinding(NavigationCommands.ShowAdmin_Editor_TableChaphterEditCommand,ShowAdmin_Editor_TableChaphterEditExecuted));
@@ -99,7 +100,7 @@ namespace TestingProgram
             }
             _slideNavigator.GoTo(
                 IndexOfSlide<MainTableViewModel>(),
-                () => Admin_Editor_TableChaphterEdit.Show(SelectedValue));
+                () => Admin_Editor_TableChaphterEdit.Show(SelectedValue, LoginName));
 
         }
         #endregion
@@ -119,7 +120,7 @@ namespace TestingProgram
             }
             _slideNavigator.GoTo(
                 IndexOfSlide<MainTableViewModel>(),
-                () => User_ListStudent_TableTestNoEdit.Show(SelectedValue));
+                () => User_ListStudent_TableTestNoEdit.Show(SelectedValue,LoginName));
         }
         #endregion
 

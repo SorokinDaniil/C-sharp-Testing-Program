@@ -10,7 +10,7 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              Title="Testing" Height="800" Width="1080"
         TextOptions.TextFormattingMode="Ideal" 
-        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen" Background="White" WindowStyle="None" ResizeMode="NoResize" x:Name="ThemeEditName">
+        TextOptions.TextRenderingMode="Auto" WindowStartupLocation="CenterScreen" Background="White" WindowStyle="None" ResizeMode="NoResize" x:Name="TestingWindowName">
 
 
     <Window.Resources>
@@ -21,6 +21,9 @@
 
     </Window.Resources>
     <Grid>
+        <materialDesign:DialogHost Identifier="TestingDialog">
+            
+       
         <DockPanel>
 
             <!--#region  HEAD_PANEL-->
@@ -100,6 +103,7 @@
 
 
         </DockPanel>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>
 
