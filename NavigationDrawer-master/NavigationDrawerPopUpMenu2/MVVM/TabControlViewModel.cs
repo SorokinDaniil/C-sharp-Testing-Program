@@ -80,7 +80,6 @@ namespace TestingProgram
         {
             SelectedValueGroup = selectedvaluegroup;
             SelectedValueChaphter = selectedvaluechaphter;
-
             ShowAdmin_ListStudent_TableTestNoEditExecuted();
             //IsCheckedOneTab = true;
             //ShowAdmin_ListStudent_TableListStudentEditExecuted(selectedvaluegroup);

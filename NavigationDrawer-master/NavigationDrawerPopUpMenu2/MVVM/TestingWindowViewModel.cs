@@ -187,7 +187,7 @@ namespace TestingProgram
             {
 
                 Application.Current.Windows[0].ShowDialog();
-                Application.Current.Windows[1].Hide();
+                //Application.Current.Windows[1].Hide();
             }
             Console.WriteLine("Dialog was closed, the CommandParameter used to close it was: " + (result ?? "NULL"));
         }

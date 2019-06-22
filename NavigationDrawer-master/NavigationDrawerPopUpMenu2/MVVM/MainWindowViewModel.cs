@@ -50,11 +50,11 @@ namespace TestingProgram
 
             if (TypeAccount == "User")
             {
-                AdminSlides = new List<object> { ChoiceChaphterNoEditUser, User_ListStudent_TableTestNoEdit };
+                AdminSlides = new List<object> { ChoiceChaphterNoEditUser, User_ListStudent_TableTestNoEdit};
             }
             if (TypeAccount == "Admin")
             {
-                AdminSlides = new List<object> { ChoiceChaphter, Admin_Editor_TableChaphterEdit  , ChoiceGroup, ChoiceChaphterNoEditAdmin ,TabControl };
+                AdminSlides = new List<object> { ChoiceChaphter, Admin_Editor_TableChaphterEdit  , ChoiceGroup, ChoiceChaphterNoEditAdmin ,TabControl , Admin_ListStudent_TablePassedTestNoEdit };
             }
             _slideNavigator = new SlideNavigator(this, AdminSlides);
             _slideNavigator.GoTo(0);//Задается начальное окно 
@@ -147,9 +147,11 @@ namespace TestingProgram
 
         private void ShowAdmin_ListStudent_TablePassedTestNoEditCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+           
             _slideNavigator.GoTo(
-                IndexOfSlide<TabControlViewModel>(),
-                () => Admin_ListStudent_TablePassedTestNoEdit.Show((AdminSlides[2] as ChoiceViewModel).ChoiceValue, (AdminSlides[3] as ChoiceViewModel).ChoiceValue),"");
+                IndexOfSlide<MainTableViewModel>(),
+                () => Admin_ListStudent_TablePassedTestNoEdit.Show((AdminSlides[2] as ChoiceViewModel).ChoiceValue, (AdminSlides[3] as ChoiceViewModel).ChoiceValue,((AdminSlides[4] as TabControlViewModel).TabControlSlides[0] as MainTableViewModel).SelecteThemeFinishSlide, ""));
+            _slideNavigator.GoTo(5);
         }
 
         #endregion

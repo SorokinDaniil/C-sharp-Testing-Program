@@ -37,12 +37,13 @@ namespace TestingProgram
         private Visibility _twocolumnvisability;
         private Visibility _threecolumnvisability;
         private Visibility _fourcolumnvisability;
+        private Visibility _visibilitySelectButton;
         string TypeTable;
         byte IdSelectedChaphterValue;
         Visibility _visabilityPopupButton;
         string LoginName;
         string SelectedValueChoiceTwo;
-
+       public string SelecteThemeFinishSlide;
 
 
         public MainTableViewModel(string typeTable)
@@ -53,6 +54,7 @@ namespace TestingProgram
             {
                 case "Admin_Editor_TableChaphterEdit":
                     {
+                        VisibilitySelectButton = Visibility.Collapsed;
                         VisabilityPopupButton = Visibility.Visible;
                         OneColumnName = "Название";
                         TwoColumnName = "Время";
@@ -65,6 +67,7 @@ namespace TestingProgram
                     } break;
                 case "Admin_ListStudent_TableListStudentEdit":
                     {
+                        VisibilitySelectButton = Visibility.Collapsed;
                         VisabilityPopupButton = Visibility.Visible;
                         OneColumnName = "Номер";
                         TwoColumnName = "Имя и фамилия";
@@ -78,6 +81,7 @@ namespace TestingProgram
                     break;
                 case "Admin_ListStudent_TableTestNoEdit":
                     {
+                        VisibilitySelectButton = Visibility.Visible;
                         VisabilityPopupButton = Visibility.Collapsed;
                         OneColumnName = "Название";
                         OneColumnVisability = Visibility.Visible;
@@ -89,6 +93,7 @@ namespace TestingProgram
                     break;
                 case "Admin_ListStudent_TablePassedTestNoEdit":
                     {
+                        VisibilitySelectButton = Visibility.Collapsed;
                         VisabilityPopupButton = Visibility.Collapsed;
                         OneColumnName = "Номер";
                         TwoColumnName = "Имя и фамилия";
@@ -102,6 +107,7 @@ namespace TestingProgram
                     break;
                 case "User_ListStudent_TableTestNoEdit":
                     {
+                        VisibilitySelectButton = Visibility.Collapsed;
                         VisabilityPopupButton = Visibility.Collapsed;
                         OneColumnName = "Название";
                         OneColumnVisability = Visibility.Visible;
@@ -130,6 +136,25 @@ namespace TestingProgram
                         else
                         IsEnabledPopupBox = true;
 
+                    }));
+            }
+        }
+
+        private RelayCommand showLastSlide;
+        public RelayCommand ShowLastSlide
+        {
+
+            get
+            {
+                return showLastSlide ??
+                    (showLastSlide = new RelayCommand(obj =>
+                    {
+                          if(TypeTable == "Admin_ListStudent_TableTestNoEdit")
+                        {
+                            SelecteThemeFinishSlide = _items3[SelectedTabIndex].OneColumnContent;
+                            (obj as Button).Command = NavigationCommands.ShowAdmin_ListStudent_TablePassedTestNoEditCommand;
+                        }
+                   
                     }));
             }
         }
@@ -253,12 +278,12 @@ namespace TestingProgram
                     break;
                 case "Admin_ListStudent_TableTestNoEdit":
                     {
-
+                        //NavigationCommands.ShowAdmin_ListStudent_TablePassedTestNoEditCommand.Execute(null, null);
                     }
                     break;
                 case "Admin_ListStudent_TablePassedTestNoEdit":
                     {
-
+                   
                     }
                     break;
                 case "User_ListStudent_TableTestNoEdit":
@@ -343,8 +368,9 @@ namespace TestingProgram
             CreateTableContent();
         }
 
-        public void Show(string selectevaluechoice , string selectevaluechoicetwo,  string loginname)
+        public void Show(string selectevaluechoice , string selectevaluechoicetwo, string selectevaluetheme,  string loginname)
         {
+            SelecteThemeFinishSlide = selectevaluetheme;
             SelecteValueChoice = selectevaluechoice;
             SelectedValueChoiceTwo = selectevaluechoicetwo;
             HeaderMainTable = SelecteValueChoice;//Присваивает название загаловка 
@@ -433,12 +459,15 @@ namespace TestingProgram
                         break;
                     case "Admin_ListStudent_TablePassedTestNoEdit":
                         {
-                            int three;
-                            DateTime four;
+                            string three = "";
+                            string four = "";
                             int index = 1;
-                            var idgroup = db.Группы.SingleOrDefault(p => p.Название == SelectedValueChoiceTwo);//Получение id выбраного элемента
+                            var idtheme  = db.Темы.SingleOrDefault(p => p.Название == SelecteThemeFinishSlide);//Получение id раздела
+                            var idgroup = db.Группы.SingleOrDefault(p => p.Название == SelecteValueChoice);//Получение id раздела
+                            var idchaphter = db.Разделы.SingleOrDefault(p => p.Название == SelectedValueChoiceTwo);//Получение id раздела
+                           
                             IdSelectedChaphterValue = idgroup.Id;
-                            IEnumerable<Студент> groups = db.Студенты.Where(p => p.Группа_Id == IdSelectedChaphterValue).Select(p => new { ФИО = p.ФИО, Id = p.Id })
+                            IEnumerable<Студент> students = db.Студенты.Where(p => p.Группа_Id == IdSelectedChaphterValue).Select(p => new { ФИО = p.ФИО, Id = p.Id })
           .AsEnumerable()
           .Select(an => new Студент
           {
@@ -447,34 +476,38 @@ namespace TestingProgram
               Id = an.Id
           });
 
-
-                           
-                         
-                        
-
-
-
-
                             foreach (var student in students)
                             {
                                 var allteststudent = db.Студент_Результат.Where(p => p.Студент_Id == student.Id).ToList();
-                                if (allteststudent.Count == 0) return false;
+                                //if (allteststudent.Count == 0) return false;
                                 for (int i = 0; i < allteststudent.Count; i++)
                                 {
                                     var resaultid = allteststudent[i].Результат_Id;
                                     var resault = db.Результаты.Where(s => s.Id == resaultid).SingleOrDefault();
-                                    if (resault.Раздел_Название == IdSelectedChaphterValue && resault.Тема_Название == themeid)
+                                    if(resault == null)
                                     {
-                                        four = resault.Дата_Прохождения;
-                                        three = resault.Оценка;
+                                        three = "-";
+                                        four = "-";
+                                    }
+                                    else
+                                    if (resault.Раздел_Название == idchaphter.Id && resault.Тема_Название == idtheme.Id)
+                                    {
+                                        four = resault.Дата_Прохождения.ToString("g");
+                                        three = resault.Оценка.ToString();
+                                    }
+                                    else
+                                    {
+                                        three = "-";
+                                        four = "-";
                                     }
                                 }
-                                var count = db.Студент_Результат.Count(p => p.Студент_Id == group.Id);
+                            
                                 _items3.Add(new SelectableViewModel
                                 {
                                     OneColumnContent = index++.ToString(),
-                                    TwoColumnContent = group.ФИО,
-                                    ThreeColumnContent = count.ToString()//Количество пройденых тестов в разделе
+                                    TwoColumnContent = student.ФИО,
+                                    ThreeColumnContent = three,
+                                    FourColumnContent = four//Количество пройденых тестов в разделе
                                 });
                             }
 
@@ -561,6 +594,16 @@ namespace TestingProgram
             }
         }
 
+ public Visibility VisibilitySelectButton
+        {
+            get { return _visibilitySelectButton; }
+            set
+            {
+                _visibilitySelectButton = value;
+
+                OnPropertyChanged();
+            }
+        }
         public string TwoColumnName
         {
             get { return _twocolumnname; }

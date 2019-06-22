@@ -24,13 +24,13 @@
                 </Button>
             </StackPanel>
             <FrameworkElement x:Name="dummyElement"/>
-            <DataGrid  Margin="0 8 0 0" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" SelectedIndex="{Binding SelectedTabIndex}">
+            <DataGrid x:Name="DataGrid" Margin="0 8 0 0" ItemsSource="{Binding Items3}" CanUserSortColumns="True" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top" SelectedIndex="{Binding SelectedTabIndex}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding SelectedItemGridCommand}" />
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseDoubleClick">
-                        <i:InvokeCommandAction Command="{Binding RunUserStartTestDialogCommand}" CommandParameter="{Binding ElementName=MainTableObject}"/>
+                        <i:InvokeCommandAction Command="{Binding RunUserStartTestDialogCommand}" CommandParameter="{Binding ElementName=DataGrid}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <DataGrid.Columns>
@@ -98,12 +98,13 @@
                 </ListView.View>
             </ListView>-->
 
-
-            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" IsEnabled="{Binding IsEnabledPopupBox}" Visibility="{Binding VisabilityPopupButton}"
+            <DockPanel DockPanel.Dock="Bottom" >
+                <Button x:Name="SelectButton" HorizontalAlignment="Right" VerticalAlignment="Center" DockPanel.Dock="Right" Margin="0,0,28,0" Visibility="{Binding VisibilitySelectButton}" Command="{Binding ShowLastSlide}" CommandParameter="{Binding ElementName=SelectButton}">ВЫБРАТЬ</Button>
+                            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}" IsEnabled="{Binding IsEnabledPopupBox}" Visibility="{Binding VisabilityPopupButton}"
                                             PlacementMode="LeftAndAlignMiddles"
     UnfurlOrientation="Horizontal"
                                  HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                                 Margin="32" DockPanel.Dock="Right" >
+                                 Margin="32,0,32,32" DockPanel.Dock="Right" >
                 <materialDesign:PopupBox.ToggleContent>
                     <materialDesign:PackIcon
       Kind="Pencil"
@@ -129,6 +130,8 @@
                     </Button>
                 </StackPanel>
             </materialDesign:PopupBox>
+
+            </DockPanel>
         </DockPanel>
     </Grid>
 </UserControl>
